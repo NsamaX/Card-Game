@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:project/page/duel/page.dart';
 
 class RoomGenerator {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:project/theme_color.dart';
-import 'package:project/page/welcome/introduce.dart';
+import 'package:project/theme/custom_theme.dart';
+import 'package:project/page/deck/page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: customTheme(context),
       debugShowCheckedModeBanner: false,
-      home: const WelcomePage(),
+      home: const DeckPage(),
     );
   }
 }

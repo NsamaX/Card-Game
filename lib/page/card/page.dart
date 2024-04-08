@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:project/api/model/cfv.dart';
+import 'package:project/api/service/cards.dart';
 import 'package:project/widget/app_bar.dart';
 import 'package:project/widget/buttom_nav.dart';
 import 'package:project/widget/card/list.dart';
 import 'icons.dart';
 
 class CardsPage extends StatefulWidget {
-  const CardsPage({Key? key}) : super(key: key);
+  final String page;
+  final bool save;
+  const CardsPage({Key? key, required this.page, required this.save})
+      : super(key: key);
 
   @override
   State<CardsPage> createState() => _CardsPageState();
@@ -16,6 +18,8 @@ class CardsPage extends StatefulWidget {
 
 class _CardsPageState extends State<CardsPage> {
   final ScrollController _scrollController = ScrollController();
+  final ApiService _apiService = ApiService();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +27,29 @@ class _CardsPageState extends State<CardsPage> {
       appBar: CustomAppBar(
         context: context,
         icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context),
+        onTapCallbacks: getOnTapCallbacks(context, widget.page),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: CardList(
-          cardDataList: _CardData,
-          scrollController: _scrollController,
-          buildDeck: false,
-        ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CardList(
+              cardDataList: _CardData,
+              scrollController: _scrollController,
+              buildDeck: widget.save,
+            ),
+          ),
+          if (_isLoading)
+            Center(
+              child: CircularProgressIndicator(),
+            ),
+        ],
       ),
-      bottomNavigationBar: BottomNav(currentIndex: 2),
+      bottomNavigationBar:
+          BottomNav(currentIndex: widget.page == 'deck' ? 0 : 2),
     );
   }
 
-  final baseUrl = "https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/";
   final card = "card";
   final cards = "cards";
   final sets = "sets";
@@ -67,27 +79,19 @@ class _CardsPageState extends State<CardsPage> {
   }
 
   Future<void> _getData(String search, {int page = 1}) async {
-    http.Response response =
-        await http.get(Uri.parse(baseUrl + "$search?page=$page"));
-    try {
-      if (response.statusCode == 200) {
-        List<dynamic> jsonData = jsonDecode(response.body)['data'];
-        List<CardData> fetchedData =
-            jsonData.map((e) => CardData.fromJson(e)).toList();
-        fetchedData.removeWhere((item) => item.sets.length == 0);
-        setState(() {
-          if (page == 1) {
-            _CardData = fetchedData;
-          } else {
-            _CardData.addAll(fetchedData);
-          }
-          _page = page;
-        });
+    setState(() {
+      _isLoading = true;
+    });
+
+    List<CardData> fetchedData = await _apiService.getData(search, page: page);
+    setState(() {
+      if (page == 1) {
+        _CardData = fetchedData;
       } else {
-        throw Exception('Failed to load data: ${response.statusCode}');
+        _CardData.addAll(fetchedData);
       }
-    } catch (e) {
-      print('Error: $e');
-    }
+      _page = page;
+      _isLoading = false;
+    });
   }
 }

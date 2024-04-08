@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/theme_color.dart';
 import 'signIn.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -8,7 +7,6 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainColor2,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Center(

@@ -20,7 +20,10 @@ final List<dynamic> contents = [
       {
         'topic': 'Card Data',
         'icon': Icons.storage_rounded,
-        'page': CardsPage()
+        'page': CardsPage(
+          page: 'setting',
+          save: false,
+        )
       },
       {'topic': 'Language', 'icon': Icons.language_rounded, 'page': null},
       {'topic': 'Privacy', 'icon': Icons.privacy_tip_rounded, 'page': null},

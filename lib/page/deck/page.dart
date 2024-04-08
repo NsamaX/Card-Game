@@ -18,6 +18,12 @@ class _DeckPageState extends State<DeckPage> {
   final ScrollController _scrollController = ScrollController();
   List<SaveCard> myDeck = [];
 
+  void updateDeckState() {
+    setState(() {
+      myDeck = [];
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,7 +42,7 @@ class _DeckPageState extends State<DeckPage> {
       appBar: CustomAppBar(
         context: context,
         icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context, myDeck),
+        onTapCallbacks: getOnTapCallbacks(context, myDeck, updateDeckState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

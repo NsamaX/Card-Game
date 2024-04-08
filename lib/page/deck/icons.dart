@@ -1,35 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/savedCard.dart';
 import 'package:project/api/service/deck.dart';
-import 'addCard.dart';
+import 'package:project/page/card/page.dart';
 
 List<dynamic> icons = [
   Icons.menu,
   Icons.ios_share_rounded,
   'My Deck',
+  Icons.delete_rounded,
   Icons.add,
-  Icons.mode_edit_outline_rounded,
 ];
 
-List<Function> getOnTapCallbacks(BuildContext context, List<SaveCard> myDeck) {
+typedef void DeleteDeckCallback();
+
+List<Function> getOnTapCallbacks(BuildContext context, List<SaveCard> myDeck,
+    DeleteDeckCallback deleteDeckCallback) {
   return [
     () {},
     () {},
     () {},
     () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => AddCardPage()),
-      );
-    },
-    () {
       deleteDeck().then((_) {
         myDeck.clear();
         print('clear');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Deleted deck successfully')),
+          SnackBar(
+            content: Text('Deleted deck successfully'),
+          ),
         );
+        deleteDeckCallback();
       });
+    },
+    () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CardsPage(page: 'deck', save: true),
+        ),
+      );
     },
   ];
 }

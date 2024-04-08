@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
-import 'single/info.dart';
+import 'package:project/page/card/info.dart';
 
 class CardWidget {
   static Widget buildCard(
@@ -16,29 +16,41 @@ class CardWidget {
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              child: ClipRRect(
+        child: Card(
+          elevation: 4.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return ClipRRect(
                 borderRadius: BorderRadius.circular(14.0),
-                child: Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey,
-                      child: Center(
-                        child: Icon(Icons.error),
-                      ),
-                    );
-                  },
+                child: AspectRatio(
+                  aspectRatio: 8 / 12,
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Container(
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ),
-          ],
+              );
+            },
+          ),
         ),
       ),
     );

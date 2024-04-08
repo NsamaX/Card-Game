@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
-import 'app_bar.dart';
-import 'card_bar.dart';
+import 'package:project/widget/card/app_bar.dart';
+import 'package:project/widget/card/card_bar.dart';
 
 class CardInfoPage extends StatefulWidget {
   final CardData model;

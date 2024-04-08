@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/page/deck/deck.dart';
+import 'package:project/page/deck/page.dart';
 import 'package:project/page/play/page.dart';
 import 'package:project/page/setting/page.dart';
 

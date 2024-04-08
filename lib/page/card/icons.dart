@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../deck/page.dart';
 import '../setting/page.dart';
 
 final List<dynamic> icons = [
@@ -7,12 +8,14 @@ final List<dynamic> icons = [
   Icons.filter_list_alt,
 ];
 
-List<Function> getOnTapCallbacks(BuildContext context) {
+List<Function> getOnTapCallbacks(BuildContext context, String page) {
   return [
     () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SettingPage()),
+        MaterialPageRoute(
+            builder: (context) =>
+                page == 'setting' ? SettingPage() : DeckPage()),
       );
     },
     () {},

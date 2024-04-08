@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/theme_color.dart';
+import 'package:project/theme/color.dart';
 
 class Board {
   static Widget buildRow(List<String> rowText) {
