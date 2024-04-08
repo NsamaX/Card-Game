@@ -1,4 +1,6 @@
-class CardData {
+import 'saveCard.dart';
+
+class CardData extends SaveCard {
   final int id;
   final String cardType;
   final String clan;

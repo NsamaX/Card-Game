@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/savedCard.dart';
+import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/page/card/page.dart';
 
@@ -13,7 +13,7 @@ List<dynamic> icons = [
 
 typedef void DeleteDeckCallback();
 
-List<Function> getOnTapCallbacks(BuildContext context, List<SaveCard> myDeck,
+List<Function> getOnTapCallbacks(BuildContext context, List<CardData> myDeck,
     DeleteDeckCallback deleteDeckCallback) {
   return [
     () {},

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
-import 'package:project/api/model/savedCard.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/widget/app_bar.dart';
 import 'package:project/widget/buttom_nav.dart';
@@ -16,7 +15,7 @@ class DeckPage extends StatefulWidget {
 
 class _DeckPageState extends State<DeckPage> {
   final ScrollController _scrollController = ScrollController();
-  List<SaveCard> myDeck = [];
+  List<CardData> myDeck = [];
 
   void updateDeckState() {
     setState(() {
@@ -36,8 +35,6 @@ class _DeckPageState extends State<DeckPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<CardData> cardDataList =
-        myDeck.map((saveCard) => saveCard.card).toList();
     return Scaffold(
       appBar: CustomAppBar(
         context: context,
@@ -47,7 +44,7 @@ class _DeckPageState extends State<DeckPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: CardList(
-          cardDataList: cardDataList,
+          cardDataList: myDeck,
           scrollController: _scrollController,
           buildDeck: false,
         ),

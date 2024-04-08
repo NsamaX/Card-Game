@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/cfv.dart';
-import '../model/savedCard.dart';
 
 Future<void> saveCard(CardData model, int cardCount) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -12,30 +11,29 @@ Future<void> saveCard(CardData model, int cardCount) async {
     'cardCount': cardCount,
   };
 
-  savedCards.add(jsonEncode(cardMap));
+  String cardJson = jsonEncode(cardMap);
+  print('JSON representation of the card: $cardJson');
+
+  savedCards.add(cardJson);
   await prefs.setStringList('user_deck', savedCards);
 }
 
-Future<List<SaveCard>> loadDeck() async {
+Future<List<CardData>> loadDeck() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   List<String>? savedCards = prefs.getStringList('user_deck');
 
-  List<SaveCard> deck = [];
+  List<CardData> deck = [];
 
   if (savedCards != null) {
-    for (String cardJson in savedCards) {
-      Map<String, dynamic>? cardMap = jsonDecode(cardJson);
+    for (String card in savedCards) {
+      Map<String, dynamic> cardMap = jsonDecode(card);
+      CardData cardData = CardData.fromJson(cardMap['model']);
 
-      if (cardMap != null && cardMap.containsKey('model')) {
-        CardData model = CardData.fromJson(cardMap['model']);
-        int cardCount = cardMap['cardCount'] ?? 0;
-        deck.add(SaveCard(card: model, cardCount: cardCount));
-      } else {
-        print('Invalid or missing data for a card.');
-      }
+      int cardCount = cardMap['cardCount'];
+      cardData.setCardCount(cardCount);
+
+      deck.add(cardData);
     }
-  } else {
-    print('No saved deck found.');
   }
 
   return deck;
