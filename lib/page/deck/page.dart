@@ -18,7 +18,7 @@ class _DeckPageState extends State<DeckPage> {
   List<CardData> myDeck = [];
   bool editDeck = false;
 
-  void updateDeckState() {
+  void deleteDeckState() {
     setState(() {
       myDeck = [];
     });
@@ -28,6 +28,14 @@ class _DeckPageState extends State<DeckPage> {
     setState(() {
       editDeck = !editDeck;
     });
+  }
+
+  void removeCardState(int index) {
+    if (myDeck[index].getCardCount() < 1) {
+      setState(() {
+        myDeck.removeAt(index);
+      });
+    }
   }
 
   @override
@@ -47,7 +55,7 @@ class _DeckPageState extends State<DeckPage> {
         context: context,
         icons: icons,
         onTapCallbacks:
-            getOnTapCallbacks(context, myDeck, updateDeckState, editDeckState),
+            getOnTapCallbacks(context, myDeck, deleteDeckState, editDeckState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -56,6 +64,7 @@ class _DeckPageState extends State<DeckPage> {
           scrollController: _scrollController,
           buildDeck: false,
           editDeck: editDeck,
+          removeCardCallBack: removeCardState,
         ),
       ),
       bottomNavigationBar: BottomNav(currentIndex: 0),

@@ -4,13 +4,27 @@ import 'package:project/api/service/deck.dart';
 import 'package:project/page/card/contents.dart';
 import 'operator.dart';
 
-class CardWidget {
-  static Widget buildCard(
-    CardData card,
-    BuildContext context,
-    bool buildDeck,
-    bool editDeck,
-  ) {
+class CardWidget extends StatelessWidget {
+  final List<CardData> cardDataList;
+  final int index;
+  final BuildContext context;
+  final bool buildDeck;
+  final bool editDeck;
+  final Function(int)? removeCardCallBack;
+
+  const CardWidget({
+    Key? key,
+    required this.cardDataList,
+    required this.index,
+    required this.context,
+    required this.buildDeck,
+    required this.editDeck,
+    this.removeCardCallBack,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    CardData card = cardDataList[index];
     return Stack(
       children: [
         GestureDetector(
@@ -68,13 +82,16 @@ class CardWidget {
             onRemove: () {
               card.removeCard();
               _updateCardCount(card);
+              if (removeCardCallBack != null) {
+                removeCardCallBack!(index);
+              }
             },
           ),
       ],
     );
   }
 
-  static void _navigateToCardInfo(
+  void _navigateToCardInfo(
     CardData cardData,
     BuildContext context, {
     required bool save,
@@ -89,7 +106,10 @@ class CardWidget {
     );
   }
 
-  static void _updateCardCount(CardData card) {
-    updateDeck(card, card.getCardCount());
+  void _updateCardCount(CardData card) {
+    updateDeck(
+      card,
+      card.getCardCount(),
+    );
   }
 }
