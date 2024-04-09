@@ -4,25 +4,22 @@ import 'package:project/api/service/deck.dart';
 import 'package:project/page/card/page.dart';
 
 List<dynamic> icons = [
-  Icons.menu,
+  Icons.delete_rounded,
   Icons.ios_share_rounded,
   'My Deck',
-  Icons.delete_rounded,
-  Icons.add,
+  Icons.add_rounded,
+  Icons.build_rounded,
 ];
 
 typedef void DeleteDeckCallback();
+typedef void EditDeckCallback();
 
 List<Function> getOnTapCallbacks(BuildContext context, List<CardData> myDeck,
-    DeleteDeckCallback deleteDeckCallback) {
+    DeleteDeckCallback deleteDeckCallback, EditDeckCallback editDeckState) {
   return [
-    () {},
-    () {},
-    () {},
     () {
       deleteDeck().then((_) {
         myDeck.clear();
-        print('clear');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Deleted deck successfully'),
@@ -31,6 +28,8 @@ List<Function> getOnTapCallbacks(BuildContext context, List<CardData> myDeck,
         deleteDeckCallback();
       });
     },
+    () {},
+    () {},
     () {
       Navigator.pushReplacement(
         context,
@@ -38,6 +37,9 @@ List<Function> getOnTapCallbacks(BuildContext context, List<CardData> myDeck,
           builder: (context) => CardsPage(page: 'deck', save: true),
         ),
       );
+    },
+    () {
+      editDeckState();
     },
   ];
 }

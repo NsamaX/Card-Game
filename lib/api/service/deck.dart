@@ -39,6 +39,34 @@ Future<List<CardData>> loadDeck() async {
   return deck;
 }
 
+Future<void> updateDeck(CardData model, int newCardCount) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String>? savedCards = prefs.getStringList('user_deck');
+
+  if (savedCards != null) {
+    for (int i = 0; i < savedCards.length; i++) {
+      Map<String, dynamic> cardMap = jsonDecode(savedCards[i]);
+      CardData cardData = CardData.fromJson(cardMap['model']);
+
+      if (cardData.id == model.id) {
+        cardData.setCardCount(newCardCount);
+        cardMap['model'] = cardData.toJson();
+        cardMap['cardCount'] = newCardCount;
+
+        if (newCardCount < 1) {
+          savedCards.removeAt(i);
+        } else {
+          String updatedCardJson = jsonEncode(cardMap);
+          savedCards[i] = updatedCardJson;
+        }
+
+        await prefs.setStringList('user_deck', savedCards);
+        return;
+      }
+    }
+  }
+}
+
 Future<void> deleteDeck() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.remove('user_deck');

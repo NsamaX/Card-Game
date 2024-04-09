@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:project/theme/custom_theme.dart';
+import 'package:project/theme/theme.dart';
 import 'package:project/page/deck/page.dart';
 
 Future<void> main() async {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
-import 'package:project/api/service/cards.dart';
+import 'package:project/api/service/card.dart';
 import 'package:project/widget/app_bar.dart';
 import 'package:project/widget/buttom_nav.dart';
 import 'package:project/widget/card/list.dart';
@@ -37,6 +37,7 @@ class _CardsPageState extends State<CardsPage> {
               cardDataList: _CardData,
               scrollController: _scrollController,
               buildDeck: widget.save,
+              editDeck: false,
             ),
           ),
           if (_isLoading)

@@ -16,10 +16,17 @@ class DeckPage extends StatefulWidget {
 class _DeckPageState extends State<DeckPage> {
   final ScrollController _scrollController = ScrollController();
   List<CardData> myDeck = [];
+  bool editDeck = false;
 
   void updateDeckState() {
     setState(() {
       myDeck = [];
+    });
+  }
+
+  void editDeckState() {
+    setState(() {
+      editDeck = !editDeck;
     });
   }
 
@@ -39,7 +46,8 @@ class _DeckPageState extends State<DeckPage> {
       appBar: CustomAppBar(
         context: context,
         icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context, myDeck, updateDeckState),
+        onTapCallbacks:
+            getOnTapCallbacks(context, myDeck, updateDeckState, editDeckState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -47,6 +55,7 @@ class _DeckPageState extends State<DeckPage> {
           cardDataList: myDeck,
           scrollController: _scrollController,
           buildDeck: false,
+          editDeck: editDeck,
         ),
       ),
       bottomNavigationBar: BottomNav(currentIndex: 0),

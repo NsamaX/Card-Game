@@ -29,7 +29,7 @@ final List<dynamic> contents = [
       {'topic': 'Privacy', 'icon': Icons.privacy_tip_rounded, 'page': null},
       {'topic': 'Help', 'icon': Icons.help_rounded, 'page': null},
       {'topic': 'About', 'icon': Icons.auto_stories_rounded, 'page': null},
-      {'topic': 'Sign out', 'icon': Icons.logout_rounded, 'page': WelcomePage()}
+      {'topic': 'Sign out', 'icon': Icons.logout_rounded, 'page': IntroducePage()}
     ]
   },
   {

@@ -3,10 +3,10 @@ import '../play/page.dart';
 
 final List<dynamic> icons = [
   Icons.arrow_back_ios_new_rounded,
-  Icons.chat_rounded,
+  Icons.headphones_rounded,
   'Room ID',
   Icons.mic_rounded,
-  Icons.headphones_rounded,
+  Icons.chat_rounded,
 ];
 
 List<Function> getOnTapCallbacks(BuildContext context) {

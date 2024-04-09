@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/api/model/cfv.dart';
+import 'package:project/api/service/deck.dart';
 import 'package:project/widget/app_bar.dart';
 import 'package:project/widget/board.dart';
 import 'package:project/widget/buttom_nav.dart';
@@ -13,6 +15,18 @@ class DuelPage extends StatefulWidget {
 }
 
 class _DuelPageState extends State<DuelPage> {
+  List<CardData> myDeck = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadDeck().then((cards) {
+      setState(() {
+        myDeck = cards;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

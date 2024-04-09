@@ -14,7 +14,7 @@ class BottomNav extends StatelessWidget {
       items: [
         buildBottomNav('Deck', Icons.web_stories_rounded),
         buildBottomNav('Play', Icons.style_rounded),
-        buildBottomNav('Setting', Icons.settings),
+        buildBottomNav('Setting', Icons.settings_rounded),
       ],
       currentIndex: currentIndex,
       onTap: (index) {

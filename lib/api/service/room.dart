@@ -2,12 +2,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:project/page/duel/page.dart';
 
-class RoomGenerator {
+class Room {
   final int maxRoom;
   final int maxRoomPerPage;
   final int maxPageIcon;
 
-  RoomGenerator({
+  Room({
     required this.maxRoom,
     required this.maxRoomPerPage,
     required this.maxPageIcon,

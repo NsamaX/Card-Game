@@ -6,12 +6,14 @@ class CardList extends StatefulWidget {
   final List<CardData> cardDataList;
   final ScrollController? scrollController;
   final bool buildDeck;
+  final bool editDeck;
 
   const CardList({
     Key? key,
     required this.cardDataList,
     this.scrollController,
     required this.buildDeck,
+    required this.editDeck,
   }) : super(key: key);
 
   @override
@@ -27,29 +29,25 @@ class _CardListState extends State<CardList> {
       itemBuilder: (context, index) {
         return Row(
           children: [
-            Expanded(
-              child: CardWidget.buildCard(
-                widget.cardDataList[index * 2].getImage(),
-                index * 2,
-                widget.cardDataList,
-                context,
-                widget.buildDeck,
-              ),
-            ),
-            Expanded(
-              child: (index * 2 + 1 < widget.cardDataList.length)
-                  ? CardWidget.buildCard(
-                      widget.cardDataList[index * 2 + 1].getImage(),
-                      index * 2 + 1,
-                      widget.cardDataList,
-                      context,
-                      widget.buildDeck,
-                    )
-                  : SizedBox(),
-            ),
+            for (int i = 0; i < 2; i++)
+              if (index * 2 + i < widget.cardDataList.length) ...[
+                buildCard(widget.cardDataList[index * 2 + i]),
+              ] else
+                Expanded(child: SizedBox()),
           ],
         );
       },
+    );
+  }
+
+  Widget buildCard(CardData card) {
+    return Expanded(
+      child: CardWidget.buildCard(
+        card,
+        context,
+        widget.buildDeck,
+        widget.editDeck,
+      ),
     );
   }
 }

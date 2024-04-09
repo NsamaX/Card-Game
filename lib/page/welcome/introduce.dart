@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'signIn.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+class IntroducePage extends StatelessWidget {
+  const IntroducePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
