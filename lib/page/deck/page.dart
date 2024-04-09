@@ -25,17 +25,12 @@ class _DeckPageState extends State<DeckPage> {
   }
 
   void editDeckState() {
-    setState(() {
-      editDeck = !editDeck;
-    });
-  }
-
-  void removeCardState(int index) {
-    if (myDeck[index].getCardCount() < 1) {
+    loadDeck().then((cards) {
       setState(() {
-        myDeck.removeAt(index);
+        editDeck = !editDeck;
+        myDeck = cards;
       });
-    }
+    });
   }
 
   @override
@@ -64,7 +59,6 @@ class _DeckPageState extends State<DeckPage> {
           scrollController: _scrollController,
           buildDeck: false,
           editDeck: editDeck,
-          removeCardCallBack: removeCardState,
         ),
       ),
       bottomNavigationBar: BottomNav(currentIndex: 0),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/page/card/contents.dart';
-import 'operator.dart';
+import 'edit/operator.dart';
 
 class CardWidget extends StatelessWidget {
   final List<CardData> cardDataList;
@@ -10,7 +10,6 @@ class CardWidget extends StatelessWidget {
   final BuildContext context;
   final bool buildDeck;
   final bool editDeck;
-  final Function(int)? removeCardCallBack;
 
   const CardWidget({
     Key? key,
@@ -19,7 +18,6 @@ class CardWidget extends StatelessWidget {
     required this.context,
     required this.buildDeck,
     required this.editDeck,
-    this.removeCardCallBack,
   }) : super(key: key);
 
   @override
@@ -82,9 +80,6 @@ class CardWidget extends StatelessWidget {
             onRemove: () {
               card.removeCard();
               _updateCardCount(card);
-              if (removeCardCallBack != null) {
-                removeCardCallBack!(index);
-              }
             },
           ),
       ],
@@ -107,9 +102,6 @@ class CardWidget extends StatelessWidget {
   }
 
   void _updateCardCount(CardData card) {
-    updateDeck(
-      card,
-      card.getCardCount(),
-    );
+    updateDeck(card, card.getCardCount());
   }
 }

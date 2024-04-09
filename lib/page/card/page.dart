@@ -80,11 +80,19 @@ class _CardsPageState extends State<CardsPage> {
   }
 
   Future<void> _getData(String search, {int page = 1}) async {
+    if (!mounted) {
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
 
     List<CardData> fetchedData = await _apiService.getData(search, page: page);
+    if (!mounted) {
+      return;
+    }
+
     setState(() {
       if (page == 1) {
         _CardData = fetchedData;

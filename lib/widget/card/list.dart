@@ -7,7 +7,6 @@ class CardList extends StatefulWidget {
   final ScrollController? scrollController;
   final bool buildDeck;
   final bool editDeck;
-  final Function(int)? removeCardCallBack;
 
   const CardList({
     Key? key,
@@ -15,7 +14,6 @@ class CardList extends StatefulWidget {
     this.scrollController,
     required this.buildDeck,
     required this.editDeck,
-    this.removeCardCallBack,
   }) : super(key: key);
 
   @override
@@ -31,7 +29,8 @@ class _CardListState extends State<CardList> {
       itemBuilder: (context, index) {
         return Row(
           children: [
-            for (int i = 0; i < 2; i++) buildCard(index * 2 + i),
+            for (int i = 0; i < 2; i++)
+              Expanded(child: buildCard(index * 2 + i)),
           ],
         );
       },
@@ -39,16 +38,14 @@ class _CardListState extends State<CardList> {
   }
 
   Widget buildCard(int index) {
-    return Expanded(
-        child: (index < widget.cardDataList.length)
-            ? CardWidget(
-                cardDataList: widget.cardDataList,
-                index: index,
-                context: context,
-                buildDeck: widget.buildDeck,
-                editDeck: widget.editDeck,
-                removeCardCallBack: widget.removeCardCallBack,
-              )
-            : SizedBox());
+    return (index < widget.cardDataList.length)
+        ? CardWidget(
+            cardDataList: widget.cardDataList,
+            index: index,
+            context: context,
+            buildDeck: widget.buildDeck,
+            editDeck: widget.editDeck,
+          )
+        : SizedBox();
   }
 }

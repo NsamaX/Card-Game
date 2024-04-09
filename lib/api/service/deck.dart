@@ -34,6 +34,7 @@ Future<List<CardData>> loadDeck() async {
 
       deck.add(cardData);
     }
+    // deck.sort((a, b) => b.grade.compareTo(a.grade));
   }
 
   return deck;
@@ -44,11 +45,13 @@ Future<void> updateDeck(CardData model, int newCardCount) async {
   List<String>? savedCards = prefs.getStringList('user_deck');
 
   if (savedCards != null) {
+    bool found = false;
     for (int i = 0; i < savedCards.length; i++) {
       Map<String, dynamic> cardMap = jsonDecode(savedCards[i]);
       CardData cardData = CardData.fromJson(cardMap['model']);
 
       if (cardData.id == model.id) {
+        found = true;
         cardData.setCardCount(newCardCount);
         cardMap['model'] = cardData.toJson();
         cardMap['cardCount'] = newCardCount;
@@ -63,6 +66,9 @@ Future<void> updateDeck(CardData model, int newCardCount) async {
         await prefs.setStringList('user_deck', savedCards);
         return;
       }
+    }
+    if (!found) {
+      saveCard(model, newCardCount);
     }
   }
 }
