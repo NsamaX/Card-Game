@@ -1,6 +1,7 @@
 import 'save.dart';
+import 'information.dart';
 
-class CardData extends Save {
+class CardData extends Save implements Information {
   final int id;
   final String cardType;
   final String clan;
@@ -203,6 +204,17 @@ class CardData extends Save {
     return dataMap;
   }
 
+  @override
+  String getName() {
+    return name;
+  }
+
+  @override
+  String getDescription() {
+    return skill;
+  }
+
+  @override
   String getImage() {
     return imageUrlJp;
   }

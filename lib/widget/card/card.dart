@@ -102,6 +102,6 @@ class CardWidget extends StatelessWidget {
   }
 
   void _updateCardCount(CardData card) {
-    updateDeck(card, card.getCardCount());
+    updateDeck(card, card.getCount());
   }
 }

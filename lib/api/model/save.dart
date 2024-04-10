@@ -1,19 +1,19 @@
 abstract class Save {
-  int cardCount = 1;
+  int count = 1;
 
-  int getCardCount() {
-    return cardCount;
+  int getCount() {
+    return count;
   }
 
-  void setCardCount(int cardCount) {
-    this.cardCount = cardCount;
+  void setCount(int count) {
+    this.count = count;
   }
 
   void addCard() {
-    cardCount++;
+    count++;
   }
 
   void removeCard() {
-    cardCount--;
+    count--;
   }
 }

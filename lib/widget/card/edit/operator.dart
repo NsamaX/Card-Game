@@ -24,7 +24,7 @@ class _CardOperatorState extends State<CardOperator> {
   @override
   void initState() {
     super.initState();
-    cardCount = widget.card.getCardCount();
+    cardCount = widget.card.getCount();
   }
 
   @override
@@ -62,7 +62,7 @@ class _CardOperatorState extends State<CardOperator> {
 
   void _updateCardCount() {
     setState(() {
-      cardCount = widget.card.getCardCount();
+      cardCount = widget.card.getCount();
     });
   }
 }

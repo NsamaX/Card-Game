@@ -12,8 +12,6 @@ Future<void> saveCard(CardData model, int cardCount) async {
   };
 
   String cardJson = jsonEncode(cardMap);
-  print('JSON representation of the card: $cardJson');
-
   savedCards.add(cardJson);
   await prefs.setStringList('user_deck', savedCards);
 }
@@ -30,7 +28,7 @@ Future<List<CardData>> loadDeck() async {
       CardData cardData = CardData.fromJson(cardMap['model']);
 
       int cardCount = cardMap['cardCount'];
-      cardData.setCardCount(cardCount);
+      cardData.setCount(cardCount);
 
       deck.add(cardData);
     }
@@ -52,7 +50,7 @@ Future<void> updateDeck(CardData model, int newCardCount) async {
 
       if (cardData.id == model.id) {
         found = true;
-        cardData.setCardCount(newCardCount);
+        cardData.setCount(newCardCount);
         cardMap['model'] = cardData.toJson();
         cardMap['cardCount'] = newCardCount;
 
