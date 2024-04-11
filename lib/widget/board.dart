@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model/sleeve.dart';
 import 'package:project/theme/color.dart';
 
 class Board extends StatefulWidget {
   final List<List<String>> field;
   final List<CardData> deck;
   List<List<List<CardData?>>> card = [];
+  final Sleeve sleeve = Sleeve();
 
   Board({
     Key? key,
@@ -31,23 +33,59 @@ class Board extends StatefulWidget {
 
 class _BoardState extends State<Board> {
   CardData? _draggedCard;
+  bool _isLoading = true;
+  bool _disposed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Preload all images
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await precacheImages();
+      if (!_disposed) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  Future<void> precacheImages() async {
+    for (var cardList in widget.card) {
+      for (var sublist in cardList) {
+        for (var cardData in sublist) {
+          if (cardData != null && !_disposed) {
+            await precacheImage(NetworkImage(cardData.getImage()), context);
+          }
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          for (int i = 0; i < widget.field.length; i++)
-            Row(
+      child: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int j = 0; j < widget.field[i].length; j++)
-                  buildField(widget.card[i][j], widget.field[i][j]),
+                for (int i = 0; i < widget.field.length; i++)
+                  Row(
+                    children: [
+                      for (int j = 0; j < widget.field[i].length; j++)
+                        buildField(widget.card[i][j], widget.field[i][j]),
+                    ],
+                  ),
               ],
             ),
-        ],
-      ),
     );
   }
 
@@ -79,62 +117,76 @@ class _BoardState extends State<Board> {
                 ),
                 if (cards != null)
                   for (int i = 0; i < cards.length; i++) ...[
-                    if (cards[i] != null) buildDraggableCard(cards[i]!),
+                    if (cards[i] != null)
+                      buildDraggableCard(
+                          (field == 'Main\nDeck' || field == 'Special\nDeck')
+                              ? true
+                              : false,
+                          cards[i]!),
                   ],
               ],
             );
           },
           onAccept: (data) {
-            setState(() {
-              if (_draggedCard != null) {
-                for (int i = 0; i < widget.card.length; i++) {
-                  for (int j = 0; j < widget.card[i].length; j++) {
-                    if (widget.card[i][j].contains(_draggedCard)) {
-                      widget.card[i][j].remove(_draggedCard);
-                      break;
+            if (!_disposed) {
+              setState(() {
+                if (_draggedCard != null) {
+                  for (int i = 0; i < widget.card.length; i++) {
+                    for (int j = 0; j < widget.card[i].length; j++) {
+                      if (widget.card[i][j].contains(_draggedCard)) {
+                        widget.card[i][j].remove(_draggedCard);
+                        break;
+                      }
                     }
                   }
+                  cards?.add(_draggedCard);
                 }
-                cards?.add(_draggedCard);
-              }
-            });
+              });
+            }
           },
         ),
       ),
     );
   }
 
-  Widget buildDraggableCard(CardData cardData) {
+  Widget buildDraggableCard(bool hide, CardData cardData) {
     return Draggable<CardData>(
       data: cardData,
-      child: buildCard(cardData.getImage()),
-      feedback: buildCard(cardData.getImage()),
+      child: buildCard(hide, cardData.getImage()),
+      feedback: buildCard(hide, cardData.getImage()),
       childWhenDragging: Container(),
       onDragStarted: () {
-        setState(() {
-          _draggedCard = cardData;
-        });
+        if (!_disposed) {
+          setState(() {
+            _draggedCard = cardData;
+          });
+        }
       },
       onDragCompleted: () {
-        setState(() {
-          _draggedCard = null;
-        });
+        if (!_disposed) {
+          setState(() {
+            _draggedCard = null;
+          });
+        }
       },
       onDraggableCanceled: (Velocity velocity, Offset offset) {
-        setState(() {
-          _draggedCard = null;
-        });
+        if (!_disposed) {
+          setState(() {
+            _draggedCard = null;
+          });
+        }
       },
     );
   }
 
-  Widget buildCard(String image) {
+  Widget buildCard(bool hide, String image) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
       child: Image.network(
-        image,
+        (hide) ? widget.sleeve.getSleeve() : image,
         fit: BoxFit.cover,
         height: 80.0,
+        width: 80 * 0.75,
       ),
     );
   }
