@@ -64,7 +64,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
               ),
               SizedBox(height: 20),
               for (var entry
-                  in widget.model.getCardDataMap(widget.model).entries)
+                  in widget.model.getCardDataMap().entries)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

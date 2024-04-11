@@ -35,14 +35,9 @@ class _DuelPageState extends State<DuelPage> {
         icons: icons,
         onTapCallbacks: getOnTapCallbacks(context),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (int i = 0; i < text.length; i++) Board.buildRow(text[i]),
-          ],
-        ),
+      body: Board(
+        field: field,
+        deck: myDeck,
       ),
       bottomNavigationBar: BottomNav(currentIndex: 1),
     );

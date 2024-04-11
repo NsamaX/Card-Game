@@ -1,5 +1,5 @@
-import 'save.dart';
 import 'information.dart';
+import 'save.dart';
 
 class CardData extends Save implements Information {
   final int id;
@@ -172,46 +172,34 @@ class CardData extends Save implements Information {
     };
   }
 
-  Map<String, dynamic> getCardDataMap(CardData model) {
+  Map<String, dynamic> getCardDataMap() {
     Map<String, dynamic> dataMap = {};
 
-    if (model.name != '') dataMap['Name'] = model.name;
-    if (model.flavor != '') dataMap['Flavor'] = '" ' + model.flavor + ' "';
-    if (model.skill != '') dataMap['Skill'] = model.skill;
-    if (model.effect != '') dataMap['Effect'] = model.effect;
-    if (model.rideSkill != '') dataMap['Ride Skill'] = model.rideSkill;
-    if (model.triggerEffect != '')
-      dataMap['Trigger Effect'] = model.triggerEffect;
-    if (model.power != '' && model.shield != '') {
-      dataMap['Power & Shield'] = '${model.power} / ${model.shield}';
-    } else if (model.power != '') {
-      dataMap['Power'] = model.power;
-    } else if (model.shield != '') {
-      dataMap['Shield'] = model.shield;
+    if (name != '') dataMap['Name'] = name;
+    if (flavor != '') dataMap['Flavor'] = '" ' + flavor + ' "';
+    if (skill != '') dataMap['Skill'] = skill;
+    if (effect != '') dataMap['Effect'] = effect;
+    if (rideSkill != '') dataMap['Ride Skill'] = rideSkill;
+    if (triggerEffect != '') dataMap['Trigger Effect'] = triggerEffect;
+    if (power != '' && shield != '') {
+      dataMap['Power & Shield'] = '${power} / ${shield}';
+    } else if (power != '') {
+      dataMap['Power'] = power;
+    } else if (shield != '') {
+      dataMap['Shield'] = shield;
     }
-    if (model.clan != '' && model.shield != '') {
-      dataMap['Clan & Nation'] = '${model.clan} / ${model.nation}';
-    } else if (model.clan != '') {
-      dataMap['Clan'] = model.clan;
-    } else if (model.nation != '') {
-      dataMap['Nation'] = model.nation;
+    if (clan != '' && shield != '') {
+      dataMap['Clan & Nation'] = '${clan} / ${nation}';
+    } else if (clan != '') {
+      dataMap['Clan'] = clan;
+    } else if (nation != '') {
+      dataMap['Nation'] = nation;
     }
-    if (model.limitationText != '')
-      dataMap['Limitation Text'] = model.limitationText;
-    if (model.format != '') dataMap['Format'] = model.format;
-    if (model.sets.isNotEmpty) dataMap['Sets'] = model.sets;
+    if (limitationText != '') dataMap['Limitation Text'] = limitationText;
+    if (format != '') dataMap['Format'] = format;
+    if (sets.isNotEmpty) dataMap['Sets'] = sets;
 
     return dataMap;
-  }
-
-  @override
-  String getName() {
-    return name;
-  }
-
-  @override
-  String getDescription() {
-    return skill;
   }
 
   @override
