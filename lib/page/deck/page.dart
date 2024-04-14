@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
-import 'package:project/widget/app_bar.dart';
-import 'package:project/widget/buttom_nav.dart';
+import 'package:project/widget/appBar.dart';
+import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/card/list.dart';
 import 'icons.dart';
 
@@ -46,17 +46,17 @@ class _DeckPageState extends State<DeckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: appBar(
         context: context,
-        icons: icons,
-        onTapCallbacks:
-            getOnTapCallbacks(context, myDeck, deleteDeckState, editDeckState),
+        menus: menus,
+        onTap:
+            getOnTap(context, myDeck, deleteDeckState, editDeckState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: CardList(
-          cardDataList: myDeck,
           scrollController: _scrollController,
+          cardList: myDeck,
           buildDeck: false,
           editDeck: editDeck,
         ),

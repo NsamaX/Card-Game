@@ -5,12 +5,12 @@ import 'package:project/widget/card/app_bar.dart';
 import 'package:project/widget/card/card_bar.dart';
 
 class CardInfoPage extends StatefulWidget {
-  final CardData model;
+  final CardData card;
   final bool save;
 
   const CardInfoPage({
     Key? key,
-    required this.model,
+    required this.card,
     required this.save,
   }) : super(key: key);
 
@@ -28,7 +28,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
   int selectedIndex = 0;
 
   void handleSave() {
-    saveCard(widget.model, data[selectedIndex]['value']);
+    saveCard(widget.card, data[selectedIndex]['value']);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Save Card Successfully')),
     );
@@ -56,7 +56,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14.0),
                     child: Image.network(
-                      widget.model.getImage(),
+                      widget.card.getImage(),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -64,7 +64,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
               ),
               SizedBox(height: 20),
               for (var entry
-                  in widget.model.getCardDataMap().entries)
+                  in widget.card.getCardDataMap().entries)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

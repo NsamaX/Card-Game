@@ -1,5 +1,5 @@
 import 'package:project/api/service/room.dart';
 
 List<Map<String, dynamic>> roomsList =
-    Room(maxRoom: 260, maxRoomPerPage: 30, maxPageIcon: 6)
+    Room(room: 260, page: 30, icon: 6)
         .generateRoomsList();

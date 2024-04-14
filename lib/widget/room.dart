@@ -1,52 +1,46 @@
 import 'package:flutter/material.dart';
-import 'page_nav/page_bar.dart';
 import 'label.dart';
+import 'pageNav.dart';
 
 class Room extends StatefulWidget {
-  final List<dynamic> rooms;
-  final int maxRoomPerPage;
-  final int maxPageIcon;
+  final List<dynamic> _room;
+  final int _page;
+  final int _icon;
 
   Room({
     Key? key,
-    required this.rooms,
-    required this.maxRoomPerPage,
-    required this.maxPageIcon,
-  }) : super(key: key);
+    required List<dynamic> room,
+    required int page,
+    required int icon,
+  })  : _room = room,
+        _page = page,
+        _icon = icon,
+        super(key: key);
 
   @override
-  _RoomState createState() => _RoomState();
+  _Roomtate createState() => _Roomtate();
 }
 
-class _RoomState extends State<Room> {
-  var currentPage = 0;
+class _Roomtate extends State<Room> {
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
-    int startRoom = currentPage * widget.maxRoomPerPage;
-    int endRoom = (currentPage + 1) * widget.maxRoomPerPage;
-    if (endRoom > widget.rooms.length) endRoom = widget.rooms.length;
+    int start = _currentPage * widget._page;
+    int end = (_currentPage + 1) * widget._page;
+    if (end > widget._room.length) end = widget._room.length;
 
     return Expanded(
       child: Column(
         children: [
-          Label(contents: widget.rooms.sublist(startRoom, endRoom)),
+          Label(label: widget._room.sublist(start, end)),
           PageBar(
-            currentPage: currentPage,
-            totalPages: (widget.rooms.length / widget.maxRoomPerPage).ceil(),
-            maxPageIcon: widget.maxPageIcon,
-            onOperatorTap: (String operator) {
+            currentPage: _currentPage,
+            page: (widget._room.length / widget._page).ceil(),
+            icon: widget._icon,
+            onTap: (int page) {
               setState(() {
-                if (operator == '+') {
-                  currentPage += 1;
-                } else {
-                  if (currentPage > 0) currentPage -= 1;
-                }
-              });
-            },
-            onPageTap: (int page) {
-              setState(() {
-                currentPage = page;
+                _currentPage = page;
               });
             },
           ),

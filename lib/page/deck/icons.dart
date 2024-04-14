@@ -3,7 +3,7 @@ import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/page/card/page.dart';
 
-List<dynamic> icons = [
+List<dynamic> menus = [
   Icons.delete_rounded,
   Icons.ios_share_rounded,
   'My Deck',
@@ -14,7 +14,7 @@ List<dynamic> icons = [
 typedef void DeleteDeckCallback();
 typedef void EditDeckCallback();
 
-List<Function> getOnTapCallbacks(BuildContext context, List<CardData> myDeck,
+List<Function> getOnTap(BuildContext context, List<CardData> myDeck,
     DeleteDeckCallback deleteDeckCallback, EditDeckCallback editDeckState) {
   return [
     () {

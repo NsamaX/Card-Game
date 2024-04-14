@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/app_bar.dart';
-import 'package:project/widget/buttom_nav.dart';
+import 'package:project/widget/appBar.dart';
+import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/label.dart';
 import 'contents.dart';
 import 'icons.dart';
@@ -11,12 +11,12 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: appBar(
         context: context,
-        icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context),
+        menus: menus,
+        onTap: getOnTap(context),
       ),
-      body: Label(contents: contents),
+      body: Label(label: contents),
       bottomNavigationBar: BottomNav(currentIndex: 2),
     );
   }

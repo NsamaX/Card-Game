@@ -5,16 +5,14 @@ import 'package:project/page/card/contents.dart';
 import 'edit/operator.dart';
 
 class CardWidget extends StatelessWidget {
-  final List<CardData> cardDataList;
-  final int index;
   final BuildContext context;
+  final CardData card;
   final bool buildDeck;
   final bool editDeck;
 
   const CardWidget({
     Key? key,
-    required this.cardDataList,
-    required this.index,
+    required this.card,
     required this.context,
     required this.buildDeck,
     required this.editDeck,
@@ -22,7 +20,6 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardData card = cardDataList[index];
     return Stack(
       children: [
         GestureDetector(
@@ -94,7 +91,7 @@ class CardWidget extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => CardInfoPage(
-          model: cardData,
+          card: cardData,
           save: save,
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/model/sleeve.dart';
 import 'package:project/theme/color.dart';
+import 'action/operator.dart';
 
 class Board extends StatefulWidget {
   final List<List<String>> field;
@@ -91,61 +92,68 @@ class _BoardState extends State<Board> {
 
   Widget buildField(List<CardData?>? cards, String field) {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: DragTarget<CardData>(
-          builder: (BuildContext context, List<CardData?> candidateData,
-              List<dynamic> rejectedData) {
-            return Stack(
-              children: [
-                Container(
-                  height: 80.0,
-                  decoration: BoxDecoration(
-                    color: mainColor3,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      field,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.4),
-                        fontSize: 12.0,
+      child: Stack(children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DragTarget<CardData>(
+            builder: (BuildContext context, List<CardData?> candidateData,
+                List<dynamic> rejectedData) {
+              return Stack(
+                children: [
+                  Container(
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      color: mainColor3,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        field,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.4),
+                          fontSize: 12.0,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-                if (cards != null)
-                  for (int i = 0; i < cards.length; i++) ...[
-                    if (cards[i] != null)
-                      buildDraggableCard(
-                          (field == 'Main\nDeck' || field == 'Special\nDeck')
-                              ? true
-                              : false,
-                          cards[i]!),
+                  if (cards != null) ...[
+                    for (int i = 0; i < cards.length; i++)
+                      if (cards[i] != null)
+                        buildDraggableCard(
+                            (field == 'Main\nDeck' || field == 'Special\nDeck')
+                                ? true
+                                : false,
+                            cards[i]!),
                   ],
-              ],
-            );
-          },
-          onAccept: (data) {
-            if (!_disposed) {
-              setState(() {
-                if (_draggedCard != null) {
-                  for (int i = 0; i < widget.card.length; i++) {
-                    for (int j = 0; j < widget.card[i].length; j++) {
-                      if (widget.card[i][j].contains(_draggedCard)) {
-                        widget.card[i][j].remove(_draggedCard);
-                        break;
+                ],
+              );
+            },
+            onAccept: (data) {
+              if (!_disposed) {
+                setState(() {
+                  if (_draggedCard != null) {
+                    for (int i = 0; i < widget.card.length; i++) {
+                      for (int j = 0; j < widget.card[i].length; j++) {
+                        if (widget.card[i][j].contains(_draggedCard)) {
+                          widget.card[i][j].remove(_draggedCard);
+                          break;
+                        }
                       }
                     }
+                    cards?.add(_draggedCard);
                   }
-                  cards?.add(_draggedCard);
-                }
-              });
-            }
-          },
+                });
+              }
+            },
+          ),
         ),
-      ),
+        // CardOperator(
+        //   flip: () {},
+        //   search: () {},
+        //   rest: () {},
+        // ),
+      ]),
     );
   }
 

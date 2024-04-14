@@ -4,33 +4,35 @@ import 'package:project/page/play/page.dart';
 import 'package:project/page/setting/page.dart';
 
 class BottomNav extends StatelessWidget {
-  final int currentIndex;
+  final int _currentIndex;
 
-  const BottomNav({Key? key, required this.currentIndex}) : super(key: key);
+  const BottomNav({Key? key, required int currentIndex})
+      : _currentIndex = currentIndex,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: [
-        buildBottomNav('Deck', Icons.web_stories_rounded),
-        buildBottomNav('Play', Icons.style_rounded),
-        buildBottomNav('Setting', Icons.settings_rounded),
+        _bottomNav('Deck', Icons.web_stories_rounded),
+        _bottomNav('Play', Icons.style_rounded),
+        _bottomNav('Setting', Icons.settings_rounded),
       ],
-      currentIndex: currentIndex,
+      currentIndex: _currentIndex,
       onTap: (index) {
-        navigateToPage(context, index);
+        _navigatePage(context, index);
       },
     );
   }
 
-  BottomNavigationBarItem buildBottomNav(String label, IconData iconData) {
+  BottomNavigationBarItem _bottomNav(String label, IconData iconData) {
     return BottomNavigationBarItem(
       icon: Icon(iconData),
       label: label,
     );
   }
 
-  void navigateToPage(BuildContext context, int index) {
+  void _navigatePage(BuildContext context, int index) {
     Widget page;
 
     switch (index) {

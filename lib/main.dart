@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/page/duel/page.dart';
+import 'package:project/page/play/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:project/theme/theme.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: customTheme(context),
       debugShowCheckedModeBanner: false,
-      home: const DuelPage(),
+      home: const PlayPage(),
     );
   }
 }

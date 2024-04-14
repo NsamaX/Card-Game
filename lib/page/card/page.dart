@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/card.dart';
-import 'package:project/widget/app_bar.dart';
-import 'package:project/widget/buttom_nav.dart';
+import 'package:project/widget/appBar.dart';
+import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/card/list.dart';
 import 'icons.dart';
 
@@ -24,18 +24,18 @@ class _CardsPageState extends State<CardsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: appBar(
         context: context,
-        icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context, widget.page),
+        menus: menus,
+        onTap: getOnTap(context, widget.page),
       ),
       body: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: CardList(
-              cardDataList: _CardData,
               scrollController: _scrollController,
+              cardList: _CardData,
               buildDeck: widget.save,
               editDeck: false,
             ),

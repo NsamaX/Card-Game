@@ -1,4 +1,4 @@
-import 'information.dart';
+import 'info.dart';
 import 'save.dart';
 
 class CardData extends Save implements Information {
@@ -172,6 +172,12 @@ class CardData extends Save implements Information {
     };
   }
 
+  @override
+  String getImage() {
+    return imageUrlJp;
+  }
+
+  @override
   Map<String, dynamic> getCardDataMap() {
     Map<String, dynamic> dataMap = {};
 
@@ -200,10 +206,5 @@ class CardData extends Save implements Information {
     if (sets.isNotEmpty) dataMap['Sets'] = sets;
 
     return dataMap;
-  }
-
-  @override
-  String getImage() {
-    return imageUrlJp;
   }
 }
