@@ -30,16 +30,15 @@ class _DuelPageState extends State<DuelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        context: context,
-        icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context),
+      appBar: apPbaR(
+        menu: icons,
+        onTap: getOnTapCallbacks(context),
       ),
       body: Board(
         field: field,
         deck: myDeck,
       ),
-      bottomNavigationBar: BottomNav(currentIndex: 1),
+      bottomNavigationBar: bottoMnaV(currentIndex: 1),
     );
   }
 }

@@ -1,72 +1,53 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final BuildContext context;
-  final List<dynamic> icons;
-  final List<Function> onTapCallbacks;
-  final int titleIndex;
+class apPbaR extends StatelessWidget implements PreferredSizeWidget {
+  final List<dynamic> _menu;
+  final List<Function> _onTap;
 
-  CustomAppBar({
+  apPbaR({
     Key? key,
-    required this.context,
-    required this.icons,
-    required this.onTapCallbacks,
-  })  : titleIndex = (icons.length / 2).round() - 1,
+    required List<dynamic> menu,
+    required List<Function> onTap,
+  })  : _menu = menu,
+        _onTap = onTap,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: buildIconRow(context),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: _menu
+            .asMap()
+            .entries
+            .map((entry) => _build_MenuItem(context, entry.key, entry.value))
+            .toList(),
+      ),
     );
   }
 
-  Widget buildIconRow(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: icons.asMap().entries.map((entry) {
-        final index = entry.key;
-        final icon = entry.value;
-        return buildIconWidget(context, index, icon);
-      }).toList(),
-    );
-  }
-
-  Widget buildIconWidget(BuildContext context, int index, dynamic icon) {
-    final isTitleIndex = index == titleIndex;
+  Widget _build_MenuItem(BuildContext context, int index, dynamic item) {
+    final _isTitle = index == (_menu.length ~/ 2);
 
     return GestureDetector(
       onTap: () {
-        if (index < onTapCallbacks.length) {
-          onTapCallbacks[index].call();
+        if (index < _onTap.length) {
+          _onTap[index].call();
         }
       },
-      child: iconTypeSelector(icon, isTitleIndex),
+      child: item is String
+          ? Text(
+              '$item',
+              style: _isTitle
+                  ? TextStyle(color: Colors.white, fontSize: 20.0)
+                  : TextStyle(),
+            )
+          : item is IconData
+              ? Icon(item)
+              : SizedBox(
+                  width: 30.0,
+                ),
     );
-  }
-
-  Widget iconTypeSelector(dynamic icon, bool isTitleIndex) {
-    if (icon is String) {
-      return Text(
-        '$icon',
-        style: TextStyle(
-          color: isTitleIndex
-              ? Colors.white
-              : Theme.of(context).textTheme.bodyText1?.color,
-          fontWeight: FontWeight.bold,
-          fontSize: isTitleIndex ? 20.0 : 16.0,
-        ),
-      );
-    } else if (icon is IconData) {
-      return Icon(
-        icon,
-        color: Colors.blue,
-      );
-    } else {
-      return SizedBox(
-        width: 30.0,
-      );
-    }
   }
 
   @override

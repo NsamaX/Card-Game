@@ -46,10 +46,9 @@ class _DeckPageState extends State<DeckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        context: context,
-        icons: icons,
-        onTapCallbacks:
+      appBar: apPbaR(
+        menu: icons,
+        onTap:
             getOnTapCallbacks(context, myDeck, deleteDeckState, editDeckState),
       ),
       body: Padding(
@@ -61,7 +60,7 @@ class _DeckPageState extends State<DeckPage> {
           editDeck: editDeck,
         ),
       ),
-      bottomNavigationBar: BottomNav(currentIndex: 0),
+      bottomNavigationBar: bottoMnaV(currentIndex: 0),
     );
   }
 }

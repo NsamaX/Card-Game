@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
-import 'package:project/widget/theme/color.dart';
+import 'color.dart';
 
 class Board extends StatefulWidget {
   final List<List<String>> field;
@@ -63,7 +63,7 @@ class _BoardState extends State<Board> {
                 Container(
                   height: 80.0,
                   decoration: BoxDecoration(
-                    color: mainColor3,
+                    color: primary3,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Center(

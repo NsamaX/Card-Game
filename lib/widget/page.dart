@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/theme/color.dart';
+import 'color.dart';
 
 class pagE extends StatelessWidget {
   final int _currentPage;
@@ -51,7 +51,7 @@ class pagE extends StatelessWidget {
           height: 30.0,
           width: 30.0,
           decoration: BoxDecoration(
-            color: page == _currentPage ? subColor : mainColor4,
+            color: page == _currentPage ? secondary : primary4,
             shape: BoxShape.circle,
           ),
           child: Center(

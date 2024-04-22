@@ -16,10 +16,9 @@ class _PlayPageState extends State<PlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        context: context,
-        icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context),
+      appBar: apPbaR(
+        menu: icons,
+        onTap: getOnTapCallbacks(context),
       ),
       body: Column(
         children: [
@@ -32,7 +31,7 @@ class _PlayPageState extends State<PlayPage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNav(currentIndex: 1),
+      bottomNavigationBar: bottoMnaV(currentIndex: 1),
     );
   }
 }

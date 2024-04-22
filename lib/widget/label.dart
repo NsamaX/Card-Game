@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/theme/color.dart';
+import 'color.dart';
 
 class labeL extends StatelessWidget {
   final List<dynamic> _label;
@@ -22,7 +22,7 @@ class labeL extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20.0, top: 16.0),
                   child: Text(
                     category['title'],
-                    style: TextStyle(color: subColor, fontSize: 16.0),
+                    style: TextStyle(color: secondary, fontSize: 16.0),
                   ),
                 ),
                 SizedBox(height: 8.0),
@@ -56,7 +56,7 @@ class labeL extends StatelessWidget {
       child: Container(
         height: 40.0,
         decoration: BoxDecoration(
-          color: mainColor4,
+          color: primary4,
           border: Border(
             bottom: BorderSide(
               color: Colors.white.withOpacity(0.5),

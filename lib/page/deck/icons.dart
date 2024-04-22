@@ -8,7 +8,7 @@ List<dynamic> icons = [
   Icons.ios_share_rounded,
   'My Deck',
   Icons.add_rounded,
-  Icons.build_rounded,
+  'Edit',
 ];
 
 typedef void DeleteDeckCallback();

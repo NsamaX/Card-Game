@@ -11,13 +11,12 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        context: context,
-        icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context),
+      appBar: apPbaR(
+        menu: icons,
+        onTap: getOnTapCallbacks(context),
       ),
       body: labeL(label: label),
-      bottomNavigationBar: BottomNav(currentIndex: 2),
+      bottomNavigationBar: bottoMnaV(currentIndex: 2),
     );
   }
 }

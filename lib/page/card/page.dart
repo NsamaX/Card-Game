@@ -24,10 +24,9 @@ class _CardsPageState extends State<CardsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        context: context,
-        icons: icons,
-        onTapCallbacks: getOnTapCallbacks(context, widget.page),
+      appBar: apPbaR(
+        menu: icons,
+        onTap: getOnTapCallbacks(context, widget.page),
       ),
       body: Stack(
         children: [
@@ -47,7 +46,7 @@ class _CardsPageState extends State<CardsPage> {
         ],
       ),
       bottomNavigationBar:
-          BottomNav(currentIndex: widget.page == 'deck' ? 0 : 2),
+          bottoMnaV(currentIndex: widget.page == 'deck' ? 0 : 2),
     );
   }
 
