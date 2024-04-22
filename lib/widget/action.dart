@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
+import 'theme.dart';
 
 class actioN extends StatefulWidget {
   final CardData card;
@@ -69,25 +70,24 @@ class _actioNState extends State<actioN> {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: item is int ? 26.0 : 36.0,
+          width: 22.0,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: themE().primaryColorLight,
             shape: BoxShape.circle,
           ),
           child: item is int
               ? Text(
                   item.toString(),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: themE().textTheme.bodyMedium?.copyWith(
+                        color: themE().primaryColorDark,
+                        fontWeight: FontWeight.bold,
+                      ),
                   textAlign: TextAlign.center,
                 )
               : Icon(
                   item,
-                  color: Colors.black,
-                  size: 26.0,
+                  color: themE().primaryColorDark,
+                  size: 22.0,
                 ),
         ),
       ),

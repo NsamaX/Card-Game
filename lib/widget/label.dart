@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'color.dart';
+import 'theme.dart';
 
 class labeL extends StatelessWidget {
   final List<dynamic> _label;
@@ -19,13 +19,15 @@ class labeL extends StatelessWidget {
             children: [
               if (category['title'] != null) ...[
                 Padding(
-                  padding: const EdgeInsets.only(left: 20.0, top: 16.0),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
                   child: Text(
                     category['title'],
-                    style: TextStyle(color: secondary, fontSize: 16.0),
+                    style: themE().textTheme.bodyMedium?.copyWith(
+                          color: themE().secondaryHeaderColor,
+                        ),
                   ),
                 ),
-                SizedBox(height: 8.0),
               ],
               ...category['content'].map<Widget>((item) {
                 return _content(
@@ -56,10 +58,10 @@ class labeL extends StatelessWidget {
       child: Container(
         height: 40.0,
         decoration: BoxDecoration(
-          color: primary4,
+          color: themE().primaryColor,
           border: Border(
             bottom: BorderSide(
-              color: Colors.white.withOpacity(0.5),
+              color: themE().primaryColorLight.withOpacity(0.6),
               width: 1.0,
             ),
           ),
@@ -68,12 +70,9 @@ class labeL extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20.0),
           child: Row(
             children: [
-              Icon(icon, color: Colors.white, size: 16.0),
+              Icon(icon),
               SizedBox(width: 20.0),
-              Text(
-                text,
-                style: TextStyle(color: Colors.white, fontSize: 12.0),
-              ),
+              Text(text, style: themE().textTheme.bodySmall),
             ],
           ),
         ),

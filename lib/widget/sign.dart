@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'theme.dart';
 
 class sigN extends StatelessWidget {
   final Map<String, String> _option = {
@@ -20,7 +21,7 @@ class sigN extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: themE().primaryColorLight,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Padding(

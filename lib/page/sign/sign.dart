@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/widget/sign.dart';
+import 'package:project/widget/theme.dart';
 import '../deck/page.dart';
 
 class SignInPage extends StatelessWidget {
@@ -11,25 +12,30 @@ class SignInPage extends StatelessWidget {
       body: Padding(
         padding:
             const EdgeInsets.symmetric(vertical: 30.0 * 2, horizontal: 40.0),
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             'Let\'s me know you.',
-            style: TextStyle(color: Colors.white, fontSize: 40.0),
+            style: themE().textTheme.titleLarge,
           ),
           SizedBox(height: 160.0),
           sigN(),
           SizedBox(height: 30.0),
-          Container(
-            width: 260.0,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => DeckPage()),
-                );
-              },
-              child: Text('Guess',
-                  style: TextStyle(color: Colors.black, fontSize: 20.0)),
+          Center(
+            child: Container(
+              width: 260.0,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => DeckPage()),
+                  );
+                },
+                child: Text(
+                  'Guess',
+                  style: themE().textTheme.titleSmall,
+                ),
+                style: themE().elevatedButtonTheme.style,
+              ),
             ),
           ),
         ]),

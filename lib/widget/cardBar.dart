@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'color.dart';
+import 'theme.dart';
 
 class carDbaR extends StatefulWidget {
   final List<Map<String, dynamic>> _data;
@@ -27,7 +27,7 @@ class _carDbaRState extends State<carDbaR> {
       child: Container(
         height: 40.0,
         decoration: BoxDecoration(
-          color: primary4,
+          color: themE().primaryColor,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
@@ -57,11 +57,15 @@ class _carDbaRState extends State<carDbaR> {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: index == _selectedIndex ? Colors.white : primary4,
+            color: index == _selectedIndex
+                ? text != ''
+                    ? themE().secondaryHeaderColor
+                    : themE().primaryColorLight
+                : themE().primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             border: Border(
               left: BorderSide(
-                color: Colors.white.withOpacity(0.2),
+                color: themE().primaryColorLight.withOpacity(0.2),
                 width: 2.0,
               ),
             ),
@@ -70,16 +74,18 @@ class _carDbaRState extends State<carDbaR> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (text != '') Text(text),
-                Text(
-                  card.toString(),
-                  style: TextStyle(
-                    color:
-                        index == _selectedIndex ? Colors.black : Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
+                if (text != '') ...[
+                  Text(text, style: themE().textTheme.bodyMedium),
+                ] else ...[
+                  Text(
+                    card.toString(),
+                    style: themE().textTheme.titleSmall?.copyWith(
+                          color: index == _selectedIndex
+                              ? themE().primaryColorDark
+                              : themE().primaryColorLight,
+                        ),
                   ),
-                ),
+                ]
               ],
             ),
           ),

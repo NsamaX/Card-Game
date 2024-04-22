@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/widget/theme.dart';
 import '../sign/sign.dart';
 import 'content.dart';
 
@@ -19,20 +20,19 @@ class welcomE extends StatelessWidget {
               width: 260,
               height: 260,
             ),
-            Text('Welcome to',
-                style: TextStyle(color: Colors.white, fontSize: 40.0)),
+            Text('Welcome to', style: themE().textTheme.titleLarge),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Card Game Cafe',
-                    style: TextStyle(color: Colors.white, fontSize: 30.0)),
-                Icon(Icons.coffee_rounded, color: Colors.white, size: 40.0)
+                    style: themE().textTheme.titleLarge),
+                Icon(Icons.coffee_rounded, size: 40.0)
               ],
             ),
             SizedBox(height: 26.0),
             Text(
               _c.getContent(),
-              style: TextStyle(color: Colors.white, fontSize: 16.0),
+              style: themE().textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 36.0),
@@ -46,7 +46,8 @@ class welcomE extends StatelessWidget {
                   );
                 },
                 child: Text('Get started',
-                    style: TextStyle(color: Colors.black, fontSize: 20.0)),
+                    style: themE().textTheme.titleSmall),
+                style: themE().elevatedButtonTheme.style,
               ),
             ),
           ]),

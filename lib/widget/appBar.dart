@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'theme.dart';
 
 class apPbaR extends StatelessWidget implements PreferredSizeWidget {
   final List<dynamic> _menu;
@@ -38,9 +39,8 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
       child: item is String
           ? Text(
               '$item',
-              style: _isTitle
-                  ? TextStyle(color: Colors.white, fontSize: 20.0)
-                  : TextStyle(),
+              style:
+                  _isTitle ? themE().textTheme.titleSmall : TextStyle(),
             )
           : item is IconData
               ? Icon(item)

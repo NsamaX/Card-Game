@@ -24,7 +24,9 @@ class savE extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.only(right: 22.0),
             child: GestureDetector(
               onTap: _onTap,
-              child: Text('Save'),
+              child: Text(
+                'Save',
+              ),
             ),
           ),
       ],
