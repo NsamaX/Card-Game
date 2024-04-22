@@ -16,6 +16,28 @@ Future<void> saveCard(CardData model, int cardCount) async {
   await prefs.setStringList('user_deck', savedCards);
 }
 
+Future<List<CardData>> loadDeck() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String>? savedCards = prefs.getStringList('user_deck');
+
+  List<CardData> deck = [];
+
+  if (savedCards != null) {
+    for (String card in savedCards) {
+      Map<String, dynamic> cardMap = jsonDecode(card);
+      CardData cardData = CardData.fromJson(cardMap['model']);
+
+      int cardCount = cardMap['cardCount'];
+      cardData.setCount(cardCount);
+
+      deck.add(cardData);
+    }
+    // deck.sort((a, b) => b.grade.compareTo(a.grade));
+  }
+
+  return deck;
+}
+
 Future<void> updateDeck(CardData model, int newCardCount) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   List<String>? savedCards = prefs.getStringList('user_deck');
@@ -47,28 +69,6 @@ Future<void> updateDeck(CardData model, int newCardCount) async {
       saveCard(model, newCardCount);
     }
   }
-}
-
-Future<List<CardData>> loadDeck() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<String>? savedCards = prefs.getStringList('user_deck');
-
-  List<CardData> deck = [];
-
-  if (savedCards != null) {
-    for (String card in savedCards) {
-      Map<String, dynamic> cardMap = jsonDecode(card);
-      CardData cardData = CardData.fromJson(cardMap['model']);
-
-      int cardCount = cardMap['cardCount'];
-      cardData.setCount(cardCount);
-
-      deck.add(cardData);
-    }
-    // deck.sort((a, b) => b.grade.compareTo(a.grade));
-  }
-
-  return deck;
 }
 
 Future<void> deleteDeck() async {

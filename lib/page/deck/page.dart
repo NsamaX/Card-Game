@@ -46,17 +46,17 @@ class _DeckPageState extends State<DeckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         context: context,
-        menus: menus,
-        onTap:
-            getOnTap(context, myDeck, deleteDeckState, editDeckState),
+        icons: icons,
+        onTapCallbacks:
+            getOnTapCallbacks(context, myDeck, deleteDeckState, editDeckState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: CardList(
+          cardDataList: myDeck,
           scrollController: _scrollController,
-          cardList: myDeck,
           buildDeck: false,
           editDeck: editDeck,
         ),

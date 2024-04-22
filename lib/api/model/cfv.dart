@@ -1,4 +1,4 @@
-import 'info.dart';
+import 'information.dart';
 import 'save.dart';
 
 class CardData extends Save implements Information {
@@ -178,7 +178,7 @@ class CardData extends Save implements Information {
   }
 
   @override
-  Map<String, dynamic> getCardDataMap() {
+  Map<String, dynamic> getDataMap() {
     Map<String, dynamic> dataMap = {};
 
     if (name != '') dataMap['Name'] = name;

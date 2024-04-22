@@ -2,42 +2,37 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:project/page/duel/page.dart';
 
-class Room {
-  final int room;
-  final int page;
-  final int icon;
+class room {
+  final int _room;
 
-  Room({
-    required this.room,
-    required this.page,
-    required this.icon,
-  });
+  room({
+    required int room,
+  }) : _room = room;
 
-  List<Map<String, dynamic>> generateRoomsList() {
-    List<Map<String, dynamic>> rooms = [
-      {"topic": null, "content": []}
+  List<Map<String, dynamic>> generateRoom() {
+    List<Map<String, dynamic>> _data = [
+      {"title": null, "content": []}
     ];
-    List<IconData> icons = [
+    List<IconData> statusIcon = [
       Icons.face_unlock_rounded,
       Icons.public_rounded,
       Icons.lock_rounded,
     ];
 
     Random random = Random();
-    for (int i = 0; i < room; i++) {
-      IconData randomIcon = icons[random.nextInt(icons.length)];
-      String id = 'Room ${i + 1}';
-      String label = '$id : Player name : Game information';
-      if (rooms.length <= i) {
-        rooms.add({"topic": null, "content": []});
+    for (int i = 0; i < _room; i++) {
+      IconData status = statusIcon[random.nextInt(statusIcon.length)];
+      String text = 'Room ${i + 1} : Player name : Game information';
+      if (_data.length <= i) {
+        _data.add({"title": null, "content": []});
       }
-      rooms[i]['content'].add({
-        'icon': randomIcon,
-        'label': label,
+      _data[i]['content'].add({
+        'icon': status,
+        'text': text,
         'page': DuelPage(),
       });
     }
 
-    return rooms;
+    return _data;
   }
 }

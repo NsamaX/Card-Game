@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../play/page.dart';
 
-final List<dynamic> menus = [
+final List<dynamic> icons = [
   Icons.arrow_back_ios_new_rounded,
   Icons.headphones_rounded,
   'Room ID',
@@ -9,7 +9,7 @@ final List<dynamic> menus = [
   Icons.chat_rounded,
 ];
 
-List<Function> getOnTap(BuildContext context) {
+List<Function> getOnTapCallbacks(BuildContext context) {
   return [
     () {
       Navigator.pushReplacement(

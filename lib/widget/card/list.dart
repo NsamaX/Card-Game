@@ -3,15 +3,15 @@ import 'package:project/api/model/cfv.dart';
 import 'card.dart';
 
 class CardList extends StatefulWidget {
+  final List<CardData> cardDataList;
   final ScrollController? scrollController;
-  final List<CardData> cardList;
   final bool buildDeck;
   final bool editDeck;
 
   const CardList({
     Key? key,
+    required this.cardDataList,
     this.scrollController,
-    required this.cardList,
     required this.buildDeck,
     required this.editDeck,
   }) : super(key: key);
@@ -25,22 +25,23 @@ class _CardListState extends State<CardList> {
   Widget build(BuildContext context) {
     return ListView.builder(
       controller: widget.scrollController,
-      itemCount: (widget.cardList.length / 2).ceil(),
+      itemCount: (widget.cardDataList.length / 2).ceil(),
       itemBuilder: (context, index) {
         return Row(
           children: [
             for (int i = 0; i < 2; i++)
-              Expanded(child: card(index * 2 + i)),
+              Expanded(child: buildCard(index * 2 + i)),
           ],
         );
       },
     );
   }
 
-  Widget card(int index) {
-    return (index < widget.cardList.length)
+  Widget buildCard(int index) {
+    return (index < widget.cardDataList.length)
         ? CardWidget(
-            card: widget.cardList[index],
+            cardDataList: widget.cardDataList,
+            index: index,
             context: context,
             buildDeck: widget.buildDeck,
             editDeck: widget.editDeck,

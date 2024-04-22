@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-final List<dynamic> menus = [
+final List<dynamic> icons = [
   null,
   'Setting',
   null,
 ];
 
-List<Function> getOnTap(BuildContext context) {
+List<Function> getOnTapCallbacks(BuildContext context) {
   return [
     () {},
     () {},

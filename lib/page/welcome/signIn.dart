@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/signIn.dart';
+import 'package:project/widget/sign.dart';
 import '../deck/page.dart';
 
 class SignInPage extends StatelessWidget {
@@ -17,7 +17,7 @@ class SignInPage extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 40.0),
           ),
           SizedBox(height: 160.0),
-          SignIn(),
+          sigN(),
           SizedBox(height: 30.0),
           Container(
             width: 260.0,

@@ -14,44 +14,44 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: [
-        _bottomNav('Deck', Icons.web_stories_rounded),
-        _bottomNav('Play', Icons.style_rounded),
-        _bottomNav('Setting', Icons.settings_rounded),
+        _buildBottomNav('Deck', Icons.web_stories_rounded),
+        _buildBottomNav('Play', Icons.style_rounded),
+        _buildBottomNav('Setting', Icons.settings_rounded),
       ],
       currentIndex: _currentIndex,
       onTap: (index) {
-        _navigatePage(context, index);
+        _navigateToPage(context, index);
       },
     );
   }
 
-  BottomNavigationBarItem _bottomNav(String label, IconData iconData) {
+  BottomNavigationBarItem _buildBottomNav(String label, IconData iconData) {
     return BottomNavigationBarItem(
       icon: Icon(iconData),
       label: label,
     );
   }
 
-  void _navigatePage(BuildContext context, int index) {
-    Widget page;
+  void _navigateToPage(BuildContext context, int index) {
+    Widget _page;
 
     switch (index) {
       case 0:
-        page = DeckPage();
+        _page = DeckPage();
         break;
       case 1:
-        page = PlayPage();
+        _page = PlayPage();
         break;
       case 2:
-        page = SettingPage();
+        _page = SettingPage();
         break;
       default:
-        page = Container();
+        _page = Container();
     }
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => page),
+      MaterialPageRoute(builder: (context) => _page),
     );
   }
 }

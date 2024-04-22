@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/theme/color.dart';
+import 'package:project/widget/theme/color.dart';
 
 class CardBar extends StatefulWidget {
   final List<Map<String, dynamic>> data;
@@ -26,7 +26,7 @@ class _CardBarState extends State<CardBar> {
         height: 40.0,
         decoration: BoxDecoration(
           color: mainColor4,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
           children: List.generate(
@@ -56,7 +56,7 @@ class _CardBarState extends State<CardBar> {
         child: Container(
           decoration: BoxDecoration(
             color: index == selectedIndex ? Colors.white : mainColor4,
-            borderRadius: BorderRadius.circular(16.0),
+            borderRadius: BorderRadius.circular(8.0),
             border: Border(
               left: BorderSide(
                 color: Colors.white.withOpacity(0.2),

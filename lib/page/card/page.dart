@@ -24,18 +24,18 @@ class _CardsPageState extends State<CardsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         context: context,
-        menus: menus,
-        onTap: getOnTap(context, widget.page),
+        icons: icons,
+        onTapCallbacks: getOnTapCallbacks(context, widget.page),
       ),
       body: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: CardList(
+              cardDataList: _CardData,
               scrollController: _scrollController,
-              cardList: _CardData,
               buildDeck: widget.save,
               editDeck: false,
             ),

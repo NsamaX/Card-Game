@@ -1,4 +1,4 @@
 abstract class Information {
   getImage();
-  getCardDataMap();
+  getDataMap();
 }

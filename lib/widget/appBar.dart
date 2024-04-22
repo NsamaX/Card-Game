@@ -1,67 +1,72 @@
 import 'package:flutter/material.dart';
 
-class appBar extends StatelessWidget implements PreferredSizeWidget {
-  final BuildContext _context;
-  final int _title;
-  final List<dynamic> _menus;
-  final List<Function> _onTap;
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final BuildContext context;
+  final List<dynamic> icons;
+  final List<Function> onTapCallbacks;
+  final int titleIndex;
 
-  appBar({
+  CustomAppBar({
     Key? key,
-    required BuildContext context,
-    required List<dynamic> menus,
-    required List<Function> onTap,
-  })  : _context = context,
-        _title = (menus.length / 2).round() - 1,
-        _menus = menus,
-        _onTap = onTap,
+    required this.context,
+    required this.icons,
+    required this.onTapCallbacks,
+  })  : titleIndex = (icons.length / 2).round() - 1,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _menus.asMap().entries.map((entry) {
-          return _icon(entry.key, entry.value);
-        }).toList(),
-      ),
+      title: buildIconRow(context),
     );
   }
 
-  Widget _icon(int index, dynamic menu) {
-    final isTitle = index == _title;
+  Widget buildIconRow(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: icons.asMap().entries.map((entry) {
+        final index = entry.key;
+        final icon = entry.value;
+        return buildIconWidget(context, index, icon);
+      }).toList(),
+    );
+  }
+
+  Widget buildIconWidget(BuildContext context, int index, dynamic icon) {
+    final isTitleIndex = index == titleIndex;
 
     return GestureDetector(
       onTap: () {
-        if (index < _onTap.length) {
-          _onTap[index].call();
+        if (index < onTapCallbacks.length) {
+          onTapCallbacks[index].call();
         }
       },
-      child: _selector(menu, isTitle),
+      child: iconTypeSelector(icon, isTitleIndex),
     );
   }
 
-  Widget _selector(dynamic menu, bool isTitle) {
-    return (menu is String)
-        ? Text(
-            '$menu',
-            style: TextStyle(
-              color: isTitle
-                  ? Colors.white
-                  : Theme.of(_context).textTheme.bodyText1?.color,
-              fontWeight: FontWeight.bold,
-              fontSize: isTitle ? 20.0 : 16.0,
-            ),
-          )
-        : (menu is IconData)
-            ? Icon(
-                menu,
-                color: Colors.blue,
-              )
-            : SizedBox(
-                width: 30.0,
-              );
+  Widget iconTypeSelector(dynamic icon, bool isTitleIndex) {
+    if (icon is String) {
+      return Text(
+        '$icon',
+        style: TextStyle(
+          color: isTitleIndex
+              ? Colors.white
+              : Theme.of(context).textTheme.bodyText1?.color,
+          fontWeight: FontWeight.bold,
+          fontSize: isTitleIndex ? 20.0 : 16.0,
+        ),
+      );
+    } else if (icon is IconData) {
+      return Icon(
+        icon,
+        color: Colors.blue,
+      );
+    } else {
+      return SizedBox(
+        width: 30.0,
+      );
+    }
   }
 
   @override

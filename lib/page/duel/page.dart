@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/widget/appBar.dart';
-import 'package:project/widget/board/board.dart';
+import 'package:project/widget/board.dart';
 import 'package:project/widget/buttomNav.dart';
 import 'contents.dart';
 import 'icons.dart';
@@ -30,10 +30,10 @@ class _DuelPageState extends State<DuelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         context: context,
-        menus: menus,
-        onTap: getOnTap(context),
+        icons: icons,
+        onTapCallbacks: getOnTapCallbacks(context),
       ),
       body: Board(
         field: field,

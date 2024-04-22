@@ -16,17 +16,17 @@ class _PlayPageState extends State<PlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         context: context,
-        menus: menus,
-        onTap: getOnTapCallback(context),
+        icons: icons,
+        onTapCallbacks: getOnTapCallbacks(context),
       ),
       body: Column(
         children: [
           Expanded(
             child: ListView(
               children: [
-                Room(room: roomsList, page: 30, icon: 6),
+                rooM(room: roomsList, page: 30, icon: 6),
               ],
             ),
           ),

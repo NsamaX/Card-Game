@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/page/play/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:project/theme/theme.dart';
+import 'package:project/page/welcome/introduce.dart';
+import 'package:project/widget/theme/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: customTheme(context),
       debugShowCheckedModeBanner: false,
-      home: const PlayPage(),
+      theme: customTheme(context),
+      home: const IntroducePage(),
     );
   }
 }

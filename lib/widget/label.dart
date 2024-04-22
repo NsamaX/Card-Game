@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project/theme/color.dart';
+import 'package:project/widget/theme/color.dart';
 
-class Label extends StatelessWidget {
+class labeL extends StatelessWidget {
   final List<dynamic> _label;
 
-  const Label({Key? key, required List<dynamic> label})
+  const labeL({Key? key, required List<dynamic> label})
       : _label = label,
         super(key: key);
 
@@ -17,12 +17,21 @@ class Label extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (category['topic'] != null) topic(category['topic']),
+              if (category['title'] != null) ...[
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0, top: 16.0),
+                  child: Text(
+                    category['title'],
+                    style: TextStyle(color: subColor, fontSize: 16.0),
+                  ),
+                ),
+                SizedBox(height: 8.0),
+              ],
               ...category['content'].map<Widget>((item) {
-                return label(
+                return _content(
                   context,
                   item['icon'],
-                  item['label'],
+                  item['text'],
                   item['page'],
                 );
               }).toList(),
@@ -33,17 +42,8 @@ class Label extends StatelessWidget {
     );
   }
 
-  Widget topic(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
-      child: Text(
-        text,
-        style: TextStyle(color: subColor, fontSize: 16.0),
-      ),
-    );
-  }
-
-  Widget label(BuildContext context, IconData icon, String text, Widget? page) {
+  Widget _content(
+      BuildContext context, IconData icon, String text, Widget? page) {
     return GestureDetector(
       onTap: () {
         if (page != null) {
