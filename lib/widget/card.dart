@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/page/card/contents.dart';
-import 'edit/operator.dart';
+import 'action.dart';
 
-class CardWidget extends StatelessWidget {
-  final CardData card;
+class carD extends StatelessWidget {
+  final CardData _card;
   final bool _build;
   final bool _edit;
 
-  const CardWidget({
+  const carD({
     Key? key,
-    required this.card,
+    required CardData card,
     required bool build,
     required bool edit,
-  })  : _build = build,
+  })  : _card = card,
+        _build = build,
         _edit = edit,
         super(key: key);
 
@@ -24,7 +25,14 @@ class CardWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            _navigateToCardInfo(card, context, save: _build);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CardInfoPage(
+                  model: _card,
+                  save: _build,
+                ),
+              ),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -40,7 +48,7 @@ class CardWidget extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 8 / 12,
                       child: Image.network(
-                        card.getImage(),
+                        _card.getImage(),
                         fit: BoxFit.cover,
                         loadingBuilder: (BuildContext context, Widget child,
                             ImageChunkEvent? loadingProgress) {
@@ -68,37 +76,18 @@ class CardWidget extends StatelessWidget {
           ),
         ),
         if (_edit)
-          CardOperator(
-            card: card,
+          actioN(
+            card: _card,
             onAdd: () {
-              card.addCard();
-              _updateCardCount(card);
+              _card.addCard();
+              updateDeck(_card, _card.getCount());
             },
             onRemove: () {
-              card.removeCard();
-              _updateCardCount(card);
+              _card.removeCard();
+              updateDeck(_card, _card.getCount());
             },
           ),
       ],
     );
-  }
-
-  void _navigateToCardInfo(
-    CardData cardcard,
-    BuildContext context, {
-    required bool save,
-  }) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => CardInfoPage(
-          model: cardcard,
-          save: save,
-        ),
-      ),
-    );
-  }
-
-  void _updateCardCount(CardData card) {
-    updateDeck(card, card.getCount());
   }
 }

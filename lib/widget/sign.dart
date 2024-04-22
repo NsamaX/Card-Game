@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class sigN extends StatelessWidget {
-  final Map<String, String> _imagePath = {
+  final Map<String, String> _option = {
     'Apple': 'assets/images/apple_logo.png',
     'Google': 'assets/images/google_logo.png',
     'Facebook': 'assets/images/facebook_logo.png',
@@ -11,11 +11,11 @@ class sigN extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: _imagePath.entries.map((entry) => _icon(entry.value)).toList(),
+      children: _option.entries.map((entry) => _sign(entry.value)).toList(),
     );
   }
 
-  Widget _icon(String imagePath) {
+  Widget _sign(String image) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -26,7 +26,7 @@ class sigN extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
-            imagePath,
+            image,
             width: 40.0,
             height: 40.0,
             fit: BoxFit.cover,

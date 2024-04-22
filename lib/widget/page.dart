@@ -23,6 +23,7 @@ class pagE extends StatelessWidget {
   Widget build(BuildContext context) {
     int _start = _currentPage ~/ _icon * _icon;
     int _end = _start + _icon;
+
     if (_end > _page) _end = _page;
     if (_start - _end < _icon) {
       _start = _end - _icon;

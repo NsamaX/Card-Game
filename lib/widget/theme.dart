@@ -6,9 +6,11 @@ ThemeData themE(BuildContext context) {
     scaffoldBackgroundColor: primary2,
     appBarTheme: AppBarTheme(
       backgroundColor: primary3,
+      iconTheme: IconThemeData(color: secondary),
       titleTextStyle: TextStyle(
           color: secondary, fontSize: 16.0, fontWeight: FontWeight.bold),
-      iconTheme: IconThemeData(color: secondary),
+      toolbarTextStyle: TextStyle(
+          color: secondary, fontSize: 16.0, fontWeight: FontWeight.bold),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary1,

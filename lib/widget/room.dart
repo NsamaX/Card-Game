@@ -22,7 +22,7 @@ class rooM extends StatefulWidget {
 }
 
 class _roomState extends State<rooM> {
-  var _currentPage = 0;
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {

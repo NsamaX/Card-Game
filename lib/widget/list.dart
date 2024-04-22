@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
-import 'card/card.dart';
+import 'card.dart';
 
 class lisT extends StatefulWidget {
   final ScrollController _scrollController;
@@ -36,16 +36,16 @@ class _lisTState extends State<lisT> {
         return Row(
           children: [
             for (int i = 0; i < column; i++)
-              Expanded(child: buildCard(index * column + i)),
+              Expanded(child: _card(index * column + i)),
           ],
         );
       },
     );
   }
 
-  Widget buildCard(int index) {
+  Widget _card(int index) {
     return (index < widget._card.length)
-        ? CardWidget(
+        ? carD(
             card: widget._card[index],
             build: widget._build,
             edit: widget._edit,

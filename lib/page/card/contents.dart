@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
-import 'package:project/widget/card/appBar.dart';
-import 'package:project/widget/card/card_bar.dart';
+import 'package:project/widget/cardBar.dart';
+import 'package:project/widget/save.dart';
 
 class CardInfoPage extends StatefulWidget {
   final CardData model;
@@ -20,10 +20,10 @@ class CardInfoPage extends StatefulWidget {
 
 class _CardInfoPageState extends State<CardInfoPage> {
   final List<Map<String, dynamic>> data = [
-    {'data': '', 'value': 1},
-    {'data': '', 'value': 2},
-    {'data': '', 'value': 3},
-    {'data': '', 'value': 4},
+    {'text': '', 'value': 1},
+    {'text': '', 'value': 2},
+    {'text': '', 'value': 3},
+    {'text': '', 'value': 4},
   ];
   int selectedIndex = 0;
 
@@ -38,9 +38,9 @@ class _CardInfoPageState extends State<CardInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: savE(
         save: widget.save,
-        onSave: handleSave,
+        onTap: handleSave,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
@@ -77,9 +77,9 @@ class _CardInfoPageState extends State<CardInfoPage> {
                 ),
               Visibility(
                 visible: widget.save,
-                child: CardBar(
+                child: carDbaR(
                   data: data,
-                  onSelectValue: (index) {
+                  onTap: (index) {
                     setState(() {
                       selectedIndex = index;
                     });

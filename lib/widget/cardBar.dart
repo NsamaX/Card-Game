@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/color.dart';
+import 'color.dart';
 
-class CardBar extends StatefulWidget {
-  final List<Map<String, dynamic>> data;
-  final void Function(int) onSelectValue;
+class carDbaR extends StatefulWidget {
+  final List<Map<String, dynamic>> _data;
+  final Function(int) _onTap;
 
-  const CardBar({
+  const carDbaR({
     Key? key,
-    required this.data,
-    required this.onSelectValue,
-  }) : super(key: key);
+    required List<Map<String, dynamic>> data,
+    required Function(int) onTap,
+  })  : _data = data,
+        _onTap = onTap,
+        super(key: key);
 
   @override
-  State<CardBar> createState() => _CardBarState();
+  State<carDbaR> createState() => _carDbaRState();
 }
 
-class _CardBarState extends State<CardBar> {
-  int selectedIndex = 0;
+class _carDbaRState extends State<carDbaR> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +32,11 @@ class _CardBarState extends State<CardBar> {
         ),
         child: Row(
           children: List.generate(
-            widget.data.length,
+            widget._data.length,
             (index) {
-              return buildCardBar(
-                widget.data[index]['data'],
-                widget.data[index]['value'],
+              return buildcarDbaR(
+                widget._data[index]['text'],
+                widget._data[index]['value'],
                 index,
               );
             },
@@ -44,18 +46,18 @@ class _CardBarState extends State<CardBar> {
     );
   }
 
-  Widget buildCardBar(String text, int card, int index) {
+  Widget buildcarDbaR(String text, int card, int index) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
           setState(() {
-            selectedIndex = index;
+            _selectedIndex = index;
           });
-          widget.onSelectValue(index);
+          widget._onTap(index);
         },
         child: Container(
           decoration: BoxDecoration(
-            color: index == selectedIndex ? Colors.white : primary4,
+            color: index == _selectedIndex ? Colors.white : primary4,
             borderRadius: BorderRadius.circular(8.0),
             border: Border(
               left: BorderSide(
@@ -72,7 +74,8 @@ class _CardBarState extends State<CardBar> {
                 Text(
                   card.toString(),
                   style: TextStyle(
-                    color: index == selectedIndex ? Colors.black : Colors.white,
+                    color:
+                        index == _selectedIndex ? Colors.black : Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   ),
