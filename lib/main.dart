@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:project/page/welcome/page.dart';
-import 'package:project/widget/theme.dart';
+import 'page/welcome/page.dart';
+import 'widget/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
-import 'card.dart';
+import 'cardE.dart';
 
 class lisT extends StatefulWidget {
   final ScrollController _scrollController;
@@ -45,7 +45,7 @@ class _lisTState extends State<lisT> {
 
   Widget _card(int index) {
     return (index < widget._card.length)
-        ? carD(
+        ? cardE(
             card: widget._card[index],
             build: widget._build,
             edit: widget._edit,

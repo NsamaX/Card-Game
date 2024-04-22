@@ -32,7 +32,7 @@ Future<List<CardData>> loadDeck() async {
 
       deck.add(cardData);
     }
-    // deck.sort((a, b) => b.grade.compareTo(a.grade));
+    deck.sort((a, b) => b.grade.compareTo(a.grade));
   }
 
   return deck;

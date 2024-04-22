@@ -5,27 +5,27 @@ ThemeData themE() {
   return ThemeData(
     scaffoldBackgroundColor: primary2,
     primaryColor: primary4,
-    primaryColorLight: Colors.white,
-    primaryColorDark: Colors.black,
+    primaryColorLight: primary5,
+    primaryColorDark: primary0,
     secondaryHeaderColor: secondary,
     textTheme: TextTheme(
       titleLarge: TextStyle(
-          color: Colors.white, fontSize: 32.0, fontWeight: FontWeight.bold),
+          color: primary5, fontSize: 32.0, fontWeight: FontWeight.bold),
       titleMedium: TextStyle(
-          color: Colors.white, fontSize: 26.0, fontWeight: FontWeight.bold),
+          color: primary5, fontSize: 26.0, fontWeight: FontWeight.bold),
       titleSmall: TextStyle(
-          color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(color: Colors.white, fontSize: 20.0),
-      bodyMedium: TextStyle(color: Colors.white, fontSize: 16.0),
-      bodySmall: TextStyle(color: Colors.white, fontSize: 12.0),
+          color: primary5, fontSize: 20.0, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(color: primary5, fontSize: 20.0),
+      bodyMedium: TextStyle(color: primary5, fontSize: 16.0),
+      bodySmall: TextStyle(color: primary5, fontSize: 12.0),
     ),
-    iconTheme: IconThemeData(color: Colors.white, size: 16.0),
+    iconTheme: IconThemeData(color: primary5, size: 16.0),
     cardTheme: CardTheme(
       color: Colors.transparent,
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: primary3,
-      iconTheme: IconThemeData(color: secondary, size: 22.0),
+      iconTheme: IconThemeData(color: secondary, size: 20.0),
       titleTextStyle: TextStyle(
           color: secondary, fontSize: 16.0, fontWeight: FontWeight.bold),
       toolbarTextStyle: TextStyle(
@@ -34,7 +34,7 @@ ThemeData themE() {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary1,
       selectedItemColor: secondary,
-      unselectedItemColor: Colors.white,
+      unselectedItemColor: primary5,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
