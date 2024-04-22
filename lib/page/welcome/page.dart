@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'signIn.dart';
+import '../sign/sign.dart';
+import 'content.dart';
 
-class IntroducePage extends StatelessWidget {
-  const IntroducePage({Key? key}) : super(key: key);
+class welcomE extends StatelessWidget {
+  const welcomE({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    content _c = content();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -28,7 +31,7 @@ class IntroducePage extends StatelessWidget {
             ),
             SizedBox(height: 26.0),
             Text(
-              'This app was created so that anyone interested in playing card games can play wherever they are or if they don\'t have cards and can have the deck of their dreams.',
+              _c.getContent(),
               style: TextStyle(color: Colors.white, fontSize: 16.0),
               textAlign: TextAlign.center,
             ),

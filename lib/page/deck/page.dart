@@ -3,8 +3,8 @@ import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
-import 'package:project/widget/card/list.dart';
-import 'icons.dart';
+import 'package:project/widget/list.dart';
+import 'menu.dart';
 
 class DeckPage extends StatefulWidget {
   const DeckPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class DeckPage extends StatefulWidget {
 class _DeckPageState extends State<DeckPage> {
   final ScrollController _scrollController = ScrollController();
   List<CardData> myDeck = [];
-  bool editDeck = false;
+  bool edit = false;
 
   void deleteDeckState() {
     setState(() {
@@ -24,10 +24,10 @@ class _DeckPageState extends State<DeckPage> {
     });
   }
 
-  void editDeckState() {
+  void editState() {
     loadDeck().then((cards) {
       setState(() {
-        editDeck = !editDeck;
+        edit = !edit;
         myDeck = cards;
       });
     });
@@ -45,19 +45,20 @@ class _DeckPageState extends State<DeckPage> {
 
   @override
   Widget build(BuildContext context) {
+    menu _m = menu();
+
     return Scaffold(
       appBar: apPbaR(
-        menu: icons,
-        onTap:
-            getOnTapCallbacks(context, myDeck, deleteDeckState, editDeckState),
+        menu: _m.getMenu(),
+        onTap: _m.getOnTap(context, myDeck, deleteDeckState, editState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: CardList(
-          cardDataList: myDeck,
+        child: lisT(
           scrollController: _scrollController,
-          buildDeck: false,
-          editDeck: editDeck,
+          card: myDeck,
+          build: false,
+          edit: edit,
         ),
       ),
       bottomNavigationBar: bottoMnaV(currentIndex: 0),

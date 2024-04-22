@@ -3,7 +3,7 @@ import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/card.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
-import 'package:project/widget/card/list.dart';
+import 'package:project/widget/list.dart';
 import 'icons.dart';
 
 class CardsPage extends StatefulWidget {
@@ -32,11 +32,11 @@ class _CardsPageState extends State<CardsPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: CardList(
-              cardDataList: _CardData,
+            child: lisT(
+              card: _CardData,
               scrollController: _scrollController,
-              buildDeck: widget.save,
-              editDeck: false,
+              build: widget.save,
+              edit: false,
             ),
           ),
           if (_isLoading)

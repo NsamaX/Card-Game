@@ -5,29 +5,26 @@ import 'package:project/page/card/contents.dart';
 import 'edit/operator.dart';
 
 class CardWidget extends StatelessWidget {
-  final List<CardData> cardDataList;
-  final int index;
-  final BuildContext context;
-  final bool buildDeck;
-  final bool editDeck;
+  final CardData card;
+  final bool _build;
+  final bool _edit;
 
   const CardWidget({
     Key? key,
-    required this.cardDataList,
-    required this.index,
-    required this.context,
-    required this.buildDeck,
-    required this.editDeck,
-  }) : super(key: key);
+    required this.card,
+    required bool build,
+    required bool edit,
+  })  : _build = build,
+        _edit = edit,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    CardData card = cardDataList[index];
     return Stack(
       children: [
         GestureDetector(
           onTap: () {
-            _navigateToCardInfo(card, context, save: buildDeck);
+            _navigateToCardInfo(card, context, save: _build);
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -70,7 +67,7 @@ class CardWidget extends StatelessWidget {
             ),
           ),
         ),
-        if (editDeck)
+        if (_edit)
           CardOperator(
             card: card,
             onAdd: () {
@@ -87,14 +84,14 @@ class CardWidget extends StatelessWidget {
   }
 
   void _navigateToCardInfo(
-    CardData cardData,
+    CardData cardcard,
     BuildContext context, {
     required bool save,
   }) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => CardInfoPage(
-          model: cardData,
+          model: cardcard,
           save: save,
         ),
       ),
