@@ -15,7 +15,7 @@ List<Function> getOnTapCallbacks(BuildContext context, String page) {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                page == 'setting' ? SettingPage() : DeckPage()),
+                page == 'setting' ? settinGpagE() : DeckPage()),
       );
     },
     () {},

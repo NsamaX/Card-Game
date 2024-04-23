@@ -5,13 +5,13 @@ import 'package:project/widget/label.dart';
 import 'content.dart';
 import 'menu.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({Key? key}) : super(key: key);
+class settinGpagE extends StatelessWidget {
+  const settinGpagE({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    content _c = content();
-    menu _m = menu();
+    final contenT _c = contenT();
+    final menU _m = menU();
 
     return Scaffold(
       appBar: apPbaR(

@@ -1,4 +1,4 @@
-class menu {
+class menU {
   final List<dynamic> _menu = [
     null,
     'Setting',
@@ -11,11 +11,7 @@ class menu {
     () {},
   ];
 
-  List<dynamic> getMenu() {
-    return _menu;
-  }
+  List<dynamic> getMenu() => _menu;
 
-  List<Function> getOnTap() {
-    return _onTap;
-  }
+  List<Function> getOnTap() => _onTap;
 }

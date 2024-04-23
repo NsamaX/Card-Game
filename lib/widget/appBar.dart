@@ -21,13 +21,13 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
         children: _menu
             .asMap()
             .entries
-            .map((entry) => _build_MenuItem(context, entry.key, entry.value))
+            .map((entry) => _Menu(context, entry.key, entry.value))
             .toList(),
       ),
     );
   }
 
-  Widget _build_MenuItem(BuildContext context, int index, dynamic item) {
+  Widget _Menu(BuildContext context, int index, dynamic item) {
     final _isTitle = index == (_menu.length ~/ 2);
 
     return GestureDetector(

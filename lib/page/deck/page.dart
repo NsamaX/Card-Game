@@ -15,6 +15,7 @@ class DeckPage extends StatefulWidget {
 
 class _DeckPageState extends State<DeckPage> {
   final ScrollController _scrollController = ScrollController();
+  final decK _d = decK();
   List<CardData> myDeck = [];
   bool edit = false;
 
@@ -25,7 +26,7 @@ class _DeckPageState extends State<DeckPage> {
   }
 
   void editState() {
-    loadDeck().then((cards) {
+    _d.load().then((cards) {
       setState(() {
         edit = !edit;
         myDeck = cards;
@@ -36,7 +37,7 @@ class _DeckPageState extends State<DeckPage> {
   @override
   void initState() {
     super.initState();
-    loadDeck().then((cards) {
+    _d.load().then((cards) {
       setState(() {
         myDeck = cards;
       });
@@ -45,12 +46,12 @@ class _DeckPageState extends State<DeckPage> {
 
   @override
   Widget build(BuildContext context) {
-    menu _m = menu();
+    final menu _m = menu(context: context);
 
     return Scaffold(
       appBar: apPbaR(
         menu: _m.getMenu(),
-        onTap: _m.getOnTap(context, myDeck, deleteDeckState, editState),
+        onTap: _m.getOnTap(myDeck, deleteDeckState, editState),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

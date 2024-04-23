@@ -3,8 +3,8 @@ import 'package:project/widget/sign.dart';
 import 'package:project/widget/theme.dart';
 import '../deck/page.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class sigNpagE extends StatelessWidget {
+  const sigNpagE({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

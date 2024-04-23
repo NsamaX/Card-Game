@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/cfv.dart';
 
-class ApiService {
+class carD {
   final String baseUrl =
       "https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/";
 

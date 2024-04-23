@@ -2,14 +2,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:project/page/duel/page.dart';
 
-class room {
+class rooM {
   final int _room;
 
-  room({
+  rooM({
     required int room,
   }) : _room = room;
 
-  List<Map<String, dynamic>> generateRoom() {
+  List<Map<String, dynamic>> generate() {
     List<Map<String, dynamic>> _data = [
       {"title": null, "content": []}
     ];

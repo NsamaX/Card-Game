@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project/widget/theme.dart';
-import '../sign/sign.dart';
-import 'content.dart';
+import '../sign/page.dart';
 
-class welcomE extends StatelessWidget {
-  const welcomE({Key? key}) : super(key: key);
+class welcomEpagE extends StatelessWidget {
+  const welcomEpagE({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    content _c = content();
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -24,14 +21,13 @@ class welcomE extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Card Game Cafe',
-                    style: themE().textTheme.titleLarge),
+                Text('Card Game Cafe', style: themE().textTheme.titleLarge),
                 Icon(Icons.coffee_rounded, size: 40.0)
               ],
             ),
             SizedBox(height: 26.0),
             Text(
-              _c.getContent(),
+              'This app was created so that anyone interested in playing card games can play wherever they are or if they don\'t have cards and can have the deck of their dreams.',
               style: themE().textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -42,11 +38,10 @@ class welcomE extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => SignInPage()),
+                    MaterialPageRoute(builder: (context) => sigNpagE()),
                   );
                 },
-                child: Text('Get started',
-                    style: themE().textTheme.titleSmall),
+                child: Text('Get started', style: themE().textTheme.titleSmall),
                 style: themE().elevatedButtonTheme.style,
               ),
             ),

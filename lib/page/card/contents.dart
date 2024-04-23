@@ -19,6 +19,7 @@ class CardInfoPage extends StatefulWidget {
 }
 
 class _CardInfoPageState extends State<CardInfoPage> {
+  decK _d = decK();
   final List<Map<String, dynamic>> data = [
     {'text': '', 'value': 1},
     {'text': '', 'value': 2},
@@ -27,11 +28,21 @@ class _CardInfoPageState extends State<CardInfoPage> {
   ];
   int selectedIndex = 0;
 
-  void handleSave() {
-    saveCard(widget.model, data[selectedIndex]['value']);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Save Card Successfully')),
-    );
+  void handleSave() async {
+    bool cardExists = await _d.check(widget.model.name);
+
+    if (cardExists) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text('Card with the same name already exists in the deck')),
+      );
+    } else {
+      _d.save(widget.model, data[selectedIndex]['value']);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Save Card Successfully')),
+      );
+    }
     Navigator.of(context).pop();
   }
 
@@ -63,8 +74,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
                 ),
               ),
               SizedBox(height: 20),
-              for (var entry
-                  in widget.model.getDataMap().entries)
+              for (var entry in widget.model.getDataMap().entries)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

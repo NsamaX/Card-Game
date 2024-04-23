@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../card/page.dart';
 import '../welcome/page.dart';
 
-class content {
+class contenT {
   final List<dynamic> _label = [
     {
       "title": "Account",
@@ -30,7 +30,7 @@ class content {
         {'icon': Icons.privacy_tip_rounded, 'text': 'Privacy', 'page': null},
         {'icon': Icons.help_rounded, 'text': 'Help', 'page': null},
         {'icon': Icons.auto_stories_rounded, 'text': 'About', 'page': null},
-        {'icon': Icons.logout_rounded, 'text': 'Sign out', 'page': welcomE()}
+        {'icon': Icons.logout_rounded, 'text': 'Sign out', 'page': welcomEpagE()}
       ]
     },
     {

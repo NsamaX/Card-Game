@@ -5,7 +5,7 @@ import 'package:project/widget/appBar.dart';
 import 'package:project/widget/board.dart';
 import 'package:project/widget/buttomNav.dart';
 import 'contents.dart';
-import 'icons.dart';
+import 'menu.dart';
 
 class DuelPage extends StatefulWidget {
   const DuelPage({Key? key}) : super(key: key);
@@ -15,28 +15,32 @@ class DuelPage extends StatefulWidget {
 }
 
 class _DuelPageState extends State<DuelPage> {
-  List<CardData> myDeck = [];
+  decK _d = decK();
+  List<CardData> _deck = [];
 
   @override
   void initState() {
     super.initState();
-    loadDeck().then((cards) {
+    _d.load().then((cards) {
       setState(() {
-        myDeck = cards;
+        _deck = cards;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    contenT _c = contenT();
+    menU _m = menU(context: context);
+
     return Scaffold(
       appBar: apPbaR(
-        menu: icons,
-        onTap: getOnTapCallbacks(context),
+        menu: _m.getMenu(),
+        onTap: _m.getOnTap(),
       ),
       body: Board(
-        field: field,
-        deck: myDeck,
+        field: _c.getField(),
+        deck: _deck,
       ),
       bottomNavigationBar: bottoMnaV(currentIndex: 1),
     );

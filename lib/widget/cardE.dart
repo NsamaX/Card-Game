@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
-import 'package:project/page/card/contents.dart';
 import 'card.dart';
 import 'edit.dart';
 
@@ -22,31 +21,25 @@ class cardE extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final decK _d = decK();
+
     return Stack(
       children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CardInfoPage(
-                  model: _card,
-                  save: _build,
-                ),
-              ),
-            );
-          },
-          child: carD(card: _card),
-        ),
+        carD(card: _card, build: _build),
         if (_edit)
           ediT(
             card: _card,
-            onAdd: () {
-              _card.addCard();
-              updateDeck(_card, _card.getCount());
-            },
-            onRemove: () {
-              _card.removeCard();
-              updateDeck(_card, _card.getCount());
+            action: {
+              Icons.add_rounded: () {
+                _card.addCard();
+                _d.update(_card, _card.getCount());
+              },
+              Icons.remove_rounded: () {
+                if (_card.getCount() > 0) {
+                  _card.removeCard();
+                  _d.update(_card, _card.getCount());
+                }
+              },
             },
           ),
       ],

@@ -1,19 +1,19 @@
 abstract class Save {
-  int count = 1;
+  int _count = 1;
 
   int getCount() {
-    return count;
+    return _count;
   }
 
   void setCount(int count) {
-    this.count = count;
+    this._count = count;
   }
 
   void addCard() {
-    count++;
+    _count++;
   }
 
   void removeCard() {
-    count--;
+    _count--;
   }
 }

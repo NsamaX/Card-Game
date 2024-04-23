@@ -34,7 +34,7 @@ class _carDbaRState extends State<carDbaR> {
           children: List.generate(
             widget._data.length,
             (index) {
-              return buildcarDbaR(
+              return _bar(
                 widget._data[index]['text'],
                 widget._data[index]['value'],
                 index,
@@ -46,7 +46,7 @@ class _carDbaRState extends State<carDbaR> {
     );
   }
 
-  Widget buildcarDbaR(String text, int card, int index) {
+  Widget _bar(String text, int card, int index) {
     return Expanded(
       child: GestureDetector(
         onTap: () {

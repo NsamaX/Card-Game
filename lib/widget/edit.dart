@@ -3,32 +3,33 @@ import 'package:project/api/model/cfv.dart';
 import 'theme.dart';
 
 class ediT extends StatefulWidget {
-  final CardData card;
-  final Function() onAdd;
-  final Function() onRemove;
+  final CardData _card;
+  final Map<IconData, Function()> _action;
 
   const ediT({
-    required this.card,
-    required this.onAdd,
-    required this.onRemove,
-  });
+    Key? key,
+    required CardData card,
+    required Map<IconData, Function()> action,
+  })  : _card = card,
+        _action = action,
+        super(key: key);
 
   @override
   _ediTState createState() => _ediTState();
 }
 
 class _ediTState extends State<ediT> {
-  late int cardCount;
+  late int _cardCount;
 
   @override
   void initState() {
     super.initState();
-    cardCount = widget.card.getCount();
+    _cardCount = widget._card.getCount();
   }
 
   void _updateCardCount() {
     setState(() {
-      cardCount = widget.card.getCount();
+      _cardCount = widget._card.getCount();
     });
   }
 
@@ -39,32 +40,21 @@ class _ediTState extends State<ediT> {
       right: 0.0,
       child: Column(
         children: [
-          _ediT(
-            onPressed: () {
-              if (cardCount > 0) {
-                widget.onRemove();
+          for (dynamic item in widget._action.keys)
+            _action(
+              item: item,
+              onPressed: () {
+                widget._action[item]!();
                 _updateCardCount();
-              }
-            },
-            item: Icons.remove_rounded,
-          ),
-          _ediT(
-            onPressed: () {
-              widget.onAdd();
-              _updateCardCount();
-            },
-            item: Icons.add_rounded,
-          ),
-          _ediT(
-            onPressed: null,
-            item: cardCount,
-          ),
+              },
+            ),
+          _action(item: _cardCount, onPressed: null)
         ],
       ),
     );
   }
 
-  Widget _ediT({Function()? onPressed, dynamic item}) {
+  Widget _action({required dynamic item, required Function()? onPressed}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: GestureDetector(
