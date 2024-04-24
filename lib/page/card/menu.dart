@@ -9,7 +9,7 @@ class menU {
   }) : _context = context;
 
   final List<dynamic> _menu = [
-    Icons.arrow_back_ios_new_rounded,
+    Icons.arrow_back_rounded,
     'Card Info',
     Icons.filter_list_rounded,
   ];

@@ -7,7 +7,7 @@ class menU {
   menU({required BuildContext context}) : _context = context;
 
   final List<dynamic> _menu = [
-    Icons.arrow_back_ios_new_rounded,
+    Icons.arrow_back_rounded,
     Icons.headphones_rounded,
     'Room ID',
     Icons.mic_rounded,
