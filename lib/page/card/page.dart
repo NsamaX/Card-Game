@@ -26,28 +26,24 @@ class _carDpagEState extends State<carDpagE> {
       return;
     }
 
-    setState(
-      () {
-        _isLoading = true;
-      },
-    );
+    setState(() {
+      _isLoading = true;
+    });
 
     List<CardData> fetchedData = await _api.getData(search, page: page);
     if (!mounted) {
       return;
     }
 
-    setState(
-      () {
-        if (page == 1) {
-          _card = fetchedData;
-        } else {
-          _card.addAll(fetchedData);
-        }
-        _page = page;
-        _isLoading = false;
-      },
-    );
+    setState(() {
+      if (page == 1) {
+        _card = fetchedData;
+      } else {
+        _card.addAll(fetchedData);
+      }
+      _page = page;
+      _isLoading = false;
+    });
   }
 
   void _scrollListener() {

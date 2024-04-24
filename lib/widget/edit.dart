@@ -28,11 +28,9 @@ class _ediTState extends State<ediT> {
   }
 
   void _updateCardCount() {
-    setState(
-      () {
-        _cardCount = widget._card.getCount();
-      },
-    );
+    setState(() {
+      _cardCount = widget._card.getCount();
+    });
   }
 
   @override
@@ -44,12 +42,11 @@ class _ediTState extends State<ediT> {
         children: [
           for (dynamic item in widget._action.keys)
             _action(
-              item: item,
-              onPressed: () {
-                widget._action[item]!();
-                _updateCardCount();
-              },
-            ),
+                item: item,
+                onPressed: () {
+                  widget._action[item]!();
+                  _updateCardCount();
+                }),
           _action(item: _cardCount, onPressed: null),
         ],
       ),

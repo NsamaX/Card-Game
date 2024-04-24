@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
+import 'package:project/widget/backBar.dart';
 import 'package:project/widget/cardBar.dart';
 import 'package:project/widget/info.dart';
-import 'package:project/widget/oneBar.dart';
 import 'content.dart';
 
 class singlE extends StatefulWidget {
@@ -28,7 +28,7 @@ class _singlEState extends State<singlE> {
   int _selectedIndex = 0;
 
   void handleSave() async {
-    bool cardExists = await _d.check(widget._card.name);
+    bool cardExists = await _d.check(widget._card.getName());
 
     if (cardExists) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +48,7 @@ class _singlEState extends State<singlE> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: onEbaR(
+      appBar: bacKbaR(
         title: '',
         icon: widget._save ? 'Save' : null,
         onTap: handleSave,
@@ -67,11 +67,9 @@ class _singlEState extends State<singlE> {
                   child: carDbaR(
                     data: _c.getBar(),
                     onTap: (index) {
-                      setState(
-                        () {
-                          _selectedIndex = index;
-                        },
-                      );
+                      setState(() {
+                        _selectedIndex = index;
+                      });
                     },
                   ),
                 ),

@@ -18,10 +18,10 @@ class rooM extends StatefulWidget {
         super(key: key);
 
   @override
-  _roomState createState() => _roomState();
+  _rooMState createState() => _rooMState();
 }
 
-class _roomState extends State<rooM> {
+class _rooMState extends State<rooM> {
   int _currentPage = 0;
 
   @override
@@ -33,19 +33,16 @@ class _roomState extends State<rooM> {
     return Expanded(
       child: Column(
         children: [
-          labeL(
-            label: widget._room.sublist(_start, _end),
-          ),
+          labeL(label: widget._room.sublist(_start, _end)),
           pagE(
-            currentPage: _currentPage,
-            page: (widget._room.length / widget._page).ceil(),
-            icon: widget._icon,
-            onTap: (int page) {
-              setState(() {
-                _currentPage = page;
-              });
-            },
-          ),
+              currentPage: _currentPage,
+              page: (widget._room.length / widget._page).ceil(),
+              icon: widget._icon,
+              onTap: (int page) {
+                setState(() {
+                  _currentPage = page;
+                });
+              }),
         ],
       ),
     );

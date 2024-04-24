@@ -66,9 +66,7 @@ class pagE extends StatelessWidget {
                         .bodyMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   )
-                : Icon(
-                    icon,
-                  ),
+                : Icon(icon),
           ),
         ),
       ),

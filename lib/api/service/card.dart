@@ -14,7 +14,7 @@ class carD {
         List<dynamic> jsonData = jsonDecode(response.body)['data'];
         List<CardData> fetchedData =
             jsonData.map((e) => CardData.fromJson(e)).toList();
-        fetchedData.removeWhere((item) => item.sets.length == 0);
+        fetchedData.removeWhere((item) => item.getSets().length == 0);
         return fetchedData;
       } else {
         throw Exception('Failed to load data: ${response.statusCode}');

@@ -5,7 +5,7 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
   final List<dynamic> _menu;
   final List<Function> _onTap;
 
-  apPbaR({
+  const apPbaR({
     Key? key,
     required List<dynamic> menu,
     required List<Function> onTap,
@@ -39,14 +39,11 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
       child: item is String
           ? Text(
               '$item',
-              style:
-                  _isTitle ? themE().textTheme.titleSmall : TextStyle(),
+              style: _isTitle ? themE().textTheme.titleSmall : TextStyle(),
             )
           : item is IconData
               ? Icon(item)
-              : SizedBox(
-                  width: 30.0,
-                ),
+              : SizedBox(width: 30.0),
     );
   }
 

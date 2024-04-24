@@ -14,7 +14,7 @@ class rooM {
       {"title": null, "content": []}
     ];
     List<IconData> statusIcon = [
-      Icons.face_unlock_rounded,
+      Icons.tag_faces_outlined,
       Icons.public_rounded,
       Icons.lock_rounded,
     ];

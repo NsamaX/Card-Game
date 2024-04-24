@@ -19,7 +19,7 @@ class dueLpagE extends StatelessWidget {
         onTap: _m.getOnTap(),
       ),
       body: boarD(
-        field: _c.getField(),
+        board: _c.getField(),
       ),
       bottomNavigationBar: bottoMnaV(currentIndex: 1),
     );

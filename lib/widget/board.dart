@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'action.dart';
 import 'theme.dart';
 
 class boarD extends StatelessWidget {
-  final List<Map<int, dynamic>> _field;
+  final List<Map<int, dynamic>> _board;
 
-  boarD({
+  const boarD({
     Key? key,
-    required List<Map<int, dynamic>> field,
-  })  : _field = field,
+    required List<Map<int, dynamic>> board,
+  })  : _board = board,
         super(key: key);
 
   @override
@@ -15,17 +16,13 @@ class boarD extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 36.0, horizontal: 10.0),
       child: ListView.builder(
-        itemCount: _field.length,
+        itemCount: _board.length,
         itemBuilder: (context, index) {
-          Map<int, dynamic> data = _field[index];
+          Map<int, dynamic> data = _board[index];
           return Column(
             children: [
               for (var map in data.values)
-                Row(
-                  children: [
-                    for (var field in map.values) _boarD(field),
-                  ],
-                ),
+                Row(children: [for (var board in map.values) _boarD(board)]),
             ],
           );
         },
@@ -34,7 +31,7 @@ class boarD extends StatelessWidget {
   }
 
   Widget _boarD(Map<String, dynamic> data) {
-    String name = data['field']['name'];
+    String _name = data['field']['name'];
 
     return Expanded(
       child: Stack(
@@ -49,35 +46,15 @@ class boarD extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  name,
+                  _name,
                   style: themE().textTheme.bodySmall?.copyWith(
-                        color: themE().primaryColorLight.withOpacity(0.6),
-                      ),
+                      color: themE().primaryColorLight.withOpacity(0.6)),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
-          Positioned(
-            top: 0.0,
-            right: 0.0,
-            child: Column(
-              children: [
-                for (var action in data['action'])
-                  if (action.length > 0)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: action is String
-                          ? Text(
-                              action,
-                              style: themE().textTheme.bodySmall,
-                            )
-                          : Icon(action.keys.first),
-                      // : Container(),
-                    ),
-              ],
-            ),
-          )
+          actioN(data: data),
         ],
       ),
     );

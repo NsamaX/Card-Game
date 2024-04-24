@@ -1,4 +1,4 @@
-abstract class informatioN {
-  getImage();
-  getDataMap();
+interface class informatioN {
+  getImage() {}
+  getDataMap() {}
 }

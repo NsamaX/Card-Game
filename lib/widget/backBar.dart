@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class onEbaR extends StatelessWidget implements PreferredSizeWidget {
+class bacKbaR extends StatelessWidget implements PreferredSizeWidget {
   final String _title;
   final dynamic _icon;
   final Function() _onTap;
 
-  const onEbaR({
+  const bacKbaR({
     Key? key,
     required String title,
     required dynamic icon,
@@ -25,10 +25,7 @@ class onEbaR extends StatelessWidget implements PreferredSizeWidget {
       title: Center(
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: Text(
-            _title,
-            style: themE().textTheme.titleSmall,
-          ),
+          child: Text(_title, style: themE().textTheme.titleSmall),
         ),
       ),
       actions: [

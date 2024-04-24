@@ -2,87 +2,125 @@ import 'information.dart';
 import 'save.dart';
 
 class CardData extends savE implements informatioN {
-  final int id;
-  final String cardType;
-  final String clan;
-  final int critical;
-  final String designIllus;
-  final String effect;
-  final String flavor;
-  final String format;
-  final String grade;
-  final String illust;
-  final String illustColor;
-  final String illust2;
-  final String illust3;
-  final String illust4;
-  final String illust5;
-  final String imageUrlEn;
-  final String imageUrlJp;
-  final String imaginaryGift;
-  final String italian;
-  final String kana;
-  final String kanji;
-  final String korean;
-  final String limitationText;
-  final String mangaIllus;
-  final String name;
-  final String nation;
-  final String note;
-  final String otherNames;
-  final String phonetic;
-  final int power;
-  final String race;
-  final String rideSkill;
-  final List<String> sets;
-  final Map<String, String> tournamentStatuses;
-  final int shield;
-  final String skill;
-  final String thai;
-  final String translation;
-  final String triggerEffect;
+  final int _id;
+  final String _cardType;
+  final String _clan;
+  final int _critical;
+  final String _designIllus;
+  final String _effect;
+  final String _flavor;
+  final String _format;
+  final String _grade;
+  final String _illust;
+  final String _illustColor;
+  final String _illust2;
+  final String _illust3;
+  final String _illust4;
+  final String _illust5;
+  final String _imageUrlEn;
+  final String _imageUrlJp;
+  final String _imaginaryGift;
+  final String _italian;
+  final String _kana;
+  final String _kanji;
+  final String _korean;
+  final String _limitationText;
+  final String _mangaIllus;
+  final String _name;
+  final String _nation;
+  final String _note;
+  final String _otherNames;
+  final String _phonetic;
+  final int _power;
+  final String _race;
+  final String _rideSkill;
+  final List<String> _sets;
+  final Map<String, String> _tournamentStatuses;
+  final int _shield;
+  final String _skill;
+  final String _thai;
+  final String _translation;
+  final String _triggerEffect;
 
   CardData({
-    required this.id,
-    required this.cardType,
-    required this.clan,
-    required this.critical,
-    required this.designIllus,
-    required this.effect,
-    required this.flavor,
-    required this.format,
-    required this.grade,
-    required this.illust,
-    required this.illustColor,
-    required this.illust2,
-    required this.illust3,
-    required this.illust4,
-    required this.illust5,
-    required this.imageUrlEn,
-    required this.imageUrlJp,
-    required this.imaginaryGift,
-    required this.italian,
-    required this.kana,
-    required this.kanji,
-    required this.korean,
-    required this.limitationText,
-    required this.mangaIllus,
-    required this.name,
-    required this.nation,
-    required this.note,
-    required this.otherNames,
-    required this.phonetic,
-    required this.power,
-    required this.race,
-    required this.rideSkill,
-    required this.sets,
-    required this.tournamentStatuses,
-    required this.shield,
-    required this.skill,
-    required this.thai,
-    required this.translation,
-    required this.triggerEffect,
-  });
+    required int id,
+    required String cardType,
+    required String clan,
+    required int critical,
+    required String designIllus,
+    required String effect,
+    required String flavor,
+    required String format,
+    required String grade,
+    required String illust,
+    required String illustColor,
+    required String illust2,
+    required String illust3,
+    required String illust4,
+    required String illust5,
+    required String imageUrlEn,
+    required String imageUrlJp,
+    required String imaginaryGift,
+    required String italian,
+    required String kana,
+    required String kanji,
+    required String korean,
+    required String limitationText,
+    required String mangaIllus,
+    required String name,
+    required String nation,
+    required String note,
+    required String otherNames,
+    required String phonetic,
+    required int power,
+    required String race,
+    required String rideSkill,
+    required List<String> sets,
+    required Map<String, String> tournamentStatuses,
+    required int shield,
+    required String skill,
+    required String thai,
+    required String translation,
+    required String triggerEffect,
+  })  : _id = id,
+        _cardType = cardType,
+        _clan = clan,
+        _critical = critical,
+        _designIllus = designIllus,
+        _effect = effect,
+        _flavor = flavor,
+        _format = format,
+        _grade = grade,
+        _illust = illust,
+        _illustColor = illustColor,
+        _illust2 = illust2,
+        _illust3 = illust3,
+        _illust4 = illust4,
+        _illust5 = illust5,
+        _imageUrlEn = imageUrlEn,
+        _imageUrlJp = imageUrlJp,
+        _imaginaryGift = imaginaryGift,
+        _italian = italian,
+        _kana = kana,
+        _kanji = kanji,
+        _korean = korean,
+        _limitationText = limitationText,
+        _mangaIllus = mangaIllus,
+        _name = name,
+        _nation = nation,
+        _note = note,
+        _otherNames = otherNames,
+        _phonetic = phonetic,
+        _power = power,
+        _race = race,
+        _rideSkill = rideSkill,
+        _sets = sets,
+        _tournamentStatuses = tournamentStatuses,
+        _shield = shield,
+        _skill = skill,
+        _thai = thai,
+        _translation = translation,
+        _triggerEffect = triggerEffect;
 
   factory CardData.fromJson(Map<String, dynamic> json) {
     return CardData(
@@ -130,80 +168,88 @@ class CardData extends savE implements informatioN {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'cardtype': cardType,
-      'clan': clan,
-      'critical': critical,
-      'designillus': designIllus,
-      'effect': effect,
-      'flavor': flavor,
-      'format': format,
-      'grade': grade,
-      'illust': illust,
-      'illustcolor': illustColor,
-      'illust2': illust2,
-      'illust3': illust3,
-      'illust4': illust4,
-      'illust5': illust5,
-      'imageurlen': imageUrlEn,
-      'imageurljp': imageUrlJp,
-      'imaginarygift': imaginaryGift,
-      'italian': italian,
-      'kana': kana,
-      'kanji': kanji,
-      'korean': korean,
-      'limitationtext': limitationText,
-      'mangaillust': mangaIllus,
-      'name': name,
-      'nation': nation,
-      'note': note,
-      'othernames': otherNames,
-      'phonetic': phonetic,
-      'power': power,
-      'race': race,
-      'rideskill': rideSkill,
-      'sets': sets,
-      'tournamentstatuses': tournamentStatuses,
-      'shield': shield,
-      'skill': skill,
-      'thai': thai,
-      'translation': translation,
-      'triggereffect': triggerEffect,
+      'id': _id,
+      'cardtype': _cardType,
+      'clan': _clan,
+      'critical': _critical,
+      'designillus': _designIllus,
+      'effect': _effect,
+      'flavor': _flavor,
+      'format': _format,
+      'grade': _grade,
+      'illust': _illust,
+      'illustcolor': _illustColor,
+      'illust2': _illust2,
+      'illust3': _illust3,
+      'illust4': _illust4,
+      'illust5': _illust5,
+      'imageurlen': _imageUrlEn,
+      'imageurljp': _imageUrlJp,
+      'imaginarygift': _imaginaryGift,
+      'italian': _italian,
+      'kana': _kana,
+      'kanji': _kanji,
+      'korean': _korean,
+      'limitationtext': _limitationText,
+      'mangaillust': _mangaIllus,
+      'name': _name,
+      'nation': _nation,
+      'note': _note,
+      'othernames': _otherNames,
+      'phonetic': _phonetic,
+      'power': _power,
+      'race': _race,
+      'rideskill': _rideSkill,
+      'sets': _sets,
+      'tournamentstatuses': _tournamentStatuses,
+      'shield': _shield,
+      'skill': _skill,
+      'thai': _thai,
+      'translation': _translation,
+      'triggereffect': _triggerEffect,
     };
   }
 
+  int getId() => _id;
+
+  String getName() => _name;
+
+  String getGrade() => _grade;
+
+  List<String> getSets() => _sets;
+
   @override
   String getImage() {
-    return imageUrlJp;
+    return _imageUrlJp;
   }
 
   @override
   Map<String, dynamic> getDataMap() {
     Map<String, dynamic> dataMap = {};
 
-    if (name != '') dataMap['Name'] = name;
-    if (flavor != '') dataMap['Flavor'] = '" ' + flavor + ' "';
-    if (skill != '') dataMap['Skill'] = skill;
-    if (effect != '') dataMap['Effect'] = effect;
-    if (rideSkill != '') dataMap['Ride Skill'] = rideSkill;
-    if (triggerEffect != '') dataMap['Trigger Effect'] = triggerEffect;
-    if (power != '' && shield != '') {
-      dataMap['Power & Shield'] = '${power} / ${shield}';
-    } else if (power != '') {
-      dataMap['Power'] = power;
-    } else if (shield != '') {
-      dataMap['Shield'] = shield;
+    if (_name != '') dataMap['Name'] = _name;
+    if (_flavor != '') dataMap['Flavor'] = '" ' + _flavor + ' "';
+    if (_skill != '') dataMap['Skill'] = _skill;
+    if (_effect != '') dataMap['Effect'] = _effect;
+    if (_rideSkill != '') dataMap['Ride Skill'] = _rideSkill;
+    if (_triggerEffect != '') dataMap['Trigger Effect'] = _triggerEffect;
+    if (_power != '' && _shield != '') {
+      dataMap['Power & Shield'] = '$_power / $_shield';
+    } else if (_power != '') {
+      dataMap['Power'] = _power;
+    } else if (_shield != '') {
+      dataMap['Shield'] = _shield;
     }
-    if (clan != '' && shield != '') {
-      dataMap['Clan & Nation'] = '${clan} / ${nation}';
-    } else if (clan != '') {
-      dataMap['Clan'] = clan;
-    } else if (nation != '') {
-      dataMap['Nation'] = nation;
+    if (_clan != '' && _shield != '') {
+      dataMap['Clan & Nation'] = '$_clan / $_nation';
+    } else if (_clan != '') {
+      dataMap['Clan'] = _clan;
+    } else if (_nation != '') {
+      dataMap['Nation'] = _nation;
     }
-    if (limitationText != '') dataMap['Limitation Text'] = limitationText;
-    if (format != '') dataMap['Format'] = format;
-    if (sets.isNotEmpty) dataMap['Sets'] = sets;
+    if (_limitationText != '') dataMap['Limitation Text'] = _limitationText;
+    if (_format != '') dataMap['Format'] = _format;
+    if (_sets.isNotEmpty) dataMap['Sets'] = _sets;
 
     return dataMap;
   }
