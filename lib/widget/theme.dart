@@ -20,9 +20,7 @@ ThemeData themE() {
       bodySmall: TextStyle(color: primary5, fontSize: 12.0),
     ),
     iconTheme: IconThemeData(color: primary5, size: 16.0),
-    cardTheme: CardTheme(
-      color: Colors.transparent,
-    ),
+    cardTheme: CardTheme(color: Colors.transparent),
     appBarTheme: AppBarTheme(
       backgroundColor: primary3,
       iconTheme: IconThemeData(color: secondary, size: 20.0),
@@ -37,9 +35,7 @@ ThemeData themE() {
       unselectedItemColor: primary5,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(primary4),
-      ),
+      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(primary4)),
     ),
   );
 }

@@ -1,7 +1,7 @@
 import 'information.dart';
 import 'save.dart';
 
-class CardData extends Save implements Information {
+class CardData extends savE implements informatioN {
   final int id;
   final String cardType;
   final String clan;

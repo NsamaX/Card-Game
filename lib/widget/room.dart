@@ -33,7 +33,9 @@ class _roomState extends State<rooM> {
     return Expanded(
       child: Column(
         children: [
-          labeL(label: widget._room.sublist(_start, _end)),
+          labeL(
+            label: widget._room.sublist(_start, _end),
+          ),
           pagE(
             currentPage: _currentPage,
             page: (widget._room.length / widget._page).ceil(),

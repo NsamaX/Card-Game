@@ -31,13 +31,19 @@ class cardE extends StatelessWidget {
             card: _card,
             action: {
               Icons.add_rounded: () {
-                _card.addCard();
-                _d.update(_card, _card.getCount());
+                _card.add();
+                _d.update(
+                  _card,
+                  _card.getCount(),
+                );
               },
               Icons.remove_rounded: () {
                 if (_card.getCount() > 0) {
-                  _card.removeCard();
-                  _d.update(_card, _card.getCount());
+                  _card.remove();
+                  _d.update(
+                    _card,
+                    _card.getCount(),
+                  );
                 }
               },
             },

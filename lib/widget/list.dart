@@ -36,7 +36,9 @@ class _lisTState extends State<lisT> {
         return Row(
           children: [
             for (int i = 0; i < column; i++)
-              Expanded(child: _card(index * column + i)),
+              Expanded(
+                child: _card(index * column + i),
+              ),
           ],
         );
       },

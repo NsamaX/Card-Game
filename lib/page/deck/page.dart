@@ -6,60 +6,70 @@ import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/list.dart';
 import 'menu.dart';
 
-class DeckPage extends StatefulWidget {
-  const DeckPage({Key? key}) : super(key: key);
+class decKpagE extends StatefulWidget {
+  const decKpagE({Key? key}) : super(key: key);
 
   @override
-  State<DeckPage> createState() => _DeckPageState();
+  State<decKpagE> createState() => _decKpagEState();
 }
 
-class _DeckPageState extends State<DeckPage> {
+class _decKpagEState extends State<decKpagE> {
   final ScrollController _scrollController = ScrollController();
   final decK _d = decK();
-  List<CardData> myDeck = [];
-  bool edit = false;
+  List<CardData> _deck = [];
+  bool _edit = false;
 
-  void deleteDeckState() {
-    setState(() {
-      myDeck = [];
-    });
+  void delete() {
+    setState(
+      () {
+        _deck = [];
+      },
+    );
   }
 
-  void editState() {
-    _d.load().then((cards) {
-      setState(() {
-        edit = !edit;
-        myDeck = cards;
-      });
-    });
+  void edit() {
+    _d.load().then(
+      (deck) {
+        setState(
+          () {
+            _edit = !_edit;
+            _deck = deck;
+          },
+        );
+      },
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    _d.load().then((cards) {
-      setState(() {
-        myDeck = cards;
-      });
-    });
+    _d.load().then(
+      (deck) {
+        setState(
+          () {
+            _deck = deck;
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final menu _m = menu(context: context);
+    final menU _m = menU(context: context, delete: delete, edit: edit);
 
     return Scaffold(
       appBar: apPbaR(
         menu: _m.getMenu(),
-        onTap: _m.getOnTap(myDeck, deleteDeckState, editState),
+        onTap: _m.getOnTap(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: lisT(
           scrollController: _scrollController,
-          card: myDeck,
+          card: _deck,
           build: false,
-          edit: edit,
+          edit: _edit,
         ),
       ),
       bottomNavigationBar: bottoMnaV(currentIndex: 0),

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/deck.dart';
 import '../card/page.dart';
 
-class menu {
+class menU {
   final BuildContext _context;
-
-  menu({required BuildContext context}) : _context = context;
-
   final decK _d = decK();
+  final Function() _delete;
+  final Function() _edit;
+
+  menU(
+      {required BuildContext context,
+      required Function() delete,
+      required Function() edit})
+      : _context = context,
+        _delete = delete,
+        _edit = edit;
+
   final List<dynamic> _menu = [
     Icons.ios_share_rounded,
     Icons.delete_rounded,
@@ -17,41 +24,43 @@ class menu {
     'Edit',
   ];
 
-  List<dynamic> getMenu() => _menu;
+  void _Share() {}
 
-  List<Function> getOnTap(List<CardData> myDeck,
-      Function delete, Function edit) {
-    return [
-      () {},
-      () => _onDelete(myDeck, delete),
-      () {},
-      () => _onAdd(),
-      () => _onEdit(edit),
-    ];
+  void _Delete() {
+    _d.delete().then(
+      (_) {
+        ScaffoldMessenger.of(_context).showSnackBar(
+          SnackBar(
+            content: Text('Deleted deck successfully'),
+          ),
+        );
+        _delete();
+      },
+    );
   }
 
-  void _onDelete(List<CardData> myDeck, Function deletee) {
-    _d.delete().then((_) {
-      myDeck.clear();
-      ScaffoldMessenger.of(_context).showSnackBar(
-        SnackBar(
-          content: Text('Deleted deck successfully'),
-        ),
-      );
-      deletee();
-    });
-  }
-
-  void _onAdd() {
+  void _Add() {
     Navigator.pushReplacement(
       _context,
       MaterialPageRoute(
-        builder: (context) => CardsPage(page: 'deck', save: true),
+        builder: (context) => carDpagE(save: true),
       ),
     );
   }
 
-  void _onEdit(Function edit) {
-    edit();
+  void _Edit() {
+    _edit();
+  }
+
+  List<dynamic> getMenu() => _menu;
+
+  List<Function> getOnTap() {
+    return [
+      _Share,
+      _Delete,
+      () {},
+      _Add,
+      _Edit,
+    ];
   }
 }

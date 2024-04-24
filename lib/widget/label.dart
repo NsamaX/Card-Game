@@ -13,33 +13,37 @@ class labeL extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ..._label.map<Widget>((category) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (category['title'] != null) ...[
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
-                  child: Text(
-                    category['title'],
-                    style: themE().textTheme.bodyMedium?.copyWith(
-                          color: themE().secondaryHeaderColor,
-                        ),
+        ..._label.map<Widget>(
+          (category) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (category['title'] != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 16.0, bottom: 8.0),
+                    child: Text(
+                      category['title'],
+                      style: themE().textTheme.bodyMedium?.copyWith(
+                            color: themE().secondaryHeaderColor,
+                          ),
+                    ),
                   ),
-                ),
+                ],
+                ...category['content'].map<Widget>(
+                  (item) {
+                    return _content(
+                      context,
+                      item['icon'],
+                      item['text'],
+                      item['page'],
+                    );
+                  },
+                ).toList(),
               ],
-              ...category['content'].map<Widget>((item) {
-                return _content(
-                  context,
-                  item['icon'],
-                  item['text'],
-                  item['page'],
-                );
-              }).toList(),
-            ],
-          );
-        }).toList(),
+            );
+          },
+        ).toList(),
       ],
     );
   }

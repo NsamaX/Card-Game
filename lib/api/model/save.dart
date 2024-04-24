@@ -1,4 +1,4 @@
-abstract class Save {
+abstract class savE {
   int _count = 1;
 
   int getCount() {
@@ -9,11 +9,11 @@ abstract class Save {
     this._count = count;
   }
 
-  void addCard() {
+  void add() {
     _count++;
   }
 
-  void removeCard() {
+  void remove() {
     _count--;
   }
 }

@@ -37,7 +37,7 @@ class bottoMnaV extends StatelessWidget {
 
     switch (index) {
       case 0:
-        _page = DeckPage();
+        _page = decKpagE();
         break;
       case 1:
         _page = plaYpagE();

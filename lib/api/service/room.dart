@@ -29,7 +29,7 @@ class rooM {
       _data[i]['content'].add({
         'icon': status,
         'text': text,
-        'page': DuelPage(),
+        'page': dueLpagE(),
       });
     }
 

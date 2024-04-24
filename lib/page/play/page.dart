@@ -5,14 +5,9 @@ import 'package:project/widget/room.dart';
 import 'contents.dart';
 import 'menu.dart';
 
-class plaYpagE extends StatefulWidget {
+class plaYpagE extends StatelessWidget {
   const plaYpagE({Key? key}) : super(key: key);
 
-  @override
-  State<plaYpagE> createState() => _plaYpagEState();
-}
-
-class _plaYpagEState extends State<plaYpagE> {
   @override
   Widget build(BuildContext context) {
     final contenT _c = contenT();

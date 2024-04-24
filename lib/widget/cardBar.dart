@@ -85,7 +85,7 @@ class _carDbaRState extends State<carDbaR> {
                               : themE().primaryColorLight,
                         ),
                   ),
-                ]
+                ],
               ],
             ),
           ),
