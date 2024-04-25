@@ -62,7 +62,7 @@ class labeL extends StatelessWidget {
           color: themE().primaryColor,
           border: Border(
             bottom: BorderSide(
-              color: themE().primaryColorLight.withOpacity(0.6),
+              color: themE().iconTheme.color!.withOpacity(0.6),
               width: 1.0,
             ),
           ),

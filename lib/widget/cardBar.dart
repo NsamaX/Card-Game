@@ -60,12 +60,12 @@ class _carDbaRState extends State<carDbaR> {
             color: index == _selectedIndex
                 ? text != ''
                     ? themE().secondaryHeaderColor
-                    : themE().primaryColorLight
+                    : themE().iconTheme.color
                 : themE().primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             border: Border(
               left: BorderSide(
-                color: themE().primaryColorLight.withOpacity(0.2),
+                color: themE().iconTheme.color!.withOpacity(0.2),
                 width: 2.0,
               ),
             ),
@@ -81,8 +81,8 @@ class _carDbaRState extends State<carDbaR> {
                     card.toString(),
                     style: themE().textTheme.titleSmall?.copyWith(
                           color: index == _selectedIndex
-                              ? themE().primaryColorDark
-                              : themE().primaryColorLight,
+                              ? themE().primaryColor
+                              : themE().iconTheme.color,
                         ),
                   ),
                 ],

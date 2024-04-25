@@ -46,7 +46,7 @@ class boarD extends StatelessWidget {
                 child: Text(
                   _name,
                   style: themE().textTheme.bodySmall?.copyWith(
-                      color: themE().primaryColorLight.withOpacity(0.6)),
+                      color: themE().iconTheme.color!.withOpacity(0.6)),
                   textAlign: TextAlign.center,
                 ),
               ),

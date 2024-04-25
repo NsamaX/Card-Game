@@ -17,19 +17,21 @@ class sigN extends StatelessWidget {
   }
 
   Widget _sign(String image) {
+    final double optionSize = 40.0;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: themE().primaryColorLight,
+          color: themE().iconTheme.color,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
             image,
-            width: 40.0,
-            height: 40.0,
+            width: optionSize,
+            height: optionSize,
             fit: BoxFit.cover,
           ),
         ),

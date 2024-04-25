@@ -81,7 +81,7 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
       decoration: BoxDecoration(
           border: Border(
               top: BorderSide(
-        color: themE().primaryColorLight.withOpacity(0.6),
+        color: themE().iconTheme.color!.withOpacity(0.6),
       ))),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),

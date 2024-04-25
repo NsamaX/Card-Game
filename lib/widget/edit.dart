@@ -61,21 +61,21 @@ class _ediTState extends State<ediT> {
         child: Container(
           width: 22.0,
           decoration: BoxDecoration(
-            color: themE().primaryColorLight,
+            color: themE().iconTheme.color,
             shape: BoxShape.circle,
           ),
           child: item is int
               ? Text(
                   item.toString(),
                   style: themE().textTheme.bodyMedium?.copyWith(
-                        color: themE().primaryColorDark,
+                        color: themE().primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                   textAlign: TextAlign.center,
                 )
               : Icon(
                   item,
-                  color: themE().primaryColorDark,
+                  color: themE().primaryColor,
                   size: 22.0,
                 ),
         ),
