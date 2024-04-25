@@ -49,7 +49,8 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
           padding: const EdgeInsets.only(top: 16.0),
           child: Container(
             width: 200.0,
-            height: 360.0,
+            height: widget._message.length * 60.0 + 68.0,
+            constraints: BoxConstraints(maxHeight: 360.0),
             decoration: BoxDecoration(
               color: themE().appBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
@@ -58,15 +59,7 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
               padding: const EdgeInsets.all(8.0),
               child: ListView(
                 children: [
-                  _message(false, 'hello'),
-                  _message(true, 'hi'),
-                  _message(false, 'how are you'),
-                  _message(true, 'i am fine'),
-                  _message(true, 'what are you doing?'),
-                  _message(false, 'doing nothing'),
-                  _message(true, 'good'),
-                  _message(false, 'bye'),
-                  _message(true, 'see you'),
+                  for (var message in widget._message) _message(message),
                   _send(),
                 ],
               ),
@@ -77,14 +70,14 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _message(bool sender, String message) {
+  Widget _message(Map<String, dynamic> data) {
     return Align(
-      alignment: sender ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: data['sender'] ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6.0),
         child: Container(
           decoration: BoxDecoration(
-            color: sender
+            color: data['sender']
                 ? themE().secondaryHeaderColor
                 : themE()
                     .elevatedButtonTheme
@@ -96,7 +89,7 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                message,
+                data['message'],
                 style: themE().textTheme.bodyMedium,
               )),
         ),
