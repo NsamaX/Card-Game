@@ -28,7 +28,7 @@ ThemeData themE() {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: primary3,
-      iconTheme: IconThemeData(color: secondary, size: 20.0),
+      iconTheme: IconThemeData(color: secondary, size: 22.0),
       titleTextStyle: TextStyle(
           color: secondary, fontSize: 16.0, fontWeight: FontWeight.bold),
       toolbarTextStyle: TextStyle(

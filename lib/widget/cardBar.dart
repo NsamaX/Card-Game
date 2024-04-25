@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'theme.dart';
 
 class carDbaR extends StatefulWidget {
-  final List<Map<String, dynamic>> _data;
+  final List<dynamic> _data;
   final Function(int) _onTap;
 
   const carDbaR({
     Key? key,
-    required List<Map<String, dynamic>> data,
+    required List<dynamic> data,
     required Function(int) onTap,
   })  : _data = data,
         _onTap = onTap,

@@ -4,10 +4,8 @@ import 'theme.dart';
 class actioN extends StatelessWidget {
   final Map<String, dynamic> _data;
 
-  const actioN({
-    Key? key,
-    required Map<String, dynamic> data,
-  })  : _data = data,
+  const actioN({Key? key, required Map<String, dynamic> data})
+      : _data = data,
         super(key: key);
 
   @override

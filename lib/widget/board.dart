@@ -3,12 +3,10 @@ import 'action.dart';
 import 'theme.dart';
 
 class boarD extends StatelessWidget {
-  final List<Map<int, dynamic>> _board;
+  final List<dynamic> _board;
 
-  const boarD({
-    Key? key,
-    required List<Map<int, dynamic>> board,
-  })  : _board = board,
+  const boarD({Key? key, required List<dynamic> board})
+      : _board = board,
         super(key: key);
 
   @override

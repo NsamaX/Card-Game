@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class contenT {
-  final List<Map<int, dynamic>> _field = [
+  final List<dynamic> _field = [
     {
       0: {
         0: {
@@ -95,15 +95,15 @@ class contenT {
     },
   ];
 
-  List<Map<int, dynamic>> _cloneFieldWithoutActions() {
-    List<Map<int, dynamic>> clonedField = [];
+  List<dynamic> _cloneFieldWithoutActions() {
+    List<dynamic> clonedField = [];
 
     for (var map in _field) {
-      Map<int, dynamic> clonedMap = {};
+      dynamic clonedMap = {};
       var reversedKeys = map.keys.toList().reversed.toList();
 
       for (var key in reversedKeys) {
-        Map<int, dynamic> clonedRow = {};
+        dynamic clonedRow = {};
         for (int i = map[key].length - 1; i >= 0; i--) {
           int index = map[key].keys.elementAt(i);
           Map<String, dynamic> clonedField = {
@@ -120,8 +120,8 @@ class contenT {
     return clonedField;
   }
 
-  List<Map<int, dynamic>> getField() {
-    List<Map<int, dynamic>> clonedField = _cloneFieldWithoutActions();
+  List<dynamic> getField() {
+    List<dynamic> clonedField = _cloneFieldWithoutActions();
     clonedField.addAll(_field);
     return clonedField;
   }

@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model/cfv.dart';
 import 'package:project/api/service/card.dart';
 import 'package:project/widget/appBar.dart';
+import 'package:project/widget/filter.dart';
 import 'package:project/widget/list.dart';
+import 'content.dart';
 import 'menu.dart';
 
 class carDpagE extends StatefulWidget {
-  final bool save;
-  const carDpagE({Key? key, required this.save}) : super(key: key);
+  final bool _save;
+
+  const carDpagE({Key? key, required bool save})
+      : _save = save,
+        super(key: key);
 
   @override
   State<carDpagE> createState() => _carDpagEState();
@@ -17,6 +22,7 @@ class _carDpagEState extends State<carDpagE> {
   final ScrollController _scrollController = ScrollController();
   final carD _api = carD();
   final _search = "cards";
+
   int _page = 1;
   List<CardData> _card = [];
   bool _isLoading = false;
@@ -67,9 +73,18 @@ class _carDpagEState extends State<carDpagE> {
     _scrollController.addListener(_scrollListener);
   }
 
+  bool _show = false;
+
+  void _draw() {
+    setState(() {
+      _show = !_show;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    menU _m = menU(context: context);
+    contenT _c = contenT();
+    menU _m = menU(context: context, draw: _draw);
 
     return Scaffold(
       appBar: apPbaR(menu: _m.getMenu(), onTap: _m.getOnTap()),
@@ -80,7 +95,7 @@ class _carDpagEState extends State<carDpagE> {
             child: lisT(
               card: _card,
               scrollController: _scrollController,
-              build: widget.save,
+              build: widget._save,
               edit: false,
             ),
           ),
@@ -88,6 +103,10 @@ class _carDpagEState extends State<carDpagE> {
             Center(
               child: CircularProgressIndicator(),
             ),
+          Visibility(
+            visible: _show,
+            child: filteR(filter: _c.getFilter()),
+          )
         ],
       ),
     );

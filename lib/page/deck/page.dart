@@ -16,8 +16,6 @@ class decKpagE extends StatefulWidget {
 class _decKpagEState extends State<decKpagE> {
   final ScrollController _scrollController = ScrollController();
   final decK _d = decK();
-  late List<dynamic> _menu;
-  late List<Function> _onTap;
   List<CardData> _deck = [];
   bool _edit = false;
 
@@ -54,13 +52,11 @@ class _decKpagEState extends State<decKpagE> {
   Widget build(BuildContext context) {
     final menU _m =
         menU(context: context, delete: delete, edit: edit, editMenu: _edit);
-    _menu = _m.getMenu();
-    _onTap = _m.getOnTap();
 
     return Scaffold(
       appBar: apPbaR(
-        menu: _menu,
-        onTap: _onTap,
+        menu: _m.getMenu(),
+        onTap: _m.getOnTap(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

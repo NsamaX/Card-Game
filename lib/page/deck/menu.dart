@@ -31,8 +31,8 @@ class menU {
     Icons.delete_rounded,
     null,
     'My Deck',
-    'Add',
-    'Edit',
+    Icons.add_rounded,
+    'Done',
   ];
 
   void _Menu() {}

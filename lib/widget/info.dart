@@ -5,10 +5,8 @@ import 'theme.dart';
 class infO extends StatelessWidget {
   final CardData _card;
 
-  const infO({
-    Key? key,
-    required CardData card,
-  })  : _card = card,
+  const infO({Key? key, required CardData card})
+      : _card = card,
         super(key: key);
 
   @override

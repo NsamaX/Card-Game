@@ -3,10 +3,11 @@ import '../deck/page.dart';
 
 class menU {
   final BuildContext _context;
+  final Function() _draw;
 
-  menU({
-    required BuildContext context,
-  }) : _context = context;
+  menU({required BuildContext context, required Function() draw})
+      : _context = context,
+        _draw = draw;
 
   final List<dynamic> _menu = [
     Icons.arrow_back_rounded,
@@ -23,7 +24,9 @@ class menU {
     );
   }
 
-  void _filter() {}
+  void _filter() {
+    _draw();
+  }
 
   List<dynamic> getMenu() => _menu;
 
