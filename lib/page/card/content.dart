@@ -4,7 +4,7 @@ class contenT {
   final List<dynamic> _filter = [
     [
       {
-        'icon': Icons.compare_arrows,
+        'icon': Icons.swap_vert_outlined,
         'text': 'Sort',
       },
       {
@@ -14,41 +14,41 @@ class contenT {
     ],
     [
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Clan',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Nation',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Type',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Grade',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Skill',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Power',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Shield',
       },
     ],
     [
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Format',
       },
       {
-        'icon': Icons.search_rounded,
+        'icon': null,
         'text': 'Set',
       },
     ]

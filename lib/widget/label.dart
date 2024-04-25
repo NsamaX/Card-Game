@@ -46,7 +46,7 @@ class labeL extends StatelessWidget {
   }
 
   Widget _content(
-      BuildContext context, IconData icon, String text, Widget? page) {
+      BuildContext context, IconData? icon, String text, Widget? page) {
     return GestureDetector(
       onTap: () {
         if (page != null) {
@@ -71,7 +71,9 @@ class labeL extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20.0),
           child: Row(
             children: [
-              Icon(icon),
+              icon != null
+                  ? Icon(icon)
+                  : SizedBox(width: themE().iconTheme.size),
               SizedBox(width: 20.0),
               Text(text, style: themE().textTheme.bodySmall),
             ],

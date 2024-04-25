@@ -8,11 +8,9 @@ import 'content.dart';
 import 'menu.dart';
 
 class carDpagE extends StatefulWidget {
-  final bool _save;
+  final bool save;
 
-  const carDpagE({Key? key, required bool save})
-      : _save = save,
-        super(key: key);
+  const carDpagE({Key? key, required this.save}) : super(key: key);
 
   @override
   State<carDpagE> createState() => _carDpagEState();
@@ -21,7 +19,7 @@ class carDpagE extends StatefulWidget {
 class _carDpagEState extends State<carDpagE> {
   final ScrollController _scrollController = ScrollController();
   final carD _api = carD();
-  final _search = "cards";
+  final String _search = "cards";
 
   int _page = 1;
   List<CardData> _card = [];
@@ -95,7 +93,7 @@ class _carDpagEState extends State<carDpagE> {
             child: lisT(
               card: _card,
               scrollController: _scrollController,
-              build: widget._save,
+              build: widget.save,
               edit: false,
             ),
           ),
@@ -103,10 +101,12 @@ class _carDpagEState extends State<carDpagE> {
             Center(
               child: CircularProgressIndicator(),
             ),
-          Visibility(
-            visible: _show,
+          AnimatedContainer(
+            duration: Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
+            transform: Matrix4.translationValues(_show ? 0 : 260, 0, 0),
             child: filteR(filter: _c.getFilter()),
-          )
+          ),
         ],
       ),
     );

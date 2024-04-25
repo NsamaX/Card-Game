@@ -44,9 +44,7 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
                         _isTitle ? themE().textTheme.titleSmall : TextStyle(),
                   )
                 : Container(child: Icon(item))
-            : SizedBox(
-                width: 32.0,
-              ));
+            : SizedBox(width: 36.0));
   }
 
   @override

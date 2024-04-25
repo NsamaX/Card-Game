@@ -16,7 +16,7 @@ class boarD extends StatelessWidget {
       child: ListView.builder(
         itemCount: _board.length,
         itemBuilder: (context, index) {
-          Map<int, dynamic> data = _board[index];
+          Map<dynamic, dynamic> data = _board[index];
           return Column(
             children: [
               for (var map in data.values)
