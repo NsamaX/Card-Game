@@ -4,14 +4,14 @@ import 'theme.dart';
 
 class ediT extends StatefulWidget {
   final carDdatA _card;
-  final Map<dynamic, Function()> _action;
+  final Map<dynamic, Function()> _onTap;
 
   const ediT({
     Key? key,
     required carDdatA card,
-    required Map<dynamic, Function()> action,
+    required Map<dynamic, Function()> onTap,
   })  : _card = card,
-        _action = action,
+        _onTap = onTap,
         super(key: key);
 
   @override
@@ -40,11 +40,11 @@ class _ediTState extends State<ediT> {
       right: 0.0,
       child: Column(
         children: [
-          for (var item in widget._action.keys)
+          for (var item in widget._onTap.keys)
             _action(
                 item: item,
                 onPressed: () {
-                  widget._action[item]!();
+                  widget._onTap[item]!();
                   _updateCardCount();
                 }),
           _action(item: _cardCount, onPressed: null),

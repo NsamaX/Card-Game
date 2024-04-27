@@ -114,18 +114,19 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('messages',
-                      style: themE()
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: themE().primaryColor)),
-                  IconButton(
-                    icon: Icon(Icons.send_rounded, color: themE().primaryColor),
-                    onPressed: () {},
-                  ),
-                ]),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('messages',
+                    style: themE()
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: themE().primaryColor)),
+                IconButton(
+                  icon: Icon(Icons.send_rounded, color: themE().primaryColor),
+                  onPressed: () {},
+                ),
+              ],
+            ),
           ),
         ),
       ),

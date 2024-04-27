@@ -29,7 +29,7 @@ class cardE extends StatelessWidget {
         if (_edit)
           ediT(
             card: _card,
-            action: {
+            onTap: {
               Icons.add_rounded: () {
                 _card.add();
                 _d.update(

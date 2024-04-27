@@ -8,7 +8,7 @@ class contenT {
         0: {
           'field': {'name': 'Special', 'type': 0},
           'action': [
-            {Icons.search_rounded: () {}},
+            {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
           ],
         },
         1: {
@@ -16,7 +16,7 @@ class contenT {
           'action': [],
         },
         2: {
-          'field': {'name': 'Guard', 'type': 1},
+          'field': {'name': 'Guard', 'type': 0},
           'action': [],
         },
         3: {
@@ -26,7 +26,7 @@ class contenT {
         4: {
           'field': {'name': 'Bind', 'type': 0},
           'action': [
-            {Icons.search_rounded: () {}},
+            {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
           ],
         },
       },
@@ -34,32 +34,50 @@ class contenT {
         0: {
           'field': {'name': 'Special', 'type': 0},
           'action': [
-            {Icons.search_rounded: () {}},
+            {'action': 'load', 'icon': Icons.download_rounded, 'onTap': () {}},
+            {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
           ],
         },
         1: {
           'field': {'name': 'Card', 'type': 0},
           'action': [
-            {Icons.screen_rotation_alt_rounded: () {}},
+            {
+              'action': null,
+              'icon': Icons.screen_rotation_alt_rounded,
+              'onTap': () {}
+            },
           ],
         },
         2: {
           'field': {'name': 'Card', 'type': 0},
           'action': [
-            {Icons.screen_rotation_alt_rounded: () {}},
+            {
+              'action': null,
+              'icon': Icons.screen_rotation_alt_rounded,
+              'onTap': () {}
+            },
           ],
         },
         3: {
           'field': {'name': 'Card', 'type': 0},
           'action': [
-            {Icons.screen_rotation_alt_rounded: () {}},
+            {
+              'action': null,
+              'icon': Icons.screen_rotation_alt_rounded,
+              'onTap': () {}
+            },
           ],
         },
         4: {
           'field': {'name': 'Main', 'type': 0},
           'action': [
-            {Icons.search_rounded: () {}},
-            {Icons.view_carousel_rounded: () {}},
+            {'action': 'load', 'icon': Icons.download_rounded, 'onTap': () {}},
+            {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
+            {
+              'action': null,
+              'icon': Icons.view_carousel_rounded,
+              'onTap': () {}
+            },
           ],
         },
       },
@@ -71,25 +89,37 @@ class contenT {
         1: {
           'field': {'name': 'Card', 'type': 0},
           'action': [
-            {Icons.screen_rotation_alt_rounded: () {}},
+            {
+              'action': null,
+              'icon': Icons.screen_rotation_alt_rounded,
+              'onTap': () {}
+            },
           ],
         },
         2: {
           'field': {'name': 'Card', 'type': 0},
           'action': [
-            {Icons.screen_rotation_alt_rounded: () {}},
+            {
+              'action': null,
+              'icon': Icons.screen_rotation_alt_rounded,
+              'onTap': () {}
+            },
           ],
         },
         3: {
           'field': {'name': 'Card', 'type': 0},
           'action': [
-            {Icons.screen_rotation_alt_rounded: () {}},
+            {
+              'action': null,
+              'icon': Icons.screen_rotation_alt_rounded,
+              'onTap': () {}
+            },
           ],
         },
         4: {
           'field': {'name': 'Drop', 'type': 0},
           'action': [
-            {Icons.search_rounded: () {}},
+            {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
           ],
         },
       },

@@ -29,30 +29,36 @@ class boarD extends StatelessWidget {
   }
 
   Widget _field(Map<String, dynamic> data) {
-    String _name = data['field']['name'];
+    final _size = 80.0;
+    final String _name = data['field']['name'];
+    final List<dynamic> _action = data['action'];
 
     return Expanded(
       child: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 80.0,
-              decoration: BoxDecoration(
-                color: themE().appBarTheme.backgroundColor,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Center(
-                child: Text(
-                  _name,
-                  style: themE().textTheme.bodySmall?.copyWith(
-                      color: themE().iconTheme.color!.withOpacity(0.6)),
-                  textAlign: TextAlign.center,
+            child: RotatedBox(
+              quarterTurns: data['field']['type'] * 3,
+              child: Container(
+                width: _size,
+                height: _size,
+                decoration: BoxDecoration(
+                  color: themE().appBarTheme.backgroundColor,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Center(
+                  child: Text(
+                    _name,
+                    style: themE().textTheme.bodySmall?.copyWith(
+                        color: themE().iconTheme.color!.withOpacity(0.6)),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ),
           ),
-          actioN(data: data),
+          actioN(onTap: _action),
         ],
       ),
     );

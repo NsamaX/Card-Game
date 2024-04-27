@@ -86,17 +86,21 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
-          children: [for (var item in data) _filter(item['icon'], item['text'])],
+          children: [
+            for (var item in data) _filter(item['icon'], item['text'])
+          ],
         ),
       ),
     );
   }
 
   Widget _filter(IconData? icon, String text) {
-    return Row(children: [
-      icon != null ? Icon(icon) : SizedBox(width: themE().iconTheme.size),
-      SizedBox(width: 8.0),
-      Text(text, style: themE().textTheme.bodyMedium),
-    ]);
+    return Row(
+      children: [
+        icon != null ? Icon(icon) : SizedBox(width: themE().iconTheme.size),
+        SizedBox(width: 8.0),
+        Text(text, style: themE().textTheme.bodyMedium),
+      ],
+    );
   }
 }

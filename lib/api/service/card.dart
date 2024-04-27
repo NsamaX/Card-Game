@@ -14,7 +14,13 @@ class carD {
         List<dynamic> jsonData = jsonDecode(response.body)['data'];
         List<carDdatA> fetchedData =
             jsonData.map((e) => carDdatA.fromJson(e)).toList();
-        fetchedData.removeWhere((item) => item.getSets().length == 0);
+        switch (baseUrl) {
+          case 'https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/':
+            fetchedData.removeWhere((item) => item.getSets().length == 0);
+            break;
+          default:
+            break;
+        }
         return fetchedData;
       } else {
         throw Exception('Failed to load data: ${response.statusCode}');

@@ -216,6 +216,9 @@ class carDdatA extends savE implements informatioN {
   }
 
   @override
+  String getName() => _name;
+
+  @override
   Map<String, dynamic> getDataMap() {
     Map<String, dynamic> dataMap = {};
 
@@ -246,11 +249,7 @@ class carDdatA extends savE implements informatioN {
     return dataMap;
   }
 
-  int getId() => _id;
-
-  String getName() => _name;
-
-  String getGrade() => _grade;
+  // String getGrade() => _grade;
 
   List<String> getSets() => _sets;
 }

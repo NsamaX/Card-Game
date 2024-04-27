@@ -35,14 +35,15 @@ class _rooMState extends State<rooM> {
         children: [
           labeL(label: widget._room.sublist(_start, _end)),
           pagE(
-              currentPage: _currentPage,
-              page: (widget._room.length / widget._page).ceil(),
-              icon: widget._icon,
-              onTap: (int page) {
-                setState(() {
-                  _currentPage = page;
-                });
-              }),
+            currentPage: _currentPage,
+            page: (widget._room.length / widget._page).ceil(),
+            icon: widget._icon,
+            onTap: (int page) {
+              setState(() {
+                _currentPage = page;
+              });
+            },
+          ),
         ],
       ),
     );

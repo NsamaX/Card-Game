@@ -40,7 +40,7 @@ class decK {
       for (int i = 0; i < savedCards.length; i++) {
         Map<String, dynamic> cardMap = jsonDecode(savedCards[i]);
         carDdatA cardData = carDdatA.fromJson(cardMap['model']);
-        if (cardData.getId() == model.getId()) {
+        if (cardData.getName() == model.getName()) {
           found = true;
           cardData.setCount(newCardCount);
           cardMap['model'] = cardData.toJson();
@@ -73,7 +73,7 @@ class decK {
         cardData.setCount(cardCount);
         deck.add(cardData);
       }
-      deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
+      // deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
     }
     return deck;
   }

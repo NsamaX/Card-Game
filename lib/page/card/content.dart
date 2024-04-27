@@ -4,13 +4,13 @@ class contenT {
   final List<dynamic> _filter = [
     [
       {
-        'icon': Icons.swap_vert_outlined,
-        'text': 'Sort',
+        'icon': Icons.search_rounded,
+        'text': 'Search',
         'options': null,
       },
       {
-        'icon': Icons.search_rounded,
-        'text': 'Search',
+        'icon': Icons.swap_vert_outlined,
+        'text': 'Sort',
         'options': null,
       },
     ],
