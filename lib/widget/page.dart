@@ -42,6 +42,8 @@ class pagE extends StatelessWidget {
   }
 
   Widget _item(Function(int) onTap, int page, IconData? icon) {
+    final double _size = 30.0;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -49,8 +51,8 @@ class pagE extends StatelessWidget {
           onTap(page);
         },
         child: Container(
-          height: 30.0,
-          width: 30.0,
+          width: _size,
+          height: _size,
           decoration: BoxDecoration(
             color: page == _currentPage
                 ? themE().secondaryHeaderColor

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/service/message.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/board.dart';
 import 'package:project/widget/buttomNav.dart';
@@ -15,7 +14,21 @@ class dueLpagE extends StatefulWidget {
 }
 
 class _dueLpagEState extends State<dueLpagE> {
+  bool _onHeadphone = false;
+  bool _onMicrophone = false;
   bool _show = false;
+
+  void _head() {
+    setState(() {
+      _onHeadphone = !_onHeadphone;
+    });
+  }
+
+  void _mic() {
+    setState(() {
+      _onMicrophone = !_onMicrophone;
+    });
+  }
 
   void _draw() {
     setState(() {
@@ -25,9 +38,15 @@ class _dueLpagEState extends State<dueLpagE> {
 
   @override
   Widget build(BuildContext context) {
-    final messagE _s = messagE();
     final contenT _c = contenT();
-    final menU _m = menU(context: context, draw: _draw);
+    final menU _m = menU(
+      context: context,
+      headphone: _head,
+      onHeadphone: _onHeadphone,
+      microphone: _mic,
+      onMicrophone: _onMicrophone,
+      draw: _draw,
+    );
 
     return Scaffold(
       appBar: apPbaR(
@@ -42,7 +61,7 @@ class _dueLpagEState extends State<dueLpagE> {
           duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
           transform: Matrix4.translationValues(_show ? 0 : 200, 0, 0),
-          child: chaT(message: _s.getMessage()),
+          child: chaT(message: _c.getMessage()),
         ),
       ]),
       bottomNavigationBar: bottoMnaV(currentIndex: 1),

@@ -44,7 +44,7 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
     return SlideTransition(
       position: _offsetAnimation,
       child: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Align(
           alignment: Alignment.centerRight,
           child: Container(
@@ -86,13 +86,13 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
-          children: [for (var item in data) _label(item['icon'], item['text'])],
+          children: [for (var item in data) _filter(item['icon'], item['text'])],
         ),
       ),
     );
   }
 
-  Widget _label(IconData? icon, String text) {
+  Widget _filter(IconData? icon, String text) {
     return Row(children: [
       icon != null ? Icon(icon) : SizedBox(width: themE().iconTheme.size),
       SizedBox(width: 8.0),

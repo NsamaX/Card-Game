@@ -3,9 +3,9 @@ import 'package:project/api/model/cfv.dart';
 import 'theme.dart';
 
 class infO extends StatelessWidget {
-  final CardData _card;
+  final carDdatA _card;
 
-  const infO({Key? key, required CardData card})
+  const infO({Key? key, required carDdatA card})
       : _card = card,
         super(key: key);
 

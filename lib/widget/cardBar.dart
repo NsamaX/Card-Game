@@ -31,16 +31,13 @@ class _carDbaRState extends State<carDbaR> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
-          children: List.generate(
-            widget._data.length,
-            (index) {
-              return _bar(
-                widget._data[index]['text'],
-                widget._data[index]['value'],
-                index,
-              );
-            },
-          ).toList(),
+          children: List.generate(widget._data.length, (index) {
+            return _bar(
+              widget._data[index]['text'],
+              widget._data[index]['value'],
+              index,
+            );
+          }).toList(),
         ),
       ),
     );

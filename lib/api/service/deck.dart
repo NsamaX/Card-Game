@@ -10,7 +10,7 @@ class decK {
       String lowerCaseCardName = cardName.toLowerCase();
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
-        CardData cardData = CardData.fromJson(cardMap['model']);
+        carDdatA cardData = carDdatA.fromJson(cardMap['model']);
         String lowerCaseExistingCardName = cardData.getName().toLowerCase();
         if (lowerCaseExistingCardName == lowerCaseCardName) {
           return true;
@@ -20,7 +20,7 @@ class decK {
     return false;
   }
 
-  Future<void> save(CardData model, int cardCount) async {
+  Future<void> save(carDdatA model, int cardCount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> savedCards = prefs.getStringList('user_deck') ?? [];
     Map<String, dynamic> cardMap = {
@@ -32,14 +32,14 @@ class decK {
     await prefs.setStringList('user_deck', savedCards);
   }
 
-  Future<void> update(CardData model, int newCardCount) async {
+  Future<void> update(carDdatA model, int newCardCount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
     if (savedCards != null) {
       bool found = false;
       for (int i = 0; i < savedCards.length; i++) {
         Map<String, dynamic> cardMap = jsonDecode(savedCards[i]);
-        CardData cardData = CardData.fromJson(cardMap['model']);
+        carDdatA cardData = carDdatA.fromJson(cardMap['model']);
         if (cardData.getId() == model.getId()) {
           found = true;
           cardData.setCount(newCardCount);
@@ -61,14 +61,14 @@ class decK {
     }
   }
 
-  Future<List<CardData>> load() async {
+  Future<List<carDdatA>> load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
-    List<CardData> deck = [];
+    List<carDdatA> deck = [];
     if (savedCards != null) {
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
-        CardData cardData = CardData.fromJson(cardMap['model']);
+        carDdatA cardData = carDdatA.fromJson(cardMap['model']);
         int cardCount = cardMap['cardCount'];
         cardData.setCount(cardCount);
         deck.add(cardData);

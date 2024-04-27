@@ -7,12 +7,12 @@ import 'package:project/widget/info.dart';
 import 'content.dart';
 
 class singlE extends StatefulWidget {
-  final CardData _card;
+  final carDdatA _card;
   final bool _save;
 
   const singlE({
     Key? key,
-    required CardData card,
+    required carDdatA card,
     required bool save,
   })  : _card = card,
         _save = save,

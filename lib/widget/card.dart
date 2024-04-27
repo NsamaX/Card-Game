@@ -3,12 +3,12 @@ import 'package:project/api/model/cfv.dart';
 import 'package:project/page/single/page.dart';
 
 class carD extends StatelessWidget {
-  final CardData _card;
+  final carDdatA _card;
   final bool _build;
 
   const carD({
     Key? key,
-    required CardData card,
+    required carDdatA card,
     required bool build,
   })  : _card = card,
         _build = build,

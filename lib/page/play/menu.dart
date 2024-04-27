@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class menU {
   final List<dynamic> _menu = [
-    Icons.filter_list_rounded,
-    'Play',
     Icons.add_rounded,
+    'Play',
+    Icons.filter_list_rounded,
   ];
 
   void _filter() {}
@@ -15,9 +15,9 @@ class menU {
 
   List<Function> getOnTap() {
     return [
-      _filter,
-      () {},
       _create,
+      () {},
+      _filter,
     ];
   }
 }

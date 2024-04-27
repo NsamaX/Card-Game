@@ -16,8 +16,8 @@ class decKpagE extends StatefulWidget {
 class _decKpagEState extends State<decKpagE> {
   final ScrollController _scrollController = ScrollController();
   final decK _d = decK();
-  List<CardData> _deck = [];
-  bool _edit = false;
+  List<carDdatA> _deck = [];
+  bool _onEdit = false;
 
   void delete() {
     setState(() {
@@ -29,7 +29,7 @@ class _decKpagEState extends State<decKpagE> {
     _d.load().then(
       (deck) {
         setState(() {
-          _edit = !_edit;
+          _onEdit = !_onEdit;
           _deck = deck;
         });
       },
@@ -51,7 +51,7 @@ class _decKpagEState extends State<decKpagE> {
   @override
   Widget build(BuildContext context) {
     final menU _m =
-        menU(context: context, delete: delete, edit: edit, editMenu: _edit);
+        menU(context: context, delete: delete, edit: edit, onEdit: _onEdit);
 
     return Scaffold(
       appBar: apPbaR(
@@ -64,7 +64,7 @@ class _decKpagEState extends State<decKpagE> {
           scrollController: _scrollController,
           card: _deck,
           build: false,
-          edit: _edit,
+          edit: _onEdit,
         ),
       ),
       bottomNavigationBar: bottoMnaV(currentIndex: 0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/api/service/message.dart';
 
 class contenT {
   final List<dynamic> _field = [
@@ -125,4 +126,7 @@ class contenT {
     clonedField.addAll(_field);
     return clonedField;
   }
+
+  final messagE _m = messagE();
+  List<dynamic> getMessage() => _m.getMessage();
 }

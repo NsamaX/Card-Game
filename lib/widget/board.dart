@@ -20,7 +20,7 @@ class boarD extends StatelessWidget {
           return Column(
             children: [
               for (var map in data.values)
-                Row(children: [for (var board in map.values) _boarD(board)]),
+                Row(children: [for (var board in map.values) _field(board)]),
             ],
           );
         },
@@ -28,7 +28,7 @@ class boarD extends StatelessWidget {
     );
   }
 
-  Widget _boarD(Map<String, dynamic> data) {
+  Widget _field(Map<String, dynamic> data) {
     String _name = data['field']['name'];
 
     return Expanded(

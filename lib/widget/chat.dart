@@ -71,10 +71,13 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
   }
 
   Widget _message(Map<String, dynamic> data) {
+    final double leftPadding = data['sender'] ? 16.0 : 0.0;
+    final double rightPadding = data['sender'] ? 0.0 : 16.0;
+
     return Align(
       alignment: data['sender'] ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0),
+        padding: EdgeInsets.fromLTRB(leftPadding, 6.0, rightPadding, 6.0),
         child: Container(
           decoration: BoxDecoration(
             color: data['sender']
@@ -84,14 +87,15 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
                     .style!
                     .backgroundColor!
                     .resolve({}),
-            borderRadius: BorderRadius.circular(26.0),
+            borderRadius: BorderRadius.circular(16.0),
           ),
           child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                data['message'],
-                style: themE().textTheme.bodyMedium,
-              )),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              data['message'],
+              style: themE().textTheme.bodyMedium,
+            ),
+          ),
         ),
       ),
     );
@@ -108,7 +112,7 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.only(left: 16.0),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -117,9 +121,9 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
                           .textTheme
                           .bodyMedium
                           ?.copyWith(color: themE().primaryColor)),
-                  Icon(
-                    Icons.send_rounded,
-                    color: themE().primaryColor,
+                  IconButton(
+                    icon: Icon(Icons.send_rounded, color: themE().primaryColor),
+                    onPressed: () {},
                   ),
                 ]),
           ),

@@ -17,19 +17,7 @@ class labeL extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (category['title'] != null) ...[
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
-                  child: Text(
-                    category['title'],
-                    style: themE()
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: themE().secondaryHeaderColor),
-                  ),
-                ),
-              ],
+              if (category['title'] != null) _title(category['title']),
               ...category['content'].map<Widget>((item) {
                 return _content(
                   context,
@@ -42,6 +30,19 @@ class labeL extends StatelessWidget {
           );
         }).toList(),
       ],
+    );
+  }
+
+  Widget _title(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
+      child: Text(
+        text,
+        style: themE()
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: themE().secondaryHeaderColor),
+      ),
     );
   }
 

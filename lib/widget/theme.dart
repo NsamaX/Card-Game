@@ -5,14 +5,13 @@ const Color primary1 = Color.fromARGB(255, 20, 20, 20);
 const Color primary2 = Color.fromARGB(255, 30, 30, 30);
 const Color primary3 = Color.fromARGB(255, 40, 40, 40);
 const Color primary4 = Color.fromARGB(255, 60, 60, 60);
-const Color secondary1 = Color.fromARGB(255, 80, 140, 225);
-const Color secondary2 = Color.fromARGB(255, 200, 200, 255);
+const Color secondary = Color.fromARGB(255, 80, 140, 225);
 
 ThemeData themE() {
   return ThemeData(
     scaffoldBackgroundColor: primary2,
     primaryColor: primary4,
-    secondaryHeaderColor: secondary1,
+    secondaryHeaderColor: secondary,
     iconTheme: IconThemeData(color: Colors.white, size: 16.0),
     // fontFamily: GoogleFonts.nunito().fontFamily,
     textTheme: TextTheme(
@@ -31,15 +30,15 @@ ThemeData themE() {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: primary3,
-      iconTheme: IconThemeData(color: secondary1, size: 22.0),
+      iconTheme: IconThemeData(color: secondary, size: 22.0),
       titleTextStyle: TextStyle(
-          color: secondary1, fontSize: 16.0, fontWeight: FontWeight.bold),
+          color: secondary, fontSize: 16.0, fontWeight: FontWeight.bold),
       toolbarTextStyle: TextStyle(
-          color: secondary1, fontSize: 16.0, fontWeight: FontWeight.bold),
+          color: secondary, fontSize: 16.0, fontWeight: FontWeight.bold),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary1,
-      selectedItemColor: secondary1,
+      selectedItemColor: secondary,
       unselectedItemColor: Colors.white,
     ),
   );

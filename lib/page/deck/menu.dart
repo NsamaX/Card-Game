@@ -7,17 +7,17 @@ class menU {
   final decK _d = decK();
   final Function() _delete;
   final Function() _edit;
-  late bool _editMenu;
+  final bool _onEdit;
 
   menU(
       {required BuildContext context,
       required Function() delete,
       required Function() edit,
-      required bool editMenu})
+      required bool onEdit})
       : _context = context,
         _delete = delete,
         _edit = edit,
-        _editMenu = editMenu;
+        _onEdit = onEdit;
 
   final List<dynamic> _menu = [
     Icons.menu_rounded,
@@ -35,11 +35,11 @@ class menU {
     'Done',
   ];
 
-  void _Menu() {}
+  void _draw() {}
 
-  void _Share() {}
+  void _share() {}
 
-  void _Search() {
+  void _search() {
     Navigator.pushReplacement(
       _context,
       MaterialPageRoute(
@@ -61,7 +61,7 @@ class menU {
     );
   }
 
-  void _Add() {
+  void _add() {
     Navigator.pushReplacement(
       _context,
       MaterialPageRoute(
@@ -71,28 +71,27 @@ class menU {
   }
 
   void _Edit() {
-    _editMenu = !_editMenu;
     _edit();
   }
 
   List<dynamic> getMenu() {
-    return _editMenu ? _menuE : _menu;
+    return _onEdit ? _menuE : _menu;
   }
 
   List<Function> getOnTap() {
-    return _editMenu
+    return _onEdit
         ? [
             _Delete,
             () {},
             () {},
-            _Add,
+            _add,
             _Edit,
           ]
         : [
-            _Menu,
-            _Share,
+            _draw,
+            _share,
             () {},
-            _Search,
+            _search,
             _Edit,
           ];
   }

@@ -6,14 +6,14 @@ class carD {
   final String baseUrl =
       "https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/";
 
-  Future<List<CardData>> getData(String search, {int page = 1}) async {
+  Future<List<carDdatA>> getData(String search, {int page = 1}) async {
     http.Response response =
         await http.get(Uri.parse(baseUrl + "$search?page=$page"));
     try {
       if (response.statusCode == 200) {
         List<dynamic> jsonData = jsonDecode(response.body)['data'];
-        List<CardData> fetchedData =
-            jsonData.map((e) => CardData.fromJson(e)).toList();
+        List<carDdatA> fetchedData =
+            jsonData.map((e) => carDdatA.fromJson(e)).toList();
         fetchedData.removeWhere((item) => item.getSets().length == 0);
         return fetchedData;
       } else {

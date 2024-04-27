@@ -3,13 +3,13 @@ import 'package:project/api/model/cfv.dart';
 import 'theme.dart';
 
 class ediT extends StatefulWidget {
-  final CardData _card;
-  final Map<IconData, Function()> _action;
+  final carDdatA _card;
+  final Map<dynamic, Function()> _action;
 
   const ediT({
     Key? key,
-    required CardData card,
-    required Map<IconData, Function()> action,
+    required carDdatA card,
+    required Map<dynamic, Function()> action,
   })  : _card = card,
         _action = action,
         super(key: key);
@@ -40,7 +40,7 @@ class _ediTState extends State<ediT> {
       right: 0.0,
       child: Column(
         children: [
-          for (dynamic item in widget._action.keys)
+          for (var item in widget._action.keys)
             _action(
                 item: item,
                 onPressed: () {

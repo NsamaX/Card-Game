@@ -5,13 +5,13 @@ import 'card.dart';
 import 'edit.dart';
 
 class cardE extends StatelessWidget {
-  final CardData _card;
+  final carDdatA _card;
   final bool _build;
   final bool _edit;
 
   const cardE({
     Key? key,
-    required CardData card,
+    required carDdatA card,
     required bool build,
     required bool edit,
   })  : _card = card,

@@ -1,7 +1,7 @@
 import 'information.dart';
 import 'save.dart';
 
-class CardData extends savE implements informatioN {
+class carDdatA extends savE implements informatioN {
   final int _id;
   final String _cardType;
   final String _clan;
@@ -42,7 +42,7 @@ class CardData extends savE implements informatioN {
   final String _translation;
   final String _triggerEffect;
 
-  CardData({
+  carDdatA({
     required int id,
     required String cardType,
     required String clan,
@@ -122,8 +122,8 @@ class CardData extends savE implements informatioN {
         _translation = translation,
         _triggerEffect = triggerEffect;
 
-  factory CardData.fromJson(Map<String, dynamic> json) {
-    return CardData(
+  factory carDdatA.fromJson(Map<String, dynamic> json) {
+    return carDdatA(
       id: json['id'],
       cardType: json['cardtype'],
       clan: json['clan'],
@@ -210,14 +210,6 @@ class CardData extends savE implements informatioN {
     };
   }
 
-  int getId() => _id;
-
-  String getName() => _name;
-
-  String getGrade() => _grade;
-
-  List<String> getSets() => _sets;
-
   @override
   String getImage() {
     return _imageUrlJp;
@@ -253,4 +245,12 @@ class CardData extends savE implements informatioN {
 
     return dataMap;
   }
+
+  int getId() => _id;
+
+  String getName() => _name;
+
+  String getGrade() => _grade;
+
+  List<String> getSets() => _sets;
 }

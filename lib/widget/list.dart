@@ -4,14 +4,14 @@ import 'cardE.dart';
 
 class lisT extends StatefulWidget {
   final ScrollController _scrollController;
-  final List<CardData> _card;
+  final List<carDdatA> _card;
   final bool _build;
   final bool _edit;
 
   const lisT({
     Key? key,
     required ScrollController scrollController,
-    required List<CardData> card,
+    required List<carDdatA> card,
     required bool build,
     required bool edit,
   })  : _scrollController = scrollController,
@@ -27,7 +27,7 @@ class lisT extends StatefulWidget {
 class _lisTState extends State<lisT> {
   @override
   Widget build(BuildContext context) {
-    final int column = 3;
+    final int row = 3;
 
     return ListView.builder(
       controller: widget._scrollController,
@@ -35,8 +35,8 @@ class _lisTState extends State<lisT> {
       itemBuilder: (context, index) {
         return Row(
           children: [
-            for (int i = 0; i < column; i++)
-              Expanded(child: _card(index * column + i)),
+            for (int i = 0; i < row; i++)
+              Expanded(child: _card(index * row + i)),
           ],
         );
       },

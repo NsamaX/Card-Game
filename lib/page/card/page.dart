@@ -22,7 +22,7 @@ class _carDpagEState extends State<carDpagE> {
   final String _search = "cards";
 
   int _page = 1;
-  List<CardData> _card = [];
+  List<carDdatA> _card = [];
   bool _isLoading = false;
 
   Future<void> _getData(String search, {int page = 1}) async {
@@ -34,7 +34,7 @@ class _carDpagEState extends State<carDpagE> {
       _isLoading = true;
     });
 
-    List<CardData> fetchedData = await _api.getData(search, page: page);
+    List<carDdatA> fetchedData = await _api.getData(search, page: page);
     if (!mounted) {
       return;
     }
