@@ -2,10 +2,21 @@ import 'package:flutter/material.dart';
 import 'theme.dart';
 
 class actioN extends StatelessWidget {
+  final int _col;
+  final int _row;
+  final Function _option;
   final List<dynamic> _onTap;
 
-  const actioN({Key? key, required List<dynamic> onTap})
-      : _onTap = onTap,
+  const actioN(
+      {Key? key,
+      required int col,
+      required int row,
+      required Function option,
+      required List<dynamic> onTap})
+      : _col = col,
+        _row = row,
+        _option = option,
+        _onTap = onTap,
         super(key: key);
 
   @override
@@ -22,7 +33,7 @@ class actioN extends StatelessWidget {
               if (action['action'] == 'load') _load = true;
               return _load && action['action'] != 'load'
                   ? SizedBox()
-                  : _action(action);
+                  : _action(_option, action);
             }).toList(),
           ],
         ),
@@ -31,11 +42,11 @@ class actioN extends StatelessWidget {
       return SizedBox();
   }
 
-  Widget _action(dynamic action) {
+  Widget _action(Function _option, dynamic action) {
     return Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: GestureDetector(
-          onTap: action['onTap'],
+          onTap: action['action'] == 'load' ? () => _option(_col, _row) : null,
           child: action['icon'] is String
               ? Text(
                   action['icon'],
