@@ -27,16 +27,16 @@ class lisT extends StatefulWidget {
 class _lisTState extends State<lisT> {
   @override
   Widget build(BuildContext context) {
-    final int row = 3;
+    final int _row = 3;
 
     return ListView.builder(
       controller: widget._scrollController,
-      itemCount: (widget._card.length / 3).ceil(),
+      itemCount: (widget._card.length / _row).ceil(),
       itemBuilder: (context, index) {
         return Row(
           children: [
-            for (int i = 0; i < row; i++)
-              Expanded(child: _card(index * row + i)),
+            for (int i = 0; i < _row; i++)
+              Expanded(child: _card(index * _row + i)),
           ],
         );
       },

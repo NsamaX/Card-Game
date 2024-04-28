@@ -28,6 +28,7 @@ class _rooMState extends State<rooM> {
   Widget build(BuildContext context) {
     int _start = _currentPage * widget._page;
     int _end = (_currentPage + 1) * widget._page;
+    
     if (_end > widget._room.length) _end = widget._room.length;
 
     return Expanded(

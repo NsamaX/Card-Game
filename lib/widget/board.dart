@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'action.dart';
 import 'theme.dart';
 
-class boarD extends StatelessWidget {
+class boarD extends StatefulWidget {
   final List<dynamic> _board;
 
   const boarD({Key? key, required List<dynamic> board})
@@ -10,13 +10,34 @@ class boarD extends StatelessWidget {
         super(key: key);
 
   @override
+  State<boarD> createState() => _boarDState();
+}
+
+class _boarDState extends State<boarD> {
+  late List<dynamic> _card = [];
+
+  @override
+  void initState() {
+    super.initState();
+    final int rows = widget._board.length;
+    final int cols = widget._board.isNotEmpty ? widget._board[0].length : 0;
+    for (int col = 0; col < cols; col++) {
+      List<dynamic> column = [];
+      for (int row = 0; row < rows; row++) {
+        column.add([]);
+      }
+      _card.add(column);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 36.0, horizontal: 10.0),
       child: ListView.builder(
-        itemCount: _board.length,
+        itemCount: widget._board.length,
         itemBuilder: (context, index) {
-          Map<dynamic, dynamic> data = _board[index];
+          Map<dynamic, dynamic> data = widget._board[index];
           return Column(
             children: [
               for (var map in data.values)

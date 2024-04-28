@@ -25,9 +25,7 @@ class pagE extends StatelessWidget {
     int _end = _start + _icon;
 
     if (_end > _page) _end = _page;
-    if (_start - _end < _icon) {
-      _start = _end - _icon;
-    }
+    if (_start - _end < _icon) _start = _end - _icon;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

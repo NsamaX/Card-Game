@@ -9,14 +9,14 @@ class contenT {
           'field': {'name': 'Special', 'type': 0},
           'action': [
             {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
-          ],
+          ]
         },
         1: {
           'field': {'name': 'Trigger', 'type': 0},
           'action': [],
         },
         2: {
-          'field': {'name': 'Guard', 'type': 0},
+          'field': {'name': 'Guard', 'type': 1},
           'action': [],
         },
         3: {
@@ -27,16 +27,18 @@ class contenT {
           'field': {'name': 'Bind', 'type': 0},
           'action': [
             {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
-          ],
+          ]
         },
       },
+    },
+    {
       1: {
         0: {
           'field': {'name': 'Special', 'type': 0},
           'action': [
             {'action': 'load', 'icon': Icons.download_rounded, 'onTap': () {}},
             {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
-          ],
+          ]
         },
         1: {
           'field': {'name': 'Card', 'type': 0},
@@ -81,6 +83,8 @@ class contenT {
           ],
         },
       },
+    },
+    {
       2: {
         0: {
           'field': {'name': 'Damage', 'type': 1},
@@ -120,41 +124,38 @@ class contenT {
           'field': {'name': 'Drop', 'type': 0},
           'action': [
             {'action': null, 'icon': Icons.search_rounded, 'onTap': () {}},
-          ],
+          ]
         },
       },
     },
   ];
 
   List<dynamic> _cloneFieldWithoutActions() {
-    List<dynamic> clonedField = [];
-
-    for (var map in _field) {
-      dynamic clonedMap = {};
-      var reversedKeys = map.keys.toList().reversed.toList();
-
-      for (var key in reversedKeys) {
-        dynamic clonedRow = {};
-        for (int i = map[key].length - 1; i >= 0; i--) {
-          int index = map[key].keys.elementAt(i);
-          Map<String, dynamic> clonedField = {
-            'field': map[key][index]['field'],
+    List<dynamic> clone = [];
+    var reversedField = _field.reversed.toList();
+    for (var item in reversedField) {
+      Map<dynamic, dynamic> clonedItem = {};
+      item.forEach((key, value) {
+        Map<dynamic, dynamic> clonedSubItem = {};
+        var keys = value.keys.toList();
+        keys = keys.reversed.toList();
+        keys.forEach((subKey) {
+          clonedSubItem[subKey] = {
+            'field': value[subKey]['field'],
             'action': [],
           };
-          clonedRow[index] = clonedField;
-        }
-        clonedMap[key] = clonedRow;
-      }
-      clonedField.add(clonedMap);
+        });
+        clonedItem[key] = clonedSubItem;
+      });
+      clone.add(clonedItem);
     }
-
-    return clonedField;
+    return clone;
   }
 
   List<dynamic> getField() {
-    List<dynamic> clonedField = _cloneFieldWithoutActions();
-    clonedField.addAll(_field);
-    return clonedField;
+    List<dynamic> clone = _cloneFieldWithoutActions();
+    clone.addAll(_field);
+    return clone;
   }
 
   final messagE _m = messagE();

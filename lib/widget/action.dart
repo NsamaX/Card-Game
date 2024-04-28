@@ -33,13 +33,15 @@ class actioN extends StatelessWidget {
 
   Widget _action(dynamic action) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: action['icon'] is String
-          ? Text(
-              action['icon'],
-              style: themE().textTheme.bodySmall,
-            )
-          : Icon(action['icon']),
-    );
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: GestureDetector(
+          onTap: action['onTap'],
+          child: action['icon'] is String
+              ? Text(
+                  action['icon'],
+                  style: themE().textTheme.bodySmall,
+                )
+              : Icon(action['icon']),
+        ));
   }
 }
