@@ -38,16 +38,15 @@ class label extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
       child: Text(
         text,
-        style: themeData()
-            .textTheme
-            .bodyMedium
-            ?.copyWith(color: themeData().secondaryHeaderColor),
+        style: themeData().textTheme.bodyMedium?.copyWith(
+              color: themeData().secondaryHeaderColor,
+            ),
       ),
     );
   }
 
   Widget _content(
-      BuildContext context, IconData? icon, String text, Widget? page) {
+      BuildContext context, IconData icon, String text, Widget? page) {
     return GestureDetector(
       onTap: () {
         if (page != null) {
@@ -72,9 +71,7 @@ class label extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20.0),
           child: Row(
             children: [
-              icon != null
-                  ? Icon(icon)
-                  : SizedBox(width: themeData().iconTheme.size),
+              Icon(icon),
               SizedBox(width: 20.0),
               Text(text, style: themeData().textTheme.bodySmall),
             ],

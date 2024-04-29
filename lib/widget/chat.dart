@@ -15,6 +15,7 @@ class chat extends StatefulWidget {
 class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
   late AnimationController _chatontroller;
   late Animation<Offset> _offsetAnimation;
+  final double _sendButton = 40.0;
 
   @override
   void initState() {
@@ -49,7 +50,9 @@ class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
           padding: const EdgeInsets.only(top: 16.0),
           child: Container(
             width: 200.0,
-            height: widget._message.length * 60.0 + 68.0,
+            height: (widget._message.length * (_sendButton * 2)) +
+                _sendButton +
+                16.0,
             constraints: BoxConstraints(maxHeight: 360.0),
             decoration: BoxDecoration(
               color: themeData().appBarTheme.backgroundColor,
@@ -71,14 +74,14 @@ class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
   }
 
   Widget _message(Map<String, dynamic> data) {
-    final double _distance = 18.0;
-    final double _leftPadding = data['sender'] ? _distance : 0.0;
-    final double _rightPadding = data['sender'] ? 0.0 : _distance;
+    final double _free = 16.0;
+    final double _leftPadding = data['sender'] ? _free : 0.0;
+    final double _rightPadding = data['sender'] ? 0.0 : _free;
 
     return Align(
       alignment: data['sender'] ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(_leftPadding, 6.0, _rightPadding, 6.0),
+        padding: EdgeInsets.fromLTRB(_leftPadding, 0.0, _rightPadding, _free),
         child: Container(
           decoration: BoxDecoration(
             color: data['sender']
@@ -104,31 +107,29 @@ class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
 
   Widget _send() {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 6.0),
-        child: Container(
-          height: 40.0,
-          decoration: BoxDecoration(
-            color: themeData().iconTheme.color,
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('messages',
-                    style: themeData()
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: themeData().primaryColor)),
-                IconButton(
-                  icon:
-                      Icon(Icons.send_rounded, color: themeData().primaryColor),
-                  onPressed: () {},
-                ),
-              ],
-            ),
+      child: Container(
+        height: _sendButton,
+        decoration: BoxDecoration(
+          color: themeData().iconTheme.color,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'messages',
+                style: themeData()
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: themeData().primaryColor),
+              ),
+              IconButton(
+                icon: Icon(Icons.send_rounded, color: themeData().primaryColor),
+                onPressed: () {},
+              ),
+            ],
           ),
         ),
       ),

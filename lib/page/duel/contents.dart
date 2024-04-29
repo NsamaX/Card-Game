@@ -53,7 +53,7 @@ class contenT {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           {
-            'action': null,
+            'action': 'flip',
             'icon': Icons.screen_rotation_alt_rounded,
           },
         ],
@@ -62,7 +62,7 @@ class contenT {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           {
-            'action': null,
+            'action': 'flip',
             'icon': Icons.screen_rotation_alt_rounded,
           },
         ],
@@ -71,7 +71,7 @@ class contenT {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           {
-            'action': null,
+            'action': 'flip',
             'icon': Icons.screen_rotation_alt_rounded,
           },
         ],
@@ -99,7 +99,7 @@ class contenT {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           {
-            'action': null,
+            'action': 'flip',
             'icon': Icons.screen_rotation_alt_rounded,
           },
         ],
@@ -108,7 +108,7 @@ class contenT {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           {
-            'action': null,
+            'action': 'flip',
             'icon': Icons.screen_rotation_alt_rounded,
           },
         ],
@@ -117,7 +117,7 @@ class contenT {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           {
-            'action': null,
+            'action': 'flip',
             'icon': Icons.screen_rotation_alt_rounded,
           },
         ],

@@ -49,7 +49,6 @@ class _filterState extends State<filter> with SingleTickerProviderStateMixin {
           alignment: Alignment.centerRight,
           child: Container(
             width: 260.0,
-            height: double.infinity,
             decoration: BoxDecoration(
               color: themeData().appBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
@@ -66,7 +65,7 @@ class _filterState extends State<filter> with SingleTickerProviderStateMixin {
                       style: themeData().textTheme.titleSmall,
                     ),
                   ),
-                  for (var _data in widget._filter) _catagory(_data),
+                  for (var _option in widget._filter) _catagory(_option),
                 ],
               ),
             ),
@@ -76,7 +75,7 @@ class _filterState extends State<filter> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _catagory(List<dynamic> data) {
+  Widget _catagory(List<dynamic> option) {
     return Container(
       decoration: BoxDecoration(
           border: Border(
@@ -87,7 +86,7 @@ class _filterState extends State<filter> with SingleTickerProviderStateMixin {
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
           children: [
-            for (var item in data) _filter(item['icon'], item['text'])
+            for (var _item in option) _filter(_item['icon'], _item['text'])
           ],
         ),
       ),

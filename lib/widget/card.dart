@@ -4,17 +4,20 @@ import 'package:project/page/single/page.dart';
 
 class CARD extends StatelessWidget {
   final model _card;
-  final bool _show;
   final bool _build;
+  final bool _show;
+  final bool _info;
 
   const CARD({
     Key? key,
     required model card,
-    required bool show,
     required bool build,
+    bool? show,
+    bool? info,
   })  : _card = card,
-        _show = show,
         _build = build,
+        _show = show ?? true,
+        _info = info ?? true,
         super(key: key);
 
   @override
@@ -23,14 +26,15 @@ class CARD extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => singlE(
-                card: _card,
-                save: _build,
+          if (_info)
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => singlE(
+                  card: _card,
+                  save: _build,
+                ),
               ),
-            ),
-          );
+            );
         },
         child: Card(
           elevation: 4.0,

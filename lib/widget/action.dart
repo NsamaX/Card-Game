@@ -4,14 +4,14 @@ import 'theme.dart';
 class action extends StatelessWidget {
   final int _col;
   final int _row;
-  final Function _action;
+  final Map<String, dynamic> _action;
   final List<dynamic> _onTap;
 
   const action(
       {Key? key,
       required int col,
       required int row,
-      required Function action,
+      required Map<String, dynamic> action,
       required List<dynamic> onTap})
       : _col = col,
         _row = row,
@@ -37,11 +37,21 @@ class action extends StatelessWidget {
       return SizedBox();
   }
 
-  Widget _option(Function _action, dynamic action) {
+  Widget _option(Map<String, dynamic> _action, dynamic action) {
     return Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: GestureDetector(
-          onTap: action['action'] == 'load' ? () => _action(_col, _row) : null,
+          onTap: () {
+            switch (action['action']) {
+              case 'load':
+                _action['load'](_col, _row);
+                break;
+              case 'flip':
+                _action['flip'](_col, _row);
+              default:
+                break;
+            }
+          },
           child: action['icon'] is String
               ? Text(
                   action['icon'],

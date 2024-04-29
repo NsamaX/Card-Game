@@ -19,7 +19,7 @@ class settinGpagE extends StatelessWidget {
         onTap: _m.getOnTap(),
       ),
       body: label(label: _c.getLabel()),
-      bottomNavigationBar: bottoMnaV(currentIndex: 2),
+      bottomNavigationBar: bottomNav(currentIndex: 2),
     );
   }
 }

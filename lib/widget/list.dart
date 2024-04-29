@@ -10,16 +10,16 @@ class list extends StatefulWidget {
   final bool _build;
   final bool _edit;
 
-  const list({
+  list({
     Key? key,
     required ScrollController scrollController,
     required List<model> card,
-    required bool build,
-    required bool edit,
+    bool? build,
+    bool? edit,
   })  : _scrollController = scrollController,
         _card = card,
-        _build = build,
-        _edit = edit,
+        _build = build ?? false,
+        _edit = edit ?? false,
         super(key: key);
 
   @override
@@ -27,8 +27,6 @@ class list extends StatefulWidget {
 }
 
 class _listState extends State<list> {
-  final decK _service = decK();
-
   @override
   Widget build(BuildContext context) {
     final int _row = 3;
@@ -41,9 +39,10 @@ class _listState extends State<list> {
           children: [
             for (int i = 0; i < _row; i++)
               Expanded(
-                  child: index * _row + i < widget._card.length
-                      ? _card(index * _row + i)
-                      : SizedBox()),
+                child: index * _row + i < widget._card.length
+                    ? _card(index * _row + i)
+                    : SizedBox(),
+              ),
           ],
         );
       },
@@ -52,10 +51,11 @@ class _listState extends State<list> {
 
   Widget _card(int index) {
     final _card = widget._card[index];
+    final decK _service = decK();
 
     return Stack(
       children: [
-        CARD(card: _card, show: true, build: widget._build),
+        CARD(card: _card, build: widget._build),
         if (widget._edit)
           edit(
             card: _card,

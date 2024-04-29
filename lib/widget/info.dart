@@ -16,11 +16,8 @@ class info extends StatelessWidget {
       children: [
         Center(
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(14.0),
+              borderRadius: BorderRadius.circular(16.0),
               child: Image.network(
                 _card.getImage(),
                 fit: BoxFit.fill,

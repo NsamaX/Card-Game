@@ -94,7 +94,6 @@ class _carDpagEState extends State<carDpagE> {
               card: _card,
               scrollController: _scrollController,
               build: widget.save,
-              edit: false,
             ),
           ),
           if (_isLoading)

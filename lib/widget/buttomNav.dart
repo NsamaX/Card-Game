@@ -3,10 +3,10 @@ import 'package:project/page/deck/page.dart';
 import 'package:project/page/play/page.dart';
 import 'package:project/page/setting/page.dart';
 
-class bottoMnaV extends StatelessWidget {
+class bottomNav extends StatelessWidget {
   final int _currentIndex;
 
-  const bottoMnaV({Key? key, required int currentIndex})
+  const bottomNav({Key? key, required int currentIndex})
       : _currentIndex = currentIndex,
         super(key: key);
 

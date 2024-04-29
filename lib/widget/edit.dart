@@ -54,12 +54,14 @@ class _editState extends State<edit> {
   }
 
   Widget _action({required dynamic item, required Function()? onPressed}) {
+    final double _size = 26.0;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: 22.0,
+          width: 26.0,
           decoration: BoxDecoration(
             color: themeData().iconTheme.color,
             shape: BoxShape.circle,
@@ -76,7 +78,7 @@ class _editState extends State<edit> {
               : Icon(
                   item,
                   color: themeData().primaryColor,
-                  size: 22.0,
+                  size: _size * 0.9,
                 ),
         ),
       ),

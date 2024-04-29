@@ -63,11 +63,10 @@ class _decKpagEState extends State<decKpagE> {
         child: list(
           scrollController: _scrollController,
           card: _deck,
-          build: false,
           edit: _onEdit,
         ),
       ),
-      bottomNavigationBar: bottoMnaV(currentIndex: 0),
+      bottomNavigationBar: bottomNav(currentIndex: 0),
     );
   }
 }

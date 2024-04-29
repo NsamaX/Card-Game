@@ -30,7 +30,7 @@ class plaYpagE extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: bottoMnaV(currentIndex: 1),
+      bottomNavigationBar: bottomNav(currentIndex: 1),
     );
   }
 }

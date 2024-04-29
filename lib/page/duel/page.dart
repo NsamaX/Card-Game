@@ -64,7 +64,7 @@ class _dueLpagEState extends State<dueLpagE> {
           child: chat(message: _c.getMessage()),
         ),
       ]),
-      bottomNavigationBar: bottoMnaV(currentIndex: 1),
+      bottomNavigationBar: bottomNav(currentIndex: 1),
     );
   }
 }
