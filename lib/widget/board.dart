@@ -131,7 +131,10 @@ class _boardState extends State<board> {
           if (_data['card'] != null)
             for (var card in _data['card'])
               Draggable(
-                  child: CARD(card: card, show: _data['show'], build: false),
+                  child: DragTarget(
+                      onAccept: (dynamic card) => _place(col, row, card),
+                      builder: (context, candidateData, rejectedData) =>
+                          CARD(card: card, show: _data['show'], build: false)),
                   data: card,
                   feedback: Container(
                     height: _size * 1.2,
