@@ -6,19 +6,19 @@ import 'action.dart';
 import 'card.dart';
 import 'theme.dart';
 
-class board extends StatefulWidget {
-  final List<dynamic> _board;
+class field extends StatefulWidget {
+  final List<dynamic> _field;
 
-  const board({Key? key, required List<dynamic> board})
-      : _board = board,
+  const field({Key? key, required List<dynamic> field})
+      : _field = field,
         super(key: key);
 
   @override
-  State<board> createState() => _boardState();
+  State<field> createState() => _fieldState();
 }
 
-class _boardState extends State<board> {
-  final decK _service = decK();
+class _fieldState extends State<field> {
+  final deck _service = deck();
   late List<dynamic> _card = [];
 
   void _drag(int col, int row) {
@@ -29,9 +29,9 @@ class _boardState extends State<board> {
     });
   }
 
-  void _drop(int col, int row, model card) {
+  void _drop(int col, int row, model card, bool show) {
     setState(() {
-      _card[col][row].add({'card': card, 'show': true});
+      _card[col][row].add({'card': card, 'show': show});
     });
   }
 
@@ -80,9 +80,9 @@ class _boardState extends State<board> {
   @override
   void initState() {
     super.initState();
-    for (int col = 0; col < widget._board.length; col++) {
+    for (int col = 0; col < widget._field.length; col++) {
       List<dynamic> _column = [];
-      for (int row = 0; row < widget._board[col].length; row++) _column.add([]);
+      for (int row = 0; row < widget._field[col].length; row++) _column.add([]);
       _card.add(_column);
     }
   }
@@ -92,13 +92,13 @@ class _boardState extends State<board> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 36.0, horizontal: 10.0),
       child: ListView.builder(
-        itemCount: widget._board.length,
+        itemCount: widget._field.length,
         itemBuilder: (context, col) {
           return Column(
             children: [
               Row(children: [
-                for (int row = 0; row < widget._board[col].length; row++)
-                  _field(col, row)
+                for (int row = 0; row < widget._field[col].length; row++)
+                  _board(col, row)
               ]),
             ],
           );
@@ -107,19 +107,20 @@ class _boardState extends State<board> {
     );
   }
 
-  Widget _field(int col, int row) {
-    final Map<String, dynamic> _field = widget._board[col][row];
+  Widget _board(int col, int row) {
+    final Map<String, dynamic> _board = widget._field[col][row];
     final _size = 80.0;
 
     return Expanded(
       child: Stack(
         children: [
           DragTarget(
-            onAccept: (dynamic card) => _drop(col, row, card['card']),
+            onAccept: (dynamic card) =>
+                _drop(col, row, card['card'], card['show']),
             builder: (context, candidateData, rejectedData) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: RotatedBox(
-                quarterTurns: _field['field']['type'] * 3,
+                quarterTurns: _board['field']['type'] * 3,
                 child: Container(
                   width: _size,
                   height: _size,
@@ -129,7 +130,7 @@ class _boardState extends State<board> {
                   ),
                   child: Center(
                     child: Text(
-                      _field['field']['name'],
+                      _board['field']['name'],
                       style: themeData().textTheme.bodySmall?.copyWith(
                           color: themeData().iconTheme.color!.withOpacity(0.6)),
                       textAlign: TextAlign.center,
@@ -143,7 +144,8 @@ class _boardState extends State<board> {
             for (var card in _card[col][row])
               Draggable(
                   child: DragTarget(
-                      onAccept: (dynamic card) => _drop(col, row, card['card']),
+                      onAccept: (dynamic card) =>
+                          _drop(col, row, card['card'], card['show']),
                       builder: (context, candidateData, rejectedData) => CARD(
                           card: card['card'],
                           show: card['show'],
@@ -160,16 +162,17 @@ class _boardState extends State<board> {
                   ),
                   childWhenDragging: Container(),
                   onDraggableCanceled: (velocity, offset) {
-                    _drop(col, row, card['card']);
+                    _drop(col, row, card['card'], false);
                   },
                   onDragEnd: (dragDetails) {
                     _drag(col, row);
                   }),
           action(
-              col: col,
-              row: row,
-              action: _getAction(),
-              onTap: _field['action']),
+            action: _getAction(),
+            onTap: _board['action'],
+            col: col,
+            row: row,
+          ),
         ],
       ),
     );

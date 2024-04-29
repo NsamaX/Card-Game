@@ -1,4 +1,4 @@
-class messagE {
+class message {
   final List<dynamic> _message = [
     {
       'sender': false,

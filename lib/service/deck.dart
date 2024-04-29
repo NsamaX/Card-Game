@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'package:project/api/model.dart';
 
-class decK {
+class deck {
   Future<bool> check(String cardName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');

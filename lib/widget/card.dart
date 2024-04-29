@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'package:project/page/single/page.dart';
+import 'package:project/page/single.dart';
 
 class CARD extends StatelessWidget {
   final model _card;
@@ -11,11 +11,11 @@ class CARD extends StatelessWidget {
   const CARD({
     Key? key,
     required model card,
-    required bool build,
+    bool? build,
     bool? show,
     bool? info,
   })  : _card = card,
-        _build = build,
+        _build = build ?? false,
         _show = show ?? true,
         _info = info ?? true,
         super(key: key);

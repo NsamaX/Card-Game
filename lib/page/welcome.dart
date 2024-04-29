@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/widget/theme.dart';
-import '../signIn/page.dart';
+import 'signIn.dart';
 
 class welcome extends StatelessWidget {
   const welcome({Key? key}) : super(key: key);

@@ -51,7 +51,7 @@ class _listState extends State<list> {
 
   Widget _card(int index) {
     final _card = widget._card[index];
-    final decK _service = decK();
+    final deck _service = deck();
 
     return Stack(
       children: [

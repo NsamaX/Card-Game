@@ -15,6 +15,7 @@ class chat extends StatefulWidget {
 class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
   late AnimationController _chatontroller;
   late Animation<Offset> _offsetAnimation;
+  final double _free = 16.0;
   final double _sendButton = 40.0;
 
   @override
@@ -51,8 +52,8 @@ class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
           child: Container(
             width: 200.0,
             height: (widget._message.length * (_sendButton * 2)) +
-                _sendButton +
-                16.0,
+                _free +
+                _sendButton,
             constraints: BoxConstraints(maxHeight: 360.0),
             decoration: BoxDecoration(
               color: themeData().appBarTheme.backgroundColor,
@@ -74,7 +75,6 @@ class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
   }
 
   Widget _message(Map<String, dynamic> data) {
-    final double _free = 16.0;
     final double _leftPadding = data['sender'] ? _free : 0.0;
     final double _rightPadding = data['sender'] ? 0.0 : _free;
 

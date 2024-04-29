@@ -61,7 +61,7 @@ class _editState extends State<edit> {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: 26.0,
+          width: _size,
           decoration: BoxDecoration(
             color: themeData().iconTheme.color,
             shape: BoxShape.circle,

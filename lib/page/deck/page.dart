@@ -15,7 +15,7 @@ class decKpagE extends StatefulWidget {
 
 class _decKpagEState extends State<decKpagE> {
   final ScrollController _scrollController = ScrollController();
-  final decK _d = decK();
+  final deck _d = deck();
   List<model> _deck = [];
   bool _onEdit = false;
 

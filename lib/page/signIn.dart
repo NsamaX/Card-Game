@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/widget/option.dart';
 import 'package:project/widget/theme.dart';
-import '../deck/page.dart';
+import 'deck/page.dart';
 
 class signIn extends StatelessWidget {
   const signIn({Key? key}) : super(key: key);

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'theme.dart';
 
 class action extends StatelessWidget {
-  final int _col;
-  final int _row;
   final Map<String, dynamic> _action;
   final List<dynamic> _onTap;
+  final int _col;
+  final int _row;
 
-  const action(
-      {Key? key,
-      required int col,
-      required int row,
-      required Map<String, dynamic> action,
-      required List<dynamic> onTap})
-      : _col = col,
-        _row = row,
-        _action = action,
+  const action({
+    Key? key,
+    required Map<String, dynamic> action,
+    required List<dynamic> onTap,
+    required int col,
+    required int row,
+  })  : _action = action,
         _onTap = onTap,
+        _col = col,
+        _row = row,
         super(key: key);
 
   @override
@@ -39,25 +39,26 @@ class action extends StatelessWidget {
 
   Widget _option(Map<String, dynamic> _action, dynamic action) {
     return Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: GestureDetector(
-          onTap: () {
-            switch (action['action']) {
-              case 'load':
-                _action['load'](_col, _row);
-                break;
-              case 'flip':
-                _action['flip'](_col, _row);
-              default:
-                break;
-            }
-          },
-          child: action['icon'] is String
-              ? Text(
-                  action['icon'],
-                  style: themeData().textTheme.bodySmall,
-                )
-              : Icon(action['icon']),
-        ));
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: GestureDetector(
+        onTap: () {
+          switch (action['action']) {
+            case 'load':
+              _action['load'](_col, _row);
+              break;
+            case 'flip':
+              _action['flip'](_col, _row);
+            default:
+              break;
+          }
+        },
+        child: action['icon'] is String
+            ? Text(
+                action['icon'],
+                style: themeData().textTheme.bodySmall,
+              )
+            : Icon(action['icon']),
+      ),
+    );
   }
 }

@@ -4,7 +4,7 @@ import '../card/page.dart';
 
 class menU {
   final BuildContext _context;
-  final decK _d = decK();
+  final deck _d = deck();
   final Function() _delete;
   final Function() _edit;
   final bool _onEdit;

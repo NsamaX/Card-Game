@@ -1,11 +1,11 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:project/page/duel/page.dart';
+import 'dart:math';
+import 'package:project/page/duel.dart';
 
-class rooM {
+class rooms {
   final int _room;
 
-  rooM({
+  rooms({
     required int room,
   }) : _room = room;
 
@@ -18,7 +18,6 @@ class rooM {
       Icons.public_rounded,
       Icons.lock_rounded,
     ];
-
     Random random = Random();
     for (int i = 0; i < _room; i++) {
       IconData status = statusIcon[random.nextInt(statusIcon.length)];
@@ -29,10 +28,9 @@ class rooM {
       _data[i]['content'].add({
         'icon': status,
         'text': text,
-        'page': dueLpagE(),
+        'page': duel(),
       });
     }
-
     return _data;
   }
 }

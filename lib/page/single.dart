@@ -4,7 +4,6 @@ import 'package:project/service/deck.dart';
 import 'package:project/widget/back.dart';
 import 'package:project/widget/bar.dart';
 import 'package:project/widget/info.dart';
-import 'content.dart';
 
 class singlE extends StatefulWidget {
   final model _card;
@@ -23,12 +22,17 @@ class singlE extends StatefulWidget {
 }
 
 class _singlEState extends State<singlE> {
-  final contenT _c = contenT();
-  final decK _d = decK();
+  final List<dynamic> _bar = [
+    {'text': '', 'value': 1},
+    {'text': '', 'value': 2},
+    {'text': '', 'value': 3},
+    {'text': '', 'value': 4},
+  ];
+  final deck _service = deck();
   int _selectedIndex = 0;
 
   void handleSave() async {
-    bool cardExists = await _d.check(widget._card.getName());
+    bool cardExists = await _service.check(widget._card.getName());
 
     if (cardExists) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -37,7 +41,7 @@ class _singlEState extends State<singlE> {
                 Text('Card with the same name already exists in the deck')),
       );
     } else {
-      _d.save(widget._card, _c.getValue(_selectedIndex));
+      _service.save(widget._card, _bar[_selectedIndex]['value']);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Save Card Successfully')),
       );
@@ -65,7 +69,7 @@ class _singlEState extends State<singlE> {
                 Visibility(
                   visible: widget._save,
                   child: bar(
-                    data: _c.getBar(),
+                    data: _bar,
                     onTap: (index) {
                       setState(() {
                         _selectedIndex = index;

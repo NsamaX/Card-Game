@@ -8,10 +8,10 @@ class back extends StatelessWidget implements PreferredSizeWidget {
 
   const back({
     Key? key,
-    required String title,
+    String? title,
     required dynamic icon,
     required Function() onTap,
-  })  : _title = title,
+  })  : _title = title ?? '',
         _icon = icon,
         _onTap = onTap,
         super(key: key);

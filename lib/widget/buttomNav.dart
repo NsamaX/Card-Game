@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/page/deck/page.dart';
-import 'package:project/page/play/page.dart';
-import 'package:project/page/setting/page.dart';
+import 'package:project/page/play.dart';
+import 'package:project/page/setting.dart';
 
 class bottomNav extends StatelessWidget {
   final int _currentIndex;
@@ -43,7 +43,7 @@ class bottomNav extends StatelessWidget {
         _page = plaYpagE();
         break;
       case 2:
-        _page = settinGpagE();
+        _page = setting();
         break;
       default:
         _page = Container();

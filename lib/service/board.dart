@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/service/message.dart';
 
-class contenT {
+class board {
   final List<dynamic> _field = [
     [
       {
@@ -157,6 +157,6 @@ class contenT {
     return clone;
   }
 
-  final messagE _m = messagE();
+  final message _m = message();
   List<dynamic> getMessage() => _m.getMessage();
 }
