@@ -1,40 +1,65 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'package:project/api/service/deck.dart';
+import 'package:project/service/deck.dart';
 import 'action.dart';
 import 'card.dart';
 import 'theme.dart';
 
-class boarD extends StatefulWidget {
+class board extends StatefulWidget {
   final List<dynamic> _board;
 
-  const boarD({Key? key, required List<dynamic> board})
+  const board({Key? key, required List<dynamic> board})
       : _board = board,
         super(key: key);
 
   @override
-  State<boarD> createState() => _boarDState();
+  State<board> createState() => _boardState();
 }
 
-class _boarDState extends State<boarD> {
-  final decK _d = decK();
-  late List<model> _deck;
+class _boardState extends State<board> {
+  final decK _service = decK();
   late List<dynamic> _card = [];
+  final _size = 80.0;
 
   void _load(int col, int row) {
-    _d.load().then(
+    _service.load().then(
       (deck) {
         setState(() {
-          _deck = deck;
-          _card[col][row].addAll(_deck);
+          List<model> _deck = deck;
+          List<model> _suit = [];
+          for (var card in _deck)
+            for (int i = 0; i < card.getCount(); i++) _suit.add(card);
+          _shuffle(10, col, row, _suit);
         });
       },
     );
   }
 
-  void _handleDrop(int col, int row, dynamic card) {
+  void _shuffle(int time, int col, int row, List<model> suit) {
+    List<model> shuffle = [];
+    Random random = Random();
+    for (int i = suit.length; i > 0; i--) {
+      int idex = random.nextInt(i);
+      shuffle.add(suit[idex]);
+      suit.removeAt(idex);
+    }
+    if (time > 0)
+      _shuffle(time - 1, col, row, shuffle);
+    else
+      _card[col][row]['card'] = shuffle;
+  }
+
+  void _drag(int col, int row) {
     setState(() {
-      _card[col][row].add(card);
+      _card[col][row]['card'].removeAt(_card[col][row]['card'].length - 1);
+    });
+  }
+
+  void _place(int col, int row, model card) {
+    setState(() {
+      _card[col][row]['card'].add(card);
+      _card[col][row]['show'] = true;
     });
   }
 
@@ -42,9 +67,10 @@ class _boarDState extends State<boarD> {
   void initState() {
     super.initState();
     for (int col = 0; col < widget._board.length; col++) {
-      _card.add([]);
+      List<dynamic> _column = [];
       for (int row = 0; row < widget._board[col].length; row++)
-        _card[col].add([]);
+        _column.add({'card': [], 'show': false});
+      _card.add(_column);
     }
   }
 
@@ -69,21 +95,21 @@ class _boarDState extends State<boarD> {
   }
 
   Widget _field(int col, int row) {
-    final Map<String, dynamic> data = widget._board[col][row];
-    final String _name = data['field']['name'];
-    final List<dynamic> _action = data['action'];
-    final _size = 80.0;
+    final Map<String, dynamic> _field = widget._board[col][row];
+    final String _name = _field['field']['name'];
+    final List<dynamic> _action = _field['action'];
+    final Map<String, dynamic> _data = _card[col][row];
 
     return Expanded(
       child: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: RotatedBox(
-              quarterTurns: data['field']['type'] * 3,
-              child: DragTarget(
-                onAccept: (dynamic card) => _handleDrop(col, row, card),
-                builder: (context, candidateData, rejectedData) => Container(
+          DragTarget(
+            onAccept: (dynamic card) => _place(col, row, card),
+            builder: (context, candidateData, rejectedData) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RotatedBox(
+                quarterTurns: _field['field']['type'] * 3,
+                child: Container(
                   width: _size,
                   height: _size,
                   decoration: BoxDecoration(
@@ -102,28 +128,23 @@ class _boarDState extends State<boarD> {
               ),
             ),
           ),
-          if (_card[col][row] != null)
-            for (var card in _card[col][row])
+          if (_data['card'] != null)
+            for (var card in _data['card'])
               Draggable(
-                child: carD(card: card, build: false),
-                data: card,
-                feedback: Container(
-                  width: _size,
-                  height: _size * 1.2,
-                  child: carD(card: card, build: true),
-                ),
-                childWhenDragging: Container(
-                  width: _size,
-                  height: _size * 1.2,
-                  child: carD(card: card, build: true),
-                ),
-                onDragEnd: (dragDetails) {
-                  setState(() {
-                    _card[col][row].remove(card);
-                  });
-                },
-              ),
-          actioN(col: col, row: row, option: _load, onTap: _action),
+                  child: CARD(card: card, show: _data['show'], build: false),
+                  data: card,
+                  feedback: Container(
+                    height: _size * 1.2,
+                    child: CARD(card: card, show: _data['show'], build: false),
+                  ),
+                  childWhenDragging: Container(),
+                  onDraggableCanceled: (velocity, offset) {
+                    _place(col, row, card);
+                  },
+                  onDragEnd: (dragDetails) {
+                    _drag(col, row);
+                  }),
+          action(col: col, row: row, action: _load, onTap: _action),
         ],
       ),
     );

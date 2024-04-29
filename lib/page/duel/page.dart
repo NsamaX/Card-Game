@@ -49,19 +49,19 @@ class _dueLpagEState extends State<dueLpagE> {
     );
 
     return Scaffold(
-      appBar: apPbaR(
+      appBar: appBar(
         menu: _m.getMenu(),
         onTap: _m.getOnTap(),
       ),
       body: Stack(children: [
-        boarD(
+        board(
           board: _c.getField(),
         ),
         AnimatedContainer(
           duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
           transform: Matrix4.translationValues(_show ? 0 : 200, 0, 0),
-          child: chaT(message: _c.getMessage()),
+          child: chat(message: _c.getMessage()),
         ),
       ]),
       bottomNavigationBar: bottoMnaV(currentIndex: 1),

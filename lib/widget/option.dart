@@ -12,11 +12,11 @@ class option extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: _image.map((entry) => _option(entry)).toList(),
+      children: _image.map((entry) => _card(entry)).toList(),
     );
   }
 
-  Widget _option(String image) {
+  Widget _card(String image) {
     final double _size = 40.0;
 
     return Padding(

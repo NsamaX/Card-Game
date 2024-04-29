@@ -14,11 +14,11 @@ class settinGpagE extends StatelessWidget {
     final menU _m = menU();
 
     return Scaffold(
-      appBar: apPbaR(
+      appBar: appBar(
         menu: _m.getMenu(),
         onTap: _m.getOnTap(),
       ),
-      body: labeL(label: _c.getLabel()),
+      body: label(label: _c.getLabel()),
       bottomNavigationBar: bottoMnaV(currentIndex: 2),
     );
   }

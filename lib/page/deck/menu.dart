@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/service/deck.dart';
+import 'package:project/service/deck.dart';
 import '../card/page.dart';
 
 class menU {

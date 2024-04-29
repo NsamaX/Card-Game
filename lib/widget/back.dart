@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class bacKbaR extends StatelessWidget implements PreferredSizeWidget {
+class back extends StatelessWidget implements PreferredSizeWidget {
   final String _title;
   final dynamic _icon;
   final Function() _onTap;
 
-  const bacKbaR({
+  const back({
     Key? key,
     required String title,
     required dynamic icon,
@@ -33,11 +33,7 @@ class bacKbaR extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(right: 22.0),
           child: GestureDetector(
             onTap: _onTap,
-            child: _icon != null
-                ? _icon is String
-                    ? Text(_icon)
-                    : Icon(_icon)
-                : SizedBox(),
+            child: _icon is String ? Text(_icon) : Icon(_icon),
           ),
         ),
       ],

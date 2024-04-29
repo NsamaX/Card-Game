@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 import 'package:project/page/single/page.dart';
 
-class carD extends StatelessWidget {
+class CARD extends StatelessWidget {
   final model _card;
+  final bool _show;
   final bool _build;
 
-  const carD({
+  const CARD({
     Key? key,
     required model card,
+    required bool show,
     required bool build,
   })  : _card = card,
+        _show = show,
         _build = build,
         super(key: key);
 
@@ -40,7 +43,7 @@ class carD extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 8 / 12,
                   child: Image.network(
-                    _card.getImage(),
+                    _show ? _card.getImage() : _card.getSleeve(),
                     fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {

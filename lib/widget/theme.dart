@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // example font: https://fonts.google.com/
 
-const Color _primary1 = Color.fromARGB(255, 20, 20, 20);
-const Color _primary2 = Color.fromARGB(255, 30, 30, 30);
-const Color _primary3 = Color.fromARGB(255, 40, 40, 40);
-const Color _primary4 = Color.fromARGB(255, 60, 60, 60);
-const Color _secondary = Color.fromARGB(255, 80, 140, 225);
+const Color _primary1 = Color.fromARGB(255, 10, 20, 30);
+const Color _primary2 = Color.fromARGB(255, 20, 30, 40);
+const Color _primary3 = Color.fromARGB(255, 30, 40, 50);
+const Color _primary4 = Color.fromARGB(255, 40, 50, 60);
+const Color _secondary = Color.fromARGB(255, 60, 130, 210);
 
 ThemeData themeData() {
   return ThemeData(
@@ -24,8 +24,8 @@ ThemeData themeData() {
 TextTheme textThemeData() {
   return TextTheme(
     titleLarge: titleStyle(32.0),
-    titleMedium: titleStyle(26.0),
-    titleSmall: titleStyle(20.0),
+    titleMedium: titleStyle(28.0),
+    titleSmall: titleStyle(24.0),
     bodyLarge: bodyStyle(20.0),
     bodyMedium: bodyStyle(16.0),
     bodySmall: bodyStyle(12.0),
@@ -58,7 +58,7 @@ ElevatedButtonThemeData elevatedButtonThemeData() {
 AppBarTheme appBarThemeData() {
   return AppBarTheme(
     backgroundColor: _primary3,
-    iconTheme: IconThemeData(color: _secondary, size: 22.0),
+    iconTheme: IconThemeData(color: _secondary, size: 24.0),
     titleTextStyle: titleStyle(16.0).copyWith(color: _secondary),
     toolbarTextStyle: titleStyle(16.0).copyWith(color: _secondary),
   );

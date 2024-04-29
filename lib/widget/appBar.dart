@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class apPbaR extends StatelessWidget implements PreferredSizeWidget {
+class appBar extends StatelessWidget implements PreferredSizeWidget {
   final List<dynamic> _menu;
   final List<Function> _onTap;
 
-  const apPbaR({
+  const appBar({
     Key? key,
     required List<dynamic> menu,
     required List<Function> onTap,
@@ -40,12 +40,13 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
           ? item is String
               ? Text(
                   '$item',
-                  style: _isTitle ? themeData().textTheme.titleSmall : TextStyle(),
+                  style:
+                      _isTitle ? themeData().textTheme.titleSmall : TextStyle(),
                 )
               : Container(
                   child: Icon(item),
                 )
-          : SizedBox(width: 36.0),
+          : SizedBox(width: 34.0),
     );
   }
 

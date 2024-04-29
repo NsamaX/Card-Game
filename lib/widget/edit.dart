@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 import 'theme.dart';
 
-class ediT extends StatefulWidget {
+class edit extends StatefulWidget {
   final model _card;
   final Map<dynamic, Function()> _onTap;
 
-  const ediT({
+  const edit({
     Key? key,
     required model card,
     required Map<dynamic, Function()> onTap,
@@ -15,22 +15,22 @@ class ediT extends StatefulWidget {
         super(key: key);
 
   @override
-  _ediTState createState() => _ediTState();
+  _editState createState() => _editState();
 }
 
-class _ediTState extends State<ediT> {
+class _editState extends State<edit> {
   late int _cardCount;
-
-  @override
-  void initState() {
-    super.initState();
-    _cardCount = widget._card.getCount();
-  }
 
   void _updateCardCount() {
     setState(() {
       _cardCount = widget._card.getCount();
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _cardCount = widget._card.getCount();
   }
 
   @override

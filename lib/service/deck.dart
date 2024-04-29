@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../model.dart';
+import 'package:project/api/model.dart';
 
 class decK {
   Future<bool> check(String cardName) async {

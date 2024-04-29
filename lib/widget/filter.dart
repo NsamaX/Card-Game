@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class filteR extends StatefulWidget {
+class filter extends StatefulWidget {
   final List<dynamic> _filter;
 
-  const filteR({Key? key, required List<dynamic> filter})
+  const filter({Key? key, required List<dynamic> filter})
       : _filter = filter,
         super(key: key);
 
   @override
-  State<filteR> createState() => _filteRState();
+  State<filter> createState() => _filterState();
 }
 
-class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
+class _filterState extends State<filter> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
 

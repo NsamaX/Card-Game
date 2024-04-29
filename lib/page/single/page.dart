@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'package:project/api/service/deck.dart';
-import 'package:project/widget/backBar.dart';
-import 'package:project/widget/cardBar.dart';
+import 'package:project/service/deck.dart';
+import 'package:project/widget/back.dart';
+import 'package:project/widget/bar.dart';
 import 'package:project/widget/info.dart';
 import 'content.dart';
 
@@ -48,7 +48,7 @@ class _singlEState extends State<singlE> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: bacKbaR(
+      appBar: back(
         title: '',
         icon: widget._save ? 'Save' : null,
         onTap: handleSave,
@@ -61,10 +61,10 @@ class _singlEState extends State<singlE> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                infO(card: widget._card),
+                info(card: widget._card),
                 Visibility(
                   visible: widget._save,
-                  child: carDbaR(
+                  child: bar(
                     data: _c.getBar(),
                     onTap: (index) {
                       setState(() {

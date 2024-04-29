@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'cardE.dart';
+import 'package:project/service/deck.dart';
+import 'card.dart';
+import 'edit.dart';
 
-class lisT extends StatefulWidget {
+class list extends StatefulWidget {
   final ScrollController _scrollController;
   final List<model> _card;
   final bool _build;
   final bool _edit;
 
-  const lisT({
+  const list({
     Key? key,
     required ScrollController scrollController,
     required List<model> card,
@@ -21,10 +23,12 @@ class lisT extends StatefulWidget {
         super(key: key);
 
   @override
-  State<lisT> createState() => _lisTState();
+  State<list> createState() => _listState();
 }
 
-class _lisTState extends State<lisT> {
+class _listState extends State<list> {
+  final decK _service = decK();
+
   @override
   Widget build(BuildContext context) {
     final int _row = 3;
@@ -36,7 +40,10 @@ class _lisTState extends State<lisT> {
         return Row(
           children: [
             for (int i = 0; i < _row; i++)
-              Expanded(child: _card(index * _row + i)),
+              Expanded(
+                  child: index * _row + i < widget._card.length
+                      ? _card(index * _row + i)
+                      : SizedBox()),
           ],
         );
       },
@@ -44,12 +51,34 @@ class _lisTState extends State<lisT> {
   }
 
   Widget _card(int index) {
-    return (index < widget._card.length)
-        ? cardE(
-            card: widget._card[index],
-            build: widget._build,
-            edit: widget._edit,
-          )
-        : SizedBox();
+    final _card = widget._card[index];
+
+    return Stack(
+      children: [
+        CARD(card: _card, show: true, build: widget._build),
+        if (widget._edit)
+          edit(
+            card: _card,
+            onTap: {
+              Icons.add_rounded: () {
+                _card.addCard();
+                _service.update(
+                  _card,
+                  _card.getCount(),
+                );
+              },
+              Icons.remove_rounded: () {
+                if (_card.getCount() > 0) {
+                  _card.removeCard();
+                  _service.update(
+                    _card,
+                    _card.getCount(),
+                  );
+                }
+              },
+            },
+          ),
+      ],
+    );
   }
 }

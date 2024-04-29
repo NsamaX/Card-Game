@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'label.dart';
 import 'page.dart';
 
-class rooM extends StatefulWidget {
+class room extends StatefulWidget {
   final List<dynamic> _room;
   final int _page;
   final int _icon;
 
-  const rooM({
+  const room({
     Key? key,
     required List<dynamic> room,
     required int page,
@@ -18,24 +18,23 @@ class rooM extends StatefulWidget {
         super(key: key);
 
   @override
-  _rooMState createState() => _rooMState();
+  _roomState createState() => _roomState();
 }
 
-class _rooMState extends State<rooM> {
+class _roomState extends State<room> {
   int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     int _start = _currentPage * widget._page;
     int _end = (_currentPage + 1) * widget._page;
-    
     if (_end > widget._room.length) _end = widget._room.length;
 
     return Expanded(
       child: Column(
         children: [
-          labeL(label: widget._room.sublist(_start, _end)),
-          pagE(
+          label(label: widget._room.sublist(_start, _end)),
+          page(
             currentPage: _currentPage,
             page: (widget._room.length / widget._page).ceil(),
             icon: widget._icon,

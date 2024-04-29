@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class labeL extends StatelessWidget {
+class label extends StatelessWidget {
   final List<dynamic> _label;
 
-  const labeL({Key? key, required List<dynamic> label})
+  const label({Key? key, required List<dynamic> label})
       : _label = label,
         super(key: key);
 

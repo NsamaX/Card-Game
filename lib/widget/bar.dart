@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class carDbaR extends StatefulWidget {
+class bar extends StatefulWidget {
   final List<dynamic> _data;
   final Function(int) _onTap;
 
-  const carDbaR({
+  const bar({
     Key? key,
     required List<dynamic> data,
     required Function(int) onTap,
@@ -14,10 +14,10 @@ class carDbaR extends StatefulWidget {
         super(key: key);
 
   @override
-  State<carDbaR> createState() => _carDbaRState();
+  State<bar> createState() => _barState();
 }
 
-class _carDbaRState extends State<carDbaR> {
+class _barState extends State<bar> {
   int _selectedIndex = 0;
 
   @override

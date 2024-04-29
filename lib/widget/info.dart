@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 import 'theme.dart';
 
-class infO extends StatelessWidget {
+class info extends StatelessWidget {
   final model _card;
 
-  const infO({Key? key, required model card})
+  const info({Key? key, required model card})
       : _card = card,
         super(key: key);
 

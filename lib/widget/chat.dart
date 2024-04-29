@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class chaT extends StatefulWidget {
+class chat extends StatefulWidget {
   final List<dynamic> _message;
 
-  const chaT({Key? key, required List<dynamic> message})
+  const chat({Key? key, required List<dynamic> message})
       : _message = message,
         super(key: key);
 
   @override
-  State<chaT> createState() => _chathaTState();
+  State<chat> createState() => _chathaTState();
 }
 
-class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
+class _chathaTState extends State<chat> with SingleTickerProviderStateMixin {
   late AnimationController _chatontroller;
   late Animation<Offset> _offsetAnimation;
 
@@ -71,13 +71,14 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
   }
 
   Widget _message(Map<String, dynamic> data) {
-    final double leftPadding = data['sender'] ? 16.0 : 0.0;
-    final double rightPadding = data['sender'] ? 0.0 : 16.0;
+    final double _distance = 18.0;
+    final double _leftPadding = data['sender'] ? _distance : 0.0;
+    final double _rightPadding = data['sender'] ? 0.0 : _distance;
 
     return Align(
       alignment: data['sender'] ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(leftPadding, 6.0, rightPadding, 6.0),
+        padding: EdgeInsets.fromLTRB(_leftPadding, 6.0, _rightPadding, 6.0),
         child: Container(
           decoration: BoxDecoration(
             color: data['sender']
@@ -122,7 +123,8 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
                         .bodyMedium
                         ?.copyWith(color: themeData().primaryColor)),
                 IconButton(
-                  icon: Icon(Icons.send_rounded, color: themeData().primaryColor),
+                  icon:
+                      Icon(Icons.send_rounded, color: themeData().primaryColor),
                   onPressed: () {},
                 ),
               ],

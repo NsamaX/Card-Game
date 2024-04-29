@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'package:project/api/service/deck.dart';
+import 'package:project/service/deck.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/list.dart';
@@ -54,13 +54,13 @@ class _decKpagEState extends State<decKpagE> {
         menU(context: context, delete: delete, edit: edit, onEdit: _onEdit);
 
     return Scaffold(
-      appBar: apPbaR(
+      appBar: appBar(
         menu: _m.getMenu(),
         onTap: _m.getOnTap(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: lisT(
+        child: list(
           scrollController: _scrollController,
           card: _deck,
           build: false,

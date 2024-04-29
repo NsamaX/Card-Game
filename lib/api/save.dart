@@ -1,6 +1,6 @@
 abstract class save {
   String _sleeve =
-      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fweb.credinca.com%2F%3Fu%3Dechidna-re-zero-rezero-witch-of-greed-hd-phone-uu-53jkEks0&psig=AOvVaw3yuL0t2S6mErL-JJQz6P0d&ust=1714463845632000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJjb09755oUDFQAAAAAdAAAAABAJ';
+      'https://64.media.tumblr.com/c75b12d2a73af3c9f87164f46a5795ea/ffa4a60c77f7c05f-a7/s400x600/5a97565db15b46d9c9156e23820614e7a23f4733.jpg';
   int _count = 1;
 
   void setSleeve(String sleeve) => this._sleeve = sleeve;

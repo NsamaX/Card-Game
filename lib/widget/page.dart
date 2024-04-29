@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class pagE extends StatelessWidget {
+class page extends StatelessWidget {
   final int _currentPage;
   final int _page;
   final int _icon;
   final Function(int) _onTap;
 
-  const pagE({
+  const page({
     Key? key,
     required int currentPage,
     required int page,
@@ -23,7 +23,6 @@ class pagE extends StatelessWidget {
   Widget build(BuildContext context) {
     int _start = _currentPage ~/ _icon * _icon;
     int _end = _start + _icon;
-
     if (_end > _page) _end = _page;
     if (_start - _end < _icon) _start = _end - _icon;
 

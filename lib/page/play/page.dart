@@ -14,7 +14,7 @@ class plaYpagE extends StatelessWidget {
     final menU _m = menU();
 
     return Scaffold(
-      appBar: apPbaR(
+      appBar: appBar(
         menu: _m.getMenu(),
         onTap: _m.getOnTap(),
       ),
@@ -23,8 +23,8 @@ class plaYpagE extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                rooM(
-                    room: _c.getRoom(), page: _c.getPage(), icon: _c.getIcon()),
+                room(
+                    room: _c.getRoom(), page: 30, icon: 6),
               ],
             ),
           ),
