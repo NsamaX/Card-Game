@@ -21,8 +21,6 @@ class actioN extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _load = false;
-
     if (_onTap.length > 0)
       return Positioned(
         top: 0.0,
@@ -30,10 +28,7 @@ class actioN extends StatelessWidget {
         child: Column(
           children: [
             ..._onTap.map<Widget>((action) {
-              if (action['action'] == 'load') _load = true;
-              return _load && action['action'] != 'load'
-                  ? SizedBox()
-                  : _action(_option, action);
+              return _action(_option, action);
             }).toList(),
           ],
         ),
@@ -50,7 +45,7 @@ class actioN extends StatelessWidget {
           child: action['icon'] is String
               ? Text(
                   action['icon'],
-                  style: themE().textTheme.bodySmall,
+                  style: themeData().textTheme.bodySmall,
                 )
               : Icon(action['icon']),
         ));

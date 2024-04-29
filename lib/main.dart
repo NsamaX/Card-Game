@@ -6,18 +6,18 @@ import 'widget/theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();
-  runApp(MyApp());
+  runApp(project());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class project extends StatelessWidget {
+  const project({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: themE(),
-      home: const welcomEpagE(),
+      debugShowCheckedModeBanner: true,
+      theme: themeData(),
+      home: const welcome(),
     );
   }
 }

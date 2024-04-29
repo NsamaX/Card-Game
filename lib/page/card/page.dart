@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'package:project/api/service/card.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/filter.dart';
@@ -22,7 +22,7 @@ class _carDpagEState extends State<carDpagE> {
   final String _search = "cards";
 
   int _page = 1;
-  List<carDdatA> _card = [];
+  List<model> _card = [];
   bool _isLoading = false;
 
   Future<void> _getData(String search, {int page = 1}) async {
@@ -34,7 +34,7 @@ class _carDpagEState extends State<carDpagE> {
       _isLoading = true;
     });
 
-    List<carDdatA> fetchedData = await _api.getData(search, page: page);
+    List<model> fetchedData = await _api.getData(search, page: page);
     if (!mounted) {
       return;
     }

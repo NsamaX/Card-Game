@@ -40,12 +40,12 @@ class contenT {
         'field': {'name': 'Special', 'type': 0},
         'action': [
           {
-            'action': 'load',
-            'icon': Icons.download_rounded,
-          },
-          {
             'action': null,
             'icon': Icons.search_rounded,
+          },
+          {
+            'action': 'load',
+            'icon': Icons.download_rounded,
           },
         ]
       },
@@ -80,12 +80,12 @@ class contenT {
         'field': {'name': 'Main', 'type': 0},
         'action': [
           {
-            'action': 'load',
-            'icon': Icons.download_rounded,
-          },
-          {
             'action': null,
             'icon': Icons.search_rounded,
+          },
+          {
+            'action': 'load',
+            'icon': Icons.download_rounded,
           },
         ],
       },

@@ -25,7 +25,7 @@ class bacKbaR extends StatelessWidget implements PreferredSizeWidget {
       title: Center(
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: Text(_title, style: themE().textTheme.titleSmall),
+          child: Text(_title, style: themeData().textTheme.titleSmall),
         ),
       ),
       actions: [

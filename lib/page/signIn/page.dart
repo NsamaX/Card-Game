@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/sign.dart';
+import 'package:project/widget/option.dart';
 import 'package:project/widget/theme.dart';
 import '../deck/page.dart';
 
-class sigNpagE extends StatelessWidget {
-  const sigNpagE({Key? key}) : super(key: key);
+class signIn extends StatelessWidget {
+  const signIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<String> _image = [
+      'asset/image/apple.png',
+      'asset/image/google.png',
+      'asset/image/facebook.png',
+    ];
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -16,10 +22,10 @@ class sigNpagE extends StatelessWidget {
           children: [
             Text(
               'Let\'s me know you.',
-              style: themE().textTheme.titleLarge,
+              style: themeData().textTheme.titleLarge,
             ),
             SizedBox(height: 60.0),
-            sigN(),
+            option(image: _image),
             SizedBox(height: 60.0),
             Center(
               child: Container(
@@ -28,14 +34,12 @@ class sigNpagE extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => decKpagE(),
-                      ),
+                      MaterialPageRoute(builder: (context) => decKpagE()),
                     );
                   },
                   child: Text(
                     'Guess',
-                    style: themE().textTheme.titleSmall,
+                    style: themeData().textTheme.titleSmall,
                   ),
                 ),
               ),

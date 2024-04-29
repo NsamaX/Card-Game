@@ -27,7 +27,7 @@ class _carDbaRState extends State<carDbaR> {
       child: Container(
         height: 40.0,
         decoration: BoxDecoration(
-          color: themE().primaryColor,
+          color: themeData().primaryColor,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
@@ -56,13 +56,13 @@ class _carDbaRState extends State<carDbaR> {
           decoration: BoxDecoration(
             color: index == _selectedIndex
                 ? text != ''
-                    ? themE().secondaryHeaderColor
-                    : themE().iconTheme.color
-                : themE().primaryColor,
+                    ? themeData().secondaryHeaderColor
+                    : themeData().iconTheme.color
+                : themeData().primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             border: Border(
               left: BorderSide(
-                color: themE().iconTheme.color!.withOpacity(0.2),
+                color: themeData().iconTheme.color!.withOpacity(0.2),
                 width: 2.0,
               ),
             ),
@@ -72,14 +72,14 @@ class _carDbaRState extends State<carDbaR> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (text != '') ...[
-                  Text(text, style: themE().textTheme.bodyMedium),
+                  Text(text, style: themeData().textTheme.bodyMedium),
                 ] else ...[
                   Text(
                     card.toString(),
-                    style: themE().textTheme.titleSmall?.copyWith(
+                    style: themeData().textTheme.titleSmall?.copyWith(
                           color: index == _selectedIndex
-                              ? themE().primaryColor
-                              : themE().iconTheme.color,
+                              ? themeData().primaryColor
+                              : themeData().iconTheme.color,
                         ),
                   ),
                 ],

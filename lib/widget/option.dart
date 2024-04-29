@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class sigN extends StatelessWidget {
-  final Map<String, String> _image = {
-    'Apple': 'assets/images/apple_logo.png',
-    'Google': 'assets/images/google_logo.png',
-    'Facebook': 'assets/images/facebook_logo.png',
-  };
+class option extends StatelessWidget {
+  final List<String> _image;
+
+  const option({Key? key, required List<String> image})
+      : _image = image,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: _image.entries.map((entry) => _option(entry.value)).toList(),
+      children: _image.map((entry) => _option(entry)).toList(),
     );
   }
 
@@ -23,7 +23,7 @@ class sigN extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: themE().iconTheme.color,
+          color: themeData().iconTheme.color,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Padding(

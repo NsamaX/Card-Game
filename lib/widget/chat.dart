@@ -52,7 +52,7 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
             height: widget._message.length * 60.0 + 68.0,
             constraints: BoxConstraints(maxHeight: 360.0),
             decoration: BoxDecoration(
-              color: themE().appBarTheme.backgroundColor,
+              color: themeData().appBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: Padding(
@@ -81,8 +81,8 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
         child: Container(
           decoration: BoxDecoration(
             color: data['sender']
-                ? themE().secondaryHeaderColor
-                : themE()
+                ? themeData().secondaryHeaderColor
+                : themeData()
                     .elevatedButtonTheme
                     .style!
                     .backgroundColor!
@@ -93,7 +93,7 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               data['message'],
-              style: themE().textTheme.bodyMedium,
+              style: themeData().textTheme.bodyMedium,
             ),
           ),
         ),
@@ -108,7 +108,7 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
         child: Container(
           height: 40.0,
           decoration: BoxDecoration(
-            color: themE().iconTheme.color,
+            color: themeData().iconTheme.color,
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Padding(
@@ -117,12 +117,12 @@ class _chathaTState extends State<chaT> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('messages',
-                    style: themE()
+                    style: themeData()
                         .textTheme
                         .bodyMedium
-                        ?.copyWith(color: themE().primaryColor)),
+                        ?.copyWith(color: themeData().primaryColor)),
                 IconButton(
-                  icon: Icon(Icons.send_rounded, color: themE().primaryColor),
+                  icon: Icon(Icons.send_rounded, color: themeData().primaryColor),
                   onPressed: () {},
                 ),
               ],

@@ -38,10 +38,10 @@ class labeL extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
       child: Text(
         text,
-        style: themE()
+        style: themeData()
             .textTheme
             .bodyMedium
-            ?.copyWith(color: themE().secondaryHeaderColor),
+            ?.copyWith(color: themeData().secondaryHeaderColor),
       ),
     );
   }
@@ -60,10 +60,10 @@ class labeL extends StatelessWidget {
       child: Container(
         height: 40.0,
         decoration: BoxDecoration(
-          color: themE().primaryColor,
+          color: themeData().primaryColor,
           border: Border(
             bottom: BorderSide(
-              color: themE().iconTheme.color!.withOpacity(0.6),
+              color: themeData().iconTheme.color!.withOpacity(0.6),
               width: 1.0,
             ),
           ),
@@ -74,9 +74,9 @@ class labeL extends StatelessWidget {
             children: [
               icon != null
                   ? Icon(icon)
-                  : SizedBox(width: themE().iconTheme.size),
+                  : SizedBox(width: themeData().iconTheme.size),
               SizedBox(width: 20.0),
-              Text(text, style: themE().textTheme.bodySmall),
+              Text(text, style: themeData().textTheme.bodySmall),
             ],
           ),
         ),

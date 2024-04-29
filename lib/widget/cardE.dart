@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'package:project/api/service/deck.dart';
 import 'card.dart';
 import 'edit.dart';
 
 class cardE extends StatelessWidget {
-  final carDdatA _card;
+  final model _card;
   final bool _build;
   final bool _edit;
 
   const cardE({
     Key? key,
-    required carDdatA card,
+    required model card,
     required bool build,
     required bool edit,
   })  : _card = card,
@@ -31,7 +31,7 @@ class cardE extends StatelessWidget {
             card: _card,
             onTap: {
               Icons.add_rounded: () {
-                _card.add();
+                _card.addCard();
                 _d.update(
                   _card,
                   _card.getCount(),
@@ -39,7 +39,7 @@ class cardE extends StatelessWidget {
               },
               Icons.remove_rounded: () {
                 if (_card.getCount() > 0) {
-                  _card.remove();
+                  _card.removeCard();
                   _d.update(
                     _card,
                     _card.getCount(),

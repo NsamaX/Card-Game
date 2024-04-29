@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
@@ -16,7 +16,7 @@ class decKpagE extends StatefulWidget {
 class _decKpagEState extends State<decKpagE> {
   final ScrollController _scrollController = ScrollController();
   final decK _d = decK();
-  List<carDdatA> _deck = [];
+  List<model> _deck = [];
   bool _onEdit = false;
 
   void delete() {

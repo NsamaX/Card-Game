@@ -51,7 +51,7 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
             width: 260.0,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: themE().appBarTheme.backgroundColor,
+              color: themeData().appBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: Padding(
@@ -63,7 +63,7 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Filter Options',
-                      style: themE().textTheme.titleSmall,
+                      style: themeData().textTheme.titleSmall,
                     ),
                   ),
                   for (var _data in widget._filter) _catagory(_data),
@@ -81,7 +81,7 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
       decoration: BoxDecoration(
           border: Border(
               top: BorderSide(
-        color: themE().iconTheme.color!.withOpacity(0.6),
+        color: themeData().iconTheme.color!.withOpacity(0.6),
       ))),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -97,9 +97,9 @@ class _filteRState extends State<filteR> with SingleTickerProviderStateMixin {
   Widget _filter(IconData? icon, String text) {
     return Row(
       children: [
-        icon != null ? Icon(icon) : SizedBox(width: themE().iconTheme.size),
+        icon != null ? Icon(icon) : SizedBox(width: themeData().iconTheme.size),
         SizedBox(width: 8.0),
-        Text(text, style: themE().textTheme.bodyMedium),
+        Text(text, style: themeData().textTheme.bodyMedium),
       ],
     );
   }

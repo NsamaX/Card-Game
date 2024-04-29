@@ -53,15 +53,15 @@ class pagE extends StatelessWidget {
           height: _size,
           decoration: BoxDecoration(
             color: page == _currentPage
-                ? themE().secondaryHeaderColor
-                : themE().primaryColor,
+                ? themeData().secondaryHeaderColor
+                : themeData().primaryColor,
             shape: BoxShape.circle,
           ),
           child: Center(
             child: icon == null
                 ? Text(
                     (page + 1).toString(),
-                    style: themE()
+                    style: themeData()
                         .textTheme
                         .bodyMedium
                         ?.copyWith(fontWeight: FontWeight.bold),

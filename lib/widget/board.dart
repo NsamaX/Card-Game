@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'package:project/api/service/deck.dart';
 import 'action.dart';
 import 'card.dart';
@@ -18,7 +18,7 @@ class boarD extends StatefulWidget {
 
 class _boarDState extends State<boarD> {
   final decK _d = decK();
-  late List<carDdatA> _deck;
+  late List<model> _deck;
   late List<dynamic> _card = [];
 
   void _load(int col, int row) {
@@ -30,7 +30,12 @@ class _boarDState extends State<boarD> {
         });
       },
     );
-    print('deck loaded');
+  }
+
+  void _handleDrop(int col, int row, dynamic card) {
+    setState(() {
+      _card[col][row].add(card);
+    });
   }
 
   @override
@@ -76,31 +81,48 @@ class _boarDState extends State<boarD> {
             padding: const EdgeInsets.all(8.0),
             child: RotatedBox(
               quarterTurns: data['field']['type'] * 3,
-              child: Stack(
-                children: [
-                  Container(
-                    width: _size,
-                    height: _size,
-                    decoration: BoxDecoration(
-                      color: themE().appBarTheme.backgroundColor,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        _name,
-                        style: themE().textTheme.bodySmall?.copyWith(
-                            color: themE().iconTheme.color!.withOpacity(0.6)),
-                        textAlign: TextAlign.center,
-                      ),
+              child: DragTarget(
+                onAccept: (dynamic card) => _handleDrop(col, row, card),
+                builder: (context, candidateData, rejectedData) => Container(
+                  width: _size,
+                  height: _size,
+                  decoration: BoxDecoration(
+                    color: themeData().appBarTheme.backgroundColor,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Center(
+                    child: Text(
+                      _name,
+                      style: themeData().textTheme.bodySmall?.copyWith(
+                          color: themeData().iconTheme.color!.withOpacity(0.6)),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  if (_card[col][row] != null)
-                    for (var card in _card[col][row])
-                      carD(card: card, build: false)
-                ],
+                ),
               ),
             ),
           ),
+          if (_card[col][row] != null)
+            for (var card in _card[col][row])
+              Draggable(
+                child: carD(card: card, build: false),
+                data: card,
+                feedback: Container(
+                  width: _size,
+                  height: _size * 1.2,
+                  child: carD(card: card, build: true),
+                ),
+                childWhenDragging: Container(
+                  width: _size,
+                  height: _size * 1.2,
+                  child: carD(card: card, build: true),
+                ),
+                onDragEnd: (dragDetails) {
+                  setState(() {
+                    _card[col][row].remove(card);
+                  });
+                },
+              ),
           actioN(col: col, row: row, option: _load, onTap: _action),
         ],
       ),

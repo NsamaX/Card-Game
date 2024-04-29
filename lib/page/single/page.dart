@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'package:project/api/service/deck.dart';
 import 'package:project/widget/backBar.dart';
 import 'package:project/widget/cardBar.dart';
@@ -7,12 +7,12 @@ import 'package:project/widget/info.dart';
 import 'content.dart';
 
 class singlE extends StatefulWidget {
-  final carDdatA _card;
+  final model _card;
   final bool _save;
 
   const singlE({
     Key? key,
-    required carDdatA card,
+    required model card,
     required bool save,
   })  : _card = card,
         _save = save,

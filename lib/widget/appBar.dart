@@ -40,7 +40,7 @@ class apPbaR extends StatelessWidget implements PreferredSizeWidget {
           ? item is String
               ? Text(
                   '$item',
-                  style: _isTitle ? themE().textTheme.titleSmall : TextStyle(),
+                  style: _isTitle ? themeData().textTheme.titleSmall : TextStyle(),
                 )
               : Container(
                   child: Icon(item),

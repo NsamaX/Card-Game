@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../model/cfv.dart';
+import '../model.dart';
 
 class decK {
   Future<bool> check(String cardName) async {
@@ -10,8 +10,8 @@ class decK {
       String lowerCaseCardName = cardName.toLowerCase();
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
-        carDdatA cardData = carDdatA.fromJson(cardMap['model']);
-        String lowerCaseExistingCardName = cardData.getName().toLowerCase();
+        model data = model.fromJson(cardMap['model']);
+        String lowerCaseExistingCardName = data.getName().toLowerCase();
         if (lowerCaseExistingCardName == lowerCaseCardName) {
           return true;
         }
@@ -20,7 +20,7 @@ class decK {
     return false;
   }
 
-  Future<void> save(carDdatA model, int cardCount) async {
+  Future<void> save(model model, int cardCount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> savedCards = prefs.getStringList('user_deck') ?? [];
     Map<String, dynamic> cardMap = {
@@ -32,18 +32,18 @@ class decK {
     await prefs.setStringList('user_deck', savedCards);
   }
 
-  Future<void> update(carDdatA model, int newCardCount) async {
+  Future<void> update(model newCard, int newCardCount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
     if (savedCards != null) {
       bool found = false;
       for (int i = 0; i < savedCards.length; i++) {
         Map<String, dynamic> cardMap = jsonDecode(savedCards[i]);
-        carDdatA cardData = carDdatA.fromJson(cardMap['model']);
-        if (cardData.getName() == model.getName()) {
+        model data = model.fromJson(cardMap['model']);
+        if (data.getName() == newCard.getName()) {
           found = true;
-          cardData.setCount(newCardCount);
-          cardMap['model'] = cardData.toJson();
+          data.setCount(newCardCount);
+          cardMap['model'] = data.toJson();
           cardMap['cardCount'] = newCardCount;
           if (newCardCount < 1) {
             savedCards.removeAt(i);
@@ -56,22 +56,22 @@ class decK {
         }
       }
       if (!found) {
-        save(model, newCardCount);
+        save(newCard, newCardCount);
       }
     }
   }
 
-  Future<List<carDdatA>> load() async {
+  Future<List<model>> load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
-    List<carDdatA> deck = [];
+    List<model> deck = [];
     if (savedCards != null) {
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
-        carDdatA cardData = carDdatA.fromJson(cardMap['model']);
+        model data = model.fromJson(cardMap['model']);
         int cardCount = cardMap['cardCount'];
-        cardData.setCount(cardCount);
-        deck.add(cardData);
+        data.setCount(cardCount);
+        deck.add(data);
       }
       // deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
     }

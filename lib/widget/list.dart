@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'cardE.dart';
 
 class lisT extends StatefulWidget {
   final ScrollController _scrollController;
-  final List<carDdatA> _card;
+  final List<model> _card;
   final bool _build;
   final bool _edit;
 
   const lisT({
     Key? key,
     required ScrollController scrollController,
-    required List<carDdatA> card,
+    required List<model> card,
     required bool build,
     required bool edit,
   })  : _scrollController = scrollController,

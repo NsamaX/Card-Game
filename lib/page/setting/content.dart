@@ -24,7 +24,7 @@ class contenT {
         {
           'icon': Icons.logout_rounded,
           'text': 'Sign out',
-          'page': welcomEpagE()
+          'page': welcome()
         }
       ]
     },

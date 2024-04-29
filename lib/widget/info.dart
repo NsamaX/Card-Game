@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model.dart';
 import 'theme.dart';
 
 class infO extends StatelessWidget {
-  final carDdatA _card;
+  final model _card;
 
-  const infO({Key? key, required carDdatA card})
+  const infO({Key? key, required model card})
       : _card = card,
         super(key: key);
 
@@ -29,13 +29,13 @@ class infO extends StatelessWidget {
           ),
         ),
         SizedBox(height: 20),
-        for (var entry in _card.getDataMap().entries)
+        for (var entry in _card.getMap().entries)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 '${entry.key}: ${entry.value}',
-                style: themE().textTheme.bodyMedium,
+                style: themeData().textTheme.bodyMedium,
               ),
               SizedBox(height: 10),
             ],
