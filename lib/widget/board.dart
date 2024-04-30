@@ -77,6 +77,7 @@ class _boardState extends State<board> {
 
   void _load(int col, int row) async {
     final List<model> _loadedDeck = await _service.load();
+    if (_loadedDeck.isEmpty) return;
     List<model> _shuffled = [];
     for (var card in _loadedDeck)
       for (int i = 0; i < card.getCount(); i++) _shuffled.add(card);
@@ -179,7 +180,7 @@ class _boardState extends State<board> {
               ),
             ),
           ),
-          if (_card[col][row].length > 0)
+          if (_card[col][row].isNotEmpty)
             for (var card in _card[col][row])
               Draggable(
                   child: DragTarget(

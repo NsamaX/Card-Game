@@ -33,6 +33,7 @@ class _packState extends State<pack> {
   }
 
   void _delete() {
+    if (_deck.isEmpty) return;
     _service.delete().then(
       (_) {
         ScaffoldMessenger.of(context).showSnackBar(
