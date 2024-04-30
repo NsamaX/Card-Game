@@ -18,6 +18,15 @@ class field extends StatefulWidget {
 }
 
 class _fieldState extends State<field> {
+  late Map<String, dynamic> _event = {
+    'Bind': {},
+    'Damage': {},
+    'Drop': {},
+    'Guard': {},
+    'Show': {},
+    'Special': {},
+    'Trigger': {},
+  };
   late List<dynamic> _card = [];
   final deck _service = deck();
   final Random _random = Random();
@@ -27,6 +36,7 @@ class _fieldState extends State<field> {
     setState(() {
       if (_card[col][row].isNotEmpty) {
         _card[col][row].removeLast();
+        _active(col, row);
       }
     });
   }
@@ -34,14 +44,36 @@ class _fieldState extends State<field> {
   void _drop(int col, int row, model card, bool show) {
     setState(() {
       _card[col][row].add({'card': card, 'show': show});
+      _active(col, row);
     });
   }
 
+  void _active(int col, int row) {
+    setState(() {
+      for (var action in widget._field[col][row]['action']) {
+        if (action['action'] != 'load') {
+          if (_card[col][row].isNotEmpty)
+            action['show'] = true;
+          else
+            action['show'] = false;
+        } else if (_card[col][row].isEmpty)
+          action['show'] = true;
+        else
+          action['show'] = false;
+      }
+    });
+  }
+
+  // void _bin(int col, int row) {
+  //   setState(() {
+  //     if (_event.containsKey()) {}
+  //   });
+  // }
+
   void _flip(int col, int row) {
     setState(() {
-      if (_card[col][row].isNotEmpty) {
+      if (_card[col][row].isNotEmpty)
         _card[col][row].last['show'] = !_card[col][row].last['show'];
-      }
     });
   }
 
@@ -55,7 +87,7 @@ class _fieldState extends State<field> {
             for (int i = 0; i < card.getCount(); i++) _suit.add(card);
           _shuffle(20, col, row, _suit);
           for (var action in widget._field[col][row]['action']) {
-            action['action'] == 'load'
+            action['action'] == 'load' && _card[col][row].isNotEmpty
                 ? action['show'] = false
                 : action['show'] = true;
           }
@@ -81,7 +113,6 @@ class _fieldState extends State<field> {
   Map<String, dynamic> _getAction() => {
         'load': _load,
         'flip': _flip,
-        'shuffle': _shuffle,
       };
 
   @override
@@ -89,7 +120,11 @@ class _fieldState extends State<field> {
     super.initState();
     for (int col = 0; col < widget._field.length; col++) {
       List<dynamic> _column = [];
-      for (int row = 0; row < widget._field[col].length; row++) _column.add([]);
+      for (int row = 0; row < widget._field[col].length; row++) {
+        _column.add([]);
+        String _name = widget._field[col][row]['field']['name'];
+        if (_event.containsKey(_name)) _event[_name] = {'col': col, 'row': row};
+      }
       _card.add(_column);
     }
   }

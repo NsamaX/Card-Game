@@ -82,7 +82,7 @@ class board {
     ],
     [
       {
-        'field': {'name': 'Damage', 'type': 3},
+        'field': {'name': 'Damage\nZone', 'type': 3},
         'action': [
           'search',
           'damage',
@@ -127,7 +127,7 @@ class board {
         ],
       },
       {
-        'field': {'name': 'Drop', 'type': 0},
+        'field': {'name': 'Drop\nZone', 'type': 0},
         'action': [
           'search',
         ]

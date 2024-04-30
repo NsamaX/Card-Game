@@ -4,7 +4,6 @@ import 'theme.dart';
 class actionOption extends StatelessWidget {
   final int _col;
   final int _row;
-  // final List<dynamic> _suit;
   final Map<String, dynamic> _option;
   final List<dynamic> _onTap;
 
@@ -12,12 +11,10 @@ class actionOption extends StatelessWidget {
     Key? key,
     required int col,
     required int row,
-    // required List<dynamic> suit,
     required Map<String, dynamic> option,
     required List<dynamic> onTap,
   })  : _col = col,
         _row = row,
-        // _suit = suit,
         _option = option,
         _onTap = onTap,
         super(key: key);
@@ -35,9 +32,10 @@ class actionOption extends StatelessWidget {
             scrollDirection: Axis.vertical,
             children: [
               Column(
-                children: _onTap.map<Widget>((action) {
-                  return _action(_option, action);
-                }).toList(),
+                children: [
+                  for (var action in _onTap)
+                    if (action['show']) _action(_option, action)
+                ],
               ),
             ],
           ),
@@ -75,7 +73,7 @@ class actionOption extends StatelessWidget {
             // case 'search':
             //   return _option['search'](_col, _row);
             // case 'shuffle':
-            //   return _option['shuffle'](20, _col, _row, _suit);
+            //   return _option['shuffle'](20, _col, _row);
             // case 'stack':
             //   return _option['stack'](_col, _row);
             // case 'search':
