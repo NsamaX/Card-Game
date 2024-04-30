@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class back extends StatelessWidget implements PreferredSizeWidget {
+class backAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String _title;
   final dynamic _icon;
   final Function() _onTap;
 
-  const back({
+  const backAppBar({
     Key? key,
     String? title,
     required dynamic icon,

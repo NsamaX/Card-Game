@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/option.dart';
+import 'package:project/widget/signIcon.dart';
 import 'package:project/widget/theme.dart';
-import 'deck/page.dart';
+import 'pack.dart';
 
 class signIn extends StatelessWidget {
   const signIn({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class signIn extends StatelessWidget {
               style: themeData().textTheme.titleLarge,
             ),
             SizedBox(height: 60.0),
-            option(image: _image),
+            signIcon(image: _image),
             SizedBox(height: 60.0),
             Center(
               child: Container(
@@ -34,7 +34,7 @@ class signIn extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => decKpagE()),
+                      MaterialPageRoute(builder: (context) => pack()),
                     );
                   },
                   child: Text(

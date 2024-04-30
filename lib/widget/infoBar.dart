@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class bar extends StatefulWidget {
-  final List<dynamic> _data;
+class infoBar extends StatefulWidget {
+  final List<int> _count;
   final Function(int) _onTap;
 
-  const bar({
+  const infoBar({
     Key? key,
-    required List<dynamic> data,
+    required List<int> count,
     required Function(int) onTap,
-  })  : _data = data,
+  })  : _count = count,
         _onTap = onTap,
         super(key: key);
 
   @override
-  State<bar> createState() => _barState();
+  State<infoBar> createState() => _infoBarState();
 }
 
-class _barState extends State<bar> {
+class _infoBarState extends State<infoBar> {
   int _selectedIndex = 0;
 
   @override
@@ -31,19 +31,15 @@ class _barState extends State<bar> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
-          children: List.generate(widget._data.length, (index) {
-            return _bar(
-              widget._data[index]['text'],
-              widget._data[index]['value'],
-              index,
-            );
-          }).toList(),
+          children: widget._count
+              .map((entry) => _box(entry, widget._count.indexOf(entry)))
+              .toList(),
         ),
       ),
     );
   }
 
-  Widget _bar(String text, int card, int index) {
+  Widget _box(int card, int index) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -55,9 +51,7 @@ class _barState extends State<bar> {
         child: Container(
           decoration: BoxDecoration(
             color: index == _selectedIndex
-                ? text != ''
-                    ? themeData().secondaryHeaderColor
-                    : themeData().iconTheme.color
+                ? themeData().secondaryHeaderColor
                 : themeData().primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             border: Border(
@@ -71,18 +65,10 @@ class _barState extends State<bar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (text != '') ...[
-                  Text(text, style: themeData().textTheme.bodyMedium),
-                ] else ...[
-                  Text(
-                    card.toString(),
-                    style: themeData().textTheme.titleSmall?.copyWith(
-                          color: index == _selectedIndex
-                              ? themeData().primaryColor
-                              : themeData().iconTheme.color,
-                        ),
-                  ),
-                ],
+                Text(
+                  card.toString(),
+                  style: themeData().textTheme.titleSmall,
+                ),
               ],
             ),
           ),

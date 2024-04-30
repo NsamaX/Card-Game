@@ -4,18 +4,18 @@ import 'package:project/page/single.dart';
 
 class CARD extends StatelessWidget {
   final model _card;
-  final bool _build;
+  final bool _save;
   final bool _show;
   final bool _info;
 
   const CARD({
     Key? key,
     required model card,
-    bool? build,
+    required bool save,
     bool? show,
     bool? info,
   })  : _card = card,
-        _build = build ?? false,
+        _save = save,
         _show = show ?? true,
         _info = info ?? true,
         super(key: key);
@@ -31,7 +31,7 @@ class CARD extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => singlE(
                   card: _card,
-                  save: _build,
+                  save: _save,
                 ),
               ),
             );

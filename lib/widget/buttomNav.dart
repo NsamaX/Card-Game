@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/page/deck/page.dart';
+import 'package:project/page/pack.dart';
 import 'package:project/page/play.dart';
 import 'package:project/page/setting.dart';
 
@@ -37,10 +37,10 @@ class bottomNav extends StatelessWidget {
 
     switch (index) {
       case 0:
-        _page = decKpagE();
+        _page = pack();
         break;
       case 1:
-        _page = plaYpagE();
+        _page = play();
         break;
       case 2:
         _page = setting();

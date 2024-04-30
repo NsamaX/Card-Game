@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project/page/welcome.dart';
-import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/label.dart';
+import 'package:project/widget/theme.dart';
+import 'welcome.dart';
 
 class setting extends StatelessWidget {
   const setting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<dynamic> _menu = [
-      null,
-      'Setting',
-      null,
-    ];
-    final List<Function> _onTap = [
-      () {},
-      () {},
-      () {},
-    ];
     final List<dynamic> _label = [
       {
         "title": "Account",
@@ -55,16 +45,15 @@ class setting extends StatelessWidget {
       }
     ];
 
-    List<dynamic> _getMenu() => _menu;
-    List<Function> _getOnTap() => _onTap;
-    List<dynamic> _getLabel() => _label;
-
     return Scaffold(
-      appBar: appBar(
-        menu: _getMenu(),
-        onTap: _getOnTap(),
+      appBar: AppBar(
+        title: Center(
+            child: Text(
+          'Setting',
+          style: themeData().textTheme.titleSmall,
+        )),
       ),
-      body: label(label: _getLabel()),
+      body: label(label: _label),
       bottomNavigationBar: bottomNav(currentIndex: 2),
     );
   }

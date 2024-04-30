@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 import 'package:project/service/deck.dart';
-import 'package:project/widget/back.dart';
-import 'package:project/widget/bar.dart';
-import 'package:project/widget/info.dart';
+import 'package:project/widget/backAppBar.dart';
+import 'package:project/widget/cardInfo.dart';
+import 'package:project/widget/infoBar.dart';
 
 class singlE extends StatefulWidget {
   final model _card;
@@ -22,13 +22,13 @@ class singlE extends StatefulWidget {
 }
 
 class _singlEState extends State<singlE> {
-  final List<dynamic> _bar = [
-    {'text': '', 'value': 1},
-    {'text': '', 'value': 2},
-    {'text': '', 'value': 3},
-    {'text': '', 'value': 4},
-  ];
   final deck _service = deck();
+  final List<int> _count = [
+    1,
+    2,
+    3,
+    4,
+  ];
   int _selectedIndex = 0;
 
   void handleSave() async {
@@ -41,7 +41,7 @@ class _singlEState extends State<singlE> {
                 Text('Card with the same name already exists in the deck')),
       );
     } else {
-      _service.save(widget._card, _bar[_selectedIndex]['value']);
+      _service.save(widget._card, _count[_selectedIndex]);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Save Card Successfully')),
       );
@@ -52,7 +52,7 @@ class _singlEState extends State<singlE> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: back(
+      appBar: backAppBar(
         title: '',
         icon: widget._save ? 'Save' : null,
         onTap: handleSave,
@@ -65,11 +65,11 @@ class _singlEState extends State<singlE> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                info(card: widget._card),
+                cardInfo(card: widget._card),
                 Visibility(
                   visible: widget._save,
-                  child: bar(
-                    data: _bar,
+                  child: infoBar(
+                    count: _count,
                     onTap: (index) {
                       setState(() {
                         _selectedIndex = index;

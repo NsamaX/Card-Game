@@ -223,7 +223,7 @@ class model extends save implements info {
   Map<String, dynamic> getMap() {
     Map<String, dynamic> dataMap = {};
     dataMap.addAll(_createMapWithCondition('Name', _name));
-    dataMap.addAll(_createMapWithCondition('Flavor', '" $_flavor "'));
+    dataMap.addAll(_createMapWithCondition('Flavor', _flavor));
     dataMap.addAll(_createMapWithCondition('Skill', _skill));
     dataMap.addAll(_createMapWithCondition('Effect', _effect));
     dataMap.addAll(_createMapWithCondition('Ride Skill', _rideSkill));

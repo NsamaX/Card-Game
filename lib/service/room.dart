@@ -5,12 +5,10 @@ import 'package:project/page/duel.dart';
 class rooms {
   final int _room;
 
-  rooms({
-    required int room,
-  }) : _room = room;
+  rooms({required int room}) : _room = room;
 
-  List<Map<String, dynamic>> generate() {
-    List<Map<String, dynamic>> _data = [
+  List<Map<String, dynamic>> getRoom() {
+    List<Map<String, dynamic>> _label = [
       {"title": null, "content": []}
     ];
     List<IconData> statusIcon = [
@@ -22,15 +20,15 @@ class rooms {
     for (int i = 0; i < _room; i++) {
       IconData status = statusIcon[random.nextInt(statusIcon.length)];
       String text = 'Room ${i + 1} : Player name : Game information';
-      if (_data.length <= i) {
-        _data.add({"title": null, "content": []});
+      if (_label.length <= i) {
+        _label.add({"title": null, "content": []});
       }
-      _data[i]['content'].add({
+      _label[i]['content'].add({
         'icon': status,
         'text': text,
         'page': duel(),
       });
     }
-    return _data;
+    return _label;
   }
 }

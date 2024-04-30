@@ -1,5 +1,5 @@
 class message {
-  final List<dynamic> _message = [
+  final List<dynamic> _log = [
     {
       'sender': false,
       'message': 'Hello! How are you today?',
@@ -46,5 +46,5 @@ class message {
     },
   ];
 
-  List<dynamic> getMessage() => _message;
+  List<dynamic> getLog() => _log;
 }

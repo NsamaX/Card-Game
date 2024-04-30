@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class option extends StatelessWidget {
+class signIcon extends StatelessWidget {
   final List<String> _image;
+  final double _size = 40.0;
 
-  const option({Key? key, required List<String> image})
+  const signIcon({Key? key, required List<String> image})
       : _image = image,
         super(key: key);
 
@@ -17,8 +18,6 @@ class option extends StatelessWidget {
   }
 
   Widget _card(String image) {
-    final double _size = 40.0;
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(

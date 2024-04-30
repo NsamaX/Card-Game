@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:project/api/model.dart';
 import 'package:project/service/deck.dart';
-import 'action.dart';
+import 'actionOption.dart';
 import 'card.dart';
 import 'theme.dart';
 
@@ -18,8 +18,10 @@ class field extends StatefulWidget {
 }
 
 class _fieldState extends State<field> {
-  final deck _service = deck();
   late List<dynamic> _card = [];
+  final deck _service = deck();
+  final Random _random = Random();
+  final _size = 80.0;
 
   void _drag(int col, int row) {
     setState(() {
@@ -50,7 +52,6 @@ class _fieldState extends State<field> {
   }
 
   void _shuffle(int time, int col, int row, List<model> suit) {
-    final Random _random = Random();
     List<model> shuffle = [];
     for (int i = suit.length; i > 0; i--) {
       int idex = _random.nextInt(i);
@@ -109,7 +110,6 @@ class _fieldState extends State<field> {
 
   Widget _board(int col, int row) {
     final Map<String, dynamic> _board = widget._field[col][row];
-    final _size = 80.0;
 
     return Expanded(
       child: Stack(
@@ -120,7 +120,7 @@ class _fieldState extends State<field> {
             builder: (context, candidateData, rejectedData) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: RotatedBox(
-                quarterTurns: _board['field']['type'] * 3,
+                quarterTurns: _board['field']['type'],
                 child: Container(
                   width: _size,
                   height: _size,
@@ -147,18 +147,20 @@ class _fieldState extends State<field> {
                       onAccept: (dynamic card) =>
                           _drop(col, row, card['card'], card['show']),
                       builder: (context, candidateData, rejectedData) => CARD(
-                          card: card['card'],
-                          show: card['show'],
-                          info: card['show'],
-                          build: false)),
+                            card: card['card'],
+                            save: false,
+                            show: card['show'],
+                            info: card['show'],
+                          )),
                   data: card,
                   feedback: Container(
                     height: _size * 1.2,
                     child: CARD(
-                        card: card['card'],
-                        show: card['show'],
-                        info: card['show'],
-                        build: false),
+                      card: card['card'],
+                      save: false,
+                      show: card['show'],
+                      info: card['show'],
+                    ),
                   ),
                   childWhenDragging: Container(),
                   onDraggableCanceled: (velocity, offset) {
@@ -167,11 +169,11 @@ class _fieldState extends State<field> {
                   onDragEnd: (dragDetails) {
                     _drag(col, row);
                   }),
-          action(
-            action: _getAction(),
-            onTap: _board['action'],
+          actionOption(
             col: col,
             row: row,
+            option: _getAction(),
+            onTap: _board['action'],
           ),
         ],
       ),
