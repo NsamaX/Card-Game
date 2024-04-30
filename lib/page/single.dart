@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 import 'package:project/service/deck.dart';
+import 'package:project/widget/addBar.dart';
 import 'package:project/widget/backAppBar.dart';
 import 'package:project/widget/cardInfo.dart';
-import 'package:project/widget/infoBar.dart';
 
 class singlE extends StatefulWidget {
   final model _card;
@@ -68,7 +68,7 @@ class _singlEState extends State<singlE> {
                 cardInfo(card: widget._card),
                 Visibility(
                   visible: widget._save,
-                  child: infoBar(
+                  child: addBar(
                     count: _count,
                     onTap: (index) {
                       setState(() {

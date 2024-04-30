@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:project/api/model.dart';
 import 'package:project/service/deck.dart';
-import 'actionOption.dart';
+import 'action.dart';
 import 'card.dart';
 import 'theme.dart';
 
@@ -18,7 +18,9 @@ class field extends StatefulWidget {
 }
 
 class _fieldState extends State<field> {
-  late Map<String, dynamic> _event = {
+  final deck _service = deck();
+  final Random _random = Random();
+  Map<String, dynamic> _event = {
     'Bind': {},
     'Damage': {},
     'Drop': {},
@@ -27,16 +29,14 @@ class _fieldState extends State<field> {
     'Special': {},
     'Trigger': {},
   };
-  late List<dynamic> _card = [];
-  final deck _service = deck();
-  final Random _random = Random();
+  List<dynamic> _card = [];
   final _size = 80.0;
 
   void _drag(int col, int row) {
     setState(() {
       if (_card[col][row].isNotEmpty) {
         _card[col][row].removeLast();
-        _active(col, row);
+        _place(col, row);
       }
     });
   }
@@ -44,22 +44,26 @@ class _fieldState extends State<field> {
   void _drop(int col, int row, model card, bool show) {
     setState(() {
       _card[col][row].add({'card': card, 'show': show});
-      _active(col, row);
+      _place(col, row);
     });
   }
 
-  void _active(int col, int row) {
+  void _place(int col, int row) {
     setState(() {
-      for (var action in widget._field[col][row]['action']) {
-        if (action['action'] != 'load') {
-          if (_card[col][row].isNotEmpty)
-            action['show'] = true;
-          else
-            action['show'] = false;
-        } else if (_card[col][row].isEmpty)
-          action['show'] = true;
-        else
-          action['show'] = false;
+      var currentField = widget._field[col][row];
+      var currentCard = _card[col][row];
+      for (var action in currentField['action']) {
+        switch (action['action']) {
+          case 'load':
+            action['show'] = currentCard.isEmpty;
+            break;
+          case 'search' || 'shuffle':
+            action['show'] = currentCard.length > 1;
+            break;
+          default:
+            action['show'] = currentCard.isNotEmpty;
+            break;
+        }
       }
     });
   }
@@ -77,42 +81,45 @@ class _fieldState extends State<field> {
     });
   }
 
-  void _load(int col, int row) {
-    _service.load().then(
-      (deck) {
-        setState(() {
-          List<model> _deck = deck;
-          List<model> _suit = [];
-          for (var card in _deck)
-            for (int i = 0; i < card.getCount(); i++) _suit.add(card);
-          _shuffle(20, col, row, _suit);
-          for (var action in widget._field[col][row]['action']) {
-            action['action'] == 'load' && _card[col][row].isNotEmpty
-                ? action['show'] = false
-                : action['show'] = true;
-          }
-        });
-      },
-    );
+  void _load(int col, int row) async {
+    final List<model> _loadedDeck = await _service.load();
+    List<model> _shuffled = [];
+    for (var card in _loadedDeck)
+      for (int i = 0; i < card.getCount(); i++) _shuffled.add(card);
+    for (var card in _shuffled) {
+      _card[col][row].add({'card': card, 'show': false});
+    }
+    _shuffle(20, col, row);
+    for (var action in widget._field[col][row]['action']) {
+      bool shouldShowAction =
+          action['action'] != 'load' || _card[col][row].isEmpty;
+      action['show'] = shouldShowAction;
+    }
+    setState(() {});
   }
 
-  void _shuffle(int time, int col, int row, List<model> suit) {
-    List<model> shuffle = [];
-    for (int i = suit.length; i > 0; i--) {
-      int idex = _random.nextInt(i);
-      shuffle.add(suit[idex]);
-      suit.removeAt(idex);
+  void _shuffle(int time, int col, int row) {
+    List<model> _shufflerYet = [];
+    for (var card in _card[col][row]) _shufflerYet.add(card['card']);
+    List<model> _shuffled = [];
+    for (int i = _shufflerYet.length; i > 0; i--) {
+      int index = _random.nextInt(i);
+      _shuffled.add(_shufflerYet[index]);
+      _shufflerYet.removeAt(index);
     }
+    _card[col][row].clear();
+    for (var card in _shuffled)
+      _card[col][row].add({'card': card, 'show': false});
     if (time > 0)
-      _shuffle(time - 1, col, row, shuffle);
+      _shuffle(time - 1, col, row);
     else
-      for (var card in shuffle)
-        _card[col][row].add({'card': card, 'show': false});
+      print('shuffled');
   }
 
   Map<String, dynamic> _getAction() => {
         'load': _load,
         'flip': _flip,
+        'shuffle': _shuffle,
       };
 
   @override
@@ -122,7 +129,7 @@ class _fieldState extends State<field> {
       List<dynamic> _column = [];
       for (int row = 0; row < widget._field[col].length; row++) {
         _column.add([]);
-        String _name = widget._field[col][row]['field']['name'];
+        final String _name = widget._field[col][row]['field']['name'];
         if (_event.containsKey(_name)) _event[_name] = {'col': col, 'row': row};
       }
       _card.add(_column);

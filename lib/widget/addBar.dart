@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-class infoBar extends StatefulWidget {
+class addBar extends StatefulWidget {
   final List<int> _count;
   final Function(int) _onTap;
 
-  const infoBar({
+  const addBar({
     Key? key,
     required List<int> count,
     required Function(int) onTap,
@@ -14,10 +14,10 @@ class infoBar extends StatefulWidget {
         super(key: key);
 
   @override
-  State<infoBar> createState() => _infoBarState();
+  State<addBar> createState() => _addBarState();
 }
 
-class _infoBarState extends State<infoBar> {
+class _addBarState extends State<addBar> {
   int _selectedIndex = 0;
 
   @override
