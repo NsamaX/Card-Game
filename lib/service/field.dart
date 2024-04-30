@@ -4,23 +4,25 @@ class field {
   final List<dynamic> _field = [
     [
       {
-        'field': {'name': 'Special\nZone', 'type': 0},
+        'field': {'name': 'Special\nZone', 'type': 0, 'event': 'special'},
         'action': []
       },
       {
-        'field': {'name': 'Trigger', 'type': 0},
+        'field': {'name': 'Trigger', 'type': 0, 'event': 'trigger'},
         'action': [],
       },
       {
-        'field': {'name': 'Guard', 'type': 3},
+        'field': {'name': 'Guard', 'type': 3, 'event': 'guard'},
+        'action': [
+          'drop',
+        ],
+      },
+      {
+        'field': {'name': 'Show', 'type': 0, 'event': 'show'},
         'action': [],
       },
       {
-        'field': {'name': 'Show', 'type': 0},
-        'action': [],
-      },
-      {
-        'field': {'name': 'Bind\nZone', 'type': 0},
+        'field': {'name': 'Bind\nZone', 'type': 0, 'event': 'bind'},
         'action': []
       },
     ],
@@ -30,7 +32,7 @@ class field {
         'action': [
           'load',
           'search',
-          'use',
+          'special',
         ]
       },
       {
@@ -41,7 +43,7 @@ class field {
           'rotateX',
           'rotateY',
           'guard',
-          'bin',
+          'drop',
           'search',
         ],
       },
@@ -53,7 +55,7 @@ class field {
           'rotateX',
           'rotateY',
           'guard',
-          'bin',
+          'drop',
           'search',
         ],
       },
@@ -65,7 +67,7 @@ class field {
           'rotateX',
           'rotateY',
           'guard',
-          'bin',
+          'drop',
           'search',
         ],
       },
@@ -75,19 +77,19 @@ class field {
           'load',
           'search',
           'shuffle',
+          'show',
+          'drop',
+          'damage',
           'draw',
-          'bin',
         ],
       },
     ],
     [
       {
-        'field': {'name': 'Damage\nZone', 'type': 3},
+        'field': {'name': 'Damage\nZone', 'type': 3, 'event': 'damage'},
         'action': [
           'search',
-          'damage',
-          'stack',
-          'bin',
+          'drop',
         ],
       },
       {
@@ -98,19 +100,7 @@ class field {
           'rotateX',
           'rotateY',
           'guard',
-          'bin',
-          'search',
-        ],
-      },
-      {
-        'field': {'name': 'Card', 'type': 0},
-        'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
-          'guard',
-          'bin',
+          'drop',
           'search',
         ],
       },
@@ -122,12 +112,24 @@ class field {
           'rotateX',
           'rotateY',
           'guard',
-          'bin',
+          'drop',
           'search',
         ],
       },
       {
-        'field': {'name': 'Drop\nZone', 'type': 0},
+        'field': {'name': 'Card', 'type': 0},
+        'action': [
+          'block',
+          'flip',
+          'rotateX',
+          'rotateY',
+          'guard',
+          'drop',
+          'search',
+        ],
+      },
+      {
+        'field': {'name': 'Drop\nZone', 'type': 0, 'event': 'drop'},
         'action': [
           'search',
         ]
@@ -136,10 +138,6 @@ class field {
   ];
 
   final List<dynamic> _actions = [
-    {
-      'action': 'bin',
-      'icon': Icons.delete_outline_rounded,
-    },
     {
       'action': 'block',
       'icon': Icons.block_rounded,
@@ -151,6 +149,10 @@ class field {
     {
       'action': 'draw',
       'icon': Icons.back_hand_rounded,
+    },
+    {
+      'action': 'drop',
+      'icon': Icons.delete_outline_rounded,
     },
     {
       'action': 'flip',
@@ -177,16 +179,16 @@ class field {
       'icon': Icons.search_rounded,
     },
     {
+      'action': 'show',
+      'icon': Icons.style_rounded,
+    },
+    {
       'action': 'shuffle',
       'icon': Icons.cached_rounded,
     },
     {
-      'action': 'stack',
+      'action': 'special',
       'icon': Icons.copy_rounded,
-    },
-    {
-      'action': 'use',
-      'icon': Icons.style_rounded,
     },
   ];
 

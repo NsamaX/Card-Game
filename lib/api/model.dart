@@ -207,6 +207,7 @@ class model extends save implements info {
         'triggereffect': _triggerEffect,
       };
 
+  String getType() => _cardType;
   String getGrade() => _grade;
   List<String> getSets() => _sets;
 

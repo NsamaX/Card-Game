@@ -21,13 +21,13 @@ class _boardState extends State<board> {
   final deck _service = deck();
   final Random _random = Random();
   Map<String, dynamic> _event = {
-    'Bind': {},
-    'Damage': {},
-    'Drop': {},
-    'Guard': {},
-    'Show': {},
-    'Special': {},
-    'Trigger': {},
+    'bind': {},
+    'damage': {},
+    'drop': {},
+    'guard': {},
+    'show': {},
+    'special': {},
+    'trigger': {},
   };
   List<dynamic> _card = [];
   final _size = 80.0;
@@ -64,6 +64,24 @@ class _boardState extends State<board> {
             action['show'] = currentCard.isNotEmpty;
             break;
         }
+      }
+    });
+  }
+
+  void _use(int col, int row, String action) {
+    setState(() {
+      if (_event.containsKey(action)) {
+        final int _col = _card[col][row].last['card'].getType() == null
+            ? _event[action]['col']
+            : _event['trigger']['col'];
+        final int _row = _card[col][row].last['card'].getType() == null
+            ? _event[action]['row']
+            : _event['trigger']['row'];
+        _card[_col][_row]
+            .add({'card': _card[col][row].last['card'], 'show': true});
+        _card[col][row].removeLast();
+        _place(col, row);
+        _place(_col, _row);
       }
     });
   }
@@ -105,16 +123,14 @@ class _boardState extends State<board> {
     _card[col][row].clear();
     for (var card in _shuffled)
       _card[col][row].add({'card': card, 'show': false});
-    if (time > 0)
-      _shuffle(time - 1, col, row);
-    else
-      print('shuffled');
+    if (time > 0) _shuffle(time - 1, col, row);
   }
 
   Map<String, dynamic> _getAction() => {
         'load': _load,
         'flip': _flip,
         'shuffle': _shuffle,
+        'use': _use,
       };
 
   @override
@@ -124,9 +140,12 @@ class _boardState extends State<board> {
       List<dynamic> _column = [];
       for (int row = 0; row < widget._board[col].length; row++) {
         _column.add([]);
-        final String _name = widget._board[col][row]['field']['name'];
+        final String _name = widget._board[col][row]['field']['event'] != null
+            ? widget._board[col][row]['field']['event']
+            : 'none';
         if (_event.containsKey(_name)) _event[_name] = {'col': col, 'row': row};
       }
+      print(_event);
       _card.add(_column);
     }
   }

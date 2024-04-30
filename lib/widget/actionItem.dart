@@ -52,6 +52,14 @@ class actionItem extends StatelessWidget {
             //   return _option['stack'](_col, _row);
             // case 'search':
             //   return _option['use'](_col, _row);
+            case 'special' ||
+                  'tigger' ||
+                  'guard' ||
+                  'show' ||
+                  'bind' ||
+                  'damage' ||
+                  'drop':
+              return _option['use'](_col, _row, _action['action']);
             default:
               break;
           }
