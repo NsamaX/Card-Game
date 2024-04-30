@@ -37,6 +37,14 @@ class _fieldState extends State<field> {
     });
   }
 
+  void _flip(int col, int row) {
+    setState(() {
+      if (_card[col][row].isNotEmpty) {
+        _card[col][row].last['show'] = !_card[col][row].last['show'];
+      }
+    });
+  }
+
   void _load(int col, int row) {
     _service.load().then(
       (deck) {
@@ -65,17 +73,10 @@ class _fieldState extends State<field> {
         _card[col][row].add({'card': card, 'show': false});
   }
 
-  void _flip(int col, int row) {
-    setState(() {
-      if (_card[col][row].isNotEmpty) {
-        _card[col][row].last['show'] = !_card[col][row].last['show'];
-      }
-    });
-  }
-
   Map<String, dynamic> _getAction() => {
         'load': _load,
         'flip': _flip,
+        'shuffle': _shuffle,
       };
 
   @override
@@ -172,6 +173,7 @@ class _fieldState extends State<field> {
           actionOption(
             col: col,
             row: row,
+            // suit: _card[col][row],
             option: _getAction(),
             onTap: _board['action'],
           ),

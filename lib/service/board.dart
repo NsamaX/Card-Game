@@ -214,7 +214,6 @@ class board {
             })(),
           },
           'action': [],
-          'show': false,
         };
         _column.add(_row);
       }

@@ -4,6 +4,7 @@ import 'theme.dart';
 class actionOption extends StatelessWidget {
   final int _col;
   final int _row;
+  // final List<dynamic> _suit;
   final Map<String, dynamic> _option;
   final List<dynamic> _onTap;
 
@@ -11,10 +12,12 @@ class actionOption extends StatelessWidget {
     Key? key,
     required int col,
     required int row,
+    // required List<dynamic> suit,
     required Map<String, dynamic> option,
     required List<dynamic> onTap,
   })  : _col = col,
         _row = row,
+        // _suit = suit,
         _option = option,
         _onTap = onTap,
         super(key: key);
@@ -51,11 +54,32 @@ class actionOption extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           switch (action['action']) {
-            case 'load':
-              _option['load'](_col, _row);
-              break;
+            // case 'bin':
+            //   return _option['bin'](_col, _row);
+            // case 'block':
+            //   return _option['block'](_col, _row);
+            // case 'damage':
+            //   return _option['damage'](_col, _row);
+            // case 'draw':
+            //   return _option['draw'](_col, _row);
             case 'flip':
-              _option['flip'](_col, _row);
+              return _option['flip'](_col, _row);
+            // case 'guard':
+            //   return _option['guard'](_col, _row);
+            case 'load':
+              return _option['load'](_col, _row);
+            // case 'rotateX':
+            //   return _option['rotateX'](_col, _row);
+            // case 'rotateY':
+            //   return _option['rotateY'](_col, _row);
+            // case 'search':
+            //   return _option['search'](_col, _row);
+            // case 'shuffle':
+            //   return _option['shuffle'](20, _col, _row, _suit);
+            // case 'stack':
+            //   return _option['stack'](_col, _row);
+            // case 'search':
+            //   return _option['use'](_col, _row);
             default:
               break;
           }

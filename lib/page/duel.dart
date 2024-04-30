@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project/service/board.dart';
 import 'package:project/service/message.dart';
 import 'package:project/widget/appBar.dart';
-import 'package:project/widget/buttomNav.dart';
+import 'package:project/widget/board.dart';
 import 'package:project/widget/chatBox.dart';
-import 'package:project/widget/field.dart';
 import 'play.dart';
 
 class duel extends StatefulWidget {
@@ -77,7 +76,6 @@ class _duelState extends State<duel> {
           child: chatBox(log: _c.getLog()),
         ),
       ]),
-      bottomNavigationBar: bottomNav(currentIndex: 1),
     );
   }
 }

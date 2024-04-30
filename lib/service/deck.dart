@@ -73,7 +73,7 @@ class deck {
         data.setCount(cardCount);
         deck.add(data);
       }
-      // deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
+      deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
     }
     return deck;
   }
