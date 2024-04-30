@@ -233,7 +233,7 @@ class board {
               Map<String, dynamic> actionCopy = {
                 'action': action['action'],
                 'icon': action['icon'],
-                'show': true,
+                'show': action['action'] == 'load' ? true : false,
               };
               _row.add(actionCopy);
             }

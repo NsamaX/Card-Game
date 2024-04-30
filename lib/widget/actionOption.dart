@@ -84,12 +84,14 @@ class actionOption extends StatelessWidget {
               break;
           }
         },
-        child: action['icon'] is String
-            ? Text(
-                action['icon'],
-                style: themeData().textTheme.bodySmall,
-              )
-            : Icon(action['icon']),
+        child: action['show']
+            ? action['icon'] is String
+                ? Text(
+                    action['icon'],
+                    style: themeData().textTheme.bodySmall,
+                  )
+                : Icon(action['icon'])
+            : SizedBox(),
       ),
     );
   }

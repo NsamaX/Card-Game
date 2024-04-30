@@ -54,6 +54,11 @@ class _fieldState extends State<field> {
           for (var card in _deck)
             for (int i = 0; i < card.getCount(); i++) _suit.add(card);
           _shuffle(20, col, row, _suit);
+          for (var action in widget._field[col][row]['action']) {
+            action['action'] == 'load'
+                ? action['show'] = false
+                : action['show'] = true;
+          }
         });
       },
     );
@@ -93,18 +98,15 @@ class _fieldState extends State<field> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 36.0, horizontal: 10.0),
-      child: ListView.builder(
-        itemCount: widget._field.length,
-        itemBuilder: (context, col) {
-          return Column(
-            children: [
-              Row(children: [
-                for (int row = 0; row < widget._field[col].length; row++)
-                  _board(col, row)
-              ]),
-            ],
-          );
-        },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          for (int col = 0; col < widget._field.length; col++)
+            Row(children: [
+              for (int row = 0; row < widget._field[col].length; row++)
+                _board(col, row)
+            ]),
+        ],
       ),
     );
   }
