@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'label.dart';
 import 'page.dart';
 
-class room extends StatefulWidget {
+class lobby extends StatefulWidget {
   final List<dynamic> _room;
   final int _page;
   final int _icon;
 
-  const room({
+  const lobby({
     Key? key,
     required List<dynamic> room,
     required int page,
@@ -18,10 +18,10 @@ class room extends StatefulWidget {
         super(key: key);
 
   @override
-  _roomState createState() => _roomState();
+  _lobbyState createState() => _lobbyState();
 }
 
-class _roomState extends State<room> {
+class _lobbyState extends State<lobby> {
   int _currentPage = 0;
 
   @override

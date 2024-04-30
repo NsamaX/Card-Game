@@ -6,18 +6,18 @@ import 'action.dart';
 import 'card.dart';
 import 'theme.dart';
 
-class field extends StatefulWidget {
-  final List<dynamic> _field;
+class board extends StatefulWidget {
+  final List<dynamic> _board;
 
-  const field({Key? key, required List<dynamic> field})
-      : _field = field,
+  const board({Key? key, required List<dynamic> board})
+      : _board = board,
         super(key: key);
 
   @override
-  State<field> createState() => _fieldState();
+  State<board> createState() => _boardState();
 }
 
-class _fieldState extends State<field> {
+class _boardState extends State<board> {
   final deck _service = deck();
   final Random _random = Random();
   Map<String, dynamic> _event = {
@@ -50,7 +50,7 @@ class _fieldState extends State<field> {
 
   void _place(int col, int row) {
     setState(() {
-      var currentField = widget._field[col][row];
+      var currentField = widget._board[col][row];
       var currentCard = _card[col][row];
       for (var action in currentField['action']) {
         switch (action['action']) {
@@ -68,12 +68,6 @@ class _fieldState extends State<field> {
     });
   }
 
-  // void _bin(int col, int row) {
-  //   setState(() {
-  //     if (_event.containsKey()) {}
-  //   });
-  // }
-
   void _flip(int col, int row) {
     setState(() {
       if (_card[col][row].isNotEmpty)
@@ -90,7 +84,7 @@ class _fieldState extends State<field> {
       _card[col][row].add({'card': card, 'show': false});
     }
     _shuffle(20, col, row);
-    for (var action in widget._field[col][row]['action']) {
+    for (var action in widget._board[col][row]['action']) {
       bool shouldShowAction =
           action['action'] != 'load' || _card[col][row].isEmpty;
       action['show'] = shouldShowAction;
@@ -125,11 +119,11 @@ class _fieldState extends State<field> {
   @override
   void initState() {
     super.initState();
-    for (int col = 0; col < widget._field.length; col++) {
+    for (int col = 0; col < widget._board.length; col++) {
       List<dynamic> _column = [];
-      for (int row = 0; row < widget._field[col].length; row++) {
+      for (int row = 0; row < widget._board[col].length; row++) {
         _column.add([]);
-        final String _name = widget._field[col][row]['field']['name'];
+        final String _name = widget._board[col][row]['field']['name'];
         if (_event.containsKey(_name)) _event[_name] = {'col': col, 'row': row};
       }
       _card.add(_column);
@@ -143,18 +137,18 @@ class _fieldState extends State<field> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          for (int col = 0; col < widget._field.length; col++)
+          for (int col = 0; col < widget._board.length; col++)
             Row(children: [
-              for (int row = 0; row < widget._field[col].length; row++)
-                _board(col, row)
+              for (int row = 0; row < widget._board[col].length; row++)
+                _field(col, row)
             ]),
         ],
       ),
     );
   }
 
-  Widget _board(int col, int row) {
-    final Map<String, dynamic> _board = widget._field[col][row];
+  Widget _field(int col, int row) {
+    final Map<String, dynamic> _field = widget._board[col][row];
 
     return Expanded(
       child: Stack(
@@ -165,7 +159,7 @@ class _fieldState extends State<field> {
             builder: (context, candidateData, rejectedData) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: RotatedBox(
-                quarterTurns: _board['field']['type'],
+                quarterTurns: _field['field']['type'],
                 child: Container(
                   width: _size,
                   height: _size,
@@ -175,7 +169,7 @@ class _fieldState extends State<field> {
                   ),
                   child: Center(
                     child: Text(
-                      _board['field']['name'],
+                      _field['field']['name'],
                       style: themeData().textTheme.bodySmall?.copyWith(
                           color: themeData().iconTheme.color!.withOpacity(0.6)),
                       textAlign: TextAlign.center,
@@ -214,12 +208,11 @@ class _fieldState extends State<field> {
                   onDragEnd: (dragDetails) {
                     _drag(col, row);
                   }),
-          actionOption(
+          action(
             col: col,
             row: row,
-            // suit: _card[col][row],
             option: _getAction(),
-            onTap: _board['action'],
+            onTap: _field['action'],
           ),
         ],
       ),

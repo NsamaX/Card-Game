@@ -13,11 +13,11 @@ class signIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: _image.map((entry) => _card(entry)).toList(),
+      children: _image.map((entry) => _icon(entry)).toList(),
     );
   }
 
-  Widget _card(String image) {
+  Widget _icon(String image) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(

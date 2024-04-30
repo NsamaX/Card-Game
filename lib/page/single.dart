@@ -5,11 +5,11 @@ import 'package:project/widget/addBar.dart';
 import 'package:project/widget/backAppBar.dart';
 import 'package:project/widget/cardInfo.dart';
 
-class singlE extends StatefulWidget {
+class single extends StatefulWidget {
   final model _card;
   final bool _save;
 
-  const singlE({
+  const single({
     Key? key,
     required model card,
     required bool save,
@@ -18,10 +18,10 @@ class singlE extends StatefulWidget {
         super(key: key);
 
   @override
-  _singlEState createState() => _singlEState();
+  _singleState createState() => _singleState();
 }
 
-class _singlEState extends State<singlE> {
+class _singleState extends State<single> {
   final deck _service = deck();
   final List<int> _count = [
     1,

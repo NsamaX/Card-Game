@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class board {
+class field {
   final List<dynamic> _field = [
     [
       {

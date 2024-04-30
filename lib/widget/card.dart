@@ -29,7 +29,7 @@ class CARD extends StatelessWidget {
           if (_info)
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => singlE(
+                builder: (context) => single(
                   card: _card,
                   save: _save,
                 ),

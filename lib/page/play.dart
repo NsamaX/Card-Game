@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:project/service/room.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
-import 'package:project/widget/room.dart';
+import 'package:project/widget/lobby.dart';
 
 class play extends StatelessWidget {
   const play({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final rooms _r = rooms(room: 260);
+    final room _service = room(room: 260);
 
     void _filter() {}
 
@@ -33,7 +33,7 @@ class play extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                room(room: _r.getRoom(), page: 30, icon: 6),
+                lobby(room: _service.getRoom(), page: 30, icon: 6),
               ],
             ),
           ),

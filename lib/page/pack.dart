@@ -36,9 +36,7 @@ class _packState extends State<pack> {
     _service.delete().then(
       (_) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Deleted deck successfully'),
-          ),
+          SnackBar(content: Text('Deleted deck successfully')),
         );
         setState(() {
           _deck = [];

@@ -17,7 +17,7 @@ class cardDB extends StatefulWidget {
 
 class _cardDBState extends State<cardDB> {
   final ScrollController _scrollController = ScrollController();
-  final card _api = card();
+  final card _service = card();
   final String _search = "cards";
   int _page = 1;
   List<model> _card = [];
@@ -111,7 +111,7 @@ class _cardDBState extends State<cardDB> {
       _isLoading = true;
     });
 
-    List<model> fetchedData = await _api.getData(search, page: page);
+    List<model> fetchedData = await _service.getData(search, page: page);
     if (!mounted) {
       return;
     }

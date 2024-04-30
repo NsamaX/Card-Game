@@ -42,19 +42,19 @@ class _editCardState extends State<editCard> {
       child: Column(
         children: [
           for (var item in widget._onTap.keys)
-            _action(
+            _option(
                 item: item,
                 onPressed: () {
                   widget._onTap[item]!();
                   _updateCardCount();
                 }),
-          _action(item: _cardCount, onPressed: null),
+          _option(item: _cardCount, onPressed: null),
         ],
       ),
     );
   }
 
-  Widget _action({required dynamic item, required Function()? onPressed}) {
+  Widget _option({required dynamic item, required Function()? onPressed}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: GestureDetector(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/service/board.dart';
+import 'package:project/service/field.dart';
 import 'package:project/service/message.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/board.dart';
@@ -14,6 +14,8 @@ class duel extends StatefulWidget {
 }
 
 class _duelState extends State<duel> {
+  final field _board = field();
+  final message _service = message();
   bool _onHeadphone = false;
   bool _onMicrophone = false;
   bool _show = false;
@@ -31,7 +33,7 @@ class _duelState extends State<duel> {
     });
   }
 
-  void _mic() {
+  void serviceic() {
     setState(() {
       _onMicrophone = !_onMicrophone;
     });
@@ -45,9 +47,6 @@ class _duelState extends State<duel> {
 
   @override
   Widget build(BuildContext context) {
-    final board _b = board();
-    final message _c = message();
-
     return Scaffold(
       appBar: appBar(
         menu: [
@@ -61,19 +60,19 @@ class _duelState extends State<duel> {
           _back,
           _head,
           () {},
-          _mic,
+          serviceic,
           _chat,
         ],
       ),
       body: Stack(children: [
-        field(
-          field: _b.getField(),
+        board(
+          board: _board.getField(),
         ),
         AnimatedContainer(
           duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
           transform: Matrix4.translationValues(_show ? 0 : 200, 0, 0),
-          child: chatBox(log: _c.getLog()),
+          child: chatBox(log: _service.getLog()),
         ),
       ]),
     );

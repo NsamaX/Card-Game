@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:project/page/duel.dart';
 
-class rooms {
+class room {
   final int _room;
 
-  rooms({required int room}) : _room = room;
+  room({required int room}) : _room = room;
 
   List<Map<String, dynamic>> getRoom() {
     List<Map<String, dynamic>> _label = [

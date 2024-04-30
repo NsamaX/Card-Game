@@ -31,15 +31,15 @@ class page extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (_currentPage >= _icon)
-          _tap(_onTap, _currentPage - 1, Icons.arrow_back_ios_rounded),
-        for (int page = _start; page < _end; page++) _tap(_onTap, page, null),
+          _item(_onTap, _currentPage - 1, Icons.arrow_back_ios_rounded),
+        for (int page = _start; page < _end; page++) _item(_onTap, page, null),
         if (_end < _page)
-          _tap(_onTap, _currentPage + 1, Icons.arrow_forward_ios_rounded),
+          _item(_onTap, _currentPage + 1, Icons.arrow_forward_ios_rounded),
       ],
     );
   }
 
-  Widget _tap(Function(int) onTap, int page, IconData? icon) {
+  Widget _item(Function(int) onTap, int page, IconData? icon) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(

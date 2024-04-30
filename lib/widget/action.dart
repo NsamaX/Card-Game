@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'actionItem.dart';
 import 'theme.dart';
 
-class actionOption extends StatelessWidget {
+class action extends StatelessWidget {
   final int _col;
   final int _row;
   final Map<String, dynamic> _option;
   final List<dynamic> _onTap;
 
-  const actionOption({
+  const action({
     Key? key,
     required int col,
     required int row,
