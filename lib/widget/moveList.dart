@@ -36,13 +36,14 @@ class MoveList extends StatelessWidget {
               Column(
                 children: [
                   for (var action in _action)
-                    if (action['show'])
-                    Move(
-                      col: _col,
-                      row: _row,
-                      option: _option,
-                      action: action,
-                    )
+                    if (action[
+                        'show']) // hide this line if you want to show all moves
+                      Move(
+                        col: _col,
+                        row: _row,
+                        option: _option,
+                        action: action,
+                      )
                 ],
               ),
             ],

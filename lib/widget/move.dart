@@ -27,6 +27,8 @@ class Move extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           switch (_action['action']) {
+            case 'draw':
+              return _option['draw'](_col, _row);
             case 'flip':
               return _option['flip'](_col, _row);
             case 'load':

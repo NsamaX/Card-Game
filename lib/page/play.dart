@@ -29,15 +29,17 @@ class _PlayPageState extends State<PlayPage> {
   late List<dynamic> _board;
   late List<dynamic> _cardMatrix;
   late Map<String, dynamic> _event = {
-    'bind': {},
-    'damage': {},
-    'drop': {},
-    'guard': {},
-    'show': {},
     'special': {},
     'trigger': {},
+    'guard': {},
+    'show': {},
+    'bind': {},
+    'specialDeck': {},
+    'mainDeck': {},
+    'damage': {},
+    'drop': {},
   };
-  Map<String, dynamic> _hand = {'opsite': [], 'me': []};
+  Map<String, dynamic> _hand = {'me': [], 'opsite': []};
 
   void _back() {
     Navigator.pushReplacement(

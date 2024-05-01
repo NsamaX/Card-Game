@@ -32,11 +32,10 @@ class _BoardState extends State<Board> {
   final double _cardSize = 80.0;
 
   void _drag(int col, int row) {
+    if (widget._cardMatrix[col][row].isEmpty) return;
     setState(() {
-      if (widget._cardMatrix[col][row].isNotEmpty) {
-        widget._cardMatrix[col][row].removeLast();
-        _place(col, row);
-      }
+      widget._cardMatrix[col][row].removeLast();
+      _place(col, row);
     });
   }
 
@@ -68,39 +67,48 @@ class _BoardState extends State<Board> {
     });
   }
 
-  void _flip(int col, int row) {
+  void _draw(int col, int row) {
+    if (widget._cardMatrix[col][row].isEmpty) return;
     setState(() {
-      if (widget._cardMatrix[col][row].isNotEmpty)
-        widget._cardMatrix[col][row].last['show'] =
-            !widget._cardMatrix[col][row].last['show'];
+      widget._hand['me'].add(widget._cardMatrix[col][row].last['card']);
+      widget._cardMatrix[col][row].removeLast();
+      _place(col, row);
+    });
+  }
+
+  void _flip(int col, int row) {
+    if (widget._cardMatrix[col][row].isEmpty) return;
+    setState(() {
+      widget._cardMatrix[col][row].last['show'] =
+          !widget._cardMatrix[col][row].last['show'];
     });
   }
 
   void _load(int col, int row) async {
     final List<Model> loadedDeck = await Deck().load();
-    if (loadedDeck.isNotEmpty) {
-      List<Model> shuffled = [];
-      for (var card in loadedDeck)
-        for (int i = 0; i < card.getCount(); i++) shuffled.add(card);
-      for (var card in shuffled)
-        widget._cardMatrix[col][row].add({'card': card, 'show': false});
-      _shuffle(20, col, row);
-      for (var action in widget._board[col][row]['action']) {
-        bool shouldShowAction =
-            action['action'] != 'load' || widget._cardMatrix[col][row].isEmpty;
-        action['show'] = shouldShowAction;
-      }
+    if (loadedDeck.isEmpty) return;
+    List<Model> shuffled = [];
+    for (var card in loadedDeck)
+      for (int i = 0; i < card.getCount(); i++) shuffled.add(card);
+    for (var card in shuffled)
+      widget._cardMatrix[col][row].add({'card': card, 'show': false});
+    _shuffle(20, col, row);
+    for (var action in widget._board[col][row]['action']) {
+      final bool shouldShowAction =
+          action['action'] != 'load' || widget._cardMatrix[col][row].isEmpty;
+      action['show'] = shouldShowAction;
     }
     setState(() {});
   }
 
   void _shuffle(int time, int col, int row) {
+    if (widget._cardMatrix[col][row].isEmpty) return;
     List<Model> shufflerYet = [];
     List<Model> shuffled = [];
     for (var card in widget._cardMatrix[col][row])
       shufflerYet.add(card['card']);
     for (int i = shufflerYet.length; i > 0; i--) {
-      int index = Random().nextInt(i);
+      final int index = Random().nextInt(i);
       shuffled.add(shufflerYet[index]);
       shufflerYet.removeAt(index);
     }
@@ -111,6 +119,7 @@ class _BoardState extends State<Board> {
   }
 
   void _use(int col, int row, String action) {
+    if (widget._cardMatrix[col][row].isEmpty) return;
     setState(() {
       if (widget._event.containsKey(action)) {
         int targetCol;
@@ -142,6 +151,7 @@ class _BoardState extends State<Board> {
   }
 
   Map<String, dynamic> _getOption() => {
+        'draw': _draw,
         'flip': _flip,
         'load': _load,
         'shuffle': _shuffle,
@@ -154,16 +164,20 @@ class _BoardState extends State<Board> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: [
-          _handZone(_theme, widget._hand['opsite']),
-          for (int col = 0; col < widget._board.length; col++)
-            Row(children: [
-              for (int row = 0; row < widget._board[col].length; row++)
-                _completeField(_theme, col, row),
-            ]),
-          _handZone(_theme, widget._hand['me']),
+          _handZone(_theme, widget._hand['opsite'], false),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (int col = 0; col < widget._board.length; col++)
+                Row(children: [
+                  for (int row = 0; row < widget._board[col].length; row++)
+                    _completeField(_theme, col, row),
+                ]),
+            ],
+          ),
+          _handZone(_theme, widget._hand['me'], true),
         ],
       ),
     );
@@ -245,16 +259,30 @@ class _BoardState extends State<Board> {
     );
   }
 
-  Widget _handZone(ThemeData theme, List<dynamic> hand) {
-    return Expanded(
+  Widget _handZone(ThemeData theme, List<dynamic> hand, bool show) {
+    return Align(
+      alignment: show ? Alignment.bottomCenter : Alignment.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Container(
-      height: _cardSize,
-      color: Colors.white,
-      child: hand.isNotEmpty
-          ? Row(
-              children: hand.map((card) => _virsualField(theme, card)).toList(),
-            )
-          : SizedBox(),
-    ));
+          height: _cardSize * 1.2,
+          child: hand.isNotEmpty
+              ? ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: hand.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var card = hand[index];
+                    return CARD(
+                      card: card,
+                      save: false,
+                      show: show,
+                      info: show,
+                    );
+                  },
+                )
+              : SizedBox(),
+        ),
+      ),
+    );
   }
 }
