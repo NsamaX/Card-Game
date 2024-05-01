@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 
 class CardInfo extends StatelessWidget {
-  final model _card;
+  final Model _card;
 
-  const CardInfo({Key? key, required model card})
+  const CardInfo({Key? key, required Model card})
       : _card = card,
         super(key: key);
 

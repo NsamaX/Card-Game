@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:project/widget/signIcon.dart';
-import 'package:project/widget/theme.dart';
-import 'pack.dart';
+import 'deck.dart';
 
-class signIn extends StatelessWidget {
-  const signIn({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  final List<String> _image = [
+    'asset/image/apple.png',
+    'asset/image/google.png',
+    'asset/image/facebook.png',
+  ];
+
+  SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<String> _image = [
-      'asset/image/apple.png',
-      'asset/image/google.png',
-      'asset/image/facebook.png',
-    ];
+    final ThemeData _theme = Theme.of(context);
 
     return Scaffold(
       body: Padding(
@@ -22,7 +23,7 @@ class signIn extends StatelessWidget {
           children: [
             Text(
               'Let\'s me know you.',
-              style: themeData().textTheme.titleLarge,
+              style: _theme.textTheme.titleLarge,
             ),
             SizedBox(height: 60.0),
             SignIcon(image: _image),
@@ -39,7 +40,7 @@ class signIn extends StatelessWidget {
                   },
                   child: Text(
                     'Guess',
-                    style: themeData().textTheme.titleSmall,
+                    style: _theme.textTheme.titleSmall,
                   ),
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'info.dart';
 import 'save.dart';
 
-class model extends save implements info {
+class Model extends Save implements Info {
   final int _id;
   final String _cardType;
   final String _clan;
@@ -42,7 +42,7 @@ class model extends save implements info {
   final String _translation;
   final String _triggerEffect;
 
-  model({
+  Model({
     required int id,
     required String cardType,
     required String clan,
@@ -122,7 +122,7 @@ class model extends save implements info {
         _translation = translation,
         _triggerEffect = triggerEffect;
 
-  factory model.fromJson(Map<String, dynamic> json) => model(
+  factory Model.fromJson(Map<String, dynamic> json) => Model(
         id: json['id'],
         cardType: json['cardtype'],
         clan: json['clan'],

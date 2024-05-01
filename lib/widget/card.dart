@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'package:project/page/single.dart';
+import 'package:project/page/cardInfo.dart';
 
 class CARD extends StatelessWidget {
-  final model _card;
+  final Model _card;
   final bool _save;
   final bool _show;
   final bool _info;
 
   const CARD(
       {Key? key,
-      required model card,
+      required Model card,
       required bool save,
       bool? show,
       bool? info})
@@ -29,7 +29,7 @@ class CARD extends StatelessWidget {
           if (_info)
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => single(
+                builder: (context) => CardInfoPage(
                   card: _card,
                   save: _save,
                 ),

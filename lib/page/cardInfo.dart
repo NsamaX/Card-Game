@@ -4,29 +4,27 @@ import 'package:project/service/deck.dart';
 import 'package:project/widget/addBar.dart';
 import 'package:project/widget/cardInfo.dart';
 
-class single extends StatefulWidget {
-  final model _card;
+class CardInfoPage extends StatefulWidget {
+  final Model _card;
   final bool _save;
 
-  const single({
-    Key? key,
-    required model card,
-    required bool save,
-  })  : _card = card,
+  const CardInfoPage({Key? key, required Model card, required bool save})
+      : _card = card,
         _save = save,
         super(key: key);
 
   @override
-  _singleState createState() => _singleState();
+  _CardInfoPageState createState() => _CardInfoPageState();
 }
 
-class _singleState extends State<single> {
-  final deck _service = deck();
+class _CardInfoPageState extends State<CardInfoPage> {
+  final Deck _deckService = Deck();
+
   final List<int> _count = [1, 2, 3, 4];
   int _selectedIndex = 0;
 
   void handleSave() async {
-    bool cardExists = await _service.check(widget._card.getName());
+    bool cardExists = await _deckService.check(widget._card.getName());
 
     if (cardExists) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -35,7 +33,7 @@ class _singleState extends State<single> {
                 Text('Card with the same name already exists in the deck')),
       );
     } else {
-      _service.save(widget._card, _count[_selectedIndex]);
+      _deckService.save(widget._card, _count[_selectedIndex]);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Save Card Successfully')),
       );

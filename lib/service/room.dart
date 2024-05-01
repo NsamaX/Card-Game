@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:project/page/duel.dart';
+import 'package:project/page/play.dart';
 
-class room {
+class Room {
   final int _room;
 
-  room({required int room}) : _room = room;
+  Room({required int room}) : _room = room;
 
   List<Map<String, dynamic>> getRoom() {
     List<Map<String, dynamic>> _label = [
@@ -26,7 +26,7 @@ class room {
       _label[i]['content'].add({
         'icon': status,
         'text': text,
-        'page': duel(),
+        'page': PlayPage(),
       });
     }
     return _label;

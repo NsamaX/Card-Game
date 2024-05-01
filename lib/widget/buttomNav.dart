@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/page/pack.dart';
-import 'package:project/page/play.dart';
+import 'package:project/page/deck.dart';
+import 'package:project/page/lobby.dart';
 import 'package:project/page/setting.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -9,6 +9,29 @@ class BottomNavigation extends StatelessWidget {
   const BottomNavigation({Key? key, required int currentIndex})
       : _currentIndex = currentIndex,
         super(key: key);
+
+  void _navigate(BuildContext context, int index) {
+    Widget page;
+
+    switch (index) {
+      case 0:
+        page = DeckPage();
+        break;
+      case 1:
+        page = LobbyPage();
+        break;
+      case 2:
+        page = SettingPage();
+        break;
+      default:
+        page = Container();
+    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,29 +50,6 @@ class BottomNavigation extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Icon(iconData),
       label: label,
-    );
-  }
-
-  void _navigate(BuildContext context, int index) {
-    Widget page;
-
-    switch (index) {
-      case 0:
-        page = DeckPage();
-        break;
-      case 1:
-        page = PlayPage();
-        break;
-      case 2:
-        page = SettingPage();
-        break;
-      default:
-        page = Container();
-    }
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => page),
     );
   }
 }

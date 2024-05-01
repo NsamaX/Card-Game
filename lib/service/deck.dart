@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:project/api/model.dart';
 
-class deck {
+class Deck {
   Future<bool> check(String cardName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
@@ -10,7 +10,7 @@ class deck {
       String lowerCaseCardName = cardName.toLowerCase();
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
-        model data = model.fromJson(cardMap['model']);
+        Model data = Model.fromJson(cardMap['model']);
         String lowerCaseExistingCardName = data.getName().toLowerCase();
         if (lowerCaseExistingCardName == lowerCaseCardName) {
           return true;
@@ -20,7 +20,7 @@ class deck {
     return false;
   }
 
-  Future<void> save(model model, int cardCount) async {
+  Future<void> save(Model model, int cardCount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> savedCards = prefs.getStringList('user_deck') ?? [];
     Map<String, dynamic> cardMap = {
@@ -32,14 +32,14 @@ class deck {
     await prefs.setStringList('user_deck', savedCards);
   }
 
-  Future<void> update(model newCard, int newCardCount) async {
+  Future<void> update(Model newCard, int newCardCount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
     if (savedCards != null) {
       bool found = false;
       for (int i = 0; i < savedCards.length; i++) {
         Map<String, dynamic> cardMap = jsonDecode(savedCards[i]);
-        model data = model.fromJson(cardMap['model']);
+        Model data = Model.fromJson(cardMap['model']);
         if (data.getName() == newCard.getName()) {
           found = true;
           data.setCount(newCardCount);
@@ -61,14 +61,14 @@ class deck {
     }
   }
 
-  Future<List<model>> load() async {
+  Future<List<Model>> load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
-    List<model> deck = [];
+    List<Model> deck = [];
     if (savedCards != null) {
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
-        model data = model.fromJson(cardMap['model']);
+        Model data = Model.fromJson(cardMap['model']);
         int cardCount = cardMap['cardCount'];
         data.setCount(cardCount);
         deck.add(data);

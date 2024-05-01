@@ -1,4 +1,4 @@
-interface class info {
+interface class Info {
   getImage() {}
   getName() {}
   getMap() {}

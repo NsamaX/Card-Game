@@ -1,4 +1,4 @@
-class message {
+class Message {
   final List<dynamic> _log = [
     {
       'sender': false,

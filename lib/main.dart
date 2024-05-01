@@ -17,7 +17,7 @@ class project extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       theme: themeData(),
-      home: const welcome(),
+      home: const WelcomePage(),
     );
   }
 }

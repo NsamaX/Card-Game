@@ -4,7 +4,7 @@ import 'package:project/service/deck.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/cardList.dart';
-import 'cardDB.dart';
+import 'cardBook.dart';
 
 class DeckPage extends StatefulWidget {
   const DeckPage({Key? key}) : super(key: key);
@@ -14,9 +14,10 @@ class DeckPage extends StatefulWidget {
 }
 
 class _DeckPageState extends State<DeckPage> {
+  final Deck _deckService = Deck();
+
   final ScrollController _scrollController = ScrollController();
-  final deck _service = deck();
-  List<model> _deck = [];
+  List<Model> _deck = [];
   bool _isEdit = false;
 
   void _draw() {}
@@ -27,14 +28,14 @@ class _DeckPageState extends State<DeckPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => cardDB(save: false),
+        builder: (context) => CardBookPage(save: false),
       ),
     );
   }
 
   void _delete() {
     if (_deck.isEmpty) return;
-    _service.delete().then(
+    _deckService.delete().then(
       (_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Deleted deck successfully')),
@@ -50,13 +51,13 @@ class _DeckPageState extends State<DeckPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => cardDB(save: true),
+        builder: (context) => CardBookPage(save: true),
       ),
     );
   }
 
   void _edit() {
-    _service.load().then(
+    _deckService.load().then(
       (deck) {
         setState(() {
           _isEdit = !_isEdit;
@@ -69,7 +70,7 @@ class _DeckPageState extends State<DeckPage> {
   @override
   void initState() {
     super.initState();
-    _service.load().then(
+    _deckService.load().then(
       (deck) {
         setState(() {
           _deck = deck;

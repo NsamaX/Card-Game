@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class field {
+class Field {
   final List<dynamic> _field = [
     [
       {
@@ -137,7 +137,7 @@ class field {
     ],
   ];
 
-  final List<dynamic> _actions = [
+  final List<dynamic> _action = [
     {
       'action': 'block',
       'icon': Icons.block_rounded,
@@ -192,7 +192,7 @@ class field {
     },
   ];
 
-  List<dynamic> _cloneFieldWithoutActions() {
+  List<dynamic> _cloneFieldWithoutAction() {
     List<dynamic> _cloneField = [];
     for (int col = _field.length - 1; col >= 0; col--) {
       List<dynamic> _column = [];
@@ -224,18 +224,18 @@ class field {
     return _cloneField;
   }
 
-  List<dynamic> _setFieldActions() {
+  List<dynamic> _setFieldAction() {
     List<dynamic> _fieldset = _field;
     for (int col = 0; col < _fieldset.length; col++) {
       for (int row = 0; row < _fieldset[col].length; row++) {
         List<dynamic> _row = [];
         for (int i = 0; i < _fieldset[col][row]['action'].length; i++) {
-          for (var action in _actions) {
-            if (_fieldset[col][row]['action'][i] == action['action']) {
+          for (var move in _action) {
+            if (_fieldset[col][row]['action'][i] == move['action']) {
               Map<String, dynamic> actionCopy = {
-                'action': action['action'],
-                'icon': action['icon'],
-                'show': action['action'] == 'load' ? true : false,
+                'action': move['action'],
+                'icon': move['icon'],
+                'show': move['action'] == 'load' ? true : false,
               };
               _row.add(actionCopy);
             }
@@ -248,8 +248,8 @@ class field {
   }
 
   List<dynamic> getField() {
-    List<dynamic> _board = _cloneFieldWithoutActions();
-    _board.addAll(_setFieldActions());
+    List<dynamic> _board = _cloneFieldWithoutAction();
+    _board.addAll(_setFieldAction());
     return _board;
   }
 }

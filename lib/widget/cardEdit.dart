@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 
-class EditCard extends StatefulWidget {
-  final model _card;
+class CardEdit extends StatefulWidget {
+  final Model _card;
   final Map<dynamic, Function()> _onTap;
 
-  const EditCard(
-      {Key? key, required model card, required Map<dynamic, Function()> onTap})
+  const CardEdit(
+      {Key? key, required Model card, required Map<dynamic, Function()> onTap})
       : _card = card,
         _onTap = onTap,
         super(key: key);
 
   @override
-  _EditCardState createState() => _EditCardState();
+  _CardEditState createState() => _CardEditState();
 }
 
-class _EditCardState extends State<EditCard> {
+class _CardEditState extends State<CardEdit> {
   final double _optionSize = 26.0;
 
   late int _cardCount;

@@ -4,24 +4,28 @@ import 'package:project/service/card.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/cardList.dart';
 import 'package:project/widget/filterBox.dart';
-import 'pack.dart';
+import 'deck.dart';
 
-class cardDB extends StatefulWidget {
-  final bool save;
+class CardBookPage extends StatefulWidget {
+  final bool _save;
 
-  const cardDB({Key? key, required this.save}) : super(key: key);
+  const CardBookPage({Key? key, required bool save})
+      : _save = save,
+        super(key: key);
 
   @override
-  State<cardDB> createState() => _cardDBState();
+  State<CardBookPage> createState() => _CardBookPageState();
 }
 
-class _cardDBState extends State<cardDB> {
+class _CardBookPageState extends State<CardBookPage> {
+  final CardAPI _cardService = CardAPI();
+
   final ScrollController _scrollController = ScrollController();
-  final card _service = card();
   final String _search = "cards";
   int _page = 1;
-  List<model> _card = [];
+  List<Model> _card = [];
   bool _isLoading = false;
+
   bool _show = false;
   final List<dynamic> _option = [
     [
@@ -111,7 +115,7 @@ class _cardDBState extends State<cardDB> {
       _isLoading = true;
     });
 
-    List<model> fetchedData = await _service.getData(search, page: page);
+    List<Model> fetchedData = await _cardService.getData(search, page: page);
     if (!mounted) {
       return;
     }
@@ -170,7 +174,7 @@ class _cardDBState extends State<cardDB> {
             child: CardList(
               card: _card,
               scrollController: _scrollController,
-              save: widget.save,
+              save: widget._save,
             ),
           ),
           if (_isLoading)
