@@ -5,11 +5,23 @@ import 'package:project/service/deck.dart';
 import 'card.dart';
 import 'moveList.dart';
 
+// ignore: must_be_immutable
 class Board extends StatefulWidget {
   final List<dynamic> _board;
+  final Map<String, dynamic> _event;
+  final List<dynamic> _cardMatrix;
+  final Map<String, dynamic> _hand;
 
-  const Board({Key? key, required List<dynamic> board})
+  const Board(
+      {Key? key,
+      required List<dynamic> board,
+      required Map<String, dynamic> event,
+      required List<dynamic> cardMatrix,
+      required Map<String, dynamic> hand})
       : _board = board,
+        _event = event,
+        _cardMatrix = cardMatrix,
+        _hand = hand,
         super(key: key);
 
   @override
@@ -19,25 +31,10 @@ class Board extends StatefulWidget {
 class _BoardState extends State<Board> {
   final double _cardSize = 80.0;
 
-  final Deck _deckService = Deck();
-  final Random _random = Random();
-
-  Map<String, dynamic> _event = {
-    'bind': {},
-    'damage': {},
-    'drop': {},
-    'guard': {},
-    'show': {},
-    'special': {},
-    'trigger': {},
-  };
-  List<dynamic> _cardMatrix = [];
-  Map<String, dynamic> _hand = {'opsite': [], 'me': []};
-
   void _drag(int col, int row) {
     setState(() {
-      if (_cardMatrix[col][row].isNotEmpty) {
-        _cardMatrix[col][row].removeLast();
+      if (widget._cardMatrix[col][row].isNotEmpty) {
+        widget._cardMatrix[col][row].removeLast();
         _place(col, row);
       }
     });
@@ -45,7 +42,7 @@ class _BoardState extends State<Board> {
 
   void _drop(int col, int row, Model card, bool show) {
     setState(() {
-      _cardMatrix[col][row].add({'card': card, 'show': show});
+      widget._cardMatrix[col][row].add({'card': card, 'show': show});
       _place(col, row);
     });
   }
@@ -53,7 +50,7 @@ class _BoardState extends State<Board> {
   void _place(int col, int row) {
     setState(() {
       var currentField = widget._board[col][row];
-      var currentCard = _cardMatrix[col][row];
+      var currentCard = widget._cardMatrix[col][row];
       for (var action in currentField['action']) {
         switch (action['action']) {
           case 'load':
@@ -73,24 +70,24 @@ class _BoardState extends State<Board> {
 
   void _flip(int col, int row) {
     setState(() {
-      if (_cardMatrix[col][row].isNotEmpty)
-        _cardMatrix[col][row].last['show'] =
-            !_cardMatrix[col][row].last['show'];
+      if (widget._cardMatrix[col][row].isNotEmpty)
+        widget._cardMatrix[col][row].last['show'] =
+            !widget._cardMatrix[col][row].last['show'];
     });
   }
 
   void _load(int col, int row) async {
-    final List<Model> loadedDeck = await _deckService.load();
+    final List<Model> loadedDeck = await Deck().load();
     if (loadedDeck.isNotEmpty) {
       List<Model> shuffled = [];
       for (var card in loadedDeck)
         for (int i = 0; i < card.getCount(); i++) shuffled.add(card);
       for (var card in shuffled)
-        _cardMatrix[col][row].add({'card': card, 'show': false});
+        widget._cardMatrix[col][row].add({'card': card, 'show': false});
       _shuffle(20, col, row);
       for (var action in widget._board[col][row]['action']) {
         bool shouldShowAction =
-            action['action'] != 'load' || _cardMatrix[col][row].isEmpty;
+            action['action'] != 'load' || widget._cardMatrix[col][row].isEmpty;
         action['show'] = shouldShowAction;
       }
     }
@@ -100,73 +97,56 @@ class _BoardState extends State<Board> {
   void _shuffle(int time, int col, int row) {
     List<Model> shufflerYet = [];
     List<Model> shuffled = [];
-    for (var card in _cardMatrix[col][row]) shufflerYet.add(card['card']);
+    for (var card in widget._cardMatrix[col][row])
+      shufflerYet.add(card['card']);
     for (int i = shufflerYet.length; i > 0; i--) {
-      int index = _random.nextInt(i);
+      int index = Random().nextInt(i);
       shuffled.add(shufflerYet[index]);
       shufflerYet.removeAt(index);
     }
-    _cardMatrix[col][row].clear();
+    widget._cardMatrix[col][row].clear();
     for (var card in shuffled)
-      _cardMatrix[col][row].add({'card': card, 'show': false});
+      widget._cardMatrix[col][row].add({'card': card, 'show': false});
     if (time > 0) _shuffle(time - 1, col, row);
   }
 
   void _use(int col, int row, String action) {
     setState(() {
-      if (_event.containsKey(action)) {
+      if (widget._event.containsKey(action)) {
         int targetCol;
         int targetRow;
         switch (action) {
           case 'show' || 'damage':
             final bool isTriggerCard =
-                _cardMatrix[col][row].last['card'].getType().length > 1;
+                widget._cardMatrix[col][row].last['card'].getType().length > 1;
             targetCol = isTriggerCard
-                ? _event['trigger']['col']
-                : _event[action]['col'];
+                ? widget._event['trigger']['col']
+                : widget._event[action]['col'];
             targetRow = isTriggerCard
-                ? _event['trigger']['row']
-                : _event[action]['row'];
+                ? widget._event['trigger']['row']
+                : widget._event[action]['row'];
             break;
           default:
-            targetCol = _event[action]['col'];
-            targetRow = _event[action]['row'];
+            targetCol = widget._event[action]['col'];
+            targetRow = widget._event[action]['row'];
             break;
         }
-        final cardToMove = _cardMatrix[col][row].last['card'];
-        _cardMatrix[targetCol][targetRow]
+        final cardToMove = widget._cardMatrix[col][row].last['card'];
+        widget._cardMatrix[targetCol][targetRow]
             .add({'card': cardToMove, 'show': true});
-        _cardMatrix[col][row].removeLast();
+        widget._cardMatrix[col][row].removeLast();
         _place(col, row);
         _place(targetCol, targetRow);
       }
     });
   }
 
-  Map<String, dynamic> _getAction() => {
+  Map<String, dynamic> _getOption() => {
         'flip': _flip,
         'load': _load,
         'shuffle': _shuffle,
         'use': _use,
       };
-
-  void _initializeCardMatrix() {
-    for (int col = 0; col < widget._board.length; col++) {
-      List<dynamic> column = [];
-      for (int row = 0; row < widget._board[col].length; row++) {
-        column.add([]);
-        final String name = widget._board[col][row]['field']['event'] ?? 'none';
-        if (_event.containsKey(name)) _event[name] = {'col': col, 'row': row};
-      }
-      _cardMatrix.add(column);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeCardMatrix();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,13 +157,13 @@ class _BoardState extends State<Board> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _handZone(_theme, _hand['opsite']),
+          _handZone(_theme, widget._hand['opsite']),
           for (int col = 0; col < widget._board.length; col++)
             Row(children: [
               for (int row = 0; row < widget._board[col].length; row++)
                 _completeField(_theme, col, row),
             ]),
-          _handZone(_theme, _hand['me']),
+          _handZone(_theme, widget._hand['me']),
         ],
       ),
     );
@@ -201,8 +181,8 @@ class _BoardState extends State<Board> {
             builder: (context, candidateData, rejectedData) =>
                 _virsualField(theme, _field),
           ),
-          if (_cardMatrix[col][row].isNotEmpty)
-            for (var card in _cardMatrix[col][row])
+          if (widget._cardMatrix[col][row].isNotEmpty)
+            for (var card in widget._cardMatrix[col][row])
               Draggable(
                 child: DragTarget(
                   onAccept: (dynamic card) =>
@@ -231,8 +211,8 @@ class _BoardState extends State<Board> {
           MoveList(
             col: col,
             row: row,
-            option: _getAction(),
-            onTap: _field['action'],
+            option: _getOption(),
+            action: _field['action'],
           ),
         ],
       ),

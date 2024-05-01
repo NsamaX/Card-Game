@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class SignIcon extends StatelessWidget {
   final double _optionSize = 40.0;
 
-  final List<String> _image;
+  final List<String> _image = [
+    'asset/image/apple.png',
+    'asset/image/google.png',
+    'asset/image/facebook.png',
+  ];
 
-  const SignIcon({Key? key, required List<String> image})
-      : _image = image,
-        super(key: key);
+  SignIcon({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -18,12 +18,11 @@ class CardBookPage extends StatefulWidget {
 }
 
 class _CardBookPageState extends State<CardBookPage> {
-  final CardAPI _cardService = CardAPI();
-
   final ScrollController _scrollController = ScrollController();
+  late List<Model> _card;
+
   final String _search = "cards";
   int _page = 1;
-  List<Model> _card = [];
   bool _isLoading = false;
 
   bool _showFilter = false;
@@ -113,7 +112,7 @@ class _CardBookPageState extends State<CardBookPage> {
       _isLoading = true;
     });
 
-    List<Model> fetchedData = await _cardService.getData(search, page: page);
+    List<Model> fetchedData = await CardAPI().getData(search, page: page);
     if (!mounted) return;
 
     setState(() {
@@ -142,6 +141,7 @@ class _CardBookPageState extends State<CardBookPage> {
   @override
   void initState() {
     super.initState();
+    _card = [];
     _getData(_search);
     _scrollController.addListener(_scrollListener);
   }

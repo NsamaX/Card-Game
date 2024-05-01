@@ -14,9 +14,6 @@ class PlayPage extends StatefulWidget {
 }
 
 class _PlayPageState extends State<PlayPage> {
-  final Field _fieldService = Field();
-  final Message _messageService = Message();
-
   final List<IconData> _communicationIcon = [
     Icons.headset_off_rounded,
     Icons.headset_rounded,
@@ -24,6 +21,19 @@ class _PlayPageState extends State<PlayPage> {
   ];
   int _communicationType = 0;
   bool _showChat = false;
+
+  late List<dynamic> _board;
+  late List<dynamic> _cardMatrix;
+  late Map<String, dynamic> _event = {
+    'bind': {},
+    'damage': {},
+    'drop': {},
+    'guard': {},
+    'show': {},
+    'special': {},
+    'trigger': {},
+  };
+  Map<String, dynamic> _hand = {'opsite': [], 'me': []};
 
   void _back() {
     Navigator.pushReplacement(
@@ -41,10 +51,26 @@ class _PlayPageState extends State<PlayPage> {
     });
   }
 
-  void _message() {
+  void _chat() {
     setState(() {
       _showChat = !_showChat;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _board = Field().getField();
+    _cardMatrix = [];
+    for (int col = 0; col < _board.length; col++) {
+      List<dynamic> column = [];
+      for (int row = 0; row < _board[col].length; row++) {
+        column.add([]);
+        final String name = _board[col][row]['field']['event'] ?? 'none';
+        if (_event.containsKey(name)) _event[name] = {'col': col, 'row': row};
+      }
+      _cardMatrix.add(column);
+    }
   }
 
   @override
@@ -63,18 +89,21 @@ class _PlayPageState extends State<PlayPage> {
           () {},
           () {},
           _communication,
-          _message,
+          _chat,
         ],
       ),
       body: Stack(children: [
         Board(
-          board: _fieldService.getField(),
+          board: _board,
+          event: _event,
+          cardMatrix: _cardMatrix,
+          hand: _hand,
         ),
         AnimatedContainer(
           duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
           transform: Matrix4.translationValues(_showChat ? 0 : 200, 0, 0),
-          child: ChatBox(log: _messageService.getLog()),
+          child: ChatBox(log: Message().getLog()),
         ),
       ]),
     );

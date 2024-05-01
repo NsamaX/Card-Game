@@ -5,25 +5,25 @@ class MoveList extends StatelessWidget {
   final int _col;
   final int _row;
   final Map<String, dynamic> _option;
-  final List<dynamic> _onTap;
+  final List<dynamic> _action;
 
   const MoveList(
       {Key? key,
       required int col,
       required int row,
       required Map<String, dynamic> option,
-      required List<dynamic> onTap})
+      required List<dynamic> action})
       : _col = col,
         _row = row,
         _option = option,
-        _onTap = onTap,
+        _action = action,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = Theme.of(context);
 
-    if (_onTap.isNotEmpty)
+    if (_action.isNotEmpty)
       return Positioned(
         top: 0.0,
         right: 0.0,
@@ -35,14 +35,14 @@ class MoveList extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  for (var action in _onTap)
-                    // if (action['show'])
-                      Move(
-                        col: _col,
-                        row: _row,
-                        option: _option,
-                        action: action,
-                      )
+                  for (var action in _action)
+                    if (action['show'])
+                    Move(
+                      col: _col,
+                      row: _row,
+                      option: _option,
+                      action: action,
+                    )
                 ],
               ),
             ],

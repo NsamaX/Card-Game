@@ -7,8 +7,6 @@ import 'cardEdit.dart';
 class CardList extends StatelessWidget {
   final int cardInEachRow = 3;
 
-  final Deck _deckService = Deck();
-
   final ScrollController _scrollController;
   final List<Model> _cards;
   final bool _save;
@@ -58,12 +56,12 @@ class CardList extends StatelessWidget {
             onTap: {
               Icons.add_rounded: () {
                 _card.addCard();
-                _deckService.update(_card, _card.getCount());
+                Deck().update(_card, _card.getCount());
               },
               Icons.remove_rounded: () {
                 if (_card.getCount() > 0) {
                   _card.removeCard();
-                  _deckService.update(_card, _card.getCount());
+                  Deck().update(_card, _card.getCount());
                 }
               },
             },

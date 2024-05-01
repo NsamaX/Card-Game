@@ -14,10 +14,8 @@ class DeckPage extends StatefulWidget {
 }
 
 class _DeckPageState extends State<DeckPage> {
-  final Deck _deckService = Deck();
-
   final ScrollController _scrollController = ScrollController();
-  List<Model> _deck = [];
+  late List<Model> _deck;
   bool _isEdit = false;
 
   void _draw() {}
@@ -27,15 +25,13 @@ class _DeckPageState extends State<DeckPage> {
   void _search() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (context) => CardBookPage(save: false),
-      ),
+      MaterialPageRoute(builder: (context) => CardBookPage(save: false)),
     );
   }
 
   void _delete() {
     if (_deck.isEmpty) return;
-    _deckService.delete().then(
+    Deck().delete().then(
       (_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Deleted deck successfully')),
@@ -57,7 +53,7 @@ class _DeckPageState extends State<DeckPage> {
   }
 
   void _edit() {
-    _deckService.load().then(
+    Deck().load().then(
       (deck) {
         setState(() {
           _isEdit = !_isEdit;
@@ -70,7 +66,8 @@ class _DeckPageState extends State<DeckPage> {
   @override
   void initState() {
     super.initState();
-    _deckService.load().then(
+    _deck = [];
+    Deck().load().then(
       (deck) {
         setState(() {
           _deck = deck;

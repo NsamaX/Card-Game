@@ -3,13 +3,7 @@ import 'package:project/widget/signIcon.dart';
 import 'deck.dart';
 
 class SignInPage extends StatelessWidget {
-  final List<String> _image = [
-    'asset/image/apple.png',
-    'asset/image/google.png',
-    'asset/image/facebook.png',
-  ];
-
-  SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +21,7 @@ class SignInPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 60.0),
-              child: SignIcon(image: _image),
+              child: SignIcon(),
             ),
             Center(
               child: Container(

@@ -18,13 +18,11 @@ class CardInfoPage extends StatefulWidget {
 }
 
 class _CardInfoPageState extends State<CardInfoPage> {
-  final Deck _deckService = Deck();
-
   final List<int> _count = [1, 2, 3, 4];
   int _selectedIndex = 0;
 
   void handleSave() async {
-    bool cardExists = await _deckService.check(widget._card.getName());
+    bool cardExists = await Deck().check(widget._card.getName());
 
     if (cardExists)
       ScaffoldMessenger.of(context).showSnackBar(
@@ -33,7 +31,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
                 Text('Card with the same name already exists in the deck')),
       );
     else {
-      _deckService.save(widget._card, _count[_selectedIndex]);
+      Deck().save(widget._card, _count[_selectedIndex]);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Save Card Successfully')),
       );

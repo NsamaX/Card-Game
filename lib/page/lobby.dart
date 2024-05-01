@@ -5,13 +5,11 @@ import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/lobby.dart';
 
 class LobbyPage extends StatelessWidget {
-  final Room _roomService = Room(room: 260);
-
   void _filter() {}
 
   void _create() {}
 
-  LobbyPage({Key? key}) : super(key: key);
+  const LobbyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,7 @@ class LobbyPage extends StatelessWidget {
             child: ListView(
               children: [
                 Lobby(
-                    room: _roomService.getRoom(),
+                    room: Room().getRoom(260),
                     maxRoomPerPage: 30,
                     maxNavigationTap: 6),
               ],

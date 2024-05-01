@@ -3,11 +3,7 @@ import 'dart:math';
 import 'package:project/page/play.dart';
 
 class Room {
-  final int _room;
-
-  Room({required int room}) : _room = room;
-
-  List<Map<String, dynamic>> getRoom() {
+  List<Map<String, dynamic>> getRoom(int room) {
     List<Map<String, dynamic>> _label = [
       {"title": null, "content": []}
     ];
@@ -17,7 +13,7 @@ class Room {
       Icons.lock_rounded,
     ];
     Random random = Random();
-    for (int i = 0; i < _room; i++) {
+    for (int i = 0; i < room; i++) {
       IconData status = statusIcon[random.nextInt(statusIcon.length)];
       String text = 'Room ${i + 1} : Player name : Game information';
       if (_label.length <= i) _label.add({"title": null, "content": []});
