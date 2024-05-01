@@ -53,7 +53,7 @@ class setting extends StatelessWidget {
           style: themeData().textTheme.titleSmall,
         )),
       ),
-      body: label(label: _label),
+      body: Label(label: _label),
       bottomNavigationBar: bottomNav(currentIndex: 2),
     );
   }

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
 
-class label extends StatelessWidget {
+class Label extends StatelessWidget {
   final List<dynamic> _label;
 
-  const label({Key? key, required List<dynamic> label})
+  const Label({Key? key, required List<dynamic> label})
       : _label = label,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,14 +18,10 @@ class label extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (category['title'] != null) _title(category['title']),
+              if (category['title'] != null) _title(_theme, category['title']),
               ...category['content'].map<Widget>((item) {
                 return _content(
-                  context,
-                  item['icon'],
-                  item['text'],
-                  item['page'],
-                );
+                    _theme, context, item['icon'], item['text'], item['page']);
               }).toList(),
             ],
           );
@@ -33,20 +30,20 @@ class label extends StatelessWidget {
     );
   }
 
-  Widget _title(String text) {
+  Widget _title(ThemeData theme, String text) {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, top: 16.0, bottom: 8.0),
       child: Text(
         text,
-        style: themeData().textTheme.bodyMedium?.copyWith(
-              color: themeData().secondaryHeaderColor,
-            ),
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: theme.secondaryHeaderColor,
+        ),
       ),
     );
   }
 
-  Widget _content(
-      BuildContext context, IconData icon, String text, Widget? page) {
+  Widget _content(ThemeData theme, BuildContext context, IconData icon,
+      String text, Widget? page) {
     return GestureDetector(
       onTap: () {
         if (page != null) {
@@ -59,10 +56,10 @@ class label extends StatelessWidget {
       child: Container(
         height: 40.0,
         decoration: BoxDecoration(
-          color: themeData().primaryColor,
+          color: theme.primaryColor,
           border: Border(
             bottom: BorderSide(
-              color: themeData().iconTheme.color!.withOpacity(0.6),
+              color: theme.iconTheme.color!.withOpacity(0.6),
               width: 1.0,
             ),
           ),
@@ -73,7 +70,7 @@ class label extends StatelessWidget {
             children: [
               Icon(icon),
               SizedBox(width: 20.0),
-              Text(text, style: themeData().textTheme.bodySmall),
+              Text(text, style: theme.textTheme.bodySmall),
             ],
           ),
         ),

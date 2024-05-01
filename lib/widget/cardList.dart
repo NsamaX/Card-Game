@@ -57,7 +57,7 @@ class _cardListState extends State<cardList> {
       children: [
         CARD(card: _card, save: widget._save),
         if (widget._edit)
-          editCard(
+          EditCard(
             card: _card,
             onTap: {
               Icons.add_rounded: () {

@@ -181,7 +181,7 @@ class _cardDBState extends State<cardDB> {
             duration: Duration(milliseconds: 400),
             curve: Curves.easeInOut,
             transform: Matrix4.translationValues(_show ? 0 : 260, 0, 0),
-            child: filterBox(filter: _option),
+            child: FilterBox(filter: _option),
           ),
         ],
       ),

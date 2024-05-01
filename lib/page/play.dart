@@ -33,7 +33,10 @@ class play extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                lobby(room: _service.getRoom(), page: 30, icon: 6),
+                Lobby(
+                    room: _service.getRoom(),
+                    maxRoomPerPage: 30,
+                    maxNavigationTap: 6),
               ],
             ),
           ),

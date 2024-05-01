@@ -72,7 +72,7 @@ class _duelState extends State<duel> {
           duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
           transform: Matrix4.translationValues(_show ? 0 : 200, 0, 0),
-          child: chatBox(log: _service.getLog()),
+          child: ChatBox(log: _service.getLog()),
         ),
       ]),
     );

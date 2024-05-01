@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'theme.dart';
 
-class editCard extends StatefulWidget {
+class EditCard extends StatefulWidget {
   final model _card;
   final Map<dynamic, Function()> _onTap;
 
-  const editCard({
+  const EditCard({
     Key? key,
     required model card,
     required Map<dynamic, Function()> onTap,
@@ -15,12 +14,13 @@ class editCard extends StatefulWidget {
         super(key: key);
 
   @override
-  _editCardState createState() => _editCardState();
+  _EditCardState createState() => _EditCardState();
 }
 
-class _editCardState extends State<editCard> {
+class _EditCardState extends State<EditCard> {
+  final double _optionSize = 26.0;
+
   late int _cardCount;
-  final double _size = 26.0;
 
   void _updateCardCount() {
     setState(() {
@@ -36,6 +36,8 @@ class _editCardState extends State<editCard> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return Positioned(
       top: 0.0,
       right: 0.0,
@@ -43,41 +45,45 @@ class _editCardState extends State<editCard> {
         children: [
           for (var item in widget._onTap.keys)
             _option(
+                theme: _theme,
                 item: item,
                 onPressed: () {
                   widget._onTap[item]!();
                   _updateCardCount();
                 }),
-          _option(item: _cardCount, onPressed: null),
+          _option(theme: _theme, item: _cardCount, onPressed: null),
         ],
       ),
     );
   }
 
-  Widget _option({required dynamic item, required Function()? onPressed}) {
+  Widget _option(
+      {required ThemeData theme,
+      required dynamic item,
+      required Function()? onPressed}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: _size,
+          width: _optionSize,
           decoration: BoxDecoration(
-            color: themeData().iconTheme.color,
+            color: theme.iconTheme.color,
             shape: BoxShape.circle,
           ),
           child: item is int
               ? Text(
                   item.toString(),
-                  style: themeData().textTheme.bodyMedium?.copyWith(
-                        color: themeData().primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 )
               : Icon(
                   item,
-                  color: themeData().primaryColor,
-                  size: _size * 0.9,
+                  color: theme.primaryColor,
+                  size: _optionSize * 0.9,
                 ),
         ),
       ),

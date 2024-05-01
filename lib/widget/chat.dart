@@ -1,56 +1,60 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
 
-class chat extends StatelessWidget {
+class Chat extends StatelessWidget {
   final List<dynamic> _log;
-  final double _messageFree;
-  final double _sendButton;
+  final double _messageFreeSize;
+  final double _sendButtonSize;
 
-  const chat(
+  const Chat(
       {Key? key,
       required List<dynamic> log,
-      required double messageFree,
-      required double sendButton})
+      required double messageFreeSize,
+      required double sendButtonSize})
       : _log = log,
-        _messageFree = messageFree,
-        _sendButton = sendButton,
+        _messageFreeSize = messageFreeSize,
+        _sendButtonSize = sendButtonSize,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    final ThemeData _theme = Theme.of(context);
+
+    return Column(
       children: [
-        for (var message in _log) _message(message),
-        _send(),
+        Expanded(
+          child: ListView(
+            children: [
+              for (var message in _log) _message(_theme, message),
+            ],
+          ),
+        ),
+        SizedBox(height: _messageFreeSize),
+        _sendButton(_theme),
       ],
     );
   }
 
-  Widget _message(Map<String, dynamic> data) {
-    final double _leftPadding = data['sender'] ? _messageFree : 0.0;
-    final double _rightPadding = data['sender'] ? 0.0 : _messageFree;
+  Widget _message(ThemeData theme, Map<String, dynamic> data) {
+    final double _leftPadding = data['sender'] ? _messageFreeSize : 0.0;
+    final double _rightPadding = data['sender'] ? 0.0 : _messageFreeSize;
 
     return Align(
       alignment: data['sender'] ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
-        padding:
-            EdgeInsets.fromLTRB(_leftPadding, 0.0, _rightPadding, _messageFree),
+        padding: EdgeInsets.fromLTRB(
+            _leftPadding, 0.0, _rightPadding, _messageFreeSize),
         child: Container(
           decoration: BoxDecoration(
             color: data['sender']
-                ? themeData().secondaryHeaderColor
-                : themeData()
-                    .elevatedButtonTheme
-                    .style!
-                    .backgroundColor!
-                    .resolve({}),
+                ? theme.secondaryHeaderColor
+                : theme.elevatedButtonTheme.style!.backgroundColor!.resolve({}),
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               data['message'],
-              style: themeData().textTheme.bodyMedium,
+              style: theme.textTheme.bodyMedium,
             ),
           ),
         ),
@@ -58,32 +62,28 @@ class chat extends StatelessWidget {
     );
   }
 
-  Widget _send() {
-    return Expanded(
-      child: Container(
-        height: _sendButton,
-        decoration: BoxDecoration(
-          color: themeData().iconTheme.color,
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'messages',
-                style: themeData()
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: themeData().primaryColor),
-              ),
-              IconButton(
-                icon: Icon(Icons.send_rounded, color: themeData().primaryColor),
-                onPressed: () {},
-              ),
-            ],
-          ),
+  Widget _sendButton(ThemeData theme) {
+    return Container(
+      height: _sendButtonSize,
+      decoration: BoxDecoration(
+        color: theme.iconTheme.color,
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'messages',
+              style: theme.textTheme.bodyMedium
+                  ?.copyWith(color: theme.primaryColor),
+            ),
+            IconButton(
+              icon: Icon(Icons.send_rounded, color: theme.primaryColor),
+              onPressed: () {},
+            ),
+          ],
         ),
       ),
     );

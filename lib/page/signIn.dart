@@ -25,7 +25,7 @@ class signIn extends StatelessWidget {
               style: themeData().textTheme.titleLarge,
             ),
             SizedBox(height: 60.0),
-            signIcon(image: _image),
+            SignIcon(image: _image),
             SizedBox(height: 60.0),
             Center(
               child: Container(

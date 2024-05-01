@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'chat.dart';
-import 'theme.dart';
 
-class chatBox extends StatefulWidget {
+class ChatBox extends StatefulWidget {
   final List<dynamic> _log;
 
-  const chatBox({Key? key, required List<dynamic> log})
+  const ChatBox({Key? key, required List<dynamic> log})
       : _log = log,
         super(key: key);
 
   @override
-  State<chatBox> createState() => _chatBoxState();
+  State<ChatBox> createState() => _ChatBoxState();
 }
 
-class _chatBoxState extends State<chatBox> with SingleTickerProviderStateMixin {
-  late AnimationController _chatBoxController;
+class _ChatBoxState extends State<ChatBox> with SingleTickerProviderStateMixin {
+  final double _messageFreeSize = 16.0;
+  final double _sendButtonSize = 40.0;
+
+  late AnimationController _ChatBoxController;
   late Animation<Offset> _offsetAnimation;
-  final double _free = 16.0;
-  final double _sendButton = 40.0;
 
   @override
   void initState() {
     super.initState();
-    _chatBoxController = AnimationController(
+    _ChatBoxController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 600),
     );
@@ -30,20 +30,22 @@ class _chatBoxState extends State<chatBox> with SingleTickerProviderStateMixin {
       begin: Offset(1.0, 0.0),
       end: Offset.zero,
     ).animate(CurvedAnimation(
-      parent: _chatBoxController,
+      parent: _ChatBoxController,
       curve: Curves.easeInOut,
     ));
-    _chatBoxController.forward();
+    _ChatBoxController.forward();
   }
 
   @override
   void dispose() {
-    _chatBoxController.dispose();
+    _ChatBoxController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return SlideTransition(
       position: _offsetAnimation,
       child: Align(
@@ -52,17 +54,15 @@ class _chatBoxState extends State<chatBox> with SingleTickerProviderStateMixin {
           padding: const EdgeInsets.only(top: 16.0),
           child: Container(
             width: 200.0,
-            height:
-                (widget._log.length * (_sendButton * 2)) + _free + _sendButton,
             constraints: BoxConstraints(maxHeight: 360.0),
             decoration: BoxDecoration(
-              color: themeData().appBarTheme.backgroundColor,
+              color: _theme.appBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: chat(log: widget._log, messageFree: 8.0, sendButton: 40.0),
-            ),
+            child: Chat(
+                log: widget._log,
+                messageFreeSize: _messageFreeSize,
+                sendButtonSize: _sendButtonSize),
           ),
         ),
       ),

@@ -71,14 +71,14 @@ class _boardState extends State<board> {
   void _use(int col, int row, String action) {
     setState(() {
       if (_event.containsKey(action)) {
-        final int _col = _card[col][row].last['card'].getType() == null
-            ? _event[action]['col']
-            : _event['trigger']['col'];
-        final int _row = _card[col][row].last['card'].getType() == null
-            ? _event[action]['row']
-            : _event['trigger']['row'];
-        _card[_col][_row]
-            .add({'card': _card[col][row].last['card'], 'show': true});
+        final bool isTriggerCard =
+            _card[col][row].last['card'].getType().length > 1;
+        final int _col =
+            isTriggerCard ? _event['trigger']['col'] : _event[action]['col'];
+        final int _row =
+            isTriggerCard ? _event['trigger']['row'] : _event[action]['row'];
+        final cardToMove = _card[col][row].last['card'];
+        _card[_col][_row].add({'card': cardToMove, 'show': true});
         _card[col][row].removeLast();
         _place(col, row);
         _place(_col, _row);

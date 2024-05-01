@@ -14,25 +14,32 @@ ThemeData themeData() {
     primaryColor: _primary4,
     secondaryHeaderColor: _secondary,
     iconTheme: IconThemeData(color: Colors.white, size: 16.0),
-    textTheme: textThemeData(),
-    elevatedButtonTheme: elevatedButtonThemeData(),
-    appBarTheme: appBarThemeData(),
-    bottomNavigationBarTheme: bottomNavigationBarThemeData(),
+    textTheme: TextTheme(
+      titleLarge: _titleStyle(32.0),
+      titleMedium: _titleStyle(28.0),
+      titleSmall: _titleStyle(24.0),
+      bodyLarge: _bodyStyle(20.0),
+      bodyMedium: _bodyStyle(16.0),
+      bodySmall: _bodyStyle(12.0),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(_primary4)),
+    ),
+    appBarTheme: AppBarTheme(
+      backgroundColor: _primary3,
+      iconTheme: IconThemeData(color: _secondary, size: 24.0),
+      titleTextStyle: _titleStyle(16.0).copyWith(color: _secondary),
+      toolbarTextStyle: _titleStyle(16.0).copyWith(color: _secondary),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: _primary1,
+      selectedItemColor: _secondary,
+      unselectedItemColor: Colors.white,
+    ),
   );
 }
 
-TextTheme textThemeData() {
-  return TextTheme(
-    titleLarge: titleStyle(32.0),
-    titleMedium: titleStyle(28.0),
-    titleSmall: titleStyle(24.0),
-    bodyLarge: bodyStyle(20.0),
-    bodyMedium: bodyStyle(16.0),
-    bodySmall: bodyStyle(12.0),
-  );
-}
-
-TextStyle titleStyle(double fontSize) {
+TextStyle _titleStyle(double fontSize) {
   return TextStyle(
     color: Colors.white,
     fontSize: fontSize,
@@ -41,33 +48,10 @@ TextStyle titleStyle(double fontSize) {
   );
 }
 
-TextStyle bodyStyle(double fontSize) {
+TextStyle _bodyStyle(double fontSize) {
   return TextStyle(
     color: Colors.white,
     fontSize: fontSize,
     // fontStyle: GoogleFonts.pacifico().fontStyle,
-  );
-}
-
-ElevatedButtonThemeData elevatedButtonThemeData() {
-  return ElevatedButtonThemeData(
-    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(_primary4)),
-  );
-}
-
-AppBarTheme appBarThemeData() {
-  return AppBarTheme(
-    backgroundColor: _primary3,
-    iconTheme: IconThemeData(color: _secondary, size: 24.0),
-    titleTextStyle: titleStyle(16.0).copyWith(color: _secondary),
-    toolbarTextStyle: titleStyle(16.0).copyWith(color: _secondary),
-  );
-}
-
-BottomNavigationBarThemeData bottomNavigationBarThemeData() {
-  return BottomNavigationBarThemeData(
-    backgroundColor: _primary1,
-    selectedItemColor: _secondary,
-    unselectedItemColor: Colors.white,
   );
 }

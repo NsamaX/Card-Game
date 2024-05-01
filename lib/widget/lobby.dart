@@ -1,43 +1,48 @@
 import 'package:flutter/material.dart';
 import 'label.dart';
-import 'page.dart';
+import 'pageNav.dart';
 
-class lobby extends StatefulWidget {
+class Lobby extends StatefulWidget {
   final List<dynamic> _room;
-  final int _page;
-  final int _icon;
+  final int _maxRoomPerPage;
+  final int _maxNavigationTap;
 
-  const lobby({
+  const Lobby({
     Key? key,
     required List<dynamic> room,
-    required int page,
-    required int icon,
+    required int maxRoomPerPage,
+    required int maxNavigationTap,
   })  : _room = room,
-        _page = page,
-        _icon = icon,
+        _maxRoomPerPage = maxRoomPerPage,
+        _maxNavigationTap = maxNavigationTap,
         super(key: key);
 
   @override
-  _lobbyState createState() => _lobbyState();
+  _LobbyState createState() => _LobbyState();
 }
 
-class _lobbyState extends State<lobby> {
+class _LobbyState extends State<Lobby> {
   int _currentPage = 0;
+
+  int get _startIndex => _currentPage * widget._maxRoomPerPage;
+  int get _endIndex => (_currentPage + 1) * widget._maxRoomPerPage;
+  int get _totalRoom => widget._room.length;
+
+  List<dynamic> get currentRoom => widget._room.sublist(
+        _startIndex,
+        _endIndex.clamp(0, _totalRoom),
+      );
 
   @override
   Widget build(BuildContext context) {
-    int _start = _currentPage * widget._page;
-    int _end = (_currentPage + 1) * widget._page;
-    if (_end > widget._room.length) _end = widget._room.length;
-
     return Expanded(
       child: Column(
         children: [
-          label(label: widget._room.sublist(_start, _end)),
-          page(
+          Label(label: currentRoom),
+          PageNavigation(
             currentPage: _currentPage,
-            page: (widget._room.length / widget._page).ceil(),
-            icon: widget._icon,
+            maxRoomPerPage: (_totalRoom / widget._maxRoomPerPage).ceil(),
+            maxNavigationTap: widget._maxNavigationTap,
             onTap: (int page) {
               setState(() {
                 _currentPage = page;

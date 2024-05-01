@@ -1,46 +1,48 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
 
-class filter extends StatelessWidget {
+class Filter extends StatelessWidget {
   final List<dynamic> _filter;
 
-  const filter({Key? key, required List<dynamic> filter})
+  const Filter({Key? key, required List<dynamic> filter})
       : _filter = filter,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: _filter.map((entry) => _catagory(entry)).toList(),
+      children: _filter.map((entry) => _category(_theme, entry)).toList(),
     );
   }
 
-  Widget _catagory(List<dynamic> option) {
+  Widget _category(ThemeData theme, List<dynamic> options) {
     return Container(
       decoration: BoxDecoration(
-          border: Border(
-              top: BorderSide(
-        color: themeData().iconTheme.color!.withOpacity(0.6),
-      ))),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          children: option
-              .map((entry) => _option(entry['icon'], entry['text']))
-              .toList(),
+        border: Border(
+          top: BorderSide(
+            color: theme.iconTheme.color!.withOpacity(0.6),
+          ),
         ),
+      ),
+      child: Column(
+        children: options
+            .map((entry) => _option(theme, entry['icon'], entry['text']))
+            .toList(),
       ),
     );
   }
 
-  Widget _option(IconData? icon, String text) {
-    return Row(
-      children: [
-        icon != null ? Icon(icon) : SizedBox(width: themeData().iconTheme.size),
-        SizedBox(width: 8.0),
-        Text(text, style: themeData().textTheme.bodyMedium),
-      ],
+  Widget _option(ThemeData theme, IconData? icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          icon != null ? Icon(icon) : SizedBox(width: theme.iconTheme.size),
+          SizedBox(width: 8.0),
+          Text(text, style: theme.textTheme.bodyMedium),
+        ],
+      ),
     );
   }
 }

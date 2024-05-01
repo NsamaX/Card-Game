@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'filter.dart';
-import 'theme.dart';
 
-class filterBox extends StatefulWidget {
+class FilterBox extends StatefulWidget {
   final List<dynamic> _filter;
 
-  const filterBox({Key? key, required List<dynamic> filter})
+  const FilterBox({Key? key, required List<dynamic> filter})
       : _filter = filter,
         super(key: key);
 
   @override
-  State<filterBox> createState() => _filterState();
+  State<FilterBox> createState() => _FilterBoxState();
 }
 
-class _filterState extends State<filterBox>
+class _FilterBoxState extends State<FilterBox>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
@@ -43,6 +42,8 @@ class _filterState extends State<filterBox>
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return SlideTransition(
       position: _offsetAnimation,
       child: Padding(
@@ -52,7 +53,7 @@ class _filterState extends State<filterBox>
           child: Container(
             width: 260.0,
             decoration: BoxDecoration(
-              color: themeData().appBarTheme.backgroundColor,
+              color: _theme.appBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: Padding(
@@ -64,10 +65,10 @@ class _filterState extends State<filterBox>
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Filter Options',
-                      style: themeData().textTheme.titleSmall,
+                      style: _theme.textTheme.titleSmall,
                     ),
                   ),
-                  filter(filter: widget._filter),
+                  Filter(filter: widget._filter),
                 ],
               ),
             ),
