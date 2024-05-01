@@ -144,8 +144,7 @@ class _BoardState extends State<Board> {
       List<dynamic> column = [];
       for (int row = 0; row < widget._board[col].length; row++) {
         column.add([]);
-        final String name =
-            widget._board[col][row]['field']['_event'] ?? 'none';
+        final String name = widget._board[col][row]['field']['event'] ?? 'none';
         if (_event.containsKey(name)) _event[name] = {'col': col, 'row': row};
       }
       _cardMatrix.add(column);

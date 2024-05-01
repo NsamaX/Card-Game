@@ -5,25 +5,33 @@ class Field {
     [
       {
         'field': {'name': 'Special\nZone', 'type': 0, 'event': 'special'},
-        'action': []
+        'action': [
+          'search',
+        ]
       },
       {
         'field': {'name': 'Trigger', 'type': 0, 'event': 'trigger'},
-        'action': [],
+        'action': [
+          'search',
+        ],
       },
       {
         'field': {'name': 'Guard', 'type': 3, 'event': 'guard'},
         'action': [
-          'drop',
+          'search',
         ],
       },
       {
         'field': {'name': 'Show', 'type': 0, 'event': 'show'},
-        'action': [],
+        'action': [
+          'search',
+        ],
       },
       {
-        'field': {'name': 'Bind\nZone', 'type': 0, 'event': 'bind'},
-        'action': []
+        'field': {'name': 'dropd\nZone', 'type': 0, 'event': 'dropd'},
+        'action': [
+          'search',
+        ]
       },
     ],
     [
@@ -32,43 +40,26 @@ class Field {
         'action': [
           'load',
           'search',
-          'special',
         ]
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
+          'search',
           'guard',
-          'drop',
+        ],
+      },
+      {
+        'field': {'name': 'Card', 'type': 0},
+        'action': [
           'search',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
-          'guard',
-          'drop',
           'search',
-        ],
-      },
-      {
-        'field': {'name': 'Card', 'type': 0},
-        'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
           'guard',
-          'drop',
-          'search',
         ],
       },
       {
@@ -78,9 +69,8 @@ class Field {
           'search',
           'shuffle',
           'show',
-          'drop',
-          'damage',
           'draw',
+          'drop',
         ],
       },
     ],
@@ -89,43 +79,27 @@ class Field {
         'field': {'name': 'Damage\nZone', 'type': 3, 'event': 'damage'},
         'action': [
           'search',
-          'drop',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
-          'guard',
-          'drop',
           'search',
+          'guard',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
-          'guard',
-          'drop',
           'search',
+          'guard',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
-          'block',
-          'flip',
-          'rotateX',
-          'rotateY',
-          'guard',
-          'drop',
           'search',
+          'guard',
         ],
       },
       {
@@ -143,16 +117,16 @@ class Field {
       'icon': Icons.block_rounded,
     },
     {
+      'action': 'drop',
+      'icon': Icons.delete_outline_rounded,
+    },
+    {
       'action': 'damage',
       'icon': Icons.heart_broken_rounded,
     },
     {
       'action': 'draw',
       'icon': Icons.back_hand_rounded,
-    },
-    {
-      'action': 'drop',
-      'icon': Icons.delete_outline_rounded,
     },
     {
       'action': 'flip',
@@ -180,7 +154,7 @@ class Field {
     },
     {
       'action': 'show',
-      'icon': Icons.style_rounded,
+      'icon': Icons.remove_red_eye_rounded,
     },
     {
       'action': 'shuffle',
@@ -189,6 +163,10 @@ class Field {
     {
       'action': 'special',
       'icon': Icons.copy_rounded,
+    },
+    {
+      'action': 'use',
+      'icon': Icons.style_rounded,
     },
   ];
 
