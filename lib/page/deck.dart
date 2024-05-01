@@ -92,7 +92,7 @@ class _DeckPageState extends State<DeckPage> {
                 'Done',
               ]
             : [
-                Icons.menu_rounded,
+                Icons.window_rounded,
                 Icons.ios_share_rounded,
                 'My Deck',
                 Icons.search_rounded,

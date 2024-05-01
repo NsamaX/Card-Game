@@ -25,9 +25,10 @@ class SignInPage extends StatelessWidget {
               'Let\'s me know you.',
               style: _theme.textTheme.titleLarge,
             ),
-            SizedBox(height: 60.0),
-            SignIcon(image: _image),
-            SizedBox(height: 60.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 60.0),
+              child: SignIcon(image: _image),
+            ),
             Center(
               child: Container(
                 width: 260.0,

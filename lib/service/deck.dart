@@ -12,9 +12,7 @@ class Deck {
         Map<String, dynamic> cardMap = jsonDecode(card);
         Model data = Model.fromJson(cardMap['model']);
         String lowerCaseExistingCardName = data.getName().toLowerCase();
-        if (lowerCaseExistingCardName == lowerCaseCardName) {
-          return true;
-        }
+        if (lowerCaseExistingCardName == lowerCaseCardName) return true;
       }
     }
     return false;
@@ -55,9 +53,7 @@ class Deck {
           return;
         }
       }
-      if (!found) {
-        save(newCard, newCardCount);
-      }
+      if (!found) save(newCard, newCardCount);
     }
   }
 
@@ -65,7 +61,7 @@ class Deck {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
     List<Model> deck = [];
-    if (savedCards != null) {
+    if (savedCards != null)
       for (String card in savedCards) {
         Map<String, dynamic> cardMap = jsonDecode(card);
         Model data = Model.fromJson(cardMap['model']);
@@ -73,8 +69,7 @@ class Deck {
         data.setCount(cardCount);
         deck.add(data);
       }
-      deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
-    }
+    deck.sort((a, b) => b.getGrade().compareTo(a.getGrade()));
     return deck;
   }
 

@@ -31,9 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return GestureDetector(
       onTap: () {
-        if (index < _onTap.length) {
-          _onTap[index].call();
-        }
+        if (index < _onTap.length) _onTap[index].call();
       },
       child: item != null
           ? item is String

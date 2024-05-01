@@ -27,32 +27,12 @@ class Move extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           switch (_action['action']) {
-            // case 'bin':
-            //   return _option['bin'](_col, _row);
-            // case 'block':
-            //   return _option['block'](_col, _row);
-            // case 'damage':
-            //   return _option['damage'](_col, _row);
-            // case 'draw':
-            //   return _option['draw'](_col, _row);
             case 'flip':
               return _option['flip'](_col, _row);
-            // case 'guard':
-            //   return _option['guard'](_col, _row);
             case 'load':
               return _option['load'](_col, _row);
-            // case 'rotateX':
-            //   return _option['rotateX'](_col, _row);
-            // case 'rotateY':
-            //   return _option['rotateY'](_col, _row);
-            // case 'search':
-            //   return _option['search'](_col, _row);
             case 'shuffle':
               return _option['shuffle'](20, _col, _row);
-            // case 'stack':
-            //   return _option['stack'](_col, _row);
-            // case 'search':
-            //   return _option['use'](_col, _row);
             case 'special' ||
                   'tigger' ||
                   'guard' ||

@@ -31,7 +31,8 @@ class _BoardState extends State<Board> {
     'special': {},
     'trigger': {},
   };
-  List<List<dynamic>> _cardMatrix = [];
+  List<dynamic> _cardMatrix = [];
+  Map<String, dynamic> _hand = {'opsite': [], 'me': []};
 
   void _drag(int col, int row) {
     setState(() {
@@ -82,12 +83,10 @@ class _BoardState extends State<Board> {
     final List<Model> loadedDeck = await _deckService.load();
     if (loadedDeck.isNotEmpty) {
       List<Model> shuffled = [];
-      for (var card in loadedDeck) {
+      for (var card in loadedDeck)
         for (int i = 0; i < card.getCount(); i++) shuffled.add(card);
-      }
-      for (var card in shuffled) {
+      for (var card in shuffled)
         _cardMatrix[col][row].add({'card': card, 'show': false});
-      }
       _shuffle(20, col, row);
       for (var action in widget._board[col][row]['action']) {
         bool shouldShowAction =
@@ -100,8 +99,8 @@ class _BoardState extends State<Board> {
 
   void _shuffle(int time, int col, int row) {
     List<Model> shufflerYet = [];
-    for (var card in _cardMatrix[col][row]) shufflerYet.add(card['card']);
     List<Model> shuffled = [];
+    for (var card in _cardMatrix[col][row]) shufflerYet.add(card['card']);
     for (int i = shufflerYet.length; i > 0; i--) {
       int index = _random.nextInt(i);
       shuffled.add(shufflerYet[index]);
@@ -116,12 +115,24 @@ class _BoardState extends State<Board> {
   void _use(int col, int row, String action) {
     setState(() {
       if (_event.containsKey(action)) {
-        final bool isTriggerCard =
-            _cardMatrix[col][row].last['card'].getType().length > 1;
-        final int targetCol =
-            isTriggerCard ? _event['trigger']['col'] : _event[action]['col'];
-        final int targetRow =
-            isTriggerCard ? _event['trigger']['row'] : _event[action]['row'];
+        int targetCol;
+        int targetRow;
+        switch (action) {
+          case 'show' || 'damage':
+            final bool isTriggerCard =
+                _cardMatrix[col][row].last['card'].getType().length > 1;
+            targetCol = isTriggerCard
+                ? _event['trigger']['col']
+                : _event[action]['col'];
+            targetRow = isTriggerCard
+                ? _event['trigger']['row']
+                : _event[action]['row'];
+            break;
+          default:
+            targetCol = _event[action]['col'];
+            targetRow = _event[action]['row'];
+            break;
+        }
         final cardToMove = _cardMatrix[col][row].last['card'];
         _cardMatrix[targetCol][targetRow]
             .add({'card': cardToMove, 'show': true});
@@ -162,15 +173,17 @@ class _BoardState extends State<Board> {
     final ThemeData _theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 36.0, horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          _handZone(_theme, _hand['opsite']),
           for (int col = 0; col < widget._board.length; col++)
             Row(children: [
               for (int row = 0; row < widget._board[col].length; row++)
                 _completeField(_theme, col, row),
             ]),
+          _handZone(_theme, _hand['me']),
         ],
       ),
     );
@@ -250,5 +263,18 @@ class _BoardState extends State<Board> {
         ),
       ),
     );
+  }
+
+  Widget _handZone(ThemeData theme, List<dynamic> hand) {
+    return Expanded(
+        child: Container(
+      height: _cardSize,
+      color: Colors.white,
+      child: hand.isNotEmpty
+          ? Row(
+              children: hand.map((card) => _virsualField(theme, card)).toList(),
+            )
+          : SizedBox(),
+    ));
   }
 }

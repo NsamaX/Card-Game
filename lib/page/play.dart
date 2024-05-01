@@ -17,9 +17,13 @@ class _PlayPageState extends State<PlayPage> {
   final Field _fieldService = Field();
   final Message _messageService = Message();
 
-  bool _onHeadphone = false;
-  bool _onMicrophone = false;
-  bool _show = false;
+  final List<IconData> _communicationIcon = [
+    Icons.headset_off_rounded,
+    Icons.headset_rounded,
+    Icons.headset_mic_rounded,
+  ];
+  int _communicationType = 0;
+  bool _showChat = false;
 
   void _back() {
     Navigator.pushReplacement(
@@ -28,21 +32,18 @@ class _PlayPageState extends State<PlayPage> {
     );
   }
 
-  void _head() {
+  void _communication() {
     setState(() {
-      _onHeadphone = !_onHeadphone;
+      if (_communicationType < _communicationIcon.length - 1)
+        _communicationType++;
+      else
+        _communicationType = 0;
     });
   }
 
-  void serviceic() {
+  void _message() {
     setState(() {
-      _onMicrophone = !_onMicrophone;
-    });
-  }
-
-  void _chat() {
-    setState(() {
-      _show = !_show;
+      _showChat = !_showChat;
     });
   }
 
@@ -52,17 +53,17 @@ class _PlayPageState extends State<PlayPage> {
       appBar: CustomAppBar(
         menu: [
           Icons.arrow_back_rounded,
-          _onHeadphone ? Icons.headset_rounded : Icons.headset_off_rounded,
+          Icons.info_outline_rounded,
           'Room ID',
-          _onMicrophone ? Icons.mic_rounded : Icons.mic_off_rounded,
+          _communicationIcon[_communicationType],
           Icons.chat_rounded,
         ],
         onTap: [
           _back,
-          _head,
           () {},
-          serviceic,
-          _chat,
+          () {},
+          _communication,
+          _message,
         ],
       ),
       body: Stack(children: [
@@ -72,7 +73,7 @@ class _PlayPageState extends State<PlayPage> {
         AnimatedContainer(
           duration: Duration(milliseconds: 400),
           curve: Curves.easeInOut,
-          transform: Matrix4.translationValues(_show ? 0 : 200, 0, 0),
+          transform: Matrix4.translationValues(_showChat ? 0 : 200, 0, 0),
           child: ChatBox(log: _messageService.getLog()),
         ),
       ]),

@@ -22,9 +22,8 @@ class CardAPI {
             break;
         }
         return fetchedData;
-      } else {
+      } else
         throw Exception('Failed to load data: ${response.statusCode}');
-      }
     } catch (e) {
       print('Error: $e');
       return [];

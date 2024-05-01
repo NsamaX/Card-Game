@@ -20,9 +20,7 @@ class Room {
     for (int i = 0; i < _room; i++) {
       IconData status = statusIcon[random.nextInt(statusIcon.length)];
       String text = 'Room ${i + 1} : Player name : Game information';
-      if (_label.length <= i) {
-        _label.add({"title": null, "content": []});
-      }
+      if (_label.length <= i) _label.add({"title": null, "content": []});
       _label[i]['content'].add({
         'icon': status,
         'text': text,

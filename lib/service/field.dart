@@ -13,22 +13,26 @@ class Field {
         'field': {'name': 'Trigger', 'type': 0, 'event': 'trigger'},
         'action': [
           'search',
+          'draw',
         ],
       },
       {
         'field': {'name': 'Guard', 'type': 3, 'event': 'guard'},
         'action': [
           'search',
+          'drop',
         ],
       },
       {
         'field': {'name': 'Show', 'type': 0, 'event': 'show'},
         'action': [
           'search',
+          'flip',
+          'draw',
         ],
       },
       {
-        'field': {'name': 'dropd\nZone', 'type': 0, 'event': 'dropd'},
+        'field': {'name': 'Bind\nZone', 'type': 0, 'event': 'bind'},
         'action': [
           'search',
         ]
@@ -46,6 +50,7 @@ class Field {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           'search',
+          'flip',
           'guard',
         ],
       },
@@ -53,12 +58,15 @@ class Field {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           'search',
+          'flip',
+          'special',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           'search',
+          'flip',
           'guard',
         ],
       },
@@ -71,6 +79,8 @@ class Field {
           'show',
           'draw',
           'drop',
+          'damage',
+          'swap',
         ],
       },
     ],
@@ -79,27 +89,28 @@ class Field {
         'field': {'name': 'Damage\nZone', 'type': 3, 'event': 'damage'},
         'action': [
           'search',
+          'drop',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           'search',
-          'guard',
+          'flip',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           'search',
-          'guard',
+          'flip',
         ],
       },
       {
         'field': {'name': 'Card', 'type': 0},
         'action': [
           'search',
-          'guard',
+          'flip',
         ],
       },
       {
@@ -130,7 +141,7 @@ class Field {
     },
     {
       'action': 'flip',
-      'icon': Icons.screen_rotation_alt_rounded,
+      'icon': Icons.wifi_protected_setup_rounded,
     },
     {
       'action': 'guard',
@@ -143,10 +154,6 @@ class Field {
     {
       'action': 'rotateX',
       'icon': Icons.stay_current_landscape_rounded,
-    },
-    {
-      'action': 'rotateY',
-      'icon': Icons.stay_current_portrait_rounded,
     },
     {
       'action': 'search',
@@ -165,9 +172,9 @@ class Field {
       'icon': Icons.copy_rounded,
     },
     {
-      'action': 'use',
-      'icon': Icons.style_rounded,
-    },
+      'action': 'swap',
+      'icon': Icons.amp_stories_rounded,
+    }
   ];
 
   List<dynamic> _cloneFieldWithoutAction() {
@@ -204,11 +211,11 @@ class Field {
 
   List<dynamic> _setFieldAction() {
     List<dynamic> _fieldset = _field;
-    for (int col = 0; col < _fieldset.length; col++) {
+    for (int col = 0; col < _fieldset.length; col++)
       for (int row = 0; row < _fieldset[col].length; row++) {
         List<dynamic> _row = [];
-        for (int i = 0; i < _fieldset[col][row]['action'].length; i++) {
-          for (var move in _action) {
+        for (int i = 0; i < _fieldset[col][row]['action'].length; i++)
+          for (var move in _action)
             if (_fieldset[col][row]['action'][i] == move['action']) {
               Map<String, dynamic> actionCopy = {
                 'action': move['action'],
@@ -217,11 +224,8 @@ class Field {
               };
               _row.add(actionCopy);
             }
-          }
-        }
         _fieldset[col][row]['action'] = _row;
       }
-    }
     return _fieldset;
   }
 

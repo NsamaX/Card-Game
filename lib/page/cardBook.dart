@@ -26,7 +26,7 @@ class _CardBookPageState extends State<CardBookPage> {
   List<Model> _card = [];
   bool _isLoading = false;
 
-  bool _show = false;
+  bool _showFilter = false;
   final List<dynamic> _option = [
     [
       {
@@ -102,30 +102,25 @@ class _CardBookPageState extends State<CardBookPage> {
 
   void _filter() {
     setState(() {
-      _show = !_show;
+      _showFilter = !_showFilter;
     });
   }
 
   Future<void> _getData(String search, {int page = 1}) async {
-    if (!mounted) {
-      return;
-    }
+    if (!mounted) return;
 
     setState(() {
       _isLoading = true;
     });
 
     List<Model> fetchedData = await _cardService.getData(search, page: page);
-    if (!mounted) {
-      return;
-    }
+    if (!mounted) return;
 
     setState(() {
-      if (page == 1) {
+      if (page == 1)
         _card = fetchedData;
-      } else {
+      else
         _card.addAll(fetchedData);
-      }
       _page = page;
       _isLoading = false;
     });
@@ -134,9 +129,8 @@ class _CardBookPageState extends State<CardBookPage> {
   void _scrollListener() {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+        !_scrollController.position.outOfRange)
       _getData(_search, page: _page + 1);
-    }
   }
 
   @override
@@ -184,7 +178,7 @@ class _CardBookPageState extends State<CardBookPage> {
           AnimatedContainer(
             duration: Duration(milliseconds: 400),
             curve: Curves.easeInOut,
-            transform: Matrix4.translationValues(_show ? 0 : 260, 0, 0),
+            transform: Matrix4.translationValues(_showFilter ? 0 : 260, 0, 0),
             child: FilterBox(filter: _option),
           ),
         ],

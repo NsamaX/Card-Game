@@ -26,13 +26,13 @@ class _CardInfoPageState extends State<CardInfoPage> {
   void handleSave() async {
     bool cardExists = await _deckService.check(widget._card.getName());
 
-    if (cardExists) {
+    if (cardExists)
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content:
                 Text('Card with the same name already exists in the deck')),
       );
-    } else {
+    else {
       _deckService.save(widget._card, _count[_selectedIndex]);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Save Card Successfully')),

@@ -23,7 +23,7 @@ class MoveList extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData _theme = Theme.of(context);
 
-    if (_onTap.isNotEmpty) {
+    if (_onTap.isNotEmpty)
       return Positioned(
         top: 0.0,
         right: 0.0,
@@ -36,7 +36,7 @@ class MoveList extends StatelessWidget {
               Column(
                 children: [
                   for (var action in _onTap)
-                    if (action['show'])
+                    // if (action['show'])
                       Move(
                         col: _col,
                         row: _row,
@@ -49,8 +49,7 @@ class MoveList extends StatelessWidget {
           ),
         ),
       );
-    } else {
+    else
       return const SizedBox();
-    }
   }
 }
