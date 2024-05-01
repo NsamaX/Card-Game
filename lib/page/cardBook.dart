@@ -93,9 +93,7 @@ class _CardBookPageState extends State<CardBookPage> {
   void _back() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (context) => DeckPage(),
-      ),
+      MaterialPageRoute(builder: (context) => DeckPage()),
     );
   }
 
@@ -107,14 +105,11 @@ class _CardBookPageState extends State<CardBookPage> {
 
   Future<void> _getData(String search, {int page = 1}) async {
     if (!mounted) return;
-
     setState(() {
       _isLoading = true;
     });
-
     List<Model> fetchedData = await CardAPI().getData(search, page: page);
     if (!mounted) return;
-
     setState(() {
       if (page == 1)
         _card = fetchedData;

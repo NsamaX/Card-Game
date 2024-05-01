@@ -18,7 +18,7 @@ class _DeckPageState extends State<DeckPage> {
   late List<Model> _deck;
   bool _isEdit = false;
 
-  void _draw() {}
+  void _menu() {}
 
   void _share() {}
 
@@ -26,6 +26,17 @@ class _DeckPageState extends State<DeckPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => CardBookPage(save: false)),
+    );
+  }
+
+  void _edit() {
+    Deck().load().then(
+      (deck) {
+        setState(() {
+          _isEdit = !_isEdit;
+          _deck = deck;
+        });
+      },
     );
   }
 
@@ -49,17 +60,6 @@ class _DeckPageState extends State<DeckPage> {
       MaterialPageRoute(
         builder: (context) => CardBookPage(save: true),
       ),
-    );
-  }
-
-  void _edit() {
-    Deck().load().then(
-      (deck) {
-        setState(() {
-          _isEdit = !_isEdit;
-          _deck = deck;
-        });
-      },
     );
   }
 
@@ -104,7 +104,7 @@ class _DeckPageState extends State<DeckPage> {
                 _edit,
               ]
             : [
-                _draw,
+                _menu,
                 _share,
                 () {},
                 _search,

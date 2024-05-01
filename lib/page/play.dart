@@ -42,6 +42,8 @@ class _PlayPageState extends State<PlayPage> {
     );
   }
 
+  void _info() {}
+
   void _communication() {
     setState(() {
       if (_communicationType < _communicationIcon.length - 1)
@@ -86,7 +88,7 @@ class _PlayPageState extends State<PlayPage> {
         ],
         onTap: [
           _back,
-          () {},
+          _info,
           () {},
           _communication,
           _chat,
