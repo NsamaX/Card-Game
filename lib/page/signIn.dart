@@ -34,7 +34,7 @@ class signIn extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => pack()),
+                      MaterialPageRoute(builder: (context) => DeckPage()),
                     );
                   },
                   child: Text(

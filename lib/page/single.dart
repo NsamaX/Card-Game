@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
 import 'package:project/service/deck.dart';
 import 'package:project/widget/addBar.dart';
-import 'package:project/widget/backAppBar.dart';
 import 'package:project/widget/cardInfo.dart';
 
 class single extends StatefulWidget {
@@ -23,12 +22,7 @@ class single extends StatefulWidget {
 
 class _singleState extends State<single> {
   final deck _service = deck();
-  final List<int> _count = [
-    1,
-    2,
-    3,
-    4,
-  ];
+  final List<int> _count = [1, 2, 3, 4];
   int _selectedIndex = 0;
 
   void handleSave() async {
@@ -51,11 +45,25 @@ class _singleState extends State<single> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return Scaffold(
-      appBar: backAppBar(
-        title: '',
-        icon: widget._save ? 'Save' : null,
-        onTap: handleSave,
+      appBar: AppBar(
+        title: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Text('', style: _theme.textTheme.titleSmall),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 22.0),
+            child: GestureDetector(
+              onTap: handleSave,
+              child: Text(widget._save ? 'Save' : ''),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
@@ -65,10 +73,10 @@ class _singleState extends State<single> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                cardInfo(card: widget._card),
+                CardInfo(card: widget._card),
                 Visibility(
                   visible: widget._save,
-                  child: addBar(
+                  child: AddBar(
                     count: _count,
                     onTap: (index) {
                       setState(() {

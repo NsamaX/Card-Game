@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/model.dart';
-import 'theme.dart';
 
-class cardInfo extends StatelessWidget {
+class CardInfo extends StatelessWidget {
   final model _card;
 
-  const cardInfo({Key? key, required model card})
+  const CardInfo({Key? key, required model card})
       : _card = card,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +33,7 @@ class cardInfo extends StatelessWidget {
             children: [
               Text(
                 '${entry.key}: ${entry.value}',
-                style: themeData().textTheme.bodyMedium,
+                style: _theme.textTheme.bodyMedium,
               ),
               SizedBox(height: 10),
             ],

@@ -5,11 +5,9 @@ class EditCard extends StatefulWidget {
   final model _card;
   final Map<dynamic, Function()> _onTap;
 
-  const EditCard({
-    Key? key,
-    required model card,
-    required Map<dynamic, Function()> onTap,
-  })  : _card = card,
+  const EditCard(
+      {Key? key, required model card, required Map<dynamic, Function()> onTap})
+      : _card = card,
         _onTap = onTap,
         super(key: key);
 

@@ -4,8 +4,8 @@ import 'package:project/widget/label.dart';
 import 'package:project/widget/theme.dart';
 import 'welcome.dart';
 
-class setting extends StatelessWidget {
-  const setting({Key? key}) : super(key: key);
+class SettingPage extends StatelessWidget {
+  const SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class setting extends StatelessWidget {
         )),
       ),
       body: Label(label: _label),
-      bottomNavigationBar: bottomNav(currentIndex: 2),
+      bottomNavigationBar: BottomNavigation(currentIndex: 2),
     );
   }
 }

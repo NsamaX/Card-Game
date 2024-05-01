@@ -3,10 +3,10 @@ import 'package:project/page/pack.dart';
 import 'package:project/page/play.dart';
 import 'package:project/page/setting.dart';
 
-class bottomNav extends StatelessWidget {
+class BottomNavigation extends StatelessWidget {
   final int _currentIndex;
 
-  const bottomNav({Key? key, required int currentIndex})
+  const BottomNavigation({Key? key, required int currentIndex})
       : _currentIndex = currentIndex,
         super(key: key);
 
@@ -19,9 +19,7 @@ class bottomNav extends StatelessWidget {
         _navigation('Setting', Icons.settings_rounded),
       ],
       currentIndex: _currentIndex,
-      onTap: (index) {
-        _navigate(context, index);
-      },
+      onTap: (index) => _navigate(context, index),
     );
   }
 
@@ -33,25 +31,25 @@ class bottomNav extends StatelessWidget {
   }
 
   void _navigate(BuildContext context, int index) {
-    Widget _page;
+    Widget page;
 
     switch (index) {
       case 0:
-        _page = pack();
+        page = DeckPage();
         break;
       case 1:
-        _page = play();
+        page = PlayPage();
         break;
       case 2:
-        _page = setting();
+        page = SettingPage();
         break;
       default:
-        _page = Container();
+        page = Container();
     }
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => _page),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 }

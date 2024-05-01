@@ -7,12 +7,12 @@ class Lobby extends StatefulWidget {
   final int _maxRoomPerPage;
   final int _maxNavigationTap;
 
-  const Lobby({
-    Key? key,
-    required List<dynamic> room,
-    required int maxRoomPerPage,
-    required int maxNavigationTap,
-  })  : _room = room,
+  const Lobby(
+      {Key? key,
+      required List<dynamic> room,
+      required int maxRoomPerPage,
+      required int maxNavigationTap})
+      : _room = room,
         _maxRoomPerPage = maxRoomPerPage,
         _maxNavigationTap = maxNavigationTap,
         super(key: key);

@@ -23,7 +23,7 @@ class _duelState extends State<duel> {
   void _back() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => play()),
+      MaterialPageRoute(builder: (context) => PlayPage()),
     );
   }
 
@@ -48,7 +48,7 @@ class _duelState extends State<duel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         menu: [
           Icons.arrow_back_rounded,
           _onHeadphone ? Icons.headset_rounded : Icons.headset_off_rounded,
@@ -65,7 +65,7 @@ class _duelState extends State<duel> {
         ],
       ),
       body: Stack(children: [
-        board(
+        Board(
           board: _board.getField(),
         ),
         AnimatedContainer(

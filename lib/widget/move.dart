@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
 
-class actionItem extends StatelessWidget {
+class Move extends StatelessWidget {
   final int _col;
   final int _row;
   final Map<String, dynamic> _option;
   final dynamic _action;
 
-  const actionItem({
-    Key? key,
-    required int col,
-    required int row,
-    required Map<String, dynamic> option,
-    required dynamic action,
-  })  : _col = col,
+  const Move(
+      {Key? key,
+      required int col,
+      required int row,
+      required Map<String, dynamic> option,
+      required dynamic action})
+      : _col = col,
         _row = row,
         _option = option,
         _action = action,
@@ -21,6 +20,8 @@ class actionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: GestureDetector(
@@ -67,7 +68,7 @@ class actionItem extends StatelessWidget {
         child: _action['icon'] is String
             ? Text(
                 _action['icon'],
-                style: themeData().textTheme.bodySmall,
+                style: _theme.textTheme.bodySmall,
               )
             : Icon(_action['icon']),
       ),

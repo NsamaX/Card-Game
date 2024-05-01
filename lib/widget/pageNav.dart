@@ -8,13 +8,13 @@ class PageNavigation extends StatelessWidget {
   final int _maxNavigationTap;
   final Function(int) _onTap;
 
-  const PageNavigation({
-    Key? key,
-    required int currentPage,
-    required int maxRoomPerPage,
-    required int maxNavigationTap,
-    required Function(int) onTap,
-  })  : _currentPage = currentPage,
+  const PageNavigation(
+      {Key? key,
+      required int currentPage,
+      required int maxRoomPerPage,
+      required int maxNavigationTap,
+      required Function(int) onTap})
+      : _currentPage = currentPage,
         _maxRoomPerPage = maxRoomPerPage,
         _maxNavigationTap = maxNavigationTap,
         _onTap = onTap,

@@ -46,12 +46,11 @@ class Label extends StatelessWidget {
       String text, Widget? page) {
     return GestureDetector(
       onTap: () {
-        if (page != null) {
+        if (page != null)
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => page),
           );
-        }
       },
       child: Container(
         height: 40.0,

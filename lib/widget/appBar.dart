@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
 
-class appBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<dynamic> _menu;
   final List<Function> _onTap;
 
-  const appBar({
-    Key? key,
-    required List<dynamic> menu,
-    required List<Function> onTap,
-  })  : _menu = menu,
+  const CustomAppBar(
+      {Key? key, required List<dynamic> menu, required List<Function> onTap})
+      : _menu = menu,
         _onTap = onTap,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _theme = Theme.of(context);
+
     return AppBar(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: _menu
             .asMap()
             .entries
-            .map((entry) => _item(context, entry.key, entry.value))
+            .map((entry) => _item(_theme, context, entry.key, entry.value))
             .toList(),
       ),
     );
   }
 
-  Widget _item(BuildContext context, int index, dynamic item) {
+  Widget _item(ThemeData theme, BuildContext context, int index, dynamic item) {
     final _isTitle = index == (_menu.length ~/ 2);
 
     return GestureDetector(
@@ -40,8 +39,7 @@ class appBar extends StatelessWidget implements PreferredSizeWidget {
           ? item is String
               ? Text(
                   '$item',
-                  style:
-                      _isTitle ? themeData().textTheme.titleSmall : TextStyle(),
+                  style: _isTitle ? theme.textTheme.titleSmall : TextStyle(),
                 )
               : Container(
                   child: Icon(item),

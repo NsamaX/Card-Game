@@ -91,7 +91,7 @@ class _cardDBState extends State<cardDB> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => pack(),
+        builder: (context) => DeckPage(),
       ),
     );
   }
@@ -151,7 +151,7 @@ class _cardDBState extends State<cardDB> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         menu: [
           Icons.arrow_back_rounded,
           'Card Info',
@@ -167,7 +167,7 @@ class _cardDBState extends State<cardDB> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: cardList(
+            child: CardList(
               card: _card,
               scrollController: _scrollController,
               save: widget.save,

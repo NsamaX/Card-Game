@@ -4,8 +4,8 @@ import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/lobby.dart';
 
-class play extends StatelessWidget {
-  const play({Key? key}) : super(key: key);
+class PlayPage extends StatelessWidget {
+  const PlayPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class play extends StatelessWidget {
     void _create() {}
 
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         menu: [
           Icons.add_rounded,
           'Play',
@@ -42,7 +42,7 @@ class play extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: bottomNav(currentIndex: 1),
+      bottomNavigationBar: BottomNavigation(currentIndex: 1),
     );
   }
 }

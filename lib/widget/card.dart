@@ -8,13 +8,13 @@ class CARD extends StatelessWidget {
   final bool _show;
   final bool _info;
 
-  const CARD({
-    Key? key,
-    required model card,
-    required bool save,
-    bool? show,
-    bool? info,
-  })  : _card = card,
+  const CARD(
+      {Key? key,
+      required model card,
+      required bool save,
+      bool? show,
+      bool? info})
+      : _card = card,
         _save = save,
         _show = show ?? true,
         _info = info ?? true,
@@ -44,6 +44,7 @@ class CARD extends StatelessWidget {
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
                 child: AspectRatio(
                   aspectRatio: 8 / 12,
                   child: Image.network(
@@ -51,9 +52,7 @@ class CARD extends StatelessWidget {
                     fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
+                      if (loadingProgress == null) return child;
                       return Container(
                         child: Center(
                           child: CircularProgressIndicator(

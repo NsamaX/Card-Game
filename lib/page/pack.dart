@@ -6,14 +6,14 @@ import 'package:project/widget/buttomNav.dart';
 import 'package:project/widget/cardList.dart';
 import 'cardDB.dart';
 
-class pack extends StatefulWidget {
-  const pack({Key? key}) : super(key: key);
+class DeckPage extends StatefulWidget {
+  const DeckPage({Key? key}) : super(key: key);
 
   @override
-  State<pack> createState() => _packState();
+  State<DeckPage> createState() => _DeckPageState();
 }
 
-class _packState extends State<pack> {
+class _DeckPageState extends State<DeckPage> {
   final ScrollController _scrollController = ScrollController();
   final deck _service = deck();
   List<model> _deck = [];
@@ -81,7 +81,7 @@ class _packState extends State<pack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: CustomAppBar(
         menu: _isEdit
             ? [
                 Icons.delete_rounded,
@@ -115,13 +115,13 @@ class _packState extends State<pack> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: cardList(
+        child: CardList(
           scrollController: _scrollController,
           card: _deck,
           edit: _isEdit,
         ),
       ),
-      bottomNavigationBar: bottomNav(currentIndex: 0),
+      bottomNavigationBar: BottomNavigation(currentIndex: 0),
     );
   }
 }
