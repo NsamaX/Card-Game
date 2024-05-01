@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'page/play.dart';
+import 'page/welcome.dart';
 import 'widget/theme.dart';
 
 Future<void> main() async {
@@ -17,7 +17,7 @@ class project extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       theme: themeData(),
-      home: const PlayPage(),
+      home: const WelcomePage(),
     );
   }
 }

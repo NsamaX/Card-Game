@@ -7,7 +7,11 @@ import 'package:project/widget/chatBox.dart';
 import 'lobby.dart';
 
 class PlayPage extends StatefulWidget {
-  const PlayPage({Key? key}) : super(key: key);
+  final int _roomID;
+
+  const PlayPage({Key? key, required int roomID})
+      : _roomID = roomID,
+        super(key: key);
 
   @override
   State<PlayPage> createState() => _PlayPageState();
@@ -82,7 +86,7 @@ class _PlayPageState extends State<PlayPage> {
         menu: [
           Icons.arrow_back_rounded,
           Icons.info_outline_rounded,
-          'Room ID',
+          'Room ${widget._roomID.toString()}',
           _communicationIcon[_communicationType],
           Icons.chat_rounded,
         ],

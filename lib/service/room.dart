@@ -20,7 +20,7 @@ class Room {
       _label[i]['content'].add({
         'icon': status,
         'text': text,
-        'page': PlayPage(),
+        'page': PlayPage(roomID: i + 1),
       });
     }
     return _label;
