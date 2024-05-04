@@ -1,7 +1,9 @@
+// TODO: set debug show checked mode banner false after finish project
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'page/welcome.dart';
-import 'widget/theme.dart';
+import 'package:project/page/welcome.dart';
+import 'package:project/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

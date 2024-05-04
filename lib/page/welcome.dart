@@ -1,55 +1,55 @@
-import 'package:flutter/material.dart';
-import 'signIn.dart';
+// TODO: create function for sign in each option
 
-class WelcomePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:project/widget/welcome.dart';
+
+class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
   @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  PageController pageController = PageController(initialPage: 0);
+
+  @override
   Widget build(BuildContext context) {
-    final ThemeData _theme = Theme.of(context);
+    final WelcomeWidget pageWidget = WelcomeWidget(context: context);
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'asset/image/welcome.png',
-                width: 260,
-                height: 260,
-              ),
-              Text('Welcome to', style: _theme.textTheme.titleLarge),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Card Game Cafe', style: _theme.textTheme.titleLarge),
-                  Icon(Icons.coffee_rounded, size: 40.0),
-                ],
-              ),
-              SizedBox(height: 26.0),
-              Text(
-                'This app was created so that anyone interested in playing card games can play wherever they are or if they don\'t have cards and can have the deck of their dreams.',
-                style: _theme.textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 36.0),
-              Container(
-                width: 260.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignInPage()),
-                    );
-                  },
-                  child:
-                      Text('Get started', style: _theme.textTheme.titleSmall),
-                ),
-              ),
-            ],
-          ),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: PageView(
+          controller: pageController,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                pageWidget.image('asset/image/welcome.png', 260),
+                pageWidget.title('Welcome'),
+                pageWidget.description(
+                    'This app was created so that anyone interested in playing card games can play wherever they are or if they don\'t have cards and can have the deck of their dreams.'),
+                pageWidget.startButton('Get start', 260, () {
+                  pageController.animateToPage(1,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut);
+                }),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                pageWidget.title('Let\'s me know you.'),
+                pageWidget.signOption({
+                  'apple': 'asset/image/apple.png',
+                  'goodle': 'asset/image/google.png',
+                  'facebook': 'asset/image/facebook.png'
+                }, 40),
+                pageWidget.guessButton('Guess', 260),
+              ],
+            ),
+          ],
         ),
       ),
     );

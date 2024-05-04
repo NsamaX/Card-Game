@@ -1,5 +1,5 @@
-import 'info.dart';
-import 'save.dart';
+import 'package:project/api/info.dart';
+import 'package:project/api/save.dart';
 
 class Model extends Save implements Info {
   final int _id;
@@ -214,28 +214,25 @@ class Model extends Save implements Info {
   @override
   String getImage() => _imageUrlJp;
   String getName() => _name;
-
-  Map<String, dynamic> _createMapWithCondition(String key, String value) {
-    if (value != '') return {key: value};
-    return {};
-  }
-
-  @override
   Map<String, dynamic> getMap() {
-    Map<String, dynamic> dataMap = {};
-    dataMap.addAll(_createMapWithCondition('Name', _name));
-    dataMap.addAll(_createMapWithCondition('Flavor', _flavor));
-    dataMap.addAll(_createMapWithCondition('Skill', _skill));
-    dataMap.addAll(_createMapWithCondition('Effect', _effect));
-    dataMap.addAll(_createMapWithCondition('Ride Skill', _rideSkill));
-    dataMap.addAll(_createMapWithCondition('Trigger Effect', _triggerEffect));
-    dataMap.addAll(_createMapWithCondition('Power', _power.toString()));
-    dataMap.addAll(_createMapWithCondition('Shield', _shield.toString()));
-    dataMap.addAll(_createMapWithCondition('Clan', _clan));
-    dataMap.addAll(_createMapWithCondition('Nation', _nation));
-    dataMap.addAll(_createMapWithCondition('Limitation Text', _limitationText));
-    dataMap.addAll(_createMapWithCondition('Format', _format));
-    if (_sets.isNotEmpty) dataMap['Sets'] = _sets;
-    return dataMap;
+    var properties = {
+      'Name': _name,
+      'Flavor': _flavor,
+      'Skill': _skill,
+      'Effect': _effect,
+      'Ride Skill': _rideSkill,
+      'Trigger Effect': _triggerEffect,
+      'Power': _power.toString(),
+      'Shield': _shield.toString(),
+      'Clan': _clan,
+      'Nation': _nation,
+      'Format': _format,
+    };
+    var map = _sets.isNotEmpty ? {...properties, 'Sets': _sets} : properties;
+    return map.entries.where((entry) => entry.value != '').fold({},
+        (map, entry) {
+      map[entry.key] = entry.value;
+      return map;
+    });
   }
 }

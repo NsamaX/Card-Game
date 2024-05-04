@@ -1,10 +1,13 @@
+// TODO: create function for share deck
+// TODO: load deck by deck name
+
 import 'package:flutter/material.dart';
-import 'package:project/api/model.dart';
+import 'package:project/api/model/cfv.dart';
+import 'package:project/page/book.dart';
 import 'package:project/service/deck.dart';
 import 'package:project/widget/appBar.dart';
 import 'package:project/widget/buttomNav.dart';
-import 'package:project/widget/cardList.dart';
-import 'cardBook.dart';
+import 'package:project/widget/card/book.dart';
 
 class DeckPage extends StatefulWidget {
   const DeckPage({Key? key}) : super(key: key);
@@ -14,51 +17,52 @@ class DeckPage extends StatefulWidget {
 }
 
 class _DeckPageState extends State<DeckPage> {
-  final ScrollController _scrollController = ScrollController();
-  late List<Model> _deck;
-  bool _isEdit = false;
+  bool editEnable = false;
+  late List<Model> deck;
 
-  void _menu() {}
+  final ScrollController scrollController = ScrollController();
 
-  void _share() {}
+  void menu() {}
 
-  void _search() {
+  void share() {}
+
+  void search() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => CardBookPage(save: false)),
+      MaterialPageRoute(builder: (context) => BookPage(save: false)),
     );
   }
 
-  void _edit() {
-    Deck().load().then(
+  void edit() {
+    DeckService().load().then(
       (deck) {
         setState(() {
-          _isEdit = !_isEdit;
-          _deck = deck;
+          editEnable = !editEnable;
+          deck = deck;
         });
       },
     );
   }
 
-  void _delete() {
-    if (_deck.isEmpty) return;
-    Deck().delete().then(
+  void delete() {
+    if (deck.isEmpty) return;
+    DeckService().delete().then(
       (_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Deleted deck successfully')),
         );
         setState(() {
-          _deck = [];
+          deck = [];
         });
       },
     );
   }
 
-  void _add() {
+  void add() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => CardBookPage(save: true),
+        builder: (context) => BookPage(save: true),
       ),
     );
   }
@@ -66,11 +70,11 @@ class _DeckPageState extends State<DeckPage> {
   @override
   void initState() {
     super.initState();
-    _deck = [];
-    Deck().load().then(
-      (deck) {
+    deck = [];
+    DeckService().load().then(
+      (load) {
         setState(() {
-          _deck = deck;
+          deck = load;
         });
       },
     );
@@ -80,45 +84,23 @@ class _DeckPageState extends State<DeckPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        menu: _isEdit
-            ? [
-                Icons.delete_rounded,
-                null,
-                'My Deck',
-                Icons.add_rounded,
-                'Done',
-              ]
+        menuItem: editEnable
+            ? [Icons.delete_rounded, null, 'My Deck', Icons.add_rounded, 'Done']
             : [
                 Icons.window_rounded,
                 Icons.ios_share_rounded,
                 'My Deck',
                 Icons.search_rounded,
-                'Edit',
+                'Edit'
               ],
-        onTap: _isEdit
-            ? [
-                _delete,
-                () {},
-                () {},
-                _add,
-                _edit,
-              ]
-            : [
-                _menu,
-                _share,
-                () {},
-                _search,
-                _edit,
-              ],
+        onTapmenuItem: editEnable
+            ? [delete, null, null, add, edit]
+            : [menu, share, null, search, edit],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: CardList(
-          scrollController: _scrollController,
-          card: _deck,
-          edit: _isEdit,
-        ),
-      ),
+      body: Book(
+          scrollController: scrollController,
+          cardList: deck,
+          editEnable: editEnable),
       bottomNavigationBar: BottomNavigation(currentIndex: 0),
     );
   }

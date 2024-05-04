@@ -1,8 +1,10 @@
+// TODO: manage decks by deck name
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:project/api/model.dart';
+import 'package:project/api/model/cfv.dart';
 
-class Deck {
+class DeckService {
   Future<bool> check(String cardName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? savedCards = prefs.getStringList('user_deck');
@@ -43,9 +45,9 @@ class Deck {
           data.setCount(newCardCount);
           cardMap['model'] = data.toJson();
           cardMap['cardCount'] = newCardCount;
-          if (newCardCount < 1) {
+          if (newCardCount < 1)
             savedCards.removeAt(i);
-          } else {
+          else {
             String updatedCardJson = jsonEncode(cardMap);
             savedCards[i] = updatedCardJson;
           }

@@ -1,26 +1,31 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:project/api/model.dart';
+import 'package:project/api/model/cfv.dart';
 
-class CardAPI {
-  final String _baseUrl =
-      "https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/";
+class CardService {
+  final String game;
+  late final String baseUrl;
 
-  Future<List<Model>> getData(String search, {int page = 1}) async {
+  CardService({required String game}) : game = game {
+    switch (game) {
+      case 'cfv':
+        baseUrl = "https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/";
+        break;
+      default:
+        throw ArgumentError('Unsupported game: $game');
+    }
+  }
+
+  Future<List<Model>> getData(String search, int page) async {
     http.Response response =
-        await http.get(Uri.parse(_baseUrl + "$search?page=$page"));
+        await http.get(Uri.parse(baseUrl + "$search?page=$page"));
     try {
       if (response.statusCode == 200) {
         List<dynamic> jsonData = jsonDecode(response.body)['data'];
         List<Model> fetchedData =
             jsonData.map((e) => Model.fromJson(e)).toList();
-        switch (_baseUrl) {
-          case 'https://card-fight-vanguard-api.ue.r.appspot.com/api/v1/':
-            fetchedData.removeWhere((item) => item.getSets().length == 0);
-            break;
-          default:
-            break;
-        }
+        if (game == 'cfv')
+          fetchedData.removeWhere((item) => item.getSets().isEmpty);
         return fetchedData;
       } else
         throw Exception('Failed to load data: ${response.statusCode}');

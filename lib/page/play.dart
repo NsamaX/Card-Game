@@ -1,83 +1,87 @@
+// TODO: create function for communicate
+
 import 'package:flutter/material.dart';
-import 'package:project/service/field.dart';
+import 'package:project/page/lobby.dart';
+import 'package:project/service/board/board.dart';
 import 'package:project/service/message.dart';
 import 'package:project/widget/appBar.dart';
-import 'package:project/widget/board.dart';
-import 'package:project/widget/chatBox.dart';
-import 'lobby.dart';
+import 'package:project/widget/board/board.dart';
+import 'package:project/widget/box/box.dart';
 
 class PlayPage extends StatefulWidget {
-  final int _roomID;
+  final int roomID;
+  final String game;
+  final String format;
 
-  const PlayPage({Key? key, required int roomID})
-      : _roomID = roomID,
-        super(key: key);
+  const PlayPage(
+      {Key? key,
+      required this.roomID,
+      required this.game,
+      required this.format})
+      : super(key: key);
 
   @override
   State<PlayPage> createState() => _PlayPageState();
 }
 
 class _PlayPageState extends State<PlayPage> {
-  final List<IconData> _communicationIcon = [
+  bool helpBoxVisible = false;
+  bool chatBoxVisible = false;
+  int communicationType = 0;
+
+  final List<IconData> communicationIcon = [
     Icons.headset_off_rounded,
     Icons.headset_rounded,
-    Icons.headset_mic_rounded,
+    Icons.headset_mic_rounded
   ];
-  int _communicationType = 0;
-  bool _showChat = false;
 
-  late List<dynamic> _board;
-  late List<dynamic> _cardMatrix;
-  late Map<String, dynamic> _event = {
-    'special': {},
-    'trigger': {},
-    'guard': {},
-    'show': {},
-    'bind': {},
-    'specialDeck': {},
-    'mainDeck': {},
-    'damage': {},
-    'drop': {},
-  };
-  Map<String, dynamic> _hand = {'me': [], 'opsite': []};
+  late final List<dynamic> board;
+  late final Map<String, dynamic> event;
+  late List<dynamic> cardMatrix;
+  Map<String, dynamic> playerHand = {'me': [], 'opsite': []};
 
-  void _back() {
+  void back() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LobbyPage()),
     );
   }
 
-  void _info() {}
-
-  void _communication() {
+  void communication() {
     setState(() {
-      if (_communicationType < _communicationIcon.length - 1)
-        _communicationType++;
+      if (communicationType < communicationIcon.length - 1)
+        communicationType++;
       else
-        _communicationType = 0;
+        communicationType = 0;
     });
   }
 
-  void _chat() {
+  void help() {
     setState(() {
-      _showChat = !_showChat;
+      helpBoxVisible = !helpBoxVisible;
+    });
+  }
+
+  void chat() {
+    setState(() {
+      chatBoxVisible = !chatBoxVisible;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _board = Field().getField();
-    _cardMatrix = [];
-    for (int col = 0; col < _board.length; col++) {
+    board = BoardService(game: widget.game, format: widget.format).getField();
+    event = BoardService(game: widget.game, format: widget.format).getEvent();
+    cardMatrix = [];
+    for (int col = 0; col < board.length; col++) {
       List<dynamic> column = [];
-      for (int row = 0; row < _board[col].length; row++) {
+      for (int row = 0; row < board[col].length; row++) {
         column.add([]);
-        final String name = _board[col][row]['field']['event'] ?? 'none';
-        if (_event.containsKey(name)) _event[name] = {'col': col, 'row': row};
+        final String name = board[col][row]['field']['event'] ?? 'none';
+        if (event.containsKey(name)) event[name] = {'col': col, 'row': row};
       }
-      _cardMatrix.add(column);
+      cardMatrix.add(column);
     }
   }
 
@@ -85,35 +89,28 @@ class _PlayPageState extends State<PlayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        menu: [
+        menuItem: [
           Icons.arrow_back_rounded,
-          Icons.info_outline_rounded,
-          'Room ${widget._roomID.toString()}',
-          _communicationIcon[_communicationType],
-          Icons.chat_rounded,
+          Icons.help_outline_rounded,
+          'Room ${widget.roomID.toString()}',
+          communicationIcon[communicationType],
+          Icons.chat_rounded
         ],
-        onTap: [
-          _back,
-          _info,
-          () {},
-          _communication,
-          _chat,
+        onTapmenuItem: [back, help, null, communication, chat],
+      ),
+      body: Stack(
+        children: [
+          Board(
+              board: board,
+              event: event,
+              cardMatrix: cardMatrix,
+              playerHand: playerHand,
+              cardSize: 80),
+          // Box().help(MessageService().getLog(), helpBoxVisible, 260, 360),
+          Box().chat(
+              MessageService().getLog(), chatBoxVisible, 260, 360, 16, 40),
         ],
       ),
-      body: Stack(children: [
-        Board(
-          board: _board,
-          event: _event,
-          cardMatrix: _cardMatrix,
-          hand: _hand,
-        ),
-        AnimatedContainer(
-          duration: Duration(milliseconds: 400),
-          curve: Curves.easeInOut,
-          transform: Matrix4.translationValues(_showChat ? 0 : 200, 0, 0),
-          child: ChatBox(log: Message().getLog()),
-        ),
-      ]),
     );
   }
 }
