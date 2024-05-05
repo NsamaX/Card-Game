@@ -3,44 +3,55 @@ import 'package:project/widget/board/moveSet.dart';
 import 'package:project/widget/card/card.dart';
 
 class FieldWidget {
-  late final ThemeData theme = Theme.of(context);
-  final BuildContext context;
-  final double cardSize;
+  Widget handZone(Map<String, dynamic> playerHand) {
+    final bool isMe = playerHand['type'] == 'me' ? true : false;
 
-  FieldWidget({required this.context, required this.cardSize});
-
-  Widget handZone(List<dynamic> playerHand, bool showCard) {
-    return Align(
-      alignment: showCard ? Alignment.bottomCenter : Alignment.topCenter,
+    return Positioned(
+      left: 0,
+      right: 0,
+      top: isMe ? null : -40,
+      bottom: isMe ? -40 : null,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: hand(playerHand, showCard),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: RotatedBox(
+            quarterTurns: isMe ? 0 : 2, child: hand(playerHand['card'], isMe)),
       ),
     );
   }
 
   Widget hand(List<dynamic> hand, bool showCard) {
     return Container(
-      height: cardSize * 1.2,
+      height: cardHeight * 1.2,
       child: hand.isNotEmpty
-          ? ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: hand.length,
-              itemBuilder: (BuildContext context, int index) {
-                var card = hand[index];
-                return CARD(
-                  card: card,
-                  saveEnable: false,
-                  showCardImage: showCard,
-                  showCardInfo: showCard,
-                );
-              },
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (hand.length > 5) ...[
+                  Expanded(
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      reverse: !showCard,
+                      children: [
+                        for (var card in hand)
+                          CARD(
+                              card: card,
+                              saveEnable: false,
+                              showCardImage: showCard)
+                      ],
+                    ),
+                  )
+                ] else ...[
+                  for (var card in hand)
+                    CARD(
+                        card: card, saveEnable: false, showCardImage: showCard),
+                ]
+              ],
             )
           : SizedBox(),
     );
   }
 
-  Widget field(int col, int row, List<dynamic> board, List<dynamic> cardMatrix,
+  Widget field(int col, int row, List<dynamic> board, List<dynamic> cardOnBoard,
       Map<String, dynamic> option, Function drag, Function drop) {
     final Map<String, dynamic> field = board[col][row];
 
@@ -48,8 +59,8 @@ class FieldWidget {
       child: Stack(
         children: [
           completeField(col, row, field, drop),
-          cardStack(col, row, cardMatrix, drag, drop),
-          MoveSet(col: col, row: row, option: option, moveSet: field['action']),
+          cardStack(col, row, cardOnBoard, drag, drop),
+          MoveSet(col: col, row: row, option: option, field: field),
         ],
       ),
     );
@@ -65,15 +76,15 @@ class FieldWidget {
 
   Widget virsualField(Map<String, dynamic> field) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: RotatedBox(
         quarterTurns: field['field']['type'],
         child: Container(
-          width: cardSize,
-          height: cardSize,
+          width: cardHeight,
+          height: cardHeight,
           decoration: BoxDecoration(
             color: theme.appBarTheme.backgroundColor,
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
             child: Text(
@@ -89,13 +100,13 @@ class FieldWidget {
     );
   }
 
-  Widget cardStack(int col, int row, List<dynamic> cardMatrix, Function drag,
+  Widget cardStack(int col, int row, List<dynamic> cardOnBoard, Function drag,
       Function drop) {
-    return cardMatrix[col][row].isEmpty
+    return cardOnBoard[col][row].isEmpty
         ? SizedBox()
         : Stack(
             children: [
-              for (var card in cardMatrix[col][row])
+              for (var card in cardOnBoard[col][row])
                 Draggable(
                   key: UniqueKey(),
                   child: DragTarget(
@@ -113,7 +124,7 @@ class FieldWidget {
                   ),
                   data: card,
                   feedback: SizedBox(
-                    height: cardSize * 1.2,
+                    height: cardHeight * 1.2,
                     child: CARD(
                       card: card['card'],
                       saveEnable: false,
@@ -128,4 +139,11 @@ class FieldWidget {
             ],
           );
   }
+
+  final double cardHeight;
+
+  late final ThemeData theme = Theme.of(context);
+  final BuildContext context;
+
+  FieldWidget({required this.context, required this.cardHeight});
 }

@@ -2,7 +2,7 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/cfv.dart';
 
 class DeckService {
   Future<bool> check(String cardName) async {

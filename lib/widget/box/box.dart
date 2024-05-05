@@ -20,15 +20,15 @@ class Box {
     );
   }
 
-  Widget help(List<dynamic> info, bool infoBoxVisible, double helpBoxWidth,
+  Widget help(List<dynamic> help, bool helpBoxVisible, double helpBoxWidth,
       double helpBoxHeight) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 400),
       curve: Curves.easeInOut,
       transform:
-          Matrix4.translationValues(0, infoBoxVisible ? 0 : -helpBoxHeight, 0),
+          Matrix4.translationValues(0, helpBoxVisible ? 0 : -helpBoxHeight, 0),
       child: Help(
-          log: info, helpBoxWidth: helpBoxWidth, helpBoxHeight: helpBoxHeight),
+          help: help, helpBoxWidth: helpBoxWidth, helpBoxHeight: helpBoxHeight),
     );
   }
 

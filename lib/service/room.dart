@@ -30,7 +30,7 @@ class RoomService {
     List<IconData> statusIcon = [
       Icons.tag_faces_outlined,
       Icons.public_rounded,
-      Icons.lock_rounded
+      Icons.lock_rounded,
     ];
     List<String> formats = [
       'Limit Break',
@@ -49,7 +49,7 @@ class RoomService {
       label[i]['content'].add({
         'icon': status,
         'text': text,
-        'page': PlayPage(roomID: i + 1, game: 'cfv', format: format)
+        'page': PlayPage(roomID: i + 1, game: 'cfv', format: format),
       });
     }
     return label;

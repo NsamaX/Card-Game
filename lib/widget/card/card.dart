@@ -1,32 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/cfv.dart';
 import 'package:project/page/info.dart';
 
-class CARD extends StatelessWidget {
-  final Model card;
-  final bool saveEnable;
-  final bool showCardImage;
-  final bool showCardInfo;
-
-  const CARD(
-      {Key? key,
-      required this.card,
-      required this.saveEnable,
-      bool? showCardImage,
-      bool? showCardInfo})
-      : showCardImage = showCardImage ?? true,
-        showCardInfo = showCardInfo ?? true,
-        super(key: key);
-
+class _CARDState extends State<CARD> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (showCardInfo)
+        if (widget.showCardInfo)
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
-                  InfoPage(card: card, saveEnable: saveEnable),
+                  InfoPage(card: widget.card, saveEnable: widget.saveEnable),
             ),
           );
       },
@@ -42,7 +27,9 @@ class CARD extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 8 / 12,
                 child: Image.network(
-                  showCardImage ? card.getImage() : card.getSleeve(),
+                  widget.showCardImage
+                      ? widget.card.getImage()
+                      : widget.card.getSleeve(),
                   fit: BoxFit.cover,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
@@ -66,4 +53,24 @@ class CARD extends StatelessWidget {
       ),
     );
   }
+}
+
+class CARD extends StatefulWidget {
+  final Model card;
+  final bool saveEnable;
+  final bool showCardImage;
+  final bool showCardInfo;
+
+  const CARD(
+      {Key? key,
+      required this.card,
+      required this.saveEnable,
+      bool? showCardImage,
+      bool? showCardInfo})
+      : showCardImage = showCardImage ?? true,
+        showCardInfo = showCardInfo ?? true,
+        super(key: key);
+
+  @override
+  State<CARD> createState() => _CARDState();
 }

@@ -1,50 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Filter extends StatefulWidget {
-  final List<dynamic> filter;
-  final double filterBoxWidth;
-  final double filterBoxHeight;
-
-  const Filter({
-    Key? key,
-    required this.filter,
-    required this.filterBoxWidth,
-    required this.filterBoxHeight,
-  }) : super(key: key);
-
-  @override
-  State<Filter> createState() => _FilterState();
-}
-
 class _FilterState extends State<Filter> with SingleTickerProviderStateMixin {
-  late ThemeData theme = Theme.of(context);
-
-  late AnimationController controller;
-  late Animation<Offset> offsetAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 600),
-    );
-    offsetAnimation = Tween<Offset>(
-      begin: Offset(1, 0),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: controller,
-      curve: Curves.easeInOut,
-    ));
-    controller.forward();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
@@ -117,4 +73,48 @@ class _FilterState extends State<Filter> with SingleTickerProviderStateMixin {
       ),
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 600),
+    );
+    offsetAnimation = Tween<Offset>(
+      begin: Offset(1, 0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOut,
+    ));
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  late AnimationController controller;
+  late Animation<Offset> offsetAnimation;
+
+  late ThemeData theme = Theme.of(context);
+}
+
+class Filter extends StatefulWidget {
+  final List<dynamic> filter;
+  final double filterBoxWidth;
+  final double filterBoxHeight;
+
+  const Filter(
+      {Key? key,
+      required this.filter,
+      required this.filterBoxWidth,
+      required this.filterBoxHeight})
+      : super(key: key);
+
+  @override
+  State<Filter> createState() => _FilterState();
 }

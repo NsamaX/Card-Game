@@ -1,39 +1,30 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final List<dynamic> menuItem;
-  final List<Function?> onTapmenuItem;
-
-  const CustomAppBar(
-      {Key? key, required this.menuItem, required this.onTapmenuItem})
-      : super(key: key);
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
-
+class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     return AppBar(
-      title: menuItem.length == 1
-          ? Center(child: Text(menuItem[0], style: theme.textTheme.titleSmall))
+      title: widget.menuItem.length == 1
+          ? Center(
+              child:
+                  Text(widget.menuItem[0], style: theme.textTheme.titleSmall))
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: menuItem
+              children: widget.menuItem
                   .asMap()
                   .entries
-                  .map((entry) => menu(theme, context, entry.key, entry.value))
+                  .map((entry) => menu(entry.key, entry.value))
                   .toList()),
     );
   }
 
-  Widget menu(ThemeData theme, BuildContext context, int index, dynamic item) {
-    final isTitle = index == (menuItem.length ~/ 2);
+  Widget menu(int index, dynamic item) {
+    final isTitle = index == (widget.menuItem.length ~/ 2);
 
     return GestureDetector(
       onTap: () {
-        if (index < onTapmenuItem.length) onTapmenuItem[index]?.call();
+        if (index < widget.onTapmenuItem.length)
+          widget.onTapmenuItem[index]?.call();
       },
       child: item != null
           ? item is String
@@ -45,4 +36,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : SizedBox(width: 34),
     );
   }
+
+  late final ThemeData theme = Theme.of(context);
+}
+
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final List<dynamic> menuItem;
+  final List<Function?> onTapmenuItem;
+
+  const CustomAppBar(
+      {Key? key, required this.menuItem, required this.onTapmenuItem})
+      : super(key: key);
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
 }

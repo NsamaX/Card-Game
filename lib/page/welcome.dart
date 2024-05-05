@@ -1,22 +1,11 @@
 // TODO: create function for sign in each option
 
 import 'package:flutter/material.dart';
-import 'package:project/widget/welcome.dart';
-
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
-
-  @override
-  State<WelcomePage> createState() => _WelcomePageState();
-}
+import 'package:project/widget/page/welcome.dart';
 
 class _WelcomePageState extends State<WelcomePage> {
-  PageController pageController = PageController(initialPage: 0);
-
   @override
   Widget build(BuildContext context) {
-    final WelcomeWidget pageWidget = WelcomeWidget(context: context);
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -54,4 +43,15 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
   }
+
+  PageController pageController = PageController(initialPage: 0);
+
+  late final WelcomeWidget pageWidget = WelcomeWidget(context: context);
+}
+
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
 }

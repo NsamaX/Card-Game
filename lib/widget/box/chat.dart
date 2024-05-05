@@ -1,53 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Chat extends StatefulWidget {
-  final Map<String, dynamic> log;
-  final double chatBoxWidth;
-  final double chatBoxHeight;
-  final double messageMargin;
-  final double sendButtonHeight;
-
-  const Chat(
-      {Key? key,
-      required this.log,
-      required this.chatBoxWidth,
-      required this.chatBoxHeight,
-      required this.messageMargin,
-      required this.sendButtonHeight})
-      : super(key: key);
-
-  @override
-  State<Chat> createState() => _ChatState();
-}
-
 class _ChatState extends State<Chat> with SingleTickerProviderStateMixin {
-  late final ThemeData theme = Theme.of(context);
-  late AnimationController chatBoxController;
-  late Animation<Offset> offsetAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    chatBoxController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 600),
-    );
-    offsetAnimation = Tween<Offset>(
-      begin: Offset(1, 0),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: chatBoxController,
-      curve: Curves.easeInOut,
-    ));
-    chatBoxController.forward();
-  }
-
-  @override
-  void dispose() {
-    chatBoxController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
@@ -136,4 +89,52 @@ class _ChatState extends State<Chat> with SingleTickerProviderStateMixin {
       ),
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    chatBoxController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 600),
+    );
+    offsetAnimation = Tween<Offset>(
+      begin: Offset(1, 0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: chatBoxController,
+      curve: Curves.easeInOut,
+    ));
+    chatBoxController.forward();
+  }
+
+  @override
+  void dispose() {
+    chatBoxController.dispose();
+    super.dispose();
+  }
+
+  late AnimationController chatBoxController;
+  late Animation<Offset> offsetAnimation;
+
+  late final ThemeData theme = Theme.of(context);
+}
+
+class Chat extends StatefulWidget {
+  final Map<String, dynamic> log;
+  final double chatBoxWidth;
+  final double chatBoxHeight;
+  final double messageMargin;
+  final double sendButtonHeight;
+
+  const Chat(
+      {Key? key,
+      required this.log,
+      required this.chatBoxWidth,
+      required this.chatBoxHeight,
+      required this.messageMargin,
+      required this.sendButtonHeight})
+      : super(key: key);
+
+  @override
+  State<Chat> createState() => _ChatState();
 }

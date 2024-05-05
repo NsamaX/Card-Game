@@ -1,5 +1,4 @@
 // TODO: set setting page
-// TODO: get setting by API
 
 import 'package:flutter/material.dart';
 import 'package:project/page/welcome.dart';

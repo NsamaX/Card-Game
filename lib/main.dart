@@ -1,4 +1,4 @@
-// TODO: set debug show checked mode banner false after finish project
+// TODO: set debug show checked mode banner false after finish this project
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

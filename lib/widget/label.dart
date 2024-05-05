@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Label extends StatelessWidget {
-  final List<dynamic> label;
-
-  const Label({Key? key, required this.label}) : super(key: key);
-
+class _LabelState extends State<Label> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...label.map<Widget>((category) {
+        ...widget.label.map<Widget>((category) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (category['title'] != null) title(theme, category['title']),
+              if (category['title'] != null) title(category['title']),
               ...category['content'].map<Widget>((item) {
-                return content(
-                    theme, context, item['icon'], item['text'], item['page']);
+                return content(item['icon'], item['text'], item['page']);
               }).toList(),
             ],
           );
@@ -28,7 +21,7 @@ class Label extends StatelessWidget {
     );
   }
 
-  Widget title(ThemeData theme, String text) {
+  Widget title(String text) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 16, bottom: 8),
       child: Text(
@@ -39,8 +32,7 @@ class Label extends StatelessWidget {
     );
   }
 
-  Widget content(ThemeData theme, BuildContext context, IconData icon,
-      String text, Widget? page) {
+  Widget content(IconData icon, String text, Widget? page) {
     return GestureDetector(
       onTap: () {
         if (page != null)
@@ -71,4 +63,15 @@ class Label extends StatelessWidget {
       ),
     );
   }
+
+  late final ThemeData theme = Theme.of(context);
+}
+
+class Label extends StatefulWidget {
+  final List<dynamic> label;
+
+  const Label({Key? key, required this.label}) : super(key: key);
+
+  @override
+  State<Label> createState() => _LabelState();
 }
