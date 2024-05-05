@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 
 class CardService {
   final String game;

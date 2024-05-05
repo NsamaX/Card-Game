@@ -1,7 +1,7 @@
 // TODO: create function for filter card
 
 import 'package:flutter/material.dart';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 import 'package:project/page/deck.dart';
 import 'package:project/service/board/cfv/filter.dart';
 import 'package:project/service/card.dart';
@@ -9,7 +9,7 @@ import 'package:project/widget/box/box.dart';
 import 'package:project/widget/card/book.dart';
 import 'package:project/widget/appBar.dart';
 
-class _cardListBookPageState extends State<BookPage> {
+class _BookPageState extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,8 @@ class _cardListBookPageState extends State<BookPage> {
                     ? Alignment.center
                     : Alignment.bottomCenter,
                 child: CircularProgressIndicator()),
-          Box().filter(FilterService().getFilter(), filterBoxVisible, 260, 460),
+          BoxWidget()
+              .filter(FilterService().getFilter(), filterBoxVisible, 260, 460),
         ],
       ),
     );
@@ -42,7 +43,7 @@ class _cardListBookPageState extends State<BookPage> {
   void back() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => DeckPage()),
+      MaterialPageRoute(builder: (context) => DeckPage(game: widget.game)),
     );
   }
 
@@ -58,7 +59,7 @@ class _cardListBookPageState extends State<BookPage> {
       isLoading = true;
     });
     List<Model> fetchedData =
-        await CardService(game: 'cfv').getData(search, page);
+        await CardService(game: widget.game).getData(search, page);
     if (!mounted) return;
     setState(() {
       if (page == 1)
@@ -78,7 +79,6 @@ class _cardListBookPageState extends State<BookPage> {
   @override
   void initState() {
     super.initState();
-    cardList = [];
     getData(search, currentPage);
     scrollController.addListener(scrollListener);
   }
@@ -91,20 +91,22 @@ class _cardListBookPageState extends State<BookPage> {
 
   bool filterBoxVisible = false;
   bool isLoading = false;
+  List<Model> cardList = [];
+
+  final String search = "cards";
   int currentPage = 1;
-  late List<Model> cardList;
 
   final ScrollController scrollController = ScrollController();
-  final String search = "cards";
 }
 
 class BookPage extends StatefulWidget {
+  final String game;
   final bool saveEnable;
 
-  const BookPage({Key? key, required bool save})
+  const BookPage({Key? key, required this.game, required bool save})
       : saveEnable = save,
         super(key: key);
 
   @override
-  State<BookPage> createState() => _cardListBookPageState();
+  State<BookPage> createState() => _BookPageState();
 }

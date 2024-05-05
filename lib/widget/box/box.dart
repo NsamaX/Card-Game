@@ -5,7 +5,7 @@ import 'package:project/widget/box/chat.dart';
 import 'package:project/widget/box/filter.dart';
 import 'package:project/widget/box/help.dart';
 
-class Box {
+class BoxWidget {
   Widget filter(List<dynamic> filter, bool filterBoxVisibility,
       double filterBoxWidth, double filterBoxHeight) {
     return AnimatedContainer(

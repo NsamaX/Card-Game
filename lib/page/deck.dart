@@ -2,7 +2,7 @@
 // TODO: load deck by deck name
 
 import 'package:flutter/material.dart';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 import 'package:project/page/book.dart';
 import 'package:project/service/deck.dart';
 import 'package:project/widget/appBar.dart';
@@ -31,7 +31,7 @@ class _DeckPageState extends State<DeckPage> {
           scrollController: scrollController,
           cardList: deck,
           editEnable: editEnable),
-      bottomNavigationBar: BottomNavigation(currentIndex: 0),
+      bottomNavigationBar: BottomNavigation(currentIndex: 0, game: widget.game),
     );
   }
 
@@ -42,7 +42,8 @@ class _DeckPageState extends State<DeckPage> {
   void search() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => BookPage(save: false)),
+      MaterialPageRoute(
+          builder: (context) => BookPage(game: widget.game, save: false)),
     );
   }
 
@@ -75,7 +76,7 @@ class _DeckPageState extends State<DeckPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => BookPage(save: true),
+        builder: (context) => BookPage(game: widget.game, save: true),
       ),
     );
   }
@@ -83,7 +84,6 @@ class _DeckPageState extends State<DeckPage> {
   @override
   void initState() {
     super.initState();
-    deck = [];
     DeckService().load().then(
       (load) {
         setState(() {
@@ -94,13 +94,15 @@ class _DeckPageState extends State<DeckPage> {
   }
 
   bool editEnable = false;
-  late List<Model> deck;
+  List<Model> deck = [];
 
   final ScrollController scrollController = ScrollController();
 }
 
 class DeckPage extends StatefulWidget {
-  const DeckPage({Key? key}) : super(key: key);
+  final String game;
+
+  const DeckPage({Key? key, required this.game}) : super(key: key);
 
   @override
   State<DeckPage> createState() => _DeckPageState();

@@ -30,8 +30,8 @@ class _PlayPageState extends State<PlayPage> {
               cardOnBoard: cardOnBoard,
               playerHand: playerHand,
               cardHeight: 80),
-          Box().help([], helpBoxVisible, 260, 360),
-          Box().chat(
+          BoxWidget().help([], helpBoxVisible, 260, 360),
+          BoxWidget().chat(
               MessageService().getLog(), chatBoxVisible, 260, 360, 16, 40),
         ],
       ),
@@ -41,7 +41,7 @@ class _PlayPageState extends State<PlayPage> {
   void back() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => LobbyPage()),
+      MaterialPageRoute(builder: (context) => LobbyPage(game: widget.game)),
     );
   }
 

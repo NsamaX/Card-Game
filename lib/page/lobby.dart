@@ -28,10 +28,11 @@ class _LobbyPageState extends State<LobbyPage> {
               ),
             ],
           ),
-          Box().filter(RoomService().getFilter(), filterBoxVisible, 260, 200),
+          BoxWidget()
+              .filter(RoomService().getFilter(), filterBoxVisible, 260, 200),
         ],
       ),
-      bottomNavigationBar: BottomNavigation(currentIndex: 1),
+      bottomNavigationBar: BottomNavigation(currentIndex: 1, game: widget.game),
     );
   }
 
@@ -59,7 +60,9 @@ class _LobbyPageState extends State<LobbyPage> {
 }
 
 class LobbyPage extends StatefulWidget {
-  const LobbyPage({Key? key}) : super(key: key);
+  final String game;
+
+  const LobbyPage({Key? key, required this.game}) : super(key: key);
 
   @override
   State<LobbyPage> createState() => _LobbyPageState();

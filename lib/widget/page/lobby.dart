@@ -5,11 +5,11 @@ import 'package:project/widget/label.dart';
 
 class LobbyWidget {
   Widget room(List<dynamic> allRoom, int maxRoomPerPage, int currentPage) {
-    int startIndex = currentPage * maxRoomPerPage;
-    int endIndex = (currentPage + 1) * maxRoomPerPage;
-    int totalRoom = allRoom.length;
+    final int startIndex = currentPage * maxRoomPerPage;
+    final int endIndex = (currentPage + 1) * maxRoomPerPage;
+    final int totalRoom = allRoom.length;
 
-    List<dynamic> currentRoom = allRoom.sublist(
+    final List<dynamic> currentRoom = allRoom.sublist(
       startIndex,
       endIndex.clamp(0, totalRoom),
     );

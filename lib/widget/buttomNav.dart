@@ -15,7 +15,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         navigation('Setting', Icons.settings_rounded)
       ],
       currentIndex: widget.currentIndex,
-      onTap: (index) => navigate(context, index),
+      onTap: (index) => navigate(context, index, widget.game),
     );
   }
 
@@ -23,18 +23,18 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return BottomNavigationBarItem(icon: Icon(iconData), label: label);
   }
 
-  void navigate(BuildContext context, int index) {
+  void navigate(BuildContext context, int index, String game) {
     Widget page;
 
     switch (index) {
       case 0:
-        page = DeckPage();
+        page = DeckPage(game: game);
         break;
       case 1:
-        page = LobbyPage();
+        page = LobbyPage(game: game);
         break;
       case 2:
-        page = SettingPage();
+        page = SettingPage(game: game);
         break;
       default:
         page = Container();
@@ -49,8 +49,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
 class BottomNavigation extends StatefulWidget {
   final int currentIndex;
+  final String game;
 
-  const BottomNavigation({Key? key, required this.currentIndex})
+  const BottomNavigation(
+      {Key? key, required this.currentIndex, required this.game})
       : super(key: key);
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 import 'package:project/service/deck.dart';
 import 'package:project/widget/board/field.dart';
 
@@ -125,8 +125,8 @@ class _BoardState extends State<Board> {
     if (widget.cardOnBoard[col][row].isEmpty) return;
     setState(() {
       if (widget.event.containsKey(action)) {
-        int targetCol;
-        int targetRow;
+        late int targetCol;
+        late int targetRow;
         switch (action) {
           case 'show' || 'damage':
             final bool isTriggerCard =

@@ -31,11 +31,25 @@ class _WelcomePageState extends State<WelcomePage> {
               children: [
                 pageWidget.title('Let\'s me know you.'),
                 pageWidget.signOption({
-                  'apple': 'asset/image/apple.png',
-                  'goodle': 'asset/image/google.png',
-                  'facebook': 'asset/image/facebook.png'
+                  'apple': 'asset/image/logo/apple.png',
+                  'goodle': 'asset/image/logo/google.png',
+                  'facebook': 'asset/image/logo/facebook.png'
                 }, 40),
-                pageWidget.guessButton('Guess', 260),
+                pageWidget.startButton('Guess', 260, () {
+                  pageController.animateToPage(2,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut);
+                }),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                pageWidget.title('Choose the game you ant to play.'),
+                pageWidget.gameOption({
+                  'pokemon': 'asset/image/logo/pokemon.png',
+                  'cfv': 'asset/image/logo/cfv.png'
+                }, 60)
               ],
             ),
           ],

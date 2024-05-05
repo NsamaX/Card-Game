@@ -10,13 +10,15 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       appBar: CustomAppBar(menuItem: ['Setting'], onTapmenuItem: [null]),
       body: Label(label: SettingService().getSetting()),
-      bottomNavigationBar: BottomNavigation(currentIndex: 2),
+      bottomNavigationBar: BottomNavigation(currentIndex: 2, game: widget.game),
     );
   }
 }
 
 class SettingPage extends StatefulWidget {
-  const SettingPage({Key? key}) : super(key: key);
+  final String game;
+
+  const SettingPage({Key? key, required this.game}) : super(key: key);
 
   @override
   State<SettingPage> createState() => _SettingPageState();

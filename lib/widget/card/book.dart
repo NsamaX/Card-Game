@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 import 'package:project/service/deck.dart';
 import 'package:project/widget/card/card.dart';
 import 'package:project/widget/card/edit.dart';
@@ -64,7 +64,7 @@ class Book extends StatefulWidget {
 
   final ScrollController scrollController;
 
-  Book(
+  const Book(
       {Key? key,
       required this.scrollController,
       required this.cardList,

@@ -42,12 +42,12 @@ class WelcomeWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children:
-            image.entries.map((entry) => option(entry.value, width)).toList(),
+            image.entries.map((entry) => sign(entry.value, width)).toList(),
       ),
     );
   }
 
-  Widget option(String image, double width) {
+  Widget sign(String image, double width) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Container(
@@ -68,18 +68,42 @@ class WelcomeWidget {
     );
   }
 
-  Widget guessButton(String text, double width) {
-    return Center(
-      child: Container(
-        width: width,
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => DeckPage()),
-            );
-          },
-          child: Text(text, style: theme.textTheme.titleSmall),
+  Widget gameOption(Map<String, String> image, double width) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 60),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: image.entries
+            .map((entry) => game(entry.value, width, entry.key))
+            .toList(),
+      ),
+    );
+  }
+
+  Widget game(String image, double width, String game) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => DeckPage(game: game)),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: theme.iconTheme.color,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Image.asset(
+              image,
+              width: width,
+              height: width,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
     );

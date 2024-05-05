@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 
 class _EditState extends State<Edit> {
   @override

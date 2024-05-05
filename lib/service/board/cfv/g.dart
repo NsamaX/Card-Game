@@ -32,7 +32,7 @@ class G implements Format {
         'field': {
           'name': 'Guard',
           'event': 'guard',
-          'type': 3,
+          'type': 0,
         },
         'action': [
           'search',

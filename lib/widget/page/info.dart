@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/cfv.dart';
+import 'package:project/api/model/cfv.dart';
 
 class InfoWidget {
   Widget saveButton(bool saveEnable, Function() saveCard) {
