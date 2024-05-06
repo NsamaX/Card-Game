@@ -13,10 +13,8 @@ class FieldWidget {
       child: Stack(
         children: [
           completeField(col: col, row: row, field: field),
-          if (cardOnBoard[col].length > 1) ...[
-            completeCard(col: col, row: row, cardOnBoard: cardOnBoard),
-            MoveSet(col: col, row: row, option: option, field: field),
-          ]
+          completeCard(col: col, row: row, cardOnBoard: cardOnBoard),
+          MoveSet(col: col, row: row, option: option, field: field),
         ],
       ),
     );

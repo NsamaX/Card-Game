@@ -22,9 +22,6 @@ ThemeData themeData() {
       bodyMedium: bodyStyle(16),
       bodySmall: bodyStyle(12),
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(primary4)),
-    ),
     appBarTheme: AppBarTheme(
       backgroundColor: primary3,
       iconTheme: IconThemeData(color: secondary, size: 24),
@@ -36,6 +33,13 @@ ThemeData themeData() {
       selectedItemColor: secondary,
       unselectedItemColor: Colors.white,
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(primary4)),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: secondary,
+        refreshBackgroundColor: primary4,
+        circularTrackColor: primary4),
   );
 }
 

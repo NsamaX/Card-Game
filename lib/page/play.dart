@@ -78,7 +78,7 @@ class _PlayPageState extends State<PlayPage> {
     super.initState();
     board = BoardService(game: widget.game, format: widget.format).getField();
     event = BoardService(game: widget.game, format: widget.format).getEvent();
-    cardOnBoard = [[]];
+    cardOnBoard = [];
     for (int col = 0; col < board.length; col++) {
       List<dynamic> column = [];
       for (int row = 0; row < board[col].length; row++) {
@@ -88,7 +88,6 @@ class _PlayPageState extends State<PlayPage> {
       }
       cardOnBoard.add(column);
     }
-    cardOnBoard.add([]);
   }
 
   final List<IconData> communicationIcon = [
