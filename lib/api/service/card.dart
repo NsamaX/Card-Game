@@ -34,8 +34,7 @@ class CardService {
             .toList();
         switch (game) {
           case 'cfv':
-            fetchedData
-                .removeWhere((item) => item.getMap()['Sets'] == 'No Set');
+            fetchedData.removeWhere((item) => item.getMap()['Sets'] == null);
             break;
           default:
             throw ArgumentError('Unsupported game: $game');

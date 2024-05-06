@@ -174,20 +174,25 @@ class CFV extends Model {
   String getImage() => imageUrlJp ?? getNoImage();
   String getName() => name ?? 'No Name';
   Map<String, dynamic> getMap() {
-    var map = {
+    var properties = {
       'Name': name,
       'Flavor': flavor,
       'Skill': skill,
       'Effect': effect,
       'Ride Skill': rideSkill,
+      'Trigger': cardType,
       'Trigger Effect': triggerEffect,
       'Power': power.toString(),
       'Shield': shield.toString(),
       'Clan': clan,
       'Nation': nation,
       'Format': format,
-      'Sets': sets!.isEmpty ? 'No Set' : sets
     };
-    return map;
+    var map = sets!.isNotEmpty ? {...properties, 'Sets': sets} : properties;
+    return map.entries.where((entry) => entry.value != '').fold({},
+        (map, entry) {
+      map[entry.key] = entry.value;
+      return map;
+    });
   }
 }

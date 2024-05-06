@@ -18,13 +18,7 @@ class _BoardState extends State<Board> {
                 Row(children: [
                   for (int row = 0; row < widget.board[col].length; row++)
                     fieldWidget.field(
-                        col: col,
-                        row: row,
-                        board: widget.board,
-                        cardOnBoard: widget.cardOnBoard,
-                        option: getOption(),
-                        drag: drag,
-                        drop: drop),
+                        col: col, row: row, cardOnBoard: widget.cardOnBoard),
                 ]),
             ],
           ),
@@ -39,18 +33,22 @@ class _BoardState extends State<Board> {
     if (widget.cardOnBoard[col][row].isEmpty) return;
     setState(() {
       widget.cardOnBoard[col][row].removeLast();
-      place(col, row);
+      update(col, row);
     });
   }
 
   void drop(int col, int row, Model card, bool show) {
     setState(() {
-      widget.cardOnBoard[col][row].add({'card': card, 'show': show});
-      place(col, row);
+      final int targetCol = widget.event['show']['col'];
+      final int targetRow = widget.event['show']['row'];
+      final bool isShow = targetCol == col && targetRow == row;
+      widget.cardOnBoard[col][row]
+          .add({'card': card, 'show': isShow ? true : show});
+      update(col, row);
     });
   }
 
-  void place(int col, int row) {
+  void update(int col, int row) {
     setState(() {
       var currentField = widget.board[col][row];
       var currentCard = widget.cardOnBoard[col][row];
@@ -73,11 +71,56 @@ class _BoardState extends State<Board> {
 
   void draw(int col, int row) {
     if (widget.cardOnBoard[col][row].isEmpty) return;
+    final String player = 'me';
     setState(() {
-      widget.playerHand['me']['card']
-          .add(widget.cardOnBoard[col][row].last['card']);
+      widget.playerHand[player]['card'].add({
+        'card': widget.cardOnBoard[col][row].last['card'],
+        'show': widget.cardOnBoard[col][row].last['show']
+      });
+      if (player == 'me') widget.playerHand[player]['card'].last['show'] = true;
       widget.cardOnBoard[col][row].removeLast();
-      place(col, row);
+      update(col, row);
+    });
+  }
+
+  void place(String player, int index) {
+    setState(() {
+      widget.playerHand[player]['card'].removeAt[index];
+    });
+  }
+
+  void use(int col, int row, String action) {
+    if (widget.cardOnBoard[col][row].isEmpty) return;
+    setState(() {
+      if (widget.event.containsKey(action)) {
+        late final int targetCol;
+        late final int targetRow;
+        switch (action) {
+          case 'show' || 'damage':
+            final bool isTriggerCard =
+                widget.cardOnBoard[col][row].last['card'].getMap()['Trigger'] !=
+                        null
+                    ? true
+                    : false;
+            targetCol = isTriggerCard
+                ? widget.event['trigger']['col']
+                : widget.event[action]['col'];
+            targetRow = isTriggerCard
+                ? widget.event['trigger']['row']
+                : widget.event[action]['row'];
+            break;
+          default:
+            targetCol = widget.event[action]['col'];
+            targetRow = widget.event[action]['row'];
+            break;
+        }
+        final cardToMove = widget.cardOnBoard[col][row].last['card'];
+        widget.cardOnBoard[targetCol][targetRow]
+            .add({'card': cardToMove, 'show': true});
+        widget.cardOnBoard[col][row].removeLast();
+        update(col, row);
+        update(targetCol, targetRow);
+      }
     });
   }
 
@@ -127,48 +170,22 @@ class _BoardState extends State<Board> {
     ;
   }
 
-  void use(int col, int row, String action) {
-    if (widget.cardOnBoard[col][row].isEmpty) return;
-    setState(() {
-      if (widget.event.containsKey(action)) {
-        late int targetCol;
-        late int targetRow;
-        switch (action) {
-          case 'show' || 'damage':
-            final bool isTriggerCard =
-                widget.cardOnBoard[col][row].last['card'].getType().length > 1;
-            targetCol = isTriggerCard
-                ? widget.event['trigger']['col']
-                : widget.event[action]['col'];
-            targetRow = isTriggerCard
-                ? widget.event['trigger']['row']
-                : widget.event[action]['row'];
-            break;
-          default:
-            targetCol = widget.event[action]['col'];
-            targetRow = widget.event[action]['row'];
-            break;
-        }
-        final cardToMove = widget.cardOnBoard[col][row].last['card'];
-        widget.cardOnBoard[targetCol][targetRow]
-            .add({'card': cardToMove, 'show': true});
-        widget.cardOnBoard[col][row].removeLast();
-        place(col, row);
-        place(targetCol, targetRow);
-      }
-    });
-  }
-
   Map<String, dynamic> getOption() => {
         'draw': draw,
+        'use': use,
         'flip': flip,
         'load': load,
         'shuffle': shuffle,
-        'use': use,
       };
 
-  late final FieldWidget fieldWidget =
-      FieldWidget(context: context, cardHeight: widget.cardHeight);
+  late final FieldWidget fieldWidget = FieldWidget(
+      context: context,
+      board: widget.board,
+      option: getOption(),
+      drag: drag,
+      drop: drop,
+      place: place,
+      cardHeight: widget.cardHeight);
 }
 
 class Board extends StatefulWidget {
