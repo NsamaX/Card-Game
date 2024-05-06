@@ -107,22 +107,37 @@ class FieldWidget {
 
   Widget handZone({required Map<String, dynamic> playerHand}) {
     final bool isMe = playerHand['type'] == 'me' ? true : false;
+    final bool isSelect = playerHand['select'];
 
     return Positioned(
       left: 0,
       right: 0,
-      top: isMe ? null : -40,
-      bottom: isMe ? -40 : null,
+      top: isMe
+          ? null
+          : isSelect
+              ? 0
+              : -40,
+      bottom: isMe
+          ? isSelect
+              ? 0
+              : -40
+          : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: RotatedBox(
             quarterTurns: isMe ? 0 : 2,
-            child: hand(hand: playerHand['card'], isMe: isMe)),
+            child: hand(
+                hand: playerHand['card'],
+                player: playerHand['type'],
+                isMe: isMe)),
       ),
     );
   }
 
-  Widget hand({required List<dynamic> hand, required bool isMe}) {
+  Widget hand(
+      {required List<dynamic> hand,
+      required String player,
+      required bool isMe}) {
     return Container(
       height: cardHeight * 1.2,
       child: hand.isNotEmpty
@@ -140,7 +155,9 @@ class FieldWidget {
                                 card: card['card'],
                                 saveEnable: false,
                                 showCardImage: card['show'],
-                                showCardInfo: card['show']),
+                                showCardInfo: card['show'],
+                                player: player,
+                                onCardClick: select),
                         ]),
                   )
                 ] else ...[
@@ -149,7 +166,9 @@ class FieldWidget {
                         card: card['card'],
                         saveEnable: false,
                         showCardImage: card['show'],
-                        showCardInfo: card['show']),
+                        showCardInfo: card['show'],
+                        player: player,
+                        onCardClick: select),
                 ]
               ],
             )
@@ -163,6 +182,7 @@ class FieldWidget {
   final Function drop;
   final Function drag;
   final Function place;
+  final Function(String) select;
 
   final double cardHeight;
 
@@ -176,5 +196,6 @@ class FieldWidget {
       required this.drop,
       required this.drag,
       required this.place,
+      required this.select,
       required this.cardHeight});
 }

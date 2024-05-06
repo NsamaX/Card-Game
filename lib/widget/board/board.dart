@@ -69,6 +69,14 @@ class _BoardState extends State<Board> {
     });
   }
 
+  void select(String player) {
+    setState(() {
+      print('click');
+      widget.playerHand[player]['select'] =
+          !widget.playerHand[player]['select'];
+    });
+  }
+
   void draw(int col, int row) {
     if (widget.cardOnBoard[col][row].isEmpty) return;
     final String player = 'me';
@@ -185,6 +193,7 @@ class _BoardState extends State<Board> {
       drag: drag,
       drop: drop,
       place: place,
+      select: select,
       cardHeight: widget.cardHeight);
 }
 

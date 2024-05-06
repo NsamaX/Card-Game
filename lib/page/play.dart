@@ -104,8 +104,8 @@ class _PlayPageState extends State<PlayPage> {
   late final Map<String, dynamic> event;
   late List<dynamic> cardOnBoard;
   Map<String, dynamic> playerHand = {
-    'me': {'type': 'me', 'card': []},
-    'opposite': {'type': 'opposite', 'card': []}
+    'me': {'type': 'me', 'select': false, 'card': []},
+    'opposite': {'type': 'opposite', 'select': false, 'card': []}
   };
 }
 

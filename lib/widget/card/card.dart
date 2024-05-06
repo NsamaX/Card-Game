@@ -7,6 +7,9 @@ class _CARDState extends State<CARD> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if (widget.onCardClick != null) widget.onCardClick!(widget.player!);
+      },
+      onLongPress: () {
         if (widget.showCardInfo)
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -60,13 +63,17 @@ class CARD extends StatefulWidget {
   final bool saveEnable;
   final bool showCardImage;
   final bool showCardInfo;
+  final String? player;
+  final Function(String)? onCardClick;
 
   const CARD(
       {Key? key,
       required this.card,
       required this.saveEnable,
       bool? showCardImage,
-      bool? showCardInfo})
+      bool? showCardInfo,
+      this.player,
+      this.onCardClick})
       : showCardImage = showCardImage ?? true,
         showCardInfo = showCardInfo ?? true,
         super(key: key);
