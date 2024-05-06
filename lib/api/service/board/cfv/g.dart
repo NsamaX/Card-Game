@@ -1,11 +1,10 @@
 // TODO: set game play
-// TODO: get game play by API
 
 import 'package:flutter/material.dart';
-import 'package:project/service/board/format.dart';
+import 'package:project/api/service/board/format.dart';
 
 class G implements Format {
-  final List<dynamic> _field = [
+  final List<dynamic> field = [
     [
       {
         'field': {
@@ -178,7 +177,7 @@ class G implements Format {
     ],
   ];
 
-  final Map<String, dynamic> _event = {
+  final Map<String, dynamic> event = {
     'special': {},
     'trigger': {},
     'guard': {},
@@ -190,7 +189,7 @@ class G implements Format {
     'drop': {},
   };
 
-  final List<dynamic> _action = [
+  final List<dynamic> action = [
     {
       'action': 'block',
       'icon': Icons.block_rounded,
@@ -246,7 +245,7 @@ class G implements Format {
   ];
 
   @override
-  List<dynamic> getField() => _field;
-  Map<String, dynamic> getEvent() => _event;
-  List<dynamic> getAction() => _action;
+  List<dynamic> getField() => field;
+  Map<String, dynamic> getEvent() => event;
+  List<dynamic> getAction() => action;
 }

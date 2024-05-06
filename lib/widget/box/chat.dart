@@ -27,7 +27,7 @@ class _ChatState extends State<Chat> with SingleTickerProviderStateMixin {
         children: [
           Expanded(
             child: ListView(
-              children: [for (var data in widget.log['log']) message(data)],
+              children: [for (var log in widget.log['log']) message(log: log)],
             ),
           ),
           SizedBox(height: widget.messageMargin),
@@ -37,8 +37,8 @@ class _ChatState extends State<Chat> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget message(Map<String, dynamic> data) {
-    final bool isSender = data['from'] == 'sender';
+  Widget message({required Map<String, dynamic> log}) {
+    final bool isSender = log['from'] == 'sender';
     final double leftPadding = isSender ? widget.messageMargin : 0;
     final double rightPadding = isSender ? 0 : widget.messageMargin;
 
@@ -56,7 +56,7 @@ class _ChatState extends State<Chat> with SingleTickerProviderStateMixin {
           ),
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(data['message'], style: theme.textTheme.bodyMedium),
+            child: Text(log['message'], style: theme.textTheme.bodyMedium),
           ),
         ),
       ),

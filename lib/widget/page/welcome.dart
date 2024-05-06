@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/page/deck.dart';
 
 class WelcomeWidget {
-  Widget image(String image, double size) {
+  Widget image({required String image, required double size}) {
     return Image.asset(
       image,
       width: size,
@@ -11,11 +11,11 @@ class WelcomeWidget {
     );
   }
 
-  Widget title(String text) {
+  Widget title({required String text}) {
     return Text(text, style: theme.textTheme.titleLarge);
   }
 
-  Widget description(String text) {
+  Widget description({required String text}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 26),
       child: Text(
@@ -26,7 +26,10 @@ class WelcomeWidget {
     );
   }
 
-  Widget startButton(String text, double width, VoidCallback changePage) {
+  Widget startButton(
+      {required String text,
+      required double width,
+      required VoidCallback changePage}) {
     return Container(
       width: width,
       child: ElevatedButton(
@@ -36,18 +39,20 @@ class WelcomeWidget {
     );
   }
 
-  Widget signOption(Map<String, String> image, double width) {
+  Widget signOption(
+      {required Map<String, String> image, required double size}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 60),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children:
-            image.entries.map((entry) => sign(entry.value, width)).toList(),
+        children: image.entries
+            .map((entry) => sign(image: entry.value, size: size))
+            .toList(),
       ),
     );
   }
 
-  Widget sign(String image, double width) {
+  Widget sign({required String image, required double size}) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Container(
@@ -59,8 +64,8 @@ class WelcomeWidget {
           padding: const EdgeInsets.all(8),
           child: Image.asset(
             image,
-            width: width,
-            height: width,
+            width: size,
+            height: size,
             fit: BoxFit.cover,
           ),
         ),
@@ -68,19 +73,22 @@ class WelcomeWidget {
     );
   }
 
-  Widget gameOption(Map<String, String> image, double width) {
+  Widget gameOption(
+      {required Map<String, String> image, required double size}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 60),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: image.entries
-            .map((entry) => game(entry.value, width, entry.key))
+            .map((entry) =>
+                game(image: entry.value, size: size, game: entry.key))
             .toList(),
       ),
     );
   }
 
-  Widget game(String image, double width, String game) {
+  Widget game(
+      {required String image, required double size, required String game}) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: GestureDetector(
@@ -99,8 +107,8 @@ class WelcomeWidget {
             padding: const EdgeInsets.all(8),
             child: Image.asset(
               image,
-              width: width,
-              height: width,
+              width: size,
+              height: size,
               fit: BoxFit.cover,
             ),
           ),

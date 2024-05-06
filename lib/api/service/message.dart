@@ -1,5 +1,3 @@
-// TODO: get log by API
-
 class MessageService {
   final Map<String, dynamic> log = {
     'id': 'null',

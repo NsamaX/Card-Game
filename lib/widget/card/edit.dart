@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model/model.dart';
 
 class _EditState extends State<Edit> {
   @override
@@ -10,22 +10,24 @@ class _EditState extends State<Edit> {
       child: Column(
         children: [
           for (var item in widget.onTap.keys)
-            option(item, () {
-              widget.onTap[item]!();
-              updateCardCount();
-            }),
-          option(cardCount, null),
+            option(
+                item: item,
+                onTap: () {
+                  widget.onTap[item]!();
+                  updateCardCount();
+                }),
+          option(item: cardCount, onTap: null),
         ],
       ),
     );
   }
 
-  Widget option(dynamic item, Function? onPressed) {
+  Widget option({required dynamic item, required Function? onTap}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: GestureDetector(
         onTap: () {
-          onPressed!();
+          onTap!();
         },
         child: Container(
           width: optionSize,

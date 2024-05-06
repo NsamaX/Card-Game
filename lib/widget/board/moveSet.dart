@@ -17,7 +17,8 @@ class _MoveSetState extends State<MoveSet> {
                 children: [
                   for (var action in moveSet)
                     // hide this condition if you want to show all moves
-                    if (action['show']) move(widget.option, action),
+                    if (action['show'])
+                      move(option: widget.option, move: action),
                 ],
               ),
             ],
@@ -28,7 +29,9 @@ class _MoveSetState extends State<MoveSet> {
       return const SizedBox();
   }
 
-  Widget move(Map<String, dynamic> option, Map<String, dynamic> move) {
+  Widget move(
+      {required Map<String, dynamic> option,
+      required Map<String, dynamic> move}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(

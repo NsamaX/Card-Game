@@ -1,5 +1,4 @@
 // TODO: set filter
-// TODO: get filter & room by API
 
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -33,12 +32,7 @@ class RoomService {
       Icons.lock_rounded,
     ];
     List<String> formats = [
-      // 'Limit Break',
-      // 'Break Ride',
-      // 'Legion',
-      'G',
-      // 'V',
-      // 'D',
+      'G', /*'D'*/
     ];
     Random random = Random();
     for (int i = 0; i < 260; i++) {

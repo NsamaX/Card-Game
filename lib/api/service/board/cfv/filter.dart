@@ -1,8 +1,7 @@
 // TODO: set filter
-// TODO: get filter by API
 
 import 'package:flutter/material.dart';
-import 'package:project/service/board/filter.dart';
+import 'package:project/api/service/board/filter.dart';
 
 class FilterService implements Filter {
   final List<dynamic> filter = [
@@ -69,5 +68,6 @@ class FilterService implements Filter {
     ]
   ];
 
+  @override
   List<dynamic> getFilter() => filter;
 }

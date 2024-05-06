@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:project/page/lobby.dart';
-import 'package:project/service/board/board.dart';
-import 'package:project/service/message.dart';
+import 'package:project/api/service/board.dart';
+import 'package:project/api/service/message.dart';
 import 'package:project/widget/board/board.dart';
 import 'package:project/widget/box/box.dart';
 import 'package:project/widget/appBar.dart';
@@ -12,27 +12,34 @@ class _PlayPageState extends State<PlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        menuItem: [
-          Icons.arrow_back_rounded,
-          Icons.help_outline_rounded,
-          'Room ${widget.roomID.toString()}',
-          communicationIcon[communicationType],
-          Icons.chat_rounded
-        ],
-        onTapmenuItem: [back, help, null, communication, chat],
-      ),
+      appBar: CustomAppBar(menu: {
+        Icons.arrow_back_rounded: back,
+        Icons.help_outline_rounded: help,
+        'Room ${widget.roomID.toString()}': null,
+        communicationIcon[communicationType]: communication,
+        Icons.chat_rounded: chat
+      }),
       body: Stack(
         children: [
           Board(
+              game: widget.game,
               board: board,
               event: event,
               cardOnBoard: cardOnBoard,
               playerHand: playerHand,
               cardHeight: 80),
-          BoxWidget().help([], helpBoxVisible, 260, 360),
+          BoxWidget().help(
+              help: [],
+              helpBoxVisible: helpBoxVisible,
+              helpBoxWidth: 260,
+              helpBoxHeight: 360),
           BoxWidget().chat(
-              MessageService().getLog(), chatBoxVisible, 260, 360, 16, 40),
+              log: MessageService().getLog(),
+              chatBoxVisible: chatBoxVisible,
+              chatBoxWidth: 260,
+              chatBoxHeight: 360,
+              messageMargin: 16,
+              sendButtonHeight: 40),
         ],
       ),
     );

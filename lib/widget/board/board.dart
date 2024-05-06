@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:project/api/model/cfv.dart';
-import 'package:project/service/deck.dart';
+import 'package:project/api/model/model.dart';
+import 'package:project/api/service/deck.dart';
 import 'package:project/widget/board/field.dart';
 
 class _BoardState extends State<Board> {
@@ -17,13 +17,19 @@ class _BoardState extends State<Board> {
               for (int col = 0; col < widget.board.length; col++)
                 Row(children: [
                   for (int row = 0; row < widget.board[col].length; row++)
-                    fieldWidget.field(col, row, widget.board,
-                        widget.cardOnBoard, getOption(), drag, drop),
+                    fieldWidget.field(
+                        col: col,
+                        row: row,
+                        board: widget.board,
+                        cardOnBoard: widget.cardOnBoard,
+                        option: getOption(),
+                        drag: drag,
+                        drop: drop),
                 ]),
             ],
           ),
-          fieldWidget.handZone(widget.playerHand['opposite']),
-          fieldWidget.handZone(widget.playerHand['me']),
+          fieldWidget.handZone(playerHand: widget.playerHand['opposite']),
+          fieldWidget.handZone(playerHand: widget.playerHand['me']),
         ],
       ),
     );
@@ -84,7 +90,7 @@ class _BoardState extends State<Board> {
   }
 
   void load(int col, int row) async {
-    final List<Model> loadedDeck = await DeckService().load();
+    final List<Model> loadedDeck = await DeckService().load(game: widget.game);
     if (loadedDeck.isEmpty) return;
     List<Model> shuffled = [];
     for (var card in loadedDeck)
@@ -166,6 +172,7 @@ class _BoardState extends State<Board> {
 }
 
 class Board extends StatefulWidget {
+  final String game;
   final List<dynamic> board;
   final Map<String, dynamic> event;
   final List<dynamic> cardOnBoard;
@@ -174,6 +181,7 @@ class Board extends StatefulWidget {
 
   const Board(
       {Key? key,
+      required this.game,
       required this.board,
       required this.event,
       required this.cardOnBoard,

@@ -6,13 +6,16 @@ import 'package:project/widget/box/filter.dart';
 import 'package:project/widget/box/help.dart';
 
 class BoxWidget {
-  Widget filter(List<dynamic> filter, bool filterBoxVisibility,
-      double filterBoxWidth, double filterBoxHeight) {
+  Widget filter(
+      {required List<dynamic> filter,
+      required bool filterBoxVisible,
+      required double filterBoxWidth,
+      required double filterBoxHeight}) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 400),
       curve: Curves.easeInOut,
       transform: Matrix4.translationValues(
-          filterBoxVisibility ? 0 : filterBoxWidth, 0, 0),
+          filterBoxVisible ? 0 : filterBoxWidth, 0, 0),
       child: Filter(
           filter: filter,
           filterBoxWidth: filterBoxWidth,
@@ -20,8 +23,11 @@ class BoxWidget {
     );
   }
 
-  Widget help(List<dynamic> help, bool helpBoxVisible, double helpBoxWidth,
-      double helpBoxHeight) {
+  Widget help(
+      {required List<dynamic> help,
+      required bool helpBoxVisible,
+      required double helpBoxWidth,
+      required double helpBoxHeight}) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 400),
       curve: Curves.easeInOut,
@@ -33,12 +39,12 @@ class BoxWidget {
   }
 
   Widget chat(
-      Map<String, dynamic> log,
-      bool chatBoxVisible,
-      double chatBoxWidth,
-      double chatBoxHeight,
-      double messageMargin,
-      double sendButtonHeight) {
+      {required Map<String, dynamic> log,
+      required bool chatBoxVisible,
+      required double chatBoxWidth,
+      required double chatBoxHeight,
+      required double messageMargin,
+      required double sendButtonHeight}) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 400),
       curve: Curves.easeInOut,

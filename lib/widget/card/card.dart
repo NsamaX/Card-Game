@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model/model.dart';
 import 'package:project/page/info.dart';
 
 class _CARDState extends State<CARD> {

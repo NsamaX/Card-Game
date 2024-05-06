@@ -10,9 +10,10 @@ class _LabelState extends State<Label> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (category['title'] != null) title(category['title']),
+              if (category['title'] != null) title(text: category['title']),
               ...category['content'].map<Widget>((item) {
-                return content(item['icon'], item['text'], item['page']);
+                return content(
+                    icon: item['icon'], text: item['text'], page: item['page']);
               }).toList(),
             ],
           );
@@ -21,7 +22,7 @@ class _LabelState extends State<Label> {
     );
   }
 
-  Widget title(String text) {
+  Widget title({required String text}) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 16, bottom: 8),
       child: Text(
@@ -32,7 +33,7 @@ class _LabelState extends State<Label> {
     );
   }
 
-  Widget content(IconData icon, String text, Widget? page) {
+  Widget content({required IconData icon, required String text, Widget? page}) {
     return GestureDetector(
       onTap: () {
         if (page != null)

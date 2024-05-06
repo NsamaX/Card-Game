@@ -55,13 +55,14 @@ class _FilterState extends State<Filter> with SingleTickerProviderStateMixin {
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
             children: options
-                .map((entry) => option(entry['icon'], entry['text']))
+                .map(
+                    (entry) => option(icon: entry['icon'], text: entry['text']))
                 .toList()),
       ),
     );
   }
 
-  Widget option(IconData? icon, String text) {
+  Widget option({required IconData? icon, required String text}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(

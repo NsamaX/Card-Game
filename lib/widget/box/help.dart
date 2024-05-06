@@ -31,7 +31,7 @@ class _HelpState extends State<Help> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget info(IconData? icon, String text) {
+  Widget info({required IconData? icon, required String text}) {
     return Container();
   }
 

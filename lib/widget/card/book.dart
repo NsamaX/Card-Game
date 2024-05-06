@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
-import 'package:project/service/deck.dart';
+import 'package:project/api/model/model.dart';
+import 'package:project/api/service/deck.dart';
 import 'package:project/widget/card/card.dart';
 import 'package:project/widget/card/edit.dart';
 
@@ -18,7 +18,7 @@ class _BookState extends State<Book> {
               for (int i = 0; i < cardInEachRow; i++)
                 Expanded(
                   child: index * cardInEachRow + i < widget.cardList.length
-                      ? card(index * cardInEachRow + i)
+                      ? card(index: index * cardInEachRow + i)
                       : SizedBox(),
                 ),
             ],
@@ -28,7 +28,7 @@ class _BookState extends State<Book> {
     );
   }
 
-  Widget card(int index) {
+  Widget card({required int index}) {
     final card = widget.cardList[index];
 
     return Stack(
@@ -40,12 +40,16 @@ class _BookState extends State<Book> {
             onTap: {
               Icons.add_rounded: () {
                 card.addCard();
-                DeckService().update(card, card.getCount());
+                DeckService().update(
+                    game: widget.game, card: card, cardCount: card.getCount());
               },
               Icons.remove_rounded: () {
                 if (card.getCount() > 0) {
                   card.removeCard();
-                  DeckService().update(card, card.getCount());
+                  DeckService().update(
+                      game: widget.game,
+                      card: card,
+                      cardCount: card.getCount());
                 }
               },
             },
@@ -58,15 +62,16 @@ class _BookState extends State<Book> {
 }
 
 class Book extends StatefulWidget {
+  final ScrollController scrollController;
+  final String game;
   final List<Model> cardList;
   final bool saveEnable;
   final bool editEnable;
 
-  final ScrollController scrollController;
-
   const Book(
       {Key? key,
       required this.scrollController,
+      required this.game,
       required this.cardList,
       bool? saveEnable,
       bool? editEnable})

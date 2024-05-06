@@ -1,10 +1,10 @@
 // TODO: create function for filter card
 
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model/model.dart';
+import 'package:project/api/service/board/cfv/filter.dart';
+import 'package:project/api/service/card.dart';
 import 'package:project/page/deck.dart';
-import 'package:project/service/board/cfv/filter.dart';
-import 'package:project/service/card.dart';
 import 'package:project/widget/box/box.dart';
 import 'package:project/widget/card/book.dart';
 import 'package:project/widget/appBar.dart';
@@ -13,19 +13,17 @@ class _BookPageState extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        menuItem: [
-          Icons.arrow_back_rounded,
-          'Card Info',
-          Icons.filter_list_rounded
-        ],
-        onTapmenuItem: [back, null, filter],
-      ),
+      appBar: CustomAppBar(menu: {
+        Icons.arrow_back_rounded: back,
+        'Card Info': null,
+        Icons.filter_list_rounded: filter
+      }),
       body: Stack(
         children: [
           Book(
-              cardList: cardList,
               scrollController: scrollController,
+              game: widget.game,
+              cardList: cardList,
               saveEnable: widget.saveEnable),
           if (isLoading)
             Align(
@@ -33,8 +31,11 @@ class _BookPageState extends State<BookPage> {
                     ? Alignment.center
                     : Alignment.bottomCenter,
                 child: CircularProgressIndicator()),
-          BoxWidget()
-              .filter(FilterService().getFilter(), filterBoxVisible, 260, 460),
+          BoxWidget().filter(
+              filter: FilterService().getFilter(),
+              filterBoxVisible: filterBoxVisible,
+              filterBoxWidth: 260,
+              filterBoxHeight: 460),
         ],
       ),
     );
@@ -53,13 +54,13 @@ class _BookPageState extends State<BookPage> {
     });
   }
 
-  Future<void> getData(String search, int page) async {
+  Future<void> getData({required String search, required int page}) async {
     if (!mounted) return;
     setState(() {
       isLoading = true;
     });
-    List<Model> fetchedData =
-        await CardService(game: widget.game).getData(search, page);
+    List<Model> fetchedData = await CardService(game: widget.game)
+        .getData(game: widget.game, search: search, page: page);
     if (!mounted) return;
     setState(() {
       if (page == 1)
@@ -73,13 +74,14 @@ class _BookPageState extends State<BookPage> {
 
   void scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
-        !scrollController.position.outOfRange) getData(search, currentPage);
+        !scrollController.position.outOfRange)
+      getData(search: search, page: currentPage);
   }
 
   @override
   void initState() {
     super.initState();
-    getData(search, currentPage);
+    getData(search: search, page: currentPage);
     scrollController.addListener(scrollListener);
   }
 

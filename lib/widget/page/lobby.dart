@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:project/widget/label.dart';
 
 class LobbyWidget {
-  Widget room(List<dynamic> allRoom, int maxRoomPerPage, int currentPage) {
+  Widget room(
+      {required List<dynamic> allRoom,
+      required int maxRoomPerPage,
+      required int currentPage}) {
     final int startIndex = currentPage * maxRoomPerPage;
     final int endIndex = (currentPage + 1) * maxRoomPerPage;
     final int totalRoom = allRoom.length;
@@ -18,12 +21,12 @@ class LobbyWidget {
   }
 
   Widget pageNavigation(
-      int currentPage,
-      int totalRoom,
-      int maxRoomPerPage,
-      int maxNavigationTap,
-      double navigationTapSize,
-      Function(int) changePage) {
+      {required int currentPage,
+      required int totalRoom,
+      required int maxRoomPerPage,
+      required int maxNavigationTap,
+      required double navigationTapSize,
+      required Function(int) changePage}) {
     int currentRoom = (totalRoom / maxRoomPerPage).ceil();
 
     int startIndex = (currentPage ~/ maxNavigationTap) * maxNavigationTap;
@@ -37,24 +40,41 @@ class LobbyWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (currentPage >= maxNavigationTap)
-          navigationTap(currentPage, currentPage - 1, navigationTapSize,
-              Icons.arrow_back_ios_rounded, changePage),
+          navigationTap(
+              currentPage: currentPage,
+              page: currentPage - 1,
+              navigationTapSize: navigationTapSize,
+              icon: Icons.arrow_back_ios_rounded,
+              changePage: changePage),
         for (int page = startIndex; page < endIndex; page++)
-          navigationTap(currentPage, page, navigationTapSize, null, changePage),
+          navigationTap(
+              currentPage: currentPage,
+              page: page,
+              navigationTapSize: navigationTapSize,
+              icon: null,
+              changePage: changePage),
         if (endIndex < currentRoom)
-          navigationTap(currentPage, currentPage + 1, navigationTapSize,
-              Icons.arrow_forward_ios_rounded, changePage),
+          navigationTap(
+              currentPage: currentPage,
+              page: currentPage + 1,
+              navigationTapSize: navigationTapSize,
+              icon: Icons.arrow_forward_ios_rounded,
+              changePage: changePage),
       ],
     );
   }
 
-  Widget navigationTap(int currentPage, int page, double navigationTapSize,
-      IconData? icon, Function(int) onTap) {
+  Widget navigationTap(
+      {required int currentPage,
+      required int page,
+      required double navigationTapSize,
+      required IconData? icon,
+      required Function(int) changePage}) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: GestureDetector(
         onTap: () {
-          onTap(page);
+          changePage(page);
         },
         child: Container(
           width: navigationTapSize,

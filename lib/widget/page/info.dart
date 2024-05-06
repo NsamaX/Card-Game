@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project/api/model/cfv.dart';
+import 'package:project/api/model/model.dart';
 
 class InfoWidget {
-  Widget saveButton(bool saveEnable, Function() saveCard) {
+  Widget saveButton({required bool saveEnable, required Function() saveCard}) {
     return Padding(
       padding: const EdgeInsets.only(right: 22),
       child: GestureDetector(
@@ -10,7 +10,7 @@ class InfoWidget {
     );
   }
 
-  Widget image(Model card) {
+  Widget image({required Model card}) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Center(
@@ -27,7 +27,7 @@ class InfoWidget {
     );
   }
 
-  Widget info(Model card) {
+  Widget info({required Model card}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,8 +39,11 @@ class InfoWidget {
     );
   }
 
-  Widget addBar(bool saveEnable, List<int> count, Function(int) onTap,
-      int selectedIndex) {
+  Widget addBar(
+      {required bool saveEnable,
+      required List<int> count,
+      required int selectedIndex,
+      required Function(int) onTap}) {
     return Visibility(
         visible: saveEnable,
         child: Padding(
@@ -53,15 +56,22 @@ class InfoWidget {
             ),
             child: Row(
               children: count
-                  .map((entry) =>
-                      box(entry, count.indexOf(entry), onTap, selectedIndex))
+                  .map((entry) => box(
+                      count: entry,
+                      index: count.indexOf(entry),
+                      selectedIndex: selectedIndex,
+                      onTap: onTap))
                   .toList(),
             ),
           ),
         ));
   }
 
-  Widget box(int count, int index, Function(int) onTap, int selectedIndex) {
+  Widget box(
+      {required int count,
+      required int index,
+      required int selectedIndex,
+      required Function(int) onTap}) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap(index),

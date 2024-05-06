@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// example font: https://fonts.google.com/
+// font example: https://fonts.google.com/
 
 const Color primary1 = Color.fromARGB(255, 10, 20, 30);
 const Color primary2 = Color.fromARGB(255, 20, 30, 40);

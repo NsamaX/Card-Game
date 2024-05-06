@@ -3,7 +3,7 @@ import 'package:project/widget/board/moveSet.dart';
 import 'package:project/widget/card/card.dart';
 
 class FieldWidget {
-  Widget handZone(Map<String, dynamic> playerHand) {
+  Widget handZone({required Map<String, dynamic> playerHand}) {
     final bool isMe = playerHand['type'] == 'me' ? true : false;
 
     return Positioned(
@@ -14,12 +14,13 @@ class FieldWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: RotatedBox(
-            quarterTurns: isMe ? 0 : 2, child: hand(playerHand['card'], isMe)),
+            quarterTurns: isMe ? 0 : 2,
+            child: hand(hand: playerHand['card'], showCard: isMe)),
       ),
     );
   }
 
-  Widget hand(List<dynamic> hand, bool showCard) {
+  Widget hand({required List<dynamic> hand, required bool showCard}) {
     return Container(
       height: cardHeight * 1.2,
       child: hand.isNotEmpty
@@ -51,15 +52,26 @@ class FieldWidget {
     );
   }
 
-  Widget field(int col, int row, List<dynamic> board, List<dynamic> cardOnBoard,
-      Map<String, dynamic> option, Function drag, Function drop) {
+  Widget field(
+      {required int col,
+      required int row,
+      required List<dynamic> board,
+      required List<dynamic> cardOnBoard,
+      required Map<String, dynamic> option,
+      required Function drag,
+      required Function drop}) {
     final Map<String, dynamic> field = board[col][row];
 
     return Expanded(
       child: Stack(
         children: [
-          completeField(col, row, field, drop),
-          cardStack(col, row, cardOnBoard, drag, drop),
+          completeField(col: col, row: row, field: field, drop: drop),
+          cardStack(
+              col: col,
+              row: row,
+              cardOnBoard: cardOnBoard,
+              drag: drag,
+              drop: drop),
           MoveSet(col: col, row: row, option: option, field: field),
         ],
       ),
@@ -67,14 +79,18 @@ class FieldWidget {
   }
 
   Widget completeField(
-      int col, int row, Map<String, dynamic> field, Function drop) {
+      {required int col,
+      required int row,
+      required Map<String, dynamic> field,
+      required Function drop}) {
     return DragTarget(
       onAccept: (dynamic card) => drop(col, row, card['card'], card['show']),
-      builder: (context, candidateData, rejectedData) => virsualField(field),
+      builder: (context, candidateData, rejectedData) =>
+          virsualField(field: field),
     );
   }
 
-  Widget virsualField(Map<String, dynamic> field) {
+  Widget virsualField({required Map<String, dynamic> field}) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: RotatedBox(
@@ -100,8 +116,12 @@ class FieldWidget {
     );
   }
 
-  Widget cardStack(int col, int row, List<dynamic> cardOnBoard, Function drag,
-      Function drop) {
+  Widget cardStack(
+      {required int col,
+      required int row,
+      required List<dynamic> cardOnBoard,
+      required Function drag,
+      required Function drop}) {
     return cardOnBoard[col][row].isEmpty
         ? SizedBox()
         : Stack(

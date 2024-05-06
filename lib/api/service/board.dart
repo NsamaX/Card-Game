@@ -1,13 +1,7 @@
 // TODO: set board all format
-// TODO: get board by API
 
-import 'format.dart';
-// import 'package:project/service/board/cfv/limitBreak.dart';
-// import 'package:project/service/board/cfv/breakRide.dart';
-// import 'package:project/service/board/cfv/legion.dart';
-import 'package:project/service/board/cfv/g.dart';
-// import 'package:project/service/board/cfv/v.dart';
-// import 'package:project/service/board/cfv/d.dart';
+import 'package:project/api/service/board/cfv/g.dart';
+import 'package:project/api/service/board/format.dart';
 
 class BoardService {
   final List<dynamic> field;
@@ -15,26 +9,16 @@ class BoardService {
   final Map<String, dynamic> event;
 
   BoardService({required String game, required String format})
-      : field = BoardService._createFormat(game, format).getField(),
-        action = BoardService._createFormat(game, format).getAction(),
-        event = BoardService._createFormat(game, format).getEvent();
+      : field = BoardService.createFormat(game, format).getField(),
+        action = BoardService.createFormat(game, format).getAction(),
+        event = BoardService.createFormat(game, format).getEvent();
 
-  static Format _createFormat(String game, String format) {
+  static Format createFormat(String game, String format) {
     switch (game) {
       case 'cfv':
         switch (format) {
-          // case 'Limit Break':
-          //   return LimitBreak();
-          // case 'Break Ride':
-          //   return BreakRide();
-          // case 'Legion':
-          //   return Legion();
           case 'G':
             return G();
-          // case 'V':
-          //   return V();
-          // case 'D':
-          //   return D();
           default:
             throw ArgumentError('Unsupported format: $format');
         }
@@ -43,7 +27,7 @@ class BoardService {
     }
   }
 
-  List<dynamic> _cloneFieldWithoutAction() {
+  List<dynamic> cloneFieldWithoutAction() {
     List<dynamic> cloneField = [];
     for (int col = field.length - 1; col >= 0; col--) {
       List<dynamic> column = [];
@@ -76,7 +60,7 @@ class BoardService {
     return cloneField;
   }
 
-  List<dynamic> _setFieldAction() {
+  List<dynamic> setFieldAction() {
     List<dynamic> fieldset = field;
     for (int col = 0; col < fieldset.length; col++)
       for (int row = 0; row < fieldset[col].length; row++) {
@@ -97,8 +81,8 @@ class BoardService {
   }
 
   List<dynamic> getField() {
-    List<dynamic> board = _cloneFieldWithoutAction();
-    board.addAll(_setFieldAction());
+    List<dynamic> board = cloneFieldWithoutAction();
+    board.addAll(setFieldAction());
     return board;
   }
 
